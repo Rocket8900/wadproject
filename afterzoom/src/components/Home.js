@@ -163,7 +163,7 @@ export function Home() {
                     <p className="mb-md-0">(C) 2019 Buddy Corp. All rights reserved. </p>
                 </div>
                 <div className="col-md-5 text-center text-md-right">
-                    <p className="mb-0">Bootstrap Landing Page by <a href="#" className="external text-white">Sufyan</a> </p>
+                    <p className="mb-0">End of Footer<a href="#" className="external text-white"></a> </p>
                 </div>
             </div>
         </div>
