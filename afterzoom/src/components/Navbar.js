@@ -32,4 +32,9 @@ function navbar() {
     </Navbar>
   );
 }
+<<<<<<< HEAD
 export default Navbar;
+=======
+
+export default navbar;
+>>>>>>> bb8668e11cd046e9e851fd1c26f757c1cdce3d4a
