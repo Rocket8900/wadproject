@@ -1,6 +1,8 @@
 import Navbar from "./components/Navbar";
-import { Home } from "./components/Home"
-import {Routes,Route} from 'react-router'
+import { Home } from "./components/Home";
+import { Login } from "./components/Login";
+import {Routes,Route} from 'react-router';
+import React, { useState } from 'react';
 import './App.css';
 
 export default function App() {
@@ -9,6 +11,7 @@ export default function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   ) 
