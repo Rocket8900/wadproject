@@ -11,66 +11,63 @@ datasource db {
 }
 
 model Student {
-  id       Int       @id @default(autoincrement())
+  id       Int        @id @default(autoincrement())
   selfie   String?
-  age Int
-  username String    @unique
+  age      Int
+  username String     @unique
   name     String
-  email    String    @unique
+  email    String     @unique
   password String // hashed!
   gender   String
   type     String // enums("auto", "manual")
   language String
-  reviews Review[]
+  reviews  Review[]
   bookings Booking[]
   chatRoom ChatRoom[]
 }
 
 model Instructor {
-  id Int @id @default(autoincrement())
-  name String
-  age Int
-  gender String
-  email String
-  password String
-  language String
-  experience Int
-  type String // enums("auto", "manual", "both")
-  carModel String
-  availability DateTime[] 
-  bookings Booking[]
-  reviews Review[]
-  chatRoom ChatRoom[]
-
+  id           Int        @id @default(autoincrement())
+  name         String
+  age          Int
+  gender       String
+  email        String
+  password     String
+  language     String
+  experience   Int
+  type         String // enums("auto", "manual", "both")
+  carModel     String
+  availability DateTime[]
+  bookings     Booking[]
+  reviews      Review[]
+  chatRoom     ChatRoom[]
 }
 
 model Booking {
   id           Int        @id @default(autoincrement())
   apptDate     DateTime
-  description  String 
-  feedback String?
+  description  String
+  feedback     String?
   studentId    Int
   instructorId Int
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
 }
 
-
 model ChatRoom {
-  id Int @id @default(autoincrement())
-  studentId Int
+  id           Int        @id @default(autoincrement())
+  studentId    Int
   instructorId Int
-  roomId String
+  roomId       String
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
 }
 
 model Review {
-  id Int @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   studentId    Int
   instructorId Int
   rating       Float
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
 }
-
