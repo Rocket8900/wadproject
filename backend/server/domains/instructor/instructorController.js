@@ -6,8 +6,6 @@ export default class InstructorController {
     
     static makeInstructorAccount = async (req, res) => {
         try {
-
-
             const {email, password} = req.body;
 
             if (!email || !password) {
@@ -27,6 +25,7 @@ export default class InstructorController {
         } catch (error) {
             return res.status(500).json({ error: "an unexpected error occurred" });
         }
+        
     }
 
     static updateInstructorProfile = async (req, res) => {

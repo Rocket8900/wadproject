@@ -9,7 +9,7 @@ export default class StudentController {
 
 	static registerStudent = async (req, res) => {
 		try {
-			const { username, password, email, gender, type, language } = req.body;
+			const { username, password } = req.body;
 
 			if (!username || !password) {
 				res.status(400).json({ message: "all fields are mandatory" });
