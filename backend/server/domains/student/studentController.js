@@ -70,7 +70,26 @@ export default class StudentController {
 			console.error(error);
 			return res.status(500).json({ error: "an unexpected error occurred" });
 		}
-	};
+	}
+
+
+	static viewStudentProfile = async (req, res) => {
+		try {
+			const student = await StudentService.getStudentById(req.params);
+			return res.status(200).json({data: student});
+		} catch (error) {
+			return res.status(500).json({ error: "an unexpected error occurred" });
+		}
+	}
+
+	static updateStudentProfile = async (req, res) => {
+		try {
+			const student = await StudentService.updateStudent(req.params, req.body)
+			return res.status(201).json({data: student});
+		} catch (error) {
+			return res.status(500).json({ error: "an unexpected error occurred" });
+		}
+	}
 
 
 }
