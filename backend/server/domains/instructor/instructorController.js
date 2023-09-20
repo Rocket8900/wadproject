@@ -71,6 +71,36 @@ export default class InstructorController {
     }
 
 
+    static listAllAvailableInstructor = async (req, res) => {
+        try {
+            const instructors = await InstructorService.getAllInstructors();
+            return res.status(200).json({data: instructors})
+        } catch (error) {
+            return res.status(500).json({ error: "an unexpected error occurred" });
+        }
+    }
+
+    static viewSpecificInstructor = async (req, res) => {
+        try {
+            const instructor = await InstructorService.getInstructorById(req.params);
+            return res.status(200).json({data: instructor})
+        } catch (error) {
+            return res.status(500).json({ error: "an unexpected error occurred" });
+        }
+    }
+
+
+    static listInstructorsByFilter = async (req, res) => {
+        try {
+
+            const instructors = await InstructorService.getInstructorsByFilters(req.body);
+            return res.status(200).json({data: instructors});
+        } catch (error) {
+            return res.status(500).json({ error: "an unexpected error occurred" });
+
+        }
+
+    }
 
 
 

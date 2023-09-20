@@ -50,6 +50,7 @@ model Booking {
   feedback     String?
   studentId    Int
   instructorId Int
+  status String // Scheduled, Completed, Rejected
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
 }
