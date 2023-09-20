@@ -2,7 +2,7 @@
 
 
 import express from "express";
-import InstructorController from "./instructorController";
+import InstructorController from "./instructorController.js";
 
 
 const instructorRoute = express.Router();

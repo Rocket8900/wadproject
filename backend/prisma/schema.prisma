@@ -28,10 +28,10 @@ model Student {
 
 model Instructor {
   id           Int        @id @default(autoincrement())
-  name         String
+  name         String 
   age          Int
   gender       String
-  email        String
+  email        String @unique
   password     String
   language     String
   experience   Int

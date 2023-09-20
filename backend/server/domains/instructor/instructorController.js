@@ -1,4 +1,4 @@
-import InstructorService from "./instructorService"
+import InstructorService from "./instructorService.js"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -17,15 +17,13 @@ export default class InstructorController {
             
             const instructor = InstructorService.createInstructor(req.body);
 
-            if (instructor) {
-                return res.status(201).json({data: instructor})
-            } else {
-                return res.status(400).json({message: "failed to create account"})
-            }
+
+            return res.status(201).json({data: instructor})
+
         } catch (error) {
             return res.status(500).json({ error: "an unexpected error occurred" });
         }
-        
+
     }
 
     static updateInstructorProfile = async (req, res) => {
