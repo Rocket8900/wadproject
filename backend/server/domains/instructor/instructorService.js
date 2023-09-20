@@ -4,14 +4,14 @@ export default class InstructorService {
 
     static createInstructor = async (instructorData) => {
         try {
-            const instructor = prisma_db.instructor.create({
+            const instructor = await prisma_db.instructor.create({
                 data: {
                     ...instructorData
                 }
             })
             return instructor
         } catch (error) {
-            
+
         }
     }
 
@@ -20,7 +20,7 @@ export default class InstructorService {
     static updateInstructor = async (instructorId, instructorData) => {
 
         try {
-            const instructor = prisma_db.instructor.update({
+            const instructor = await prisma_db.instructor.update({
                 where: {
                     id: instructorId
                 },

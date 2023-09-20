@@ -15,7 +15,7 @@ export default class InstructorController {
             const hashedPassword = await bcrypt.hash(password, 10);
             req.body.password = hashedPassword
             
-            const instructor = InstructorService.createInstructor(req.body);
+            const instructor = await InstructorService.createInstructor(req.body);
 
 
             return res.status(201).json({data: instructor})
@@ -30,7 +30,7 @@ export default class InstructorController {
         try {
             const instructorId = req.params
             const instructorData = req.body
-            const instructor = InstructorService.updateInstructor(instructorId, instructorData);
+            const instructor = await InstructorService.updateInstructor(instructorId, instructorData);
             return res.status(201).json({data: instructor})
         } catch (error) {
             return res.status(500).json({ error: "an unexpected error occurred" });
