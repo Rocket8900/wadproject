@@ -21,9 +21,11 @@ export default class InstructorService {
     static updateInstructor = async (instructorId, instructorData) => {
 
         try {
+            const {id} = instructorId;
+
             const instructor = await prisma_db.instructor.update({
                 where: {
-                    id: instructorId
+                    id: Number(id)
                 },
                 data: {
                     ...instructorData
@@ -37,9 +39,11 @@ export default class InstructorService {
 
     static getInstructorById = async (instructorId) => {
         try {
+            const {id} = instructorId;
+
             const instructor = await prisma_db.instructor.findUnique({
                 where: {
-                    id: instructorId
+                    id:  Number(id)
                 }
             })
             return instructor
@@ -50,7 +54,7 @@ export default class InstructorService {
 
     static getInstructorByEmail = async (instructorEmail) => {
         try {
-            const instructor = prisma_db.instructor.findUnique({
+            const instructor = await prisma_db.instructor.findUnique({
                 where: {
                     email : instructorEmail
                 }
@@ -64,8 +68,8 @@ export default class InstructorService {
 
     static getInstructorsByFilters = async (filters) => {
         try {
-            const instructors = prisma_db.instructor.findMany({
-                data: {
+            const instructors = await prisma_db.instructor.findMany({
+                where: {
                     ...filters
                 }
             })
@@ -77,7 +81,7 @@ export default class InstructorService {
 
     static getAllInstructors = async () => {
         try {
-            const instructors = prisma_db.instructor.findMany({})
+            const instructors = await prisma_db.instructor.findMany({})
             return instructors;
         } catch (error) {
 

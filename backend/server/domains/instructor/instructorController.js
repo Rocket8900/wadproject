@@ -92,7 +92,6 @@ export default class InstructorController {
 
     static listInstructorsByFilter = async (req, res) => {
         try {
-
             const instructors = await InstructorService.getInstructorsByFilters(req.body);
             return res.status(200).json({data: instructors});
         } catch (error) {
