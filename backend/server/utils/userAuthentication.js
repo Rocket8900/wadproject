@@ -18,7 +18,6 @@ export const validateUser = async (req, res, next) => {
             return res.status(401).json({message: "unauthorised access"});
         }
     } catch (error) {
-        Logging.error(error)
         res.status(500).json({error: "an unexpected error occurred"})
     }
 }

@@ -10,7 +10,7 @@ export default class BookingController {
 
     static makeABooking = async (req, res) => {
         try {
-            const {bookingData} = req.body
+            const { bookingData } = req.body
             const booking = await BookingService.createBooking(bookingData);
             return res.status(201).json({data: booking})
         } catch (error) {
@@ -20,8 +20,8 @@ export default class BookingController {
 
     static updateBookingById = async (req, res) => {
         try {   
-            const {id} = req.params.id
-            const {bookingData} = req.body;
+            const { id } = req.params.id
+            const { bookingData } = req.body;
             const booking  = await BookingService.updateBooking(id, bookingData)
             return res.status(201).json({data: booking})
         } catch (error) {
