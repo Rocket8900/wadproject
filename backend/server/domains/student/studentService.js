@@ -35,8 +35,8 @@ export default class StudentService {
     static updateStudent = async (studentId, studentData) => {
         try {
             const {id} = studentId
-
-            const student =  await prisma_db.student.create({
+            console.log(id)
+            const student =  await prisma_db.student.update({
                 where: {
                     id: Number(id)
                 },
