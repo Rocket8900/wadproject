@@ -13,7 +13,8 @@ instructorRoute.post("/login", InstructorController.loginInstructor);
 instructorRoute.get("/list", InstructorController.listAllAvailableInstructor)
 instructorRoute.post("/list/filter", InstructorController.listInstructorsByFilter)
 instructorRoute.get("/list/:id", InstructorController.viewSpecificInstructor);
-instructorRoute.post("/list/:id/update", InstructorController.updateInstructorProfile);
+instructorRoute.get("/profile/:id", InstructorController.viewSpecificInstructor);
+instructorRoute.post("/profile/:id/update", InstructorController.updateInstructorProfile);
 
 
 
