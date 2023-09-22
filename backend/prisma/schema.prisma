@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Student {
-  id       Int        @id @default(autoincrement())
+  id       String        @id @default(uuid())
   selfie   String?
   age      Int
   username String     @unique
@@ -27,7 +27,7 @@ model Student {
 }
 
 model Instructor {
-  id           Int        @id @default(autoincrement())
+  id       String        @id @default(uuid())
   name         String 
   age          Int
   gender       String
@@ -44,30 +44,30 @@ model Instructor {
 }
 
 model Booking {
-  id           Int        @id @default(autoincrement())
+  id       String        @id @default(uuid())
   apptDate     DateTime
   description  String
   feedback     String?
-  studentId    Int
-  instructorId Int
+  studentId    String
+  instructorId String
   status String // Scheduled, Completed, Rejected
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
 }
 
 model ChatRoom {
-  id           Int        @id @default(autoincrement())
-  studentId    Int
-  instructorId Int
+  id       String        @id @default(uuid())
+  studentId    String
+  instructorId String
   roomId       String
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
 }
 
 model Review {
-  id           Int        @id @default(autoincrement())
-  studentId    Int
-  instructorId Int
+  id       String        @id @default(uuid())
+  studentId    String
+  instructorId String
   rating       Float
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
