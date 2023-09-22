@@ -7,6 +7,7 @@ import cors from 'cors';
 import studentRoute from './domains/student/studentRoute.js';
 import instructorRoute from './domains/instructor/instructorRoute.js';
 import bookingRoute from './domains/booking/bookingRoute.js';
+import reviewRoute from './domains/review/reviewRoute.js';
 
 
 
@@ -24,6 +25,8 @@ app.use(cors({}));
 app.use("/v1/api/student", studentRoute)
 app.use("/v1/api/instructor", instructorRoute)
 app.use("/v1/api/booking", bookingRoute)
+app.use("/v1/api/review", reviewRoute)
+
 
 app.listen(PORT, async () => {
 	console.log(`Listening on port: ${PORT}`);
