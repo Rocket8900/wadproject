@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import carImage from '../car.jpg'; // Import car image
+import carImage from './car.jpg'; // Import car image
 
 export function Login() {
   const [email, setEmail] = useState('');

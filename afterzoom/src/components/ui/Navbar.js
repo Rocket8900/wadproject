@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function navbar() {
+function NavbarComponent() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -32,9 +32,4 @@ function navbar() {
     </Navbar>
   );
 }
-<<<<<<< HEAD
-export default Navbar;
-=======
-
-export default navbar;
->>>>>>> bb8668e11cd046e9e851fd1c26f757c1cdce3d4a
+export default NavbarComponent;
