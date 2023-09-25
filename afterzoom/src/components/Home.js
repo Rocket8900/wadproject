@@ -66,7 +66,7 @@ export function Home() {
     <div className="row d-flex justify-content-center">
         <div className="col-md-10 col-lg-9 col-xl-8">
             <div className="card card-main border-0 text-center">
-                <h5 className="font-weight-bold mb-4">What our clients are sayingabout us.</h5>
+                <h5 className="font-weight-bold mb-4">What our clients are saying about us.</h5>
                 <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                     <ol className="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
