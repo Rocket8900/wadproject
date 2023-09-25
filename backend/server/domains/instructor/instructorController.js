@@ -1,6 +1,6 @@
 import InstructorService from "./instructorService.js"
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import AuthService from "../auth/authService.js";
 
 export default class InstructorController {
     
@@ -48,28 +48,15 @@ export default class InstructorController {
             const instructor = await InstructorService.getInstructorByEmail(email);
 
             if (instructor && (await bcrypt.compare(password, instructor.password))) {
-                const accessToken = jwt.sign(
-					{
-						instructor: {
-							type: "instructor",
-							instructor_id: instructor.id,
-						},
-					},
-					process.env.SECRET_ACCESS_TOKEN,
-					{ expiresIn: "50m" }
-				);
+  
+                
+                const accessToken = AuthService.getAccessToken("instructor", instructor.id)
+				const refreshToken = AuthService.getRefreshToken("instructor",instructor.id)
+				const saveToken = await AuthService.saveIntructorRefreshToken(instructor.id, refreshToken)
 
-
-				const refreshToken = jwt.sign(
-					{
-						student: {
-							type: "instructor",
-							instructor_id: instructor.id,
-						},
-					},
-					process.env.SECRET_ACCESS_TOKEN,
-					{ expiresIn: "7d" } // Set the expiration time for the refresh token
-				);
+                if (saveToken) {
+					console.log("refresh token saved")	
+				}
 
 				res.cookie('refresh_token', refreshToken, {
 					maxAge: 50 * 60 * 1000, // Expires in 50 minutes

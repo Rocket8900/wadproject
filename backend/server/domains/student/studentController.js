@@ -2,6 +2,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import StudentService from "./studentService.js";
+import AuthService from "../auth/authService.js";
 
 
 
@@ -49,28 +50,16 @@ export default class StudentController {
 			}
 			const student = await StudentService.getStudentByUsername(username)
 			if (student && (await bcrypt.compare(password, student.password))) {
-				const accessToken = jwt.sign(
-					{
-						student: {
-							type: "student",
-							student_id: student.id,
-						},
-					},
-					process.env.SECRET_ACCESS_TOKEN,
-					{ expiresIn: "50m" }
-				);
 
-				const refreshToken = jwt.sign(
-					{
-						student: {
-							type: "student",
-							student_id: student.id,
-						},
-					},
-					process.env.SECRET_ACCESS_TOKEN,
-					{ expiresIn: "7d" } // Set the expiration time for the refresh token
-				);
-
+				const accessToken = AuthService.getAccessToken("student",student.id)
+				const refreshToken = AuthService.getRefreshToken("student",student.id)
+				const saveToken = await AuthService.saveStudentRefreshToken(student.id, refreshToken)
+				
+				
+				if (saveToken) {
+					console.log("refresh token saved" + saveToken)	
+				}
+				
 				res.cookie('refresh_token', refreshToken, {
 					maxAge: 50 * 60 * 1000, // Expires in 50 minutes
 					httpOnly: true, // Cookie can only be accessed on the server
