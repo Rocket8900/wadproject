@@ -21,6 +21,7 @@ model Student {
   gender   String
   type     String // enums("auto", "manual")
   language String
+  tokens StudentToken[]
   reviews  Review[]
   bookings Booking[]
   chatRoom ChatRoom[]
@@ -37,6 +38,7 @@ model Instructor {
   experience   Int
   type         String // enums("auto", "manual", "both")
   carModel     String
+  tokens InstructorToken[]
   availability DateTime[]
   bookings     Booking[]
   reviews      Review[]
@@ -71,4 +73,24 @@ model Review {
   rating       Float
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
+}
+
+
+
+
+model StudentToken {
+  id String @id @default(uuid())
+  studentId String 
+  refreshToken String @unique
+  createdAt DateTime @default(now())
+  student      Student    @relation(fields: [studentId], references: [id])
+}
+
+model InstructorToken {
+  id String @id @default(uuid())
+  instructorId String
+  refreshToken String @unique
+  createdAt DateTime @default(now())
+  instructor   Instructor @relation(fields: [instructorId], references: [id])
+
 }
