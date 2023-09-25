@@ -2,26 +2,38 @@ import mongoose from "mongoose";
 
 
 const connectionSchema = mongoose.Schema({
-    socketId: {
-        type: String,
-        required: true
-    },  
+
     participants: {
-        userAId: {
-            type: String,
-            required: true
+        userA: {
+            id: {
+                type: String,
+                required: true
+            },
+            socketId: {
+                type: String,
+                required: true
+            }
         },  
-        userBId: {
-            type: String,
-            required: true
+        userB: {
+            id: {
+                type: String,
+                required: true
+            },
+            socketId: {
+                type: String,
+                required: true
+            }
         }
     },
 
 }, {timestamps: true})
 
+connectionSchema.index({ 'participants.userA.socketId': 1, 'participants.userB.socketId': 1 }, { unique: true });
+
+
 
 const messageSchema = mongoose.Schema({
-    socketId: {
+    connectionId: {
         type: String,
         required: true,
     },

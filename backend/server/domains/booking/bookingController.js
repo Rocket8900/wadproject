@@ -3,7 +3,7 @@
 
 
 
-import BookingService from "./bookingService";
+import BookingService from "./bookingService.js";
 
 
 export default class BookingController {

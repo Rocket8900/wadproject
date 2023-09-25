@@ -1,5 +1,5 @@
 
-import ReviewService from "./reviewService";
+import ReviewService from "./reviewService.js";
 
 
 

@@ -59,12 +59,30 @@ export default class StudentController {
 					process.env.SECRET_ACCESS_TOKEN,
 					{ expiresIn: "50m" }
 				);
+
+				const refreshToken = jwt.sign(
+					{
+						student: {
+							type: "student",
+							student_id: student.id,
+						},
+					},
+					process.env.SECRET_ACCESS_TOKEN,
+					{ expiresIn: "7d" } // Set the expiration time for the refresh token
+				);
+
+				res.cookie('refresh_token', refreshToken, {
+					maxAge: 50 * 60 * 1000, // Expires in 50 minutes
+					httpOnly: true, // Cookie can only be accessed on the server
+				});
+
+				res.header("Authorization", `Bearer ${accessToken}`)
+
 				return res.status(201).json({
 					message: "successful login",
-					access_token: accessToken,
 				});
 			} else {
-				return res.status(401).json({ message: "incorrect pasword/email" });
+				return res.status(401).json({ message: "incorrect password/email" });
 			}
 		} catch (error) {
 			console.error(error);
