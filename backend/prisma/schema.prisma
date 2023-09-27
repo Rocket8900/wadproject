@@ -11,34 +11,36 @@ datasource db {
 }
 
 model Student {
-  id       String        @id @default(uuid())
+  id       String         @id @default(uuid())
   selfie   String?
   age      Int
-  username String     @unique
+  username String         @unique
   name     String
-  email    String     @unique
+  email    String         @unique
   password String // hashed!
   gender   String
   type     String // enums("auto", "manual")
   language String
-  tokens StudentToken[]
+  tokens   StudentToken[]
   reviews  Review[]
   bookings Booking[]
   chatRoom ChatRoom[]
 }
 
 model Instructor {
-  id       String        @id @default(uuid())
-  name         String 
+  id           String            @id @default(uuid())
+  name         String
   age          Int
+  rating       Float
+  affiliation  String // SSDC, CDC, BBDC
   gender       String
-  email        String @unique
+  email        String            @unique
   password     String
   language     String
   experience   Int
   type         String // enums("auto", "manual", "both")
   carModel     String
-  tokens InstructorToken[]
+  tokens       InstructorToken[]
   availability DateTime[]
   bookings     Booking[]
   reviews      Review[]
@@ -46,19 +48,19 @@ model Instructor {
 }
 
 model Booking {
-  id       String        @id @default(uuid())
+  id           String     @id @default(uuid())
   apptDate     DateTime
   description  String
   feedback     String?
   studentId    String
   instructorId String
-  status String // Scheduled, Completed, Rejected
+  status       String // Scheduled, Completed, Rejected
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
 }
 
 model ChatRoom {
-  id       String        @id @default(uuid())
+  id           String     @id @default(uuid())
   studentId    String
   instructorId String
   roomId       String
@@ -67,7 +69,7 @@ model ChatRoom {
 }
 
 model Review {
-  id       String        @id @default(uuid())
+  id           String     @id @default(uuid())
   studentId    String
   instructorId String
   rating       Float
@@ -75,22 +77,20 @@ model Review {
   instructor   Instructor @relation(fields: [instructorId], references: [id])
 }
 
-
-
-
 model StudentToken {
-  id String @id @default(uuid())
-  studentId String 
-  refreshToken String @unique
-  createdAt DateTime @default(now())
-  student      Student    @relation(fields: [studentId], references: [id])
+  id           String   @id @default(uuid())
+  studentId    String
+  refreshToken String   @unique
+  createdAt    DateTime @default(now())
+  student      Student  @relation(fields: [studentId], references: [id])
 }
 
 model InstructorToken {
-  id String @id @default(uuid())
+  id           String     @id @default(uuid())
   instructorId String
-  refreshToken String @unique
-  createdAt DateTime @default(now())
+  refreshToken String     @unique
+  createdAt    DateTime   @default(now())
   instructor   Instructor @relation(fields: [instructorId], references: [id])
-
 }
+
+
