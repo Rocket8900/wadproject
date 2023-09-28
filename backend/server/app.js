@@ -37,15 +37,19 @@ app.use("/v1/api/booking", bookingRoute)
 app.use("/v1/api/review", reviewRoute)
 
 
+
 startServerSocket(io);
+
 
 httpServer.listen(PORT, () => {  // Make sure to call listen on the httpServer, not the Express app
     console.log('Socket/Server is running on port 3001');
 })
 
 
+
 app.get("/", async (req, res) => {
     res.send("api is working...")
 })
+
 
 export default app

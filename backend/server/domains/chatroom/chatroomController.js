@@ -1,4 +1,5 @@
 import { Server } from "socket.io"
+import ChatroomService from "./chatroomService"
 
 export default class ChatroomController {
     
@@ -7,30 +8,10 @@ export default class ChatroomController {
 
             const senderId = req.user.id
             const { receiverId }  = req.params.id
-            const senderSocketId = 1;
-            const receiverSocketId = 3;
-            
 
-            
+            const chatHistory = await ChatroomService.getChatHistory(senderId, receiverId);
 
-
-            
-        
-            /*
-                sender can either a instructor or student 
-                open chat -> regenerate chat history
-
-                save sender's socket id 
-                save 
-
-                1. start connnection
-                2. client gets a connection
-
-
-            
-            
-            */ 
-
+            return res.status(200).json({data: chatHistory})
 
 
         } catch (error) {

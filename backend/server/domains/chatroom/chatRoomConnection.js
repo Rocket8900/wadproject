@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 import app from "../../app.js"
 import http from "http";
+import { redis_cache } from "../../utils/redisConnection.js";
 
 
 
@@ -16,14 +17,18 @@ export const startServerSocket = (io) => {
 
 
       try {
+
         /* 
-          todo:  authentication for socket 
-          todo: save the userId into the socket
-          todo:  save the socket id for user (can store in redis)
+          todo: authentication for socket 
+          // todo: save the userId into the socket
+          // todo: save the socket id for user (can store in redis)
+          todo: store messages on mongodb
         */
 
-        socket.userData = {userId : "shawn"}
-
+        
+        socket.userData = {userId : "shawn"} // fake user data
+        const userId = socket.userData.userId; 
+        await redis_cache.set(userId, socket.id); // set socketid to userid
         console.log("private messaging function in use: " + socket.id + ": " + socket.userData.userId);
         next();
 
@@ -36,22 +41,27 @@ export const startServerSocket = (io) => {
 
 
 
-    io.on("connection", (socket) => {
+    io.on("connection",  (socket) => {
 
-      // onload of the chat page, client socket emits  "entry" 
 
-      socket.on("private_message", ({receiverId, message}) => {
-
+      socket.on("private_message", async ({receiverId, message}) => {
         const sender = socket.userData.userId
         console.log(`${sender} send "${message}" to ${receiverId}`); 
+        const receiverSocketId = await redis_cache.get(receiverId) // get socketid of user
+        if (receiverSocketId) {
+          // send to socket 
+        } 
+        // save the message to chat history
+
+
 
       })
 
-      // onunload?? from FE to emit a response back 
-      socket.on("disconnect", () => {
-
+      // onunload from FE to emit a response back to remove socket key pair
+      socket.on("disconnect", async () => {
+        console.log(socket.userData.userId + " disconncted");
+        await redis_cache.del(socket.userData.userId) // del user-socket pair
         socket.disconnect();
-
       })
 
   });
