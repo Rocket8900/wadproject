@@ -3,9 +3,16 @@ import { Home } from "./components/home/Home";
 import { Login } from "./components/login/Login";
 import { UserDashboard } from "./components/dashboards/UserDashboard";
 import { InstructorDashboard } from "./components/dashboards/InstructorDashboard";
+import  Registration  from "./components/registration/registration";
+import StudentDashboard from "./components/dashboard/studentdashboard";
+import InstructorDashboard from "./components/dashboard/instructordashboard";
+import InstructorsComponent from "./components/instructors/instructors";
+import InstructorComponent from "./components/instructors/instructor";
 import {Routes,Route} from 'react-router';
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
+
+// instructordashboard.js
 
 export default function App() {
   return (
@@ -14,11 +21,13 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/user-dashboard" element={<UserDashboard />} />
-        <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/studentdashboard" element={<StudentDashboard />} />
+        <Route path="/instructordashboard" element={<InstructorDashboard />} />
+        <Route path="/instructors" element={<InstructorsComponent />} />
+        <Route path="/instructor" element={<InstructorComponent />} />
 
       </Routes>
     </div>
   ) 
 }
-
