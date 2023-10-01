@@ -1,11 +1,10 @@
 import { Form } from "react-bootstrap";
-import { ChangeEvent } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
-function DriversComponent() {
+function InstructorsComponent() {
     return (
         <Row>
             <Col md={3} className="border-end h-100 position-sticky">
@@ -64,4 +63,4 @@ function DriversComponent() {
         </Row>
         );
     }
-    export default DriversComponent;
+    export default InstructorsComponent;

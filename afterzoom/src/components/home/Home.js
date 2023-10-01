@@ -7,7 +7,7 @@ export function Home() {
                         <h1>Afterzoom</h1>
                         <p className="lead">Learning driving has never been easier </p>
 
-                        <p><a href="#" className="btn btn-primary shadow mr-2">Log in</a><a href="#" className="btn btn-outline-primary">Sign up</a></p>
+                        <p><a href="/login" className="btn btn-primary shadow mr-2">Log in</a><a href="#" className="btn btn-outline-primary">Sign up</a></p>
                     </div>
                 <div className="col-lg-6 order-1 order-lg-2"><img src="img/fancyimage.jpg" alt="landing image" className="img-fluid"></img></div>
             </div>
@@ -66,7 +66,7 @@ export function Home() {
     <div className="row d-flex justify-content-center">
         <div className="col-md-10 col-lg-9 col-xl-8">
             <div className="card card-main border-0 text-center">
-                <h5 className="font-weight-bold mb-4">What our clients are sayingabout us.</h5>
+                <h5 className="font-weight-bold mb-4">What our clients are saying about us.</h5>
                 <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                     <ol className="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
