@@ -9,7 +9,7 @@ import InstructorComponent from "./components/instructors/instructor";
 import {Routes,Route} from 'react-router';
 import React from 'react';
 import './App.css';
-
+// ensure that custom components start with capital letter to differentiate from built in components
 // instructordashboard.js
 
 export default function App() {
