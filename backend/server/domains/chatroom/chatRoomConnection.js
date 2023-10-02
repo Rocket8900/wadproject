@@ -2,6 +2,7 @@ import { Server } from "socket.io";
 import app from "../../app.js"
 import http from "http";
 import { redis_cache } from "../../utils/redisConnection.js";
+import InstructorService from "../instructor/instructorService.js";
 
 
 
@@ -35,6 +36,7 @@ export const startServerSocket = (io) => {
       } catch (error) {
         return new Error(error);
       }
+      
   
 
     })
@@ -45,15 +47,23 @@ export const startServerSocket = (io) => {
 
 
       socket.on("private_message", async ({receiverId, message}) => {
+
         const sender = socket.userData.userId
         console.log(`${sender} send "${message}" to ${receiverId}`); 
+
         const receiverSocketId = await redis_cache.get(receiverId) // get socketid of user
+
         if (receiverSocketId) {
           // send to socket 
-        } 
+          io.to(receiverSocketId).emit("private_message", message);
+        }
+
+        const instructorExists = await InstructorService.getInstructorById(receiverId)
+        if (instructorExists) {
+          console.log("add message to db ~");
+        }
+        
         // save the message to chat history
-
-
 
       })
 
