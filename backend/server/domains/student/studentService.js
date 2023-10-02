@@ -5,9 +5,9 @@ import { prisma_db } from "../../utils/prismaConnection.js";
 
 
 export default class StudentService {
-    static createStudent = (studentData) => {
+    static createStudent = async (studentData) => {
         try {
-            const student =  prisma_db.student.create({
+            const student = await prisma_db.student.create({
                 data: {
                     ...studentData
                 }
@@ -18,11 +18,12 @@ export default class StudentService {
         }
     }
 
-    static deleteStudent = (studentId) => {
+    static deleteStudent = async (studentId) => {
         try {
-            const student =  prisma_db.student.delete({
+            const {id} = studentId
+            const student =  await prisma_db.student.delete({
                 where: {
-                    id: studentId
+                    id: Number(id)
                 }
             })
             return student
@@ -31,11 +32,13 @@ export default class StudentService {
         }
     }
 
-    static updateStudent = (studentId, studentData) => {
+    static updateStudent = async (studentId, studentData) => {
         try {
-            const student =  prisma_db.student.create({
+            const {id} = studentId
+            console.log(id)
+            const student =  await prisma_db.student.update({
                 where: {
-                    id: studentId
+                    id: Number(id)
                 },
                 data: {
                     ...studentData
@@ -47,9 +50,10 @@ export default class StudentService {
         }
     }
 
-    static getStudentByUsername = (username) => {
+    static getStudentByUsername = async (username) => {
         try {
-            const student =  prisma_db.student.findUnique({
+
+            const student = await prisma_db.student.findUnique({
                 where: {
                     username: username
                 }
@@ -59,6 +63,24 @@ export default class StudentService {
 
         }
     }
+
+    static getStudentById = async (studentId) => {
+        try {
+            const {id} = studentId
+
+            const student = await prisma_db.student.findUnique({
+                where: {
+                    id: Number(id)
+                }
+            })
+            return student
+        } catch (error) {
+
+        }
+    }
+
+
+
 
 
 
