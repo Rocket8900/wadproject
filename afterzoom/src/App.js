@@ -9,7 +9,8 @@ import InstructorComponent from "./components/instructors/instructor";
 import {Routes,Route} from 'react-router';
 import React from 'react';
 import './App.css';
-// ensure that custom components start with capital letter to differentiate from built in components
+import Chat from "./components/private-chat/chat";
+
 // instructordashboard.js
 
 export default function App() {
@@ -24,7 +25,7 @@ export default function App() {
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
         <Route path="/instructors" element={<InstructorsComponent />} />
         <Route path="/instructor" element={<InstructorComponent />} />
-
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </div>
   ) 
