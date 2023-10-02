@@ -6,3 +6,6 @@ To start the backend:
 4. run `npm start`
 
 
+To have the `.env` file
+1. in your terminal `touch .env`
+2. copy-paste the .env content from telegram
