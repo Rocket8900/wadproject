@@ -1,7 +1,7 @@
 import InstructorService from "./instructorService.js"
 import bcrypt from "bcryptjs";
 import AuthService from "../auth/authService.js";
-
+import Logging from "../../utils/loggings.js";
 export default class InstructorController {
     
     static makeInstructorAccount = async (req, res) => {
@@ -16,11 +16,17 @@ export default class InstructorController {
             req.body.password = hashedPassword
             
             const instructor = await InstructorService.createInstructor(req.body);
-
+            
+            if (instructor) {
+                Logging.info(`new instructor created [${instructor.id}]`)
+            } else {
+                Logging.warn(`unable to create instructor`)
+            }
 
             return res.status(201).json({data: instructor})
 
         } catch (error) {
+            Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });
         }
 
@@ -31,8 +37,14 @@ export default class InstructorController {
             const instructorId = req.params
             const instructorData = req.body
             const instructor = await InstructorService.updateInstructor(instructorId, instructorData);
+            if (instructor) {
+                Logging.info(`new update for instructor [${instructor.id}]`)
+            } else {
+                Logging.warn(`unable to update instructor`)
+            }
             return res.status(201).json({data: instructor})
         } catch (error) {
+            Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });
         }
     }
@@ -55,7 +67,7 @@ export default class InstructorController {
 				const saveToken = await AuthService.saveIntructorRefreshToken(instructor.id, refreshToken)
 
                 if (saveToken) {
-					console.log("refresh token saved")	
+					Logging.info("refresh token saved")	
 				}
 
 				res.cookie('refresh_token', refreshToken, {
@@ -65,14 +77,18 @@ export default class InstructorController {
 
 				res.header("Authorization", `Bearer ${accessToken}`)
 
+                Logging.info(`login by instructor ${instructor.id}`)
+
 				return res.status(201).json({
 					message: "successful login",
 				});
 
 			} else {
+                Logging.info(`attempted login for instructor ${instructor.id}`)
 				return res.status(401).json({ message: "incorrect pasword/email" });
 			}
         } catch (error) {
+            Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });
         }
     }
@@ -81,8 +97,10 @@ export default class InstructorController {
     static listAllAvailableInstructor = async (req, res) => {
         try {
             const instructors = await InstructorService.getAllInstructors();
+            Logging.info("retrieved all available instructors")
             return res.status(200).json({data: instructors})
         } catch (error) {
+            Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });
         }
     }
@@ -90,8 +108,11 @@ export default class InstructorController {
     static viewSpecificInstructor = async (req, res) => {
         try {
             const instructor = await InstructorService.getInstructorById(req.params);
+            Logging.info(`retrieved information for instructor ${instructor.id}`)
             return res.status(200).json({data: instructor})
         } catch (error) {
+            Logging.error(error)
+
             return res.status(500).json({ error: "an unexpected error occurred" });
         }
     }
@@ -100,8 +121,10 @@ export default class InstructorController {
     static listInstructorsByFilter = async (req, res) => {
         try {
             const instructors = await InstructorService.getInstructorsByFilters(req.body);
+            Logging.info("retrieving filtered instructors")
             return res.status(200).json({data: instructors});
         } catch (error) {
+            Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });
 
         }
