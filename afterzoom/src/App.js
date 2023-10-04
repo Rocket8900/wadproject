@@ -1,7 +1,7 @@
 import NavbarComponent from "./components/ui/Navbar";
 import { Home } from "./components/home/Home";
 import { Login } from "./components/login/Login";
-import { UserDashboard } from "./components/dashboards/UserDashboard";
+import { StudentDashboard } from "./components/dashboards/StudentDashboard";
 import { InstructorDashboard } from "./components/dashboards/InstructorDashboard";
 import  Registration  from "./components/registration/registration";
 import InstructorsComponent from "./components/instructors/instructors";
@@ -21,7 +21,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/student-dashboard" element={<UserDashboard />} />
+        <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
         <Route path="/instructors" element={<InstructorsComponent />} />
         <Route path="/instructor" element={<InstructorComponent />} />
