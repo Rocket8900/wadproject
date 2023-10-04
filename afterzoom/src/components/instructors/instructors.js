@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 function InstructorsComponent() {
     const [instructors, setInstructors] = useState([]);
     const [filter, setFilter] = useState({
@@ -57,7 +58,7 @@ function InstructorsComponent() {
                     <Card.Text>
                     Driver for {instructor.experience} years 
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Link to={`/instructors/${instructor.id}`}><Button variant="primary">View Details</Button></Link>
                 </Card.Body>
             </Card>
         ))}

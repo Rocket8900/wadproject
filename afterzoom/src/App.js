@@ -5,7 +5,7 @@ import { UserDashboard } from "./components/dashboards/UserDashboard";
 import { InstructorDashboard } from "./components/dashboards/InstructorDashboard";
 import  Registration  from "./components/registration/registration";
 import InstructorsComponent from "./components/instructors/instructors";
-import InstructorComponent from "./components/instructors/instructor";
+import InstructorDetail from "./components/instructors/InstructorDetail";
 import {Routes,Route} from 'react-router';
 import React from 'react';
 import './App.css';
@@ -24,7 +24,7 @@ export default function App() {
         <Route path="/student-dashboard" element={<UserDashboard />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
         <Route path="/instructors" element={<InstructorsComponent />} />
-        <Route path="/instructor" element={<InstructorComponent />} />
+        <Route path="/instructors/:id" element={<InstructorDetail />} />
         <Route path="/chat" element={<Chat />} />
       </Routes>
     </div>
