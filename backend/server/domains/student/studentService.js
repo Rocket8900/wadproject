@@ -1,7 +1,7 @@
 
 
 import { prisma_db } from "../../utils/prismaConnection.js";
-
+import Logging from "../../utils/loggings.js";
 
 
 export default class StudentService {
@@ -11,78 +11,78 @@ export default class StudentService {
                 data: {
                     ...studentData
                 }
-            })
-            return student
+            });
+            return student;
         } catch (error) {
-
+            Logging.error(error);
+            return null;
         }
-    }
+    };
 
     static deleteStudent = async (studentId) => {
         try {
-            const {id} = studentId
-            const student =  await prisma_db.student.delete({
+            const { id } = studentId;
+            const student = await prisma_db.student.delete({
                 where: {
-                    id: Number(id)
+                    id: id
                 }
-            })
-            return student
+            });
+            return student;
         } catch (error) {
-
+            Logging.error(error);
+            return null;
         }
-    }
+    };
 
     static updateStudent = async (studentId, studentData) => {
         try {
-            const {id} = studentId
-            console.log(id)
-            const student =  await prisma_db.student.update({
+            const { id } = studentId;
+            const student = await prisma_db.student.update({
                 where: {
-                    id: Number(id)
+                    id: id
                 },
                 data: {
                     ...studentData
                 }
-            })
-            return student
+            });
+            return student;
         } catch (error) {
-
+            Logging.error(error);
+            return null;
         }
-    }
+    };
 
     static getStudentByUsername = async (username) => {
         try {
-
             const student = await prisma_db.student.findUnique({
                 where: {
                     username: username
                 }
-            })
-            return student
+            });
+            return student;
         } catch (error) {
-
+            Logging.error(error);
+            return null;
         }
-    }
+    };
 
     static getStudentById = async (studentId) => {
         try {
-            const {id} = studentId
+            const { id } = studentId;
 
             const student = await prisma_db.student.findUnique({
                 where: {
-                    id: Number(id)
+                    id: id
                 }
-            })
-            return student
+            });
+            return student;
         } catch (error) {
-
+            Logging.error(error);
+            return null;
         }
-    }
-
-
-
+    };
+}
 
 
 
     
-}
