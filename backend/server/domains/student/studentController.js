@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import StudentService from "./studentService.js";
 import AuthService from "../auth/authService.js";
+import Logging from "../../utils/loggings.js";
 
 
 
@@ -20,19 +21,21 @@ export default class StudentController {
 
 			req.body.password = hashedPassword
 
-			const student =  await StudentService.createStudent(req.body) 
+			const student =  await StudentService.createStudent(req.body)
 
 			if (student) {
+				Logging.info("new student created")
 				return res
 					.status(201)
 					.json({ message: "student successfully registered" });
 			} else {
+				Logging.warn("fail to create student")
 				return res.status(400).json({
 					message: "database error: failed to create student account",
 				});
 			}
 		} catch (error) {
-			console.error(error);
+			Logging.error(error);
 			return res
 				.status(500)
 				.json({ error: "an unexpected error occurred" });
@@ -57,7 +60,7 @@ export default class StudentController {
 				
 				
 				if (saveToken) {
-					console.log("refresh token saved" + saveToken)	
+					Logging.info(`refresh token saved`)	
 				}
 				
 				res.cookie('refresh_token', refreshToken, {
@@ -66,15 +69,16 @@ export default class StudentController {
 				});
 
 				res.header("Authorization", `Bearer ${accessToken}`)
-
+				Logging.info(`student ${student.id} logged in`)
 				return res.status(201).json({
 					message: "successful login",
 				});
 			} else {
+				Logging.warn("failed login attempt")
 				return res.status(401).json({ message: "incorrect password/email" });
 			}
 		} catch (error) {
-			console.error(error);
+			Logging.error(error);
 			return res.status(500).json({ error: "an unexpected error occurred" });
 		}
 	}
@@ -83,8 +87,11 @@ export default class StudentController {
 	static viewStudentProfile = async (req, res) => {
 		try {
 			const student = await StudentService.getStudentById(req.params);
+			Logging.info(`retrieved student ${student.id}`)
 			return res.status(200).json({data: student});
 		} catch (error) {
+			Logging.error(error);
+
 			return res.status(500).json({ error: "an unexpected error occurred" });
 		}
 	}
@@ -92,8 +99,10 @@ export default class StudentController {
 	static updateStudentProfile = async (req, res) => {
 		try {
 			const student = await StudentService.updateStudent(req.params, req.body)
+			Logging.info(`updated details for student ${student.id}`)
 			return res.status(201).json({data: student});
 		} catch (error) {
+			Logging.error(error);
 			return res.status(500).json({ error: "an unexpected error occurred" });
 		}
 	}
