@@ -46,7 +46,7 @@ export function Login() {
       // Handle successful student login here
       console.log(response.data);
       // Redirect to the student dashboard
-      navigate.push('/student-dashboard');
+      navigate('/student-dashboard');
 
     } catch (error) {
       // Handle errors here
@@ -64,7 +64,7 @@ export function Login() {
       // Handle successful instructor login
       console.log(response.data);
       // Redirect to the instructor dashboard
-      navigate.push('/instructor-dashboard');
+      navigate('/instructor-dashboard');
 
     } catch (error) {
       // Handle login errors here (e.g. show an error message to the user)
