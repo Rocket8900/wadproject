@@ -11,6 +11,7 @@ import bookingRoute from './domains/booking/bookingRoute.js';
 import reviewRoute from './domains/review/reviewRoute.js';
 import { startServerSocket } from './domains/chatroom/chatRoomConnection.js';
 import { Server } from "socket.io";
+import Logging from './utils/loggings.js';
 
 
 
@@ -43,7 +44,7 @@ startServerSocket(io);
 
 
 httpServer.listen(PORT, () => {  // Make sure to call listen on the httpServer, not the Express app
-    console.log('Socket/Server is running on port 3001');
+    Logging.log('Socket/Server is running on port 3001');
 })
 
 

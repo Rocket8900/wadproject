@@ -4,7 +4,7 @@ import './Dashboard.css';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
-export function UserDashboard() {
+export function StudentDashboard() {
     return (
         <Container>
             {/* Top 3 Buttons */}

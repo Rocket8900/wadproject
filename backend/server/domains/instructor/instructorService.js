@@ -23,7 +23,6 @@ export default class InstructorService {
     static updateInstructor = async (instructorId, instructorData) => {
         try {
             const { id } = instructorId;
-
             const instructor = await prisma_db.instructor.update({
                 where: {
                     id: id
