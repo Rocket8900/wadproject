@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './ChatPage.css'; // Assuming you have a CSS file named ChatPage.css in the same directory
+import './ChatPage.css'; 
 
 function ChatPage() {
   const [messages, setMessages] = useState([]);
