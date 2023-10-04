@@ -1,4 +1,5 @@
 import { prisma_db } from "../../utils/prismaConnection.js";
+import Logging from "../../utils/loggings.js";
 
 export default class InstructorService {
 
@@ -8,63 +9,70 @@ export default class InstructorService {
                 data: {
                     ...instructorData
                 }
-            })
-            return instructor
+            });
+            return instructor;
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while creating the instructor."
+            };
         }
-    }
-
-
+    };
     // other crud fields not needed. 
 
     static updateInstructor = async (instructorId, instructorData) => {
-
         try {
-            const {id} = instructorId;
-
+            const { id } = instructorId;
             const instructor = await prisma_db.instructor.update({
                 where: {
-                    id: Number(id)
+                    id: id
                 },
                 data: {
                     ...instructorData
                 }
-            })
-            return instructor
+            });
+            return instructor;
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while updating the instructor."
+            };
         }
-    }
+    };
 
     static getInstructorById = async (instructorId) => {
         try {
-            const {id} = instructorId;
+            const { id } = instructorId;
 
             const instructor = await prisma_db.instructor.findUnique({
                 where: {
-                    id:  Number(id)
+                    id: id
                 }
-            })
-            return instructor
+            });
+            return instructor;
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while retrieving the instructor."
+            };
         }
-    }
+    };
 
     static getInstructorByEmail = async (instructorEmail) => {
         try {
             const instructor = await prisma_db.instructor.findUnique({
                 where: {
-                    email : instructorEmail
+                    email: instructorEmail
                 }
-            })
+            });
             return instructor;
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while retrieving the instructor."
+            };
         }
-    }
-
+    };
 
     static getInstructorsByFilters = async (filters) => {
         try {
@@ -72,20 +80,25 @@ export default class InstructorService {
                 where: {
                     ...filters
                 }
-            })
+            });
             return instructors;
         } catch (error) {
-            
+            Logging.error(error);
+            return {
+                error: "An error occurred while retrieving the instructors."
+            };
         }
-    }
+    };
 
     static getAllInstructors = async () => {
         try {
-            const instructors = await prisma_db.instructor.findMany({})
+            const instructors = await prisma_db.instructor.findMany({});
             return instructors;
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while retrieving the instructors."
+            };
         }
-    }
-
+    };
 }

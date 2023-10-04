@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
+import cors from "cors"
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import http from "http";
@@ -10,6 +11,7 @@ import bookingRoute from './domains/booking/bookingRoute.js';
 import reviewRoute from './domains/review/reviewRoute.js';
 import { startServerSocket } from './domains/chatroom/chatRoomConnection.js';
 import { Server } from "socket.io";
+import Logging from './utils/loggings.js';
 
 
 
@@ -26,7 +28,7 @@ const io = new Server(httpServer, {
     }
 });
 
-
+app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,7 +44,7 @@ startServerSocket(io);
 
 
 httpServer.listen(PORT, () => {  // Make sure to call listen on the httpServer, not the Express app
-    console.log('Socket/Server is running on port 3001');
+    Logging.log('Socket/Server is running on port 3001');
 })
 
 

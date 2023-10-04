@@ -1,66 +1,71 @@
-import { Form } from "react-bootstrap";
-import { Col, Container, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
-
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 function InstructorsComponent() {
-    return (
-        <Row>
-            <Col md={3} className="border-end h-100 position-sticky">
-                <div>
-                    <h1 className="fs-6 hellix-bold py-3 border-bottom align-content-center">Filter</h1>
-                    <Form>
-                        <h6 className="hellix-bold">CATEGORY</h6>
-                        <div key="5-seater" className="">
-                        <Form.Check // prettier-ignore
-                            type="checkbox"
-                            id="popular"
-                            label="popular"
-                        />
-                        </div>
-                    </Form>
-                </div>
-            </Col>
-            <Col md={9}>
-                <div>
-                <Container className="py-4">
-                    <Row>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src="holder.js/100px180" />
-                            <Card.Body>
-                                <Card.Title>John</Card.Title>
-                                <Card.Text>
-                                Driver for 10 years
-                                </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
-                            </Card.Body>
-                        </Card>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src="holder.js/100px180" />
-                            <Card.Body>
-                                <Card.Title>Max</Card.Title>
-                                <Card.Text>
-                                Driver for 25 years
-                                </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
-                            </Card.Body>
-                        </Card>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src="holder.js/100px180" />
-                            <Card.Body>
-                                <Card.Title>Steven</Card.Title>
-                                <Card.Text>
-                                Driver for 1343432 years
-                                </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
-                            </Card.Body>
-                        </Card>
-                    </Row>
-                </Container>
-                </div>
-            </Col>
-        </Row>
+    const [instructors, setInstructors] = useState([]);
+    const [filter, setFilter] = useState({
+        gender: '',
+      });
+  
+    useEffect(() => {
+      const getInstructorsData = async () => {
+        try {
+          const response = await axios.get("http://localhost:3001/v1/api/instructor/list");
+          setInstructors(response.data.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      getInstructorsData();
+    }, []);
+
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        setFilter({
+          ...filter,
+          [name]: value,
+        });
+      };
+
+    const filteredInstructors = instructors.filter((instructor) => {
+        return (
+        (filter.gender === '' || instructor.gender === filter.gender)
         );
-    }
-    export default InstructorsComponent;
+    });
+    return (
+      <div>
+        <form>
+            <label>
+            Gender:
+            <select
+                name="gender"
+                value={filter.gender}
+                onChange={handleFilterChange}
+            >
+                <option value="">All</option>
+                <option value="m">Male</option>
+                <option value="f">Female</option>
+            </select>
+            </label>
+        </form>
+        {filteredInstructors.map((instructor) => (
+            <Card key={instructor.id} style={{ width: '18rem' }}>
+                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Body>
+                    <Card.Title>{instructor.name}</Card.Title>
+                    <Card.Text>
+                    Driver for {instructor.experience} years 
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+        ))}
+      </div>
+    );
+  }
+  
+  export default InstructorsComponent;
+
+
+
