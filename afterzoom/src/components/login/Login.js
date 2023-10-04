@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import carImage from './car.jpg'; // Import car image
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,12 +18,58 @@ export function Login() {
     width: '33%',
   };
 
+  const loginStyles = { // for login buttons
+    backgroundColor: 'white',
+    borderRadius: '10px',
+    padding: '10px 20px',
+    margin: '10px',
+    border: '1px solid #ccc',
+    cursor: 'pointer',
+    width: '33%',
+  };
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+
+  const handleStudentLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/v1/api/student/login', {
+        username: email,
+        password,
+      });
+
+      // Handle successful student login here
+      console.log(response.data);
+      // Redirect to the student dashboard
+      navigate.push('/student-dashboard');
+
+    } catch (error) {
+      // Handle errors here
+      console.error(error);
+    }
+  };
+
+  const handleInstructorLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/v1/api/instructor/login', {
+        email,
+        password,
+      });
+
+      // Handle successful instructor login
+      console.log(response.data);
+      // Redirect to the instructor dashboard
+      navigate.push('/instructor-dashboard');
+
+    } catch (error) {
+      // Handle login errors here (e.g. show an error message to the user)
+      console.error(error);
+    }
   };
 
   return (
@@ -41,18 +90,18 @@ export function Login() {
           value={password}
           onChange={handlePasswordChange}
         />
-        <button
-          style={{
-            backgroundColor: 'white',
-            borderRadius: '10px',
-            padding: '10px 20px',
-            margin: '10px',
-            border: '1px solid #ccc',
-            cursor: 'pointer',
-            width: '33%',
-          }}
+        <button type="button"
+          style={loginStyles}
+          onClick={handleStudentLogin}
         >
-          Sign In
+          Student Login
+        </button>
+
+        <button type="button"
+          style={loginStyles}
+          onClick={handleInstructorLogin}
+        >
+          Instructor Login
         </button>
       </div>
 
@@ -71,7 +120,7 @@ export function Login() {
       </div>
 
         <div style={{ color: 'black', position: 'absolute', bottom: '10px', right: '10px' }}>
-          <a href="#">Have not registered before? Click Here</a>
+          <a href="/registration">Have not registered before? Click Here</a>
         </div>
       
     </div>
