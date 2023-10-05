@@ -23,12 +23,16 @@ export const app = express()
 const httpServer = http.createServer(app);  
 const io = new Server(httpServer, {
     cors: {
-        origin: "*",  // Allow this origin
+        origin: "http://localhost:3000",  // Allow this origin
         methods: ["GET", "POST", "DELETE", "PATCH"]  // Allow these HTTP methods
     }
 });
 
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000', // replace with your frontend's origin
+    credentials: true
+  }));
+  
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,7 +48,7 @@ startServerSocket(io);
 
 
 httpServer.listen(PORT, () => {  // Make sure to call listen on the httpServer, not the Express app
-    Logging.log('Socket/Server is running on port 3001');
+    Logging.log('socket & server is running on port 3001');
 })
 
 
