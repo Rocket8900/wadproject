@@ -24,7 +24,7 @@ export default class AuthController {
         });
     }
 
-    static verifyRefreshToken(req, res, next) {
+    static(req, res, next) {
         const refreshToken = req.cookies.refreshToken; // Adjust based on where you store the refresh token
         jwt.verify(refreshToken, process.env.SECRET_REFRESH_TOKEN, (err, decodedRefresh) => {
             if (err) {

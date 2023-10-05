@@ -52,11 +52,11 @@ export default class StudentService {
         }
     };
 
-    static getStudentByUsername = async (username) => {
+    static getStudentByEmail = async (email) => {
         try {
             const student = await prisma_db.student.findUnique({
                 where: {
-                    username: username
+                    email: email
                 }
             });
             return student;

@@ -61,24 +61,20 @@ export default class InstructorController {
 
             if (instructor && (await bcrypt.compare(password, instructor.password))) {
   
-                
                 const accessToken = AuthService.getAccessToken("instructor", instructor.id)
 				const refreshToken = AuthService.getRefreshToken("instructor",instructor.id)
-				const saveToken = await AuthService.saveInstructorRefreshToken(instructor.id, refreshToken)
-
-                if (saveToken) {
-					Logging.info("refresh token saved")	
-				}
 
 				res.cookie('refresh_token', refreshToken, {
-					maxAge: 50 * 60 * 1000, // Expires in 50 minutes
+                    maxAge: 3 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
 					httpOnly: true, // Cookie can only be accessed on the server
 				});
 
-				res.header("Authorization", `Bearer ${accessToken}`)
+				res.cookie("access_token",accessToken, {
+					maxAge: 50 * 60 * 1000, // Expires in 50 minutes
+					httpOnly: true, // Cookie can only be accessed on the server
+				})
 
                 Logging.info(`login by instructor ${instructor.id}`)
-
 				return res.status(201).json({
 					message: "successful login",
 				});
