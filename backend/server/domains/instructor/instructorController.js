@@ -64,7 +64,7 @@ export default class InstructorController {
                 
                 const accessToken = AuthService.getAccessToken("instructor", instructor.id)
 				const refreshToken = AuthService.getRefreshToken("instructor",instructor.id)
-				const saveToken = await AuthService.saveIntructorRefreshToken(instructor.id, refreshToken)
+				const saveToken = await AuthService.saveInstructorRefreshToken(instructor.id, refreshToken)
 
                 if (saveToken) {
 					Logging.info("refresh token saved")	

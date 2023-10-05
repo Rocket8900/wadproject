@@ -28,7 +28,7 @@ const io = new Server(httpServer, {
     }
 });
 
-app.use(cors())
+app.use(cors({origin: "*", credentials: true}))
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,7 +44,7 @@ startServerSocket(io);
 
 
 httpServer.listen(PORT, () => {  // Make sure to call listen on the httpServer, not the Express app
-    Logging.log('Socket/Server is running on port 3001');
+    Logging.log('socket & server is running on port 3001');
 })
 
 

@@ -67,8 +67,9 @@ export default class StudentController {
 					maxAge: 50 * 60 * 1000, // Expires in 50 minutes
 					httpOnly: true, // Cookie can only be accessed on the server
 				});
-
+			
 				res.header("Authorization", `Bearer ${accessToken}`)
+
 				Logging.info(`student ${student.id} logged in`)
 				return res.status(201).json({
 					message: "successful login",
@@ -90,8 +91,7 @@ export default class StudentController {
 			Logging.info(`retrieved student ${student.id}`)
 			return res.status(200).json({data: student});
 		} catch (error) {
-			Logging.error(error);
-
+			Logging.error(error)
 			return res.status(500).json({ error: "an unexpected error occurred" });
 		}
 	}
