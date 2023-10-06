@@ -8,29 +8,29 @@ export const quiz = {
     perQuestionScore: 5,
     questions: [
       {
-        question: 'Which function is used to serialize an object into a JSON string in Javascript?',
-        choices: ['stringify()', 'parse()', 'convert()', 'None of the above'],
+        question: 'What is DIPS?',
+        choices: ['Driver Improvement Points System Rules', 'Driver Improvement Passengers Safety Rules', 'Driver Incident Points System Rules'],
         type: 'MCQs',
-        correctAnswer: 'stringify()',
+        correctAnswer: 'Driver Improvement Points System Rules',
       },
       {
-        question: 'Which of the following keywords is used to define a variable in Javascript?',
-        choices: ['var', 'let', 'var and let', 'None of the above'],
+        question: 'When is tailgating acceptable?',
+        choices: ['When you want the vehicle in front to speed up', 'When you want the vehicle in front to give way', 'Tailgating is never acceptable'],
         type: 'MCQs',
-        correctAnswer: 'var and let',
+        correctAnswer: 'Tailgating is never acceptable',
       },
       {
         question:
-          'Which of the following methods can be used to display data in some form using Javascript?',
-        choices: ['document.write()', 'console.log()', 'window.alert', 'All of the above'],
+          'A probationary driver who has accumulated 13 or more demerit points within the first 12 months will',
+        choices: ['be fined only', 'get his/her license revoked', 'be jailed only'],
         type: 'MCQs',
-        correctAnswer: 'All of the above',
+        correctAnswer: 'get his/her license revoked',
       },
       {
-        question: 'How can a datatype be declared to be a constant type?',
-        choices: ['const', 'var', 'let', 'constant'],
+        question: 'The Provisional Driving License is valid for',
+        choices: ['6 months.', '8 months.', '12 months.'],
         type: 'MCQs',
-        correctAnswer: 'const',
+        correctAnswer: '6 months.',
       },
     ],
   }

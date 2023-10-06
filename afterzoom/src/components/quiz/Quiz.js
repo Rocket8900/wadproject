@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { quiz } from './questions'
 import './quiz.css'
 
+
 const Quiz = () => {
   const [activeQuestion, setActiveQuestion] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState('')
@@ -47,7 +48,6 @@ const Quiz = () => {
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`)
 
   return (
-    <div>
     <div className="quiz-container">
       {!showResult ? (
         <div>
@@ -89,7 +89,6 @@ const Quiz = () => {
           </p>
         </div>
       )}
-    </div>
     </div>
   )
 }
