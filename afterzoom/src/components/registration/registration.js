@@ -1,13 +1,28 @@
 import React, { useState } from "react";
+import InstructorForm from "./InstructorForm";
+import StudentForm from "./StudentForm";
 
 function Registration() {
+  const [isInstructor, setIsInstructor] = useState(false);
+  const handleInstructorCheckboxChange = () => {
+    setIsInstructor(!isInstructor);
+  };
+  const [isStudent, setIsStudent] = useState(false);
+  const handleStudentCheckboxChange = () => {
+    setIsStudent(!isStudent);
+  };
   const [formData, setFormData] = useState({
-    role: "",
-    fullName: "",
+    // role: "",
+    name: "",
     email: "",
     password: "",
     gender: "",
     language: "",
+    age: 21,
+    rating: 0,
+    experience: 23,
+    type: "auto",
+    carModel : "toyota",
   });
 
   const handleChange = (e) => {
@@ -22,7 +37,7 @@ function Registration() {
     e.preventDefault();
 
     try {
-      const response = await fetch("localhost:3001/v1/api/XXX/YYY", {
+      const response = await fetch("http://localhost:3001/v1/api/instructor/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,111 +60,28 @@ function Registration() {
       <div className="container-fluid">
         <div className="row main">
           <div className="col-5 qnMan align-self-center">
-            <img src="questionMarkMan.jpg" alt="Question Mark Man" />
+            
           </div>
 
           <div className="col-7 align-self-center">
             <h1>TELL ME MORE ABOUT YOURSELF</h1>
-            <div className="text-center m-3" style={{ paddingTop: "10px" }}>
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="learner"
-                  onChange={handleChange}
-                />{" "}
-                Learner
-              </label>{" "}
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="instructor"
-                  onChange={handleChange}
-                />{" "}
-                Instructor
-              </label>
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                className="form-control"
-                placeholder="Full Name"
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="form-control"
-                placeholder="Email Address"
-              />
-            </div>
             <div>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                id="inputPassword5"
-                className="form-control"
-                aria-describedby="passwordHelpBlock"
-                placeholder="Password"
-              />
+              <form>
+                <label>
+                  <input type="checkbox" checked={isInstructor} onChange={handleInstructorCheckboxChange}
+                  />
+                  I am an instructor
+                </label>
+                <label>
+                  <input type="checkbox" checked={isStudent} onChange={handleStudentCheckboxChange}
+                  />
+                  I am a student
+                </label>
+              </form>
+              {isInstructor && <InstructorForm />}
+              {isStudent && <StudentForm />}
             </div>
-            <div id="passwordHelpBlock" className="form-text">
-              Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-            </div>
-            <div className="text-center" style={{ paddingTop: "10px" }}>
-              <label>
-                <input
-                  type="radio"
-                  name="gender"
-                  value="male"
-                  onChange={handleChange}
-                />{" "}
-                Male
-              </label>{" "}
-              <label>
-                <input
-                  type="radio"
-                  name="gender"
-                  value="female"
-                  onChange={handleChange}
-                />{" "}
-                Female
-              </label>
-            </div>
-            <div style={{ paddingTop: "10px" }}>
-              <select
-                name="language"
-                value={formData.language}
-                onChange={handleChange}
-                className="form-select"
-                aria-label="Default select example"
-              >
-                <option value="" disabled>
-                  Language
-                </option>
-                <option value="english">English</option>
-                <option value="chinese">Chinese</option>
-                <option value="tamil">Tamil</option>
-                <option value="malay">Malay</option>
-              </select>
-            </div>
-            <div>
-              <a href="" className="arrow pt-5">
-                <img src="right-arrow-50.png" alt="Right Arrow" />
-              </a>
-            </div>
-            <button type="button" className="btn btn-primary" onClick={handleSubmit}>
-              Submit
-            </button>
+
           </div>
         </div>
       </div>
