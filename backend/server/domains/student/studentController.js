@@ -59,12 +59,12 @@ export default class StudentController {
 
 				res.cookie('refresh_token', refreshToken, {
 					maxAge: 3 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
-					httpOnly: true, // Cookie can only be accessed on the server
+					// Cookie can only be accessed on the server
 				});
 
 				res.cookie("access_token",accessToken, {
 					maxAge: 50 * 60 * 1000, // Expires in 50 minutes
-					httpOnly: true, // Cookie can only be accessed on the server
+					// Cookie can only be accessed on the server
 				})
 
 				Logging.info(`student ${student.id} logged in`)
@@ -103,6 +103,8 @@ export default class StudentController {
 			return res.status(500).json({ error: "an unexpected error occurred" });
 		}
 	}
+
+	
 
 
 }

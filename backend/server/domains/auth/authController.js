@@ -18,20 +18,23 @@ export default class AuthController {
             } else if (err) {
                 return res.status(401).json({ message: "unauthorized access" });
             } else {
+
+
                 req.user = decoded.user;
+
                 next();
             }
         });
     }
 
-    static(req, res, next) {
+    static verifyRefreshToken(req, res, next) {
         const refreshToken = req.cookies.refreshToken; // Adjust based on where you store the refresh token
         jwt.verify(refreshToken, process.env.SECRET_REFRESH_TOKEN, (err, decodedRefresh) => {
             if (err) {
                 return res.status(401).json({ message: "please log in again" });
             } else {
                 const newAccessToken = jwt.sign({ user: decodedRefresh.user }, process.env.SECRET_ACCESS_TOKEN, { expiresIn: '1h' }); // Adjust expiration time as needed
-                res.cookie('accessToken', newAccessToken, { httpOnly: true }); // Adjust based on how you want to send the token
+                res.cookie('accessToken', newAccessToken); // Adjust based on how you want to send the token
                 req.user = decodedRefresh.user;
                 Logging.info("regenerating access token");
                 next();

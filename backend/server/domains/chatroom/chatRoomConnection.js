@@ -1,8 +1,10 @@
 import { Server } from "socket.io";
 import app from "../../app.js"
 import http from "http";
+import jwt from "jsonwebtoken"
 import { redis_cache } from "../../utils/redisConnection.js";
 import InstructorService from "../instructor/instructorService.js";
+import StudentService from "../student/studentService.js";
 
 
 
@@ -13,10 +15,8 @@ export const startServerSocket = (io) => {
     io.use( async (socket, next) => {
 
       const {query} = socket.handshake
-      const {authToken} = query;
-
-
-
+      const token  = query.token;
+      
       try {
 
         /* 
@@ -26,9 +26,9 @@ export const startServerSocket = (io) => {
           todo: store messages on mongodb
         */
 
-        
-        socket.userData = {userId : "shawn"} // fake user data
-        const userId = socket.userData.userId; 
+        const decoded = jwt.verify(token, process.env.SECRET_ACCESS_TOKEN);
+        const userId = decoded.user.id
+        socket.userData = {userId : userId} // fake user data
         await redis_cache.set(userId, socket.id); // set socketid to userid
         console.log("private messaging function in use: " + socket.id + ": " + socket.userData.userId);
         next();
@@ -55,11 +55,13 @@ export const startServerSocket = (io) => {
 
         if (receiverSocketId) {
           // send to socket 
+          console.log(`found receiver socket ${receiverSocketId}`);
           io.to(receiverSocketId).emit("private_message", message);
         }
-
+        
         const instructorExists = await InstructorService.getInstructorById(receiverId)
-        if (instructorExists) {
+        const studentExists = await StudentService.getStudentById(receiverId)
+        if (instructorExists || studentExists) {
           console.log("add message to db ~");
         }
         
