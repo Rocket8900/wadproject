@@ -10,15 +10,15 @@ export function InstructorDashboard() {
             {/* Top 3 Buttons */}
             <div className="d-grid gap-2 mx-auto">
                 <Link to="/view-students">
-                    <button class="button" type="button">View Students</button>
+                    <button className="button" type="button">View Students</button>
                 </Link>
 
                 <Link to="/view-bookings">
-                    <button class="button" type="button">View Bookings</button>
+                    <button className="button" type="button">View Bookings</button>
                 </Link>
 
                 <Link to="/calendar">
-                    <button class="button" type="button">Calendar</button>
+                    <button className="button" type="button">Calendar</button>
                 </Link>
             </div>
 

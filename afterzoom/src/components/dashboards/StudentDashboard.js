@@ -10,15 +10,15 @@ export function StudentDashboard() {
             {/* Top 3 Buttons */}
             <div className="d-grid gap-2 mx-auto">
                 <Link to="/find-instructor">
-                    <button class="button" type="button">Find an Instructor</button>
+                    <button className="button" type="button">Find an Instructor</button>
                 </Link>
 
                 <Link to="/test-questions">
-                    <button class="button" type="button">BTT/FTT Test Questions</button>
+                    <button className="button" type="button">BTT/FTT Test Questions</button>
                 </Link>
 
                 <Link to="/community-chat">
-                    <button class="button" type="button">Community Chat</button>
+                    <button className="button" type="button">Community Chat</button>
                 </Link>
             </div>
 
