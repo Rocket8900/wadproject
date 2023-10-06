@@ -11,49 +11,7 @@ function Registration() {
   const handleStudentCheckboxChange = () => {
     setIsStudent(!isStudent);
   };
-  const [formData, setFormData] = useState({
-    // role: "",
-    name: "",
-    email: "",
-    password: "",
-    gender: "",
-    language: "",
-    age: 21,
-    rating: 0,
-    experience: 23,
-    type: "auto",
-    carModel : "toyota",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch("http://localhost:3001/v1/api/instructor/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        console.log("Form data submitted successfully!");
-      } else {
-        console.error("Error submitting form data");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+ 
 
   return (
     <div>
