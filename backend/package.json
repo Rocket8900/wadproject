@@ -28,5 +28,8 @@
     "prisma": "^5.2.0",
     "redis": "^4.6.10",
     "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "prisma-docs-generator": "^0.8.0"
   }
 }

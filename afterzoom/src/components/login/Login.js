@@ -39,28 +39,50 @@ export function Login() {
   const handleStudentLogin = async () => {
     try {
       const response = await axios.post('http://localhost:3001/v1/api/student/login', {
-        username: email,
+        email,
         password,
-      });
-
+      }, {withCredentials: true});
+  
+      // Extract the access_token from the cookie
+      const token = getCookie('access_token');
+  
+      // Configure Axios to include the Authorization header for subsequent requests
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      }
+  
       // Handle successful student login here
       console.log(response.data);
       // Redirect to the student dashboard
       navigate('/student-dashboard');
-
+  
     } catch (error) {
       // Handle errors here
       console.error(error);
     }
   };
+  
+  // Helper function to get a cookie by name
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+  
 
   const handleInstructorLogin = async () => {
     try {
       const response = await axios.post('http://localhost:3001/v1/api/instructor/login', {
         email,
         password,
-      });
+      })
 
+      const token = getCookie('access_token');
+  
+      // Configure Axios to include the Authorization header for subsequent requests
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      }
       // Handle successful instructor login
       console.log(response.data);
       // Redirect to the instructor dashboard

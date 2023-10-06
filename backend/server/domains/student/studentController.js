@@ -11,9 +11,9 @@ export default class StudentController {
 
 	static registerStudent = async (req, res) => {
 		try {
-			const { username, password } = req.body;
+			const { email, password } = req.body;
 
-			if (!username || !password) {
+			if (!email || !password) {
 				res.status(400).json({ message: "all fields are mandatory" });
 			}
 
@@ -46,29 +46,27 @@ export default class StudentController {
 
 	static loginStudent = async (req, res) => {
 		try {
-			const { username, password } = req.body;
+			const { email, password } = req.body;
 
-			if (!username || !password) {
-				res.status(400).json({ message: "all fields are needed" });
+			if (!email || !password) {
+				return res.status(400).json({ message: "all fields are needed" });
 			}
-			const student = await StudentService.getStudentByUsername(username)
+			const student = await StudentService.getStudentByEmail(email)
 			if (student && (await bcrypt.compare(password, student.password))) {
 
-				const accessToken = AuthService.getAccessToken("student",student.id)
+				const accessToken = AuthService.getAccessToken("student", student.id)
 				const refreshToken = AuthService.getRefreshToken("student",student.id)
-				const saveToken = await AuthService.saveStudentRefreshToken(student.id, refreshToken)
-				
-				
-				if (saveToken) {
-					Logging.info(`refresh token saved`)	
-				}
-				
+
 				res.cookie('refresh_token', refreshToken, {
-					maxAge: 50 * 60 * 1000, // Expires in 50 minutes
-					httpOnly: true, // Cookie can only be accessed on the server
+					maxAge: 3 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+					// Cookie can only be accessed on the server
 				});
 
-				res.header("Authorization", `Bearer ${accessToken}`)
+				res.cookie("access_token",accessToken, {
+					maxAge: 50 * 60 * 1000, // Expires in 50 minutes
+					// Cookie can only be accessed on the server
+				})
+
 				Logging.info(`student ${student.id} logged in`)
 				return res.status(201).json({
 					message: "successful login",
@@ -90,8 +88,7 @@ export default class StudentController {
 			Logging.info(`retrieved student ${student.id}`)
 			return res.status(200).json({data: student});
 		} catch (error) {
-			Logging.error(error);
-
+			Logging.error(error)
 			return res.status(500).json({ error: "an unexpected error occurred" });
 		}
 	}
@@ -106,6 +103,8 @@ export default class StudentController {
 			return res.status(500).json({ error: "an unexpected error occurred" });
 		}
 	}
+
+	
 
 
 }

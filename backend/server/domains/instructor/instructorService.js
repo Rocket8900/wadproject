@@ -22,10 +22,10 @@ export default class InstructorService {
 
     static updateInstructor = async (instructorId, instructorData) => {
         try {
-            const { id } = instructorId;
+
             const instructor = await prisma_db.instructor.update({
                 where: {
-                    id: id
+                    id: instructorId
                 },
                 data: {
                     ...instructorData
@@ -42,11 +42,10 @@ export default class InstructorService {
 
     static getInstructorById = async (instructorId) => {
         try {
-            const { id } = instructorId;
 
             const instructor = await prisma_db.instructor.findUnique({
                 where: {
-                    id: id
+                    id: instructorId
                 }
             });
             return instructor;
