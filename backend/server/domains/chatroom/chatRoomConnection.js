@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import app from "../../app.js"
 import http from "http";
-import { redis_cache } from "../../utils/redisConnection.js";
+// import { redis_cache } from "../../utils/redisConnection.js";
 import InstructorService from "../instructor/instructorService.js";
 
 

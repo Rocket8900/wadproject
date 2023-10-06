@@ -62,20 +62,20 @@ export default class InstructorController {
             if (instructor && (await bcrypt.compare(password, instructor.password))) {
   
                 
-                const accessToken = AuthService.getAccessToken("instructor", instructor.id)
-				const refreshToken = AuthService.getRefreshToken("instructor",instructor.id)
-				const saveToken = await AuthService.saveIntructorRefreshToken(instructor.id, refreshToken)
+                // const accessToken = AuthService.getAccessToken("instructor", instructor.id)
+				// const refreshToken = AuthService.getRefreshToken("instructor",instructor.id)
+				// const saveToken = await AuthService.saveIntructorRefreshToken(instructor.id, refreshToken)
 
-                if (saveToken) {
-					Logging.info("refresh token saved")	
-				}
+                // if (saveToken) {
+				// 	Logging.info("refresh token saved")	
+				// }
 
-				res.cookie('refresh_token', refreshToken, {
-					maxAge: 50 * 60 * 1000, // Expires in 50 minutes
-					httpOnly: true, // Cookie can only be accessed on the server
-				});
+				// res.cookie('refresh_token', refreshToken, {
+				// 	maxAge: 50 * 60 * 1000, // Expires in 50 minutes
+				// 	httpOnly: true, // Cookie can only be accessed on the server
+				// });
 
-				res.header("Authorization", `Bearer ${accessToken}`)
+				// res.header("Authorization", `Bearer ${accessToken}`)
 
                 Logging.info(`login by instructor ${instructor.id}`)
 
@@ -85,7 +85,7 @@ export default class InstructorController {
 
 			} else {
                 Logging.info(`attempted login for instructor ${instructor.id}`)
-				return res.status(401).json({ message: "incorrect pasword/email" });
+				return res.status(401).json({ message: "incorrect password/email" });
 			}
         } catch (error) {
             Logging.error(error)

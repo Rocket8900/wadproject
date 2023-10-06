@@ -6,12 +6,12 @@ import { InstructorDashboard } from "./components/dashboards/InstructorDashboard
 import  Registration  from "./components/registration/registration";
 import InstructorsComponent from "./components/instructors/instructors";
 import InstructorDetail from "./components/instructors/InstructorDetail";
+import Quiz from "./components/quiz/Quiz";
 import {Routes,Route} from 'react-router';
 import React from 'react';
 import './App.css';
 import Chat from "./components/private-chat/chat";
 
-// instructordashboard.js
 
 export default function App() {
   return (
@@ -26,6 +26,7 @@ export default function App() {
         <Route path="/instructors" element={<InstructorsComponent />} />
         <Route path="/instructors/:id" element={<InstructorDetail />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/quiz" element={<Quiz />} />
       </Routes>
     </div>
   ) 
