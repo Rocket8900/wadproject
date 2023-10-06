@@ -21,10 +21,10 @@ export default class StudentService {
 
     static deleteStudent = async (studentId) => {
         try {
-            const { id } = studentId;
+
             const student = await prisma_db.student.delete({
                 where: {
-                    id: id
+                    id: studentId
                 }
             });
             return student;
@@ -36,10 +36,10 @@ export default class StudentService {
 
     static updateStudent = async (studentId, studentData) => {
         try {
-            const { id } = studentId;
+
             const student = await prisma_db.student.update({
                 where: {
-                    id: id
+                    id: studentId
                 },
                 data: {
                     ...studentData
@@ -68,11 +68,10 @@ export default class StudentService {
 
     static getStudentById = async (studentId) => {
         try {
-            const { id } = studentId;
 
             const student = await prisma_db.student.findUnique({
                 where: {
-                    id: id
+                    id: studentId
                 }
             });
             return student;

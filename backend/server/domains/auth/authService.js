@@ -9,7 +9,7 @@ export default class AuthService {
     static getAccessToken =  (type, userId) => {
         try {
             const token = jwt.sign({
-                student: {
+                user: {
                     type: type,
                     id: userId
                 }
@@ -23,7 +23,7 @@ export default class AuthService {
     static getRefreshToken = (type, userId) => {
         try {
             const token = jwt.sign({
-                student: {
+                user: {
                     type: type,
                     id: userId
                 }

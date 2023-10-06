@@ -12,6 +12,7 @@ import reviewRoute from './domains/review/reviewRoute.js';
 import { startServerSocket } from './domains/chatroom/chatRoomConnection.js';
 import { Server } from "socket.io";
 import Logging from './utils/loggings.js';
+import chatRoomRoute from './domains/chatroom/chatroomRoute.js';
 
 
 
@@ -37,6 +38,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+app.use((req, res, next) => {
+    req.io = io;
+    next();
+})
+
+
 app.use("/v1/api/student", studentRoute)
 app.use("/v1/api/instructor", instructorRoute)
 app.use("/v1/api/booking", bookingRoute)
@@ -44,7 +52,7 @@ app.use("/v1/api/review", reviewRoute)
 
 
 
-startServerSocket(io);
+startServerSocket(io)
 
 
 httpServer.listen(PORT, () => {  // Make sure to call listen on the httpServer, not the Express app
