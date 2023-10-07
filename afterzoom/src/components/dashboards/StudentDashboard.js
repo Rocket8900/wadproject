@@ -10,13 +10,13 @@ function getCookie(name) {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
-console.log(getCookie('access_token'));
-const token = getCookie('access_token');
-const decodedToken = jwtDecode(token).user;
-const type = decodedToken.type;
-const id = decodedToken.id;
-console.log(type);
-console.log(id);
+// console.log(getCookie('access_token'));
+// const token = getCookie('access_token');
+// const decodedToken = jwtDecode(token).user;
+// const type = decodedToken.type;
+// const id = decodedToken.id;
+// console.log(type);
+// console.log(id);
 
 
 export function StudentDashboard() {

@@ -3,6 +3,10 @@ import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Cookie from 'js-cookie';
+
+
+
 function InstructorsComponent() {
     const [instructors, setInstructors] = useState([]);
     const [filter, setFilter] = useState({
@@ -12,7 +16,13 @@ function InstructorsComponent() {
     useEffect(() => {
       const getInstructorsData = async () => {
         try {
-          const response = await axios.get("http://localhost:3001/v1/api/instructor/list");
+          const token = Cookie.get('access_token');  // Retrieve the cookie value
+          
+          const response = await axios.get("http://localhost:3001/v1/api/instructor/list", {
+            headers: {
+              Authorization: `Bearer ${token}`  // Add the cookie value to the authorization header
+            }
+          });
           setInstructors(response.data.data);
         } catch (error) {
           console.error(error);

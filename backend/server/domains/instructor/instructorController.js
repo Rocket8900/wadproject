@@ -56,12 +56,11 @@ export default class InstructorController {
                 const accessToken = AuthService.getAccessToken("instructor", instructor.id)
 				const refreshToken = AuthService.getRefreshToken("instructor",instructor.id)
 				res.cookie('refresh_token', refreshToken, {
-                    maxAge: 3 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
-					httpOnly: true, // Cookie can only be accessed on the server
+                    maxAge: 3 * 24 * 60 * 60 * 1000, // 7 days in milliseconds // Cookie can only be accessed on the server
 				});
 				res.cookie("access_token",accessToken, {
 					maxAge: 50 * 60 * 1000, // Expires in 50 minutes
-					httpOnly: true, // Cookie can only be accessed on the server
+				 // Cookie can only be accessed on the server
 				})
                 Logging.info(`login by instructor ${instructor.id}`)
 				return res.status(201).json({
