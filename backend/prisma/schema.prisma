@@ -5,68 +5,65 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Student {
-  id       String         @id @default(uuid())
-  selfie   String?
-  age      Int
-  username String         @unique
-  name     String
-  email    String         @unique
-  password String // hashed!
-  gender   String
-  type     String // enums("auto", "manual")
-  language String
-  tokens   StudentToken[]
-  reviews  Review[]
-  bookings Booking[]
-  chatRoom ChatRoom[]
+  id          String        @id @default(uuid())
+  selfie      String?
+  age         Int
+  name        String
+  email       String        @unique
+  password    String // hashed!
+  gender      String
+  type        String // enums("auto", "manual")
+  language    String
+  reviews     Review[]
+  bookings    Booking[]
+  chatHistory ChatHistory[]
 }
 
 model Instructor {
-  id           String            @id @default(uuid())
+  id           String        @id @default(uuid())
+  picture      String[]
   name         String
   age          Int
-  rating       Float
   affiliation  String // SSDC, CDC, BBDC
   gender       String
-  email        String            @unique
+  email        String        @unique
   password     String
   language     String
   experience   Int
   type         String // enums("auto", "manual", "both")
   carModel     String
-  tokens       InstructorToken[]
   availability DateTime[]
   bookings     Booking[]
   reviews      Review[]
-  chatRoom     ChatRoom[]
+  chatHistory  ChatHistory[]
 }
 
 model Booking {
   id           String     @id @default(uuid())
-  apptDate     DateTime
+  apptDate     DateTime   @default(now())
   description  String
   feedback     String?
   studentId    String
   instructorId String
-  status       String // Scheduled, Completed, Rejected
+  status       String     @default("PENDING")
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
 }
 
-model ChatRoom {
-  id           String     @id @default(uuid())
+model ChatHistory {
   studentId    String
   instructorId String
-  roomId       String
+  message      Json[]
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
+
+  @@id([studentId, instructorId])
 }
 
 model Review {
@@ -77,21 +74,3 @@ model Review {
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
 }
-
-model StudentToken {
-  id           String   @id @default(uuid())
-  studentId    String
-  refreshToken String   @unique
-  createdAt    DateTime @default(now())
-  student      Student  @relation(fields: [studentId], references: [id])
-}
-
-model InstructorToken {
-  id           String     @id @default(uuid())
-  instructorId String
-  refreshToken String     @unique
-  createdAt    DateTime   @default(now())
-  instructor   Instructor @relation(fields: [instructorId], references: [id])
-}
-
-

@@ -18,10 +18,7 @@ export default class AuthController {
             } else if (err) {
                 return res.status(401).json({ message: "unauthorized access" });
             } else {
-
-
                 req.user = decoded.user;
-
                 next();
             }
         });

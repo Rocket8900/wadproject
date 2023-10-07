@@ -56,7 +56,7 @@ export const startServerSocket = (io) => {
         if (receiverSocketId) {
           // send to socket 
           console.log(`found receiver socket ${receiverSocketId}`);
-          io.to(receiverSocketId).emit("private_message", message);
+          io.to(receiverSocketId).emit("private_message", {text: message, sender: "shawn"});
         }
         
         const instructorExists = await InstructorService.getInstructorById(receiverId)
