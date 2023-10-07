@@ -75,7 +75,7 @@ export function Login() {
       const response = await axios.post('http://localhost:3001/v1/api/instructor/login', {
         email,
         password,
-      })
+      }, {withCredentials: true})
 
       const token = getCookie('access_token');
   
