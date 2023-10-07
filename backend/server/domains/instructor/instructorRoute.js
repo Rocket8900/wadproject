@@ -14,6 +14,7 @@ instructorRoute.post("/register", InstructorController.makeInstructorAccount)
 instructorRoute.post("/login", InstructorController.loginInstructor);
 
 instructorRoute.use(AuthController.validateUser)
+
 instructorRoute.get("/list", InstructorController.listAllAvailableInstructor)
 instructorRoute.post("/list/filter", InstructorController.listInstructorsByFilter)
 instructorRoute.get("/list/:id", InstructorController.viewSpecificInstructor);
