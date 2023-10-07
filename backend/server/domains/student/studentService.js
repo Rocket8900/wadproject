@@ -80,7 +80,20 @@ export default class StudentService {
             return null;
         }
     };
+
+
+    static getAllStudents = async () => {
+        try {
+            const students = await prisma_db.student.findMany({});
+            return students;
+        } catch (error) {
+            Logging.error(error);
+            return null;
+        }
+    };
 }
+
+
 
 
 

@@ -7,7 +7,7 @@ import AuthController from "../auth/authController.js"
 const chatRoomRoute = express.Router()
 
 
-// chatRoomRoute.get("/", AuthController.validateUser, ChatroomController.startChatting)
+chatRoomRoute.get("/:id", AuthController.validateUser, ChatroomController.startChatting)
 
 
 

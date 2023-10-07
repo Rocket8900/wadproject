@@ -11,6 +11,7 @@ studentRoute.post("/login", StudentController.loginStudent)
 
 studentRoute.use(AuthController.validateUser)
 
+studentRoute.get("/list", StudentController.viewAllStudent)
 studentRoute.get("/profile/:id", StudentController.viewStudentProfile)
 studentRoute.post("/profile/:id/update", StudentController.updateStudentProfile)
 
