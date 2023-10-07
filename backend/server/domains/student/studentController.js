@@ -84,7 +84,8 @@ export default class StudentController {
 
 	static viewStudentProfile = async (req, res) => {
 		try {
-			const student = await StudentService.getStudentById(req.params);
+			const {studentId} = req.params.id
+			const student = await StudentService.getStudentById(studentId);
 			Logging.info(`retrieved student ${student.id}`)
 			return res.status(200).json({data: student});
 		} catch (error) {
@@ -95,7 +96,8 @@ export default class StudentController {
 
 	static updateStudentProfile = async (req, res) => {
 		try {
-			const student = await StudentService.updateStudent(req.params, req.body)
+			const {studentId} = req.params.id
+			const student = await StudentService.updateStudent(studentId, req.body)
 			Logging.info(`updated details for student ${student.id}`)
 			return res.status(201).json({data: student});
 		} catch (error) {
@@ -104,7 +106,20 @@ export default class StudentController {
 		}
 	}
 
-	
+	static viewAllStudent = async (req, res) => {
+		try {
+			const students = await StudentService.getAllStudents();
+			Logging.info("retrieved all students")
+			return res.status(200).json({data: students})
+		} catch (error) {
+			Logging.error(error);
+			return res.status(500).json({ error: "an unexpected error occurred" });
+		}
+	}
+
+
+
+
 
 
 }

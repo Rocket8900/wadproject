@@ -49,6 +49,7 @@ app.use("/v1/api/student", studentRoute)
 app.use("/v1/api/instructor", instructorRoute)
 app.use("/v1/api/booking", bookingRoute)
 app.use("/v1/api/review", reviewRoute)
+app.use("/v1/api/chat", chatRoomRoute)
 
 
 
