@@ -62,7 +62,10 @@ export default class BookingService {
     }
 
 
-    static getBookingByInstructor = async (instructorId) => {
+
+
+
+    static getBookingOfInstructor = async (instructorId) => {
         try {
             const booking = await prisma_db.booking.findMany({
                 where: {
