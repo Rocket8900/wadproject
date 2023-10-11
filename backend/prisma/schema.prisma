@@ -20,57 +20,62 @@ model Student {
   gender      String
   type        String // enums("auto", "manual")
   language    String
+  instructor  Instructor?  @relation(fields: [instructorId], references: [id])
+  instructorId String?
+
   reviews     Review[]
   bookings    Booking[]
   chatHistory ChatHistory[]
-}
+  }
 
-model Instructor {
-  id           String        @id @default(uuid())
-  picture      String[]
-  name         String
-  age          Int
-  affiliation  String // SSDC, CDC, BBDC
-  gender       String
-  email        String        @unique
-  password     String
-  language     String
-  experience   Int
-  type         String // enums("auto", "manual", "both")
-  carModel     String
-  availability DateTime[]
-  bookings     Booking[]
-  reviews      Review[]
-  chatHistory  ChatHistory[]
-}
+  model Instructor {
+    id           String        @id @default(uuid())
+    picture      String[]
+    name         String
+    age          Int
+    affiliation  String // SSDC, CDC, BBDC
+    gender       String
+    email        String        @unique
+    password     String
+    language     String
+    experience   Int
+    type         String // enums("auto", "manual", "both")
+    carModel     String
+    
+    students     Student[]
+    availability DateTime[]
+    bookings     Booking[]
+    reviews      Review[]
+    chatHistory  ChatHistory[]
+  }
 
-model Booking {
-  id           String     @id @default(uuid())
-  apptDate     DateTime   @default(now())
-  description  String
-  feedback     String?
-  studentId    String
-  instructorId String
-  status       String     @default("PENDING")
-  student      Student    @relation(fields: [studentId], references: [id])
-  instructor   Instructor @relation(fields: [instructorId], references: [id])
-}
 
-model ChatHistory {
-  studentId    String
-  instructorId String
-  message      Json[]
-  student      Student    @relation(fields: [studentId], references: [id])
-  instructor   Instructor @relation(fields: [instructorId], references: [id])
 
-  @@id([studentId, instructorId])
-}
+  model Booking {
+    id           String     @id @default(uuid())
+    lesson       Json[]
+    studentId    String
+    instructorId String
+    status       String     @default("PENDING") // pending, accepted, ongoing, rejected, cancelled
+    student      Student    @relation(fields: [studentId], references: [id])
+    instructor   Instructor @relation(fields: [instructorId], references: [id])
+  }
 
-model Review {
-  id           String     @id @default(uuid())
-  studentId    String
-  instructorId String
-  rating       Float
-  student      Student    @relation(fields: [studentId], references: [id])
-  instructor   Instructor @relation(fields: [instructorId], references: [id])
-}
+  model ChatHistory {
+    studentId    String
+    instructorId String
+    message      Json[]
+    student      Student    @relation(fields: [studentId], references: [id])
+    instructor   Instructor @relation(fields: [instructorId], references: [id])
+
+    @@id([studentId, instructorId])
+  }
+
+  model Review {
+    id           String     @id @default(uuid())
+    studentId    String
+    instructorId String
+    rating       Float
+    student      Student    @relation(fields: [studentId], references: [id])
+    instructor   Instructor @relation(fields: [instructorId], references: [id])
+  }
