@@ -10,8 +10,8 @@ const bookingRoute = express.Router()
 
 bookingRoute.post("/create", BookingController.makeABooking)
 bookingRoute.get("/:id", BookingController.getBookingById)
-bookingRoute.post("/:id/update", BookingController.updateBookingById)
-bookingRoute.get("/student/:id", BookingController.viewAllBookingForStudent)
+bookingRoute.post("/:id", BookingController.updateBookingById)
+bookingRoute.get("/student/:id", BookingController.viewAllBookingOfStudent)
 bookingRoute.get("/student/:id/filtered", BookingController.viewFilteredBookingsForStudent)
 
 

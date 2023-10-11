@@ -1,3 +1,4 @@
+import Logging from "../../utils/loggings.js";
 import { prisma_db } from "../../utils/prismaConnection.js";
 
 
@@ -6,6 +7,7 @@ export default class BookingService {
 
     static createBooking = async (bookingData) => {
         try {  
+
             const booking = await prisma_db.booking.create({
                 data: {
                     ...bookingData
@@ -13,7 +15,10 @@ export default class BookingService {
             })
             return booking
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while making the booking."
+            };
         }
     } 
 
@@ -30,7 +35,10 @@ export default class BookingService {
             })
             return booking
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while updating the booking."
+            };
         }
     }
 
@@ -44,7 +52,10 @@ export default class BookingService {
             })
             return booking
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while retrieving the booking."
+            };
         }
     }
 
@@ -57,7 +68,10 @@ export default class BookingService {
             })
             return booking
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while retrieving the booking."
+            };
         }
     }
 
@@ -74,7 +88,10 @@ export default class BookingService {
             })
             return booking
         } catch (error) {
-            
+            Logging.error(error);
+            return {
+                error: "An error occurred while retrieving the booking."
+            };
         }
     }
 
@@ -91,7 +108,10 @@ export default class BookingService {
             })
             return booking
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while retrieving the booking."
+            };
         }
     }
 
@@ -107,12 +127,30 @@ export default class BookingService {
                 }
             })
             return booking
-
         } catch (error) {
-
+            Logging.error(error);
+            return {
+                error: "An error occurred while retrieving the booking."
+            };
         }
     }
 
+    static getBookingBasedOnStudentIdAndInstructorId = async (instructorId, studentId) => {
+        try {
+            const booking = await prisma_db.booking.findUnique({
+                where: {
+                    instructorId: instructorId,
+                    studentId: studentId
+                }
+            })
+            return booking
+        } catch (error) {
+            Logging.error(error);
+            return {
+                error: "An error occurred while retrieving the booking."
+            };
+        }
+    }
     
 
 

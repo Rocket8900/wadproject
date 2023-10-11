@@ -11,7 +11,7 @@ export default class BookingController {
 
     static makeABooking = async (req, res) => {
         try {
-            const { bookingData } = req.body
+            const bookingData  = req.body
             const booking = await BookingService.createBooking(bookingData);
             if (booking) {
                 Logging.info("new booking created")
@@ -27,26 +27,25 @@ export default class BookingController {
 
     static updateBookingById = async (req, res) => {
         try {   
-            const { id } = req.params.id
-            const { bookingData } = req.body;
+            const id = req.params.id
+            const bookingData = req.body;
+            const booking  = await BookingService.updateBooking(id, bookingData)
             if (booking) {
                 Logging.info("updated booking status")
             } else {
                 Logging.info("failed to update booking status")
             }
-            const booking  = await BookingService.updateBooking(id, bookingData)
             return res.status(201).json({data: booking})
         } catch (error) {
             Logging.error(error);
 			return res.status(500).json({ error: "an unexpected error occurred" });
-
         }
     }
 
     static getBookingById = async (req, res) => {
         try {
-            const {id} = req.params.id;
-            const booking = await BookingService.getBookingById(id)
+            const bookingId = req.params.id;
+            const booking = await BookingService.getBookingById(bookingId)
             if (booking) {
                 Logging.info("get booking specific booking")
             } else{ 
@@ -59,10 +58,15 @@ export default class BookingController {
         }
     }
 
-    static viewAllBookingForStudent = async (req, res) => {
+    static viewAllBookingOfStudent = async (req, res) => {
         try {
-            const {id} = req.params.id
-            const bookings = await BookingService.getBookingsByStudent(id);
+            const studentId = req.params.id
+            const bookings = await BookingService.getBookingsByStudent(studentId);
+            if (bookings) {
+                Logging.info(`get bookings for ${studentId}`)
+            } else{ 
+                Logging.info("failed to get bookings")
+            }
             return res.status(200).json({data: bookings})
         } catch (error) {
 			Logging.error(error);
@@ -72,8 +76,13 @@ export default class BookingController {
 
     static viewAllBookingsOfInstructor= async (req, res) => {
         try {
-            const {id} = req.params.id
-            const bookings = await BookingService.getBookingOfInstructor(id);
+            const instructorId = req.params.id
+            const bookings = await BookingService.getBookingOfInstructor(instructorId);
+            if (bookings) {
+                Logging.info(`get bookings for ${instructorId}`)
+            } else{ 
+                Logging.info("failed to get bookings")
+            }
             return res.status(200).json({data: bookings})
         } catch (error) {
             Logging.error(error);
@@ -84,9 +93,14 @@ export default class BookingController {
     
     static viewFilteredBookingsForStudent = async (req,res) => {
         try {
-            const {id} = req.params.id
+            const studentId = req.params.id
             const filters = req.body
-            const bookings = await BookingService.getBookingByStudentUsingFilter(id, filters)
+            const bookings = await BookingService.getBookingByStudentUsingFilter(studentId, filters)
+            if (bookings) {
+                Logging.info(`get bookings for ${studentId}`)
+            } else{ 
+                Logging.info("failed to get bookings")
+            }
             return res.status(200).json({data: bookings})
         } catch (error) {
 			Logging.error(error);
@@ -96,9 +110,14 @@ export default class BookingController {
 
     static viewFilteredBookingsForInstructor = async (req, res) => {
         try {
-            const {id} = req.params.id
+            const instructorId = req.params.id
             const filters = req.body;
-            const bookings = await BookingService.getBookingByInstructorUsingFilter(id, filters)
+            const bookings = await BookingService.getBookingByInstructorUsingFilter(instructorId, filters)
+            if (bookings) {
+                Logging.info(`get bookings for ${instructorId}`)
+            } else{ 
+                Logging.info("failed to get bookings")
+            }
             return res.status(200).json({data: bookings})
         } catch (error) {
 			Logging.error(error);
