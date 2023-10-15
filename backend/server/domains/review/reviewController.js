@@ -13,7 +13,6 @@ export default class ReviewController {
             return res.status(201).json({data: review})
         } catch (error) {
             return res.status(500).json({ error: "an unexpected error occurred" });
-
         }
     }
 
@@ -37,7 +36,6 @@ export default class ReviewController {
             return res.status(201).json({data: review})
         } catch (error) {
             return res.status(500).json({ error: "an unexpected error occurred" });
-
         }
     }
 
