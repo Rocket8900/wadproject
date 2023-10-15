@@ -49,7 +49,7 @@ export default class AuthController {
                 return res.status(401).json({ message: "unauthorized access" });
             }
         } catch (error) {
-            res.status(500).json({ error: "an unexpected error occurred" });
+            return res.status(500).json({ error: "an unexpected error occurred" });
         }
     }
 }

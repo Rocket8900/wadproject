@@ -12,14 +12,11 @@ const instructorRoute = express.Router();
 
 instructorRoute.post("/register", InstructorController.makeInstructorAccount)
 instructorRoute.post("/login", InstructorController.loginInstructor);
-
 instructorRoute.use(AuthController.validateUser)
-
 instructorRoute.get("/list", InstructorController.listAllAvailableInstructor)
-instructorRoute.post("/list/filter", InstructorController.listInstructorsByFilter)
-instructorRoute.get("/list/:id", InstructorController.viewSpecificInstructor);
+instructorRoute.post("/list", InstructorController.listInstructorsByFilter)
 instructorRoute.get("/profile/:id", InstructorController.viewSpecificInstructor);
-instructorRoute.post("/profile/:id/update", InstructorController.updateInstructorProfile);
+instructorRoute.patch("/profile/:id", InstructorController.updateInstructorProfile);
 
 
 

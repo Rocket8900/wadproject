@@ -1,5 +1,5 @@
 import { prisma_db } from "../../utils/prismaConnection.js";
-
+import Logging from "../../utils/loggings.js";
 
 export default class ReviewService {
     
@@ -12,7 +12,8 @@ export default class ReviewService {
             })
             return review
         } catch (error) {
-
+            Logging.error(error);
+            return null;
         }
     }
     static updateReview = (reviewId, reviewData) => {
@@ -27,7 +28,8 @@ export default class ReviewService {
             })
             return review
         } catch (error) {
-            
+            Logging.error(error);
+            return null;
         }
     }
 
@@ -40,7 +42,8 @@ export default class ReviewService {
             })
             return review
         } catch (error) {
-            
+            Logging.error(error);
+            return null;
         }
     }
 
@@ -53,7 +56,8 @@ export default class ReviewService {
             })
             return review
         } catch (error) {
-            
+            Logging.error(error);
+            return null;
         }
     }
     static viewAllReviewByStudentId = (studentId) => {
@@ -65,7 +69,8 @@ export default class ReviewService {
             })
             return reviews
         } catch (error) {
-
+            Logging.error(error);
+            return null;
         }
     }
 
@@ -78,7 +83,8 @@ export default class ReviewService {
             })
             return reviews
         } catch (error) {
-
+            Logging.error(error);
+            return null;
         }
     }
     
