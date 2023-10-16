@@ -84,7 +84,7 @@ export default class StudentController {
 
 	static viewStudentProfile = async (req, res) => {
 		try {
-			const {studentId} = req.params.id
+			const studentId = req.params.id
 			const student = await StudentService.getStudentById(studentId);
 			Logging.info(`retrieved student ${student.id}`)
 			return res.status(200).json({data: student});
@@ -96,7 +96,7 @@ export default class StudentController {
 
 	static updateStudentProfile = async (req, res) => {
 		try {
-			const {studentId} = req.params.id
+			const studentId = req.params.id
 			const student = await StudentService.updateStudent(studentId, req.body)
 			Logging.info(`updated details for student ${student.id}`)
 			return res.status(201).json({data: student});

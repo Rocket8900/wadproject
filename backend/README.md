@@ -92,7 +92,7 @@
 
 3. `/list` (GET)
    - Description: Get instructors based on specific queries
-   - Params:
+   - Query:
      - `filterField1`: "value1"
      - `filterField2`: "value2"
    - Authenticated path
@@ -122,7 +122,7 @@
 
 ### Booking Endpoints
 
-**Base Endpoint:** `/v1/api/booking`
+**Base Endpoint:** `/`
 
 1. `/` (POST)
    - Description: Create a booking instance
@@ -155,6 +155,11 @@
 4. `/student/:id` (GET)
    - Description: Get all bookings of a student
    - Params: Student ID
+   - Authenticated path
+
+5. `/instructor/:id` (GET)
+   - Description: Get all bookings of a Instructor
+   - Params: Instructor ID
    - Authenticated path
 
 ### Review Endpoint

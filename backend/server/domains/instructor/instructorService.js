@@ -13,9 +13,8 @@ export default class InstructorService {
             return instructor;
         } catch (error) {
             Logging.error(error);
-            return {
-                error: "An error occurred while creating the instructor."
-            };
+            return null
+
         }
     };
     // other crud fields not needed. 
@@ -34,9 +33,8 @@ export default class InstructorService {
             return instructor;
         } catch (error) {
             Logging.error(error);
-            return {
-                error: "An error occurred while updating the instructor."
-            };
+            return null
+
         }
     };
 
@@ -51,9 +49,8 @@ export default class InstructorService {
             return instructor;
         } catch (error) {
             Logging.error(error);
-            return {
-                error: "An error occurred while retrieving the instructor."
-            };
+            return null
+;
         }
     };
 
@@ -67,9 +64,7 @@ export default class InstructorService {
             return instructor;
         } catch (error) {
             Logging.error(error);
-            return {
-                error: "An error occurred while retrieving the instructor."
-            };
+            return null
         }
     };
 
@@ -83,9 +78,8 @@ export default class InstructorService {
             return instructors;
         } catch (error) {
             Logging.error(error);
-            return {
-                error: "An error occurred while retrieving the instructors."
-            };
+            return null
+
         }
     };
 
@@ -95,9 +89,8 @@ export default class InstructorService {
             return instructors;
         } catch (error) {
             Logging.error(error);
-            return {
-                error: "An error occurred while retrieving the instructors."
-            };
+            return null
+
         }
     };
 }
