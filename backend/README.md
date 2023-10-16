@@ -1,3 +1,201 @@
+## API Endpoints & Routes
+
+### Student Endpoints
+
+**Base Endpoint:** `/v1/api/student`
+
+1. `/login` (POST)
+   - Description: Login student
+   - Body: 
+     ```json
+     {
+       "email": "student@example.com",
+       "password": "password123"
+     }
+     ```
+   - Unauthenticated path
+
+2. `/register` (POST)
+   - Description: Register student
+   - Body:
+     ```json
+     {
+       "selfie": "image_url",
+       "age": 25,
+       "name": "Student Name",
+       "email": "student@example.com",
+       "password": "password123",
+       "gender": "Male",
+       "type": "auto",
+       "language": "English",
+       "instructorId": null
+     }
+     ```
+   - Unauthenticated path
+
+3. `/profile/:id` (GET)
+   - Description: Get student profile
+   - Params: student's ID
+   - Authenticated path
+
+4. `/profile/:id` (PATCH)
+   - Description: Update student profile
+   - Params: student's ID
+   - Body:
+     ```json
+     {
+       "selfie": "updated_image_url",
+       "age": 26,
+       "name": "Updated Student Name",
+       "email": "updated_student@example.com",
+       "gender": "Female",
+       "type": "manual",
+       "language": "Spanish"
+     }
+     ```
+   - Authenticated path
+
+### Instructor Endpoints
+
+**Base Endpoint:** `/v1/api/instructor`
+
+1. `/login` (POST)
+   - Description: Login instructor
+   - Body:
+     ```json
+     {
+       "email": "instructor@example.com",
+       "password": "password123"
+     }
+     ```
+   - Unauthenticated path
+
+2. `/register` (POST)
+   - Description: Register instructor
+   - Body:
+     ```json
+     {
+       "picture": ["image_url1", "image_url2"],
+       "name": "Instructor Name",
+       "age": 30,
+       "affiliation": "SSDC",
+       "gender": "Male",
+       "email": "instructor@example.com",
+       "password": "password123",
+       "language": "English",
+       "experience": 5,
+       "type": "auto",
+       "carModel": "Toyota"
+     }
+     ```
+   - Unauthenticated path
+
+3. `/list` (GET)
+   - Description: Get instructors based on specific queries
+   - Params:
+     - `filterField1`: "value1"
+     - `filterField2`: "value2"
+   - Authenticated path
+
+4. `/profile/:id` (GET)
+   - Description: Get instructor's profile
+   - Params: instructor's ID
+   - Authenticated path
+
+5. `/profile/:id` (PATCH)
+   - Description: Update instructor's profile
+   - Params: instructor's ID
+   - Body:
+     ```json
+     {
+       "picture": ["updated_image_url1", "updated_image_url2"],
+       "name": "Updated Instructor Name",
+       "age": 31,
+       "affiliation": "CDC",
+       "gender": "Female",
+       "experience": 6,
+       "type": "both",
+       "carModel": "Honda"
+     }
+     ```
+   - Authenticated path
+
+### Booking Endpoints
+
+**Base Endpoint:** `/v1/api/booking`
+
+1. `/` (POST)
+   - Description: Create a booking instance
+   - Body:
+     ```json
+     {
+       "studentId": "student_id",
+       "instructorId": "instructor_id",
+       "lesson": [{}]
+     }
+     ```
+   - Authenticated path
+
+2. `/:id` (GET)
+   - Description: Get a specific booking by ID
+   - Params: Booking ID
+   - Authenticated path
+
+3. `/:id` (PATCH)
+   - Description: Update the booking details of that ID
+   - Params: Booking ID
+   - Body:
+     ```json
+     {
+       "lesson": [{}]
+     }
+     ```
+   - Authenticated path
+
+4. `/student/:id` (GET)
+   - Description: Get all bookings of a student
+   - Params: Student ID
+   - Authenticated path
+
+### Review Endpoint
+
+**Base Endpoint:** `/v1/api/review`
+
+1. `/` (POST)
+   - Description: Create a new review
+   - Body:
+     ```json
+     {
+       "studentId": "student_id",
+       "instructorId": "instructor_id",
+       "rating": 4.5
+     }
+     ```
+   - Authenticated path
+
+2. `/:id` (GET)
+   - Description: Get a specific review by ID
+   - Params: Review ID
+   - Authenticated path
+
+3. `/:id` (PATCH)
+   - Description: Update a specific review by ID
+   - Params: Review ID
+   - Body:
+     ```json
+     {
+       "rating": 4.8
+     }
+     ```
+   - Authenticated path
+
+4. `/instructor/:id` (GET)
+   - Description: Get all reviews of an instructor
+   - Params: Instructor ID
+   - Authenticated path
+
+
+
 To start the backend: 
 
 1. get the `.env` file (in telegram) and keep it on the level as the `server` folder
@@ -10,127 +208,3 @@ To have the `.env` file
 1. in your terminal `touch .env`
 2. copy-paste the .env content from telegram
 
-
-
-## API Endpoints & Routes
-
-
-### Student Endpoints
-
-**Base Endpoint:** `/v1/api/student`
-
-**Additional Paths**
-1. `/login` 
-	- **POST** request
-	- Description: Login student
-	- Body: `{... details of students from schema}`
-	- Unauthenticated path
-2. `/register`
-	- **POST** request
-	- Description: Register student
-	- Body: `{... details of student's login info}`
-	- Unauthenticated path
-3. `/profile/:id`
-	- **GET** request 
-	- Description: Get student profile
-	- Params: student's ID
-	- Authenticated path
-4. `/profile/:id`
-	- **PATCH** request
-	- Description: Update student profile
-	- Params: student's ID
-	- Body: `{...updated fields for student}`
-	- Authenticated path
-
-
-### Instructor Endpoints
-
-**Base Endpoint**: `/v1/api/instructor`
-
-**Additional Paths**
-1. `/login` 
-	- **POST** request
-	- Description: Login student
-	- Body: `{... details of instructor from schema}`
-	- Unauthenticated path
-2. `/register`
-	- **POST** request
-	- Description: Register instructor
-	- Body: `{... details of instructor's login info}`
-	- Unauthenticated path
-3.  `/list`
-	- **GET** request
-	- Description: Get all instructors
-	- Authenticated path
-4. `/list`
-	- **POST** request
-	- Description: Get instructor based on specific queries
-	- Params: `{... specfic filters}`
-	- Authenticated path
-5. `/profile/:id`
-	- **GET** request
-	- Description: Get instructor's profile
-	- Params: instructor's ID
-	- Authenticated path
-6.  `/profile/:id`
-	 - **PATCH** request
-	 - Description: Update instructor's profile
-	 - Params:  instructor's ID
-	 - Body: `{...updated fields for instructor}`
-	 - Authenticated path
-
-
-### Booking Endpoints
-
-**Base Endpoint**: `/v1/api/booking`
-
-**Additional Paths**
-1.  `/`
-	- **POST** request
-	- Description: Create a booking instance
-	- Body: `{...details of the booking}`
-	- Authenticated path
-2.  `/:id`
-	- **GET** request
-	- Description: Get a specific booking by ID
-	- Params: Booking ID
-	- Authenticated path
-3. `/:id`
-	- **PATCH** request
-	- Description: Update the booking details of that ID
-	- Params: Booking ID
-	- Body: `{...updated details of booking}`
-	- Authenticated path
-4. `/student/:id`
-	- **GET** request
-	- Description: Get all booking of student
-	- Params: Student ID
-	- Authenticated path
-
-
-### Review Endpoint
-
-**Base Endpoint**: `/v1/api/review`
-
-**Additional Paths**
-1. `/`
-	- **POST** request
-	- Description:  Create an new review
-	- Body: `{...details of review}`
-	- Authenticated path
-2. `/:id`
-	- **GET** request
-	- Description: Get specific review by ID
-	- Params: Review ID
-	- Authenticated path
-3. `/:id`
-	- **PATCH** request
-	- Description: Update specific review by ID
-	- Params: Review ID
-	- Body: `{...updated details of review}`
-	- Authenticated path
-4. `/instructor/:id`
-	- **GET** request
-	- Description: Get all reviews of instructor
-	- Params: Instructor ID
-	- Authenticated path
