@@ -29,7 +29,7 @@ export default class InstructorController {
 
     static updateInstructorProfile = async (req, res) => {
         try {
-            const instructorId = req.params
+            const instructorId = req.params.id
             const instructorData = req.body
             const instructor = await InstructorService.updateInstructor(instructorId, instructorData);
             if (instructor) {
@@ -52,7 +52,8 @@ export default class InstructorController {
 				res.status(400).json({ message: "all fields are needed" });
 			}
             const instructor = await InstructorService.getInstructorByEmail(email);
-            if (instructor && (await bcrypt.compare(password, instructor.password))) {
+
+            if (instructor !== null && (await bcrypt.compare(password, instructor.password))) {
                 const accessToken = AuthService.getAccessToken("instructor", instructor.id)
 				const refreshToken = AuthService.getRefreshToken("instructor",instructor.id)
 				res.cookie('refresh_token', refreshToken, {
@@ -90,7 +91,7 @@ export default class InstructorController {
 
     static viewSpecificInstructor = async (req, res) => {
         try {
-            const instructor = await InstructorService.getInstructorById(req.params);
+            const instructor = await InstructorService.getInstructorById(req.params.id);
             Logging.info(`retrieved information for instructor ${instructor.id}`)
             return res.status(200).json({data: instructor})
         } catch (error) {
@@ -102,7 +103,7 @@ export default class InstructorController {
 
     static listInstructorsByFilter = async (req, res) => {
         try {
-            const instructors = await InstructorService.getInstructorsByFilters(req.body);
+            const instructors = await InstructorService.getInstructorsByFilters(req.query);
             Logging.info("retrieving filtered instructors")
             return res.status(200).json({data: instructors});
         } catch (error) {

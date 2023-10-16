@@ -74,4 +74,6 @@ model Review {
   rating       Float
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
+  
+  @@unique([studentId, instructorId])
 }
