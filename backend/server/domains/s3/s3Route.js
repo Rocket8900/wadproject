@@ -2,14 +2,14 @@
 
 
 import express from "express"
-import S3Controller from "./s3Controller"
+import S3Controller from "./s3Controller.js"
 
 
 
 const s3Route = express.Router()
 
-s3Route.post("/bulk", S3Controller.bulkRetrieveSignedUrls)
-s3Route.post("/single", S3Controller.singleRetrieveSignedUrls)
+s3Route.get("/bulk/:id", S3Controller.bulkRetrieveSignedUrlsBasedOnInstructorId)
+s3Route.get("/single/:id", S3Controller.singleRetrieveSignedUrlsBasedOnStudentId)
 
 
 export {s3Route as default}
