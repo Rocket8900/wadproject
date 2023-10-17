@@ -122,7 +122,7 @@
 
 ### Booking Endpoints
 
-**Base Endpoint:** `/`
+**Base Endpoint:** `/v1/api/booking`
 
 1. `/` (POST)
    - Description: Create a booking instance
