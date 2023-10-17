@@ -36,7 +36,6 @@ export default class StudentService {
 
     static updateStudent = async (studentId, studentData) => {
         try {
-
             const student = await prisma_db.student.update({
                 where: {
                     id: studentId
@@ -91,6 +90,23 @@ export default class StudentService {
             return null;
         }
     };
+
+    static uploadStudentPicture = async (studentId, s3Key) => {
+        try {
+            const student = await prisma_db.student.update({
+                where: {
+                    id: studentId
+                }, 
+                data: {
+                    selfie: s3Key
+                }
+            })
+            return student
+        } catch (error) {
+            Logging.error(error);
+            return null
+        }
+    }
 }
 
 
