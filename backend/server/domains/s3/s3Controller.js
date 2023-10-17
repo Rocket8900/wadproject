@@ -1,15 +1,18 @@
 import S3Service from "./s3Service.js"
 import Logging from "../../utils/loggings.js"
+import InstructorService from "../instructor/instructorService.js"
+import StudentService from "../student/studentService.js"
 
 export default class S3Controller {
-    static bulkRetrieveSignedUrls = async (req, res) => {
+    static bulkRetrieveSignedUrlsBasedOnInstructorId = async (req, res) => {
         try {
-            const urls = req.body // [...urls]
+            const instructorId = req.params.id
+            const keys = (await InstructorService.getInstructorById(instructorId)).picture 
             let result = []
-            urls.forEach(async urlId => {
-                const signedUrl = await S3Service.getSignedUrl("instructor", urlId)
-                result.push(signedUrl)
-            });
+            for (const key of keys) {
+                const signedUrl = await S3Service.getSignedUrl(key);
+                result.push(signedUrl);
+            }
             return res.status(200).json({data: result}) 
         } catch (error) {
             Logging.error(error)
@@ -17,10 +20,11 @@ export default class S3Controller {
         }
     }
 
-    static singleRetrieveSignedUrls = async (req, res) => {
+    static singleRetrieveSignedUrlsBasedOnStudentId = async (req, res) => {
         try {
-            const urlId = req.params.id
-            const signedUrl = await S3Service.getSignedUrl("student", urlId)
+            const studentId = req.params.id
+            const urlId = (await StudentService.getStudentById(studentId)).selfie
+            const signedUrl = await S3Service.getSignedUrl(urlId)
             if (signedUrl) {
                 return res.status(200).json({data: signedUrl})
             }

@@ -35,10 +35,10 @@ export default class S3Service {
     }
   };
 
-  static getSignedUrl = async (bucketName, objectKey) => {
+  static getSignedUrl = async (objectKey) => {
     try {
       Logging.info("getting s3 signed url");
-      const params = { Bucket: bucketName, Key: objectKey, Expires: 60 * 100 }; // URL expires in 5 minutes
+      const params = { Bucket: "afterzoom", Key: objectKey, Expires: 60 * 100 }; // URL expires in 5 minutes
       return s3.getSignedUrl("getObject", params);
     } catch (error) {
       Logging.error(error);
