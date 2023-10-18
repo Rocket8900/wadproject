@@ -1,11 +1,7 @@
-import { Server } from "socket.io";
-import app from "../../app.js"
-import http from "http";
 import jwt from "jsonwebtoken"
 import { redis_cache } from "../../utils/redisConnection.js";
 import InstructorService from "../instructor/instructorService.js";
 import StudentService from "../student/studentService.js";
-import ChatroomService from "./chatroomService.js";
 import ChatroomController from "./chatroomController.js";
 import Logging from "../../utils/loggings.js";
 

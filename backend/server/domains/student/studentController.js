@@ -124,8 +124,8 @@ export default class StudentController {
           Logging.warn("failed to store s3 key on db");
         }
       } else {
-		Logging.warn("failed to upload onto s3")
-	  }
+        Logging.warn("failed to upload onto s3");
+      }
       return res.status(400).json({ data: "failed to upload photo" });
     } catch (error) {
       Logging.error(error);
