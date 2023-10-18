@@ -74,6 +74,14 @@ model Review {
   rating       Float
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
-  
+
   @@unique([studentId, instructorId])
+}
+
+
+model Scene {
+  id String @id @default(uuid())
+  key String // s3 key
+  options Json[]  // {wrong: {id: XXX}, correct: {id: XXX}}
+  origin Boolean 
 }

@@ -1,6 +1,5 @@
 import express from "express" 
 import ChatroomController from "./chatroomController.js"
-
 import AuthController from "../auth/authController.js"
 
 
