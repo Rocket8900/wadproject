@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  seed = "./seed/seed.js"
 }
 
 datasource db {
@@ -85,3 +86,4 @@ model Scene {
   options Json[]  // {wrong: {id: XXX}, correct: {id: XXX}}
   origin Boolean 
 }
+
