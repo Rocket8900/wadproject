@@ -1,0 +1,57 @@
+
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #EAEAEA;
+}
+
+/* Container for Buttons */
+.container {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+/* Button Styles */
+.button {
+    background-color: #191716;
+    color: white;
+    border: none;
+    padding: 25px 20px;
+    margin-top: 20px;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Add transition for smooth hover effect */
+}
+
+/* Hover effect - change background color to green */
+.button:hover {
+    background-color: #C2E812;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.col {
+    padding: 0px;
+}
+
+.col button {
+    width: 100%;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+/* .row:last-child {
+    justify-content: space-evenly;
+} */

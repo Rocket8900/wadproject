@@ -1,0 +1,23 @@
+.body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #DBE4EE;
+}
+
+.container-fluid {
+    padding:0px;
+}
+
+.block {
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.block [data-grid="a"] {
+    background-color: #2E5FFE;
+}
+
+

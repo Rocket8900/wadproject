@@ -1,0 +1,92 @@
+#sidebar {
+    position: relative;
+    padding:0px;
+  }
+  #sidebar .pro-sidebar {
+    height: 100vh;
+  }
+  #sidebar .closemenu {
+    color: #000;
+    z-index: 9999;
+    line-height: 20px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+  }
+  #sidebar .pro-sidebar {
+    width: 100%;
+    min-width: 100%;
+    color:black;
+    
+  }
+  #sidebar .pro-sidebar.collapsed {
+    width: 80px;
+    min-width: 80px;
+  }
+  #sidebar .pro-sidebar-inner {
+    background-color: white;
+    box-shadow: 0.5px 0.866px 2px 0px rgba(0, 0, 0, 0.15);
+    padding-top:15px;
+  }
+  #sidebar .pro-sidebar-inner .pro-sidebar-layout {
+    overflow-y: hidden;
+    
+  }
+  #sidebar .pro-sidebar-inner .pro-sidebar-layout .logotext p {
+    font-size: 1.5vw;
+    padding: 0 20px;
+    color: #000;
+    font-weight: bold;
+  }
+  #sidebar.pro-sidebar-inner .pro-sidebar-layout ul {
+    padding: 0 5px;
+  }
+  #sidebar.pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
+    color:black;
+    margin: 10px 0px;
+    font-weight: bold;
+  }
+  #sidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper {
+    background-color: transparent;
+    color:black;
+    border-radius: 3px;
+  }
+  #sidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper .pro-item-content {
+    color:black;
+  }
+  #sidebar .pro-sidebar-inner .pro-sidebar-layout .active {
+    background: #F5F5F5;
+    color:black;
+  }
+  #sidebar.logo {
+    padding: 20px;
+  }
+  
+  @media only screen and (max-width: 720px) {
+    html {
+      overflow: hidden;
+    }
+  }
+
+  #sidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
+    font-size: 1vw; /* Adjust the font size to your preference */
+  }
+
+
+  .user-info-box {
+    background-color: rgba(242, 242, 242, 0.8); /* Grey color with 80% opacity */
+    padding: 10px;
+    border-radius: 8px; 
+    width: 80%; 
+    margin-top:15px;
+    margin-bottom:15px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  
+  .user-info {
+    font-size: 1vw;
+    text-align: center;
+  }
