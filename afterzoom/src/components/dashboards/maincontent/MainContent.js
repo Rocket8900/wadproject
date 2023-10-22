@@ -3,21 +3,99 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import "./MainContent.css";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
+import { PiHandWavingDuotone} from 'react-icons/pi';
+import Calendar from '../calendar/Calendar'; 
+import Unread from '../unread/Unread'
+import Graph from '../graph/Graph'
+import AlternateGraph from "../graph/AlternateGraph"; 
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const MainContent = (props) => {
+  const [details, setDetails] = useState("");
+  const [showAlternateGraph, setShowAlternateGraph] = useState(false); 
+  const toggleGraph = () => {
+    setShowAlternateGraph((prev) => !prev);
+  };
+  const showDetailsHandle = (details) => {
+    setDetails(details);
+  };
   const [compactType, setCompactType] = useState("vertical");
   const [mounted, setMounted] = useState(false);
   const [layout, setLayout] = useState([
-    { i: "a", id: "grid-item-hello-user", x: 0, y: 0, w: 6, h: 2 },
-    { i: "b", id: "grid-item-unread", x: 6, y: 0, w: 2, h: 2 },
-    { i: "c", id: "grid-item-calendar", x: 0, y: 2, w: 4, h: 4 },
-    { i: "d", id: "grid-item-graph", x: 4, y: 2, w: 4, h: 4 },
-    { i: "e", id: "grid-item-lastrow1", x: 0, y: 6, w: 2, h: 2 },
-    { i: "f", id: "grid-item-lastrow2", x: 2, y: 6, w: 2, h: 2 },
-    { i: "g", id: "grid-item-lastrow1", x: 4, y: 6, w: 2, h: 2 },
-    { i: "h", id: "grid-item-lastrow1", x: 6, y: 6, w: 2, h: 2 },
+    { 
+      i: "a", 
+      id: "grid-item-hello-user", 
+      x: 0, y: 0, w: 6, h: 2,
+      content: 
+      <div>
+        <h2>Hello, ToBeRetrieved!  <PiHandWavingDuotone /></h2>
+        <p>
+        Your profile is ToBeRetrieved% complete
+        Task List:
+        <ul>
+          <li>point 1 (ToBeRetrieved)</li>
+          <li>point 2 (ToBeRetrieved)</li>
+        </ul>
+        </p>
+      </div>},
+    { i: "b", 
+      id: "grid-item-unread", 
+      x: 6, y: 0, w: 2, h: 2,
+      content: 
+      <div className="unread"><Unread/></div>
+    },
+    { i: "c", 
+      id: "grid-item-calendar", 
+      x: 0, y: 2, w: 4, h: 4,
+      content:
+      <div>
+      <Calendar showDetailsHandle={showDetailsHandle} />
+      </div>
+    },
+    { 
+      i: "d", 
+      id: "grid-item-graph",
+      x: 4, y: 2, w: 4, h: 4,
+      content:
+      <div>
+      <Graph/>
+      </div>
+    },
+    { i: "e", 
+      id: "grid-item-lastrow1", 
+      x: 0, y: 6, w: 2, h: 2,
+      content:
+      <div>
+        <h3>Jump Back In</h3>
+        To Be Retrieved To Be Retrieved To Be Retrieved To Be Retrieved 
+      </div>
+    },
+    { i: "f", 
+      id: "grid-item-lastrow2", 
+      x: 2, y: 6, w: 2, h: 2,
+      content:
+      <div>
+      <h3>Your Notes</h3>
+      To Be Retrieved To Be Retrieved To Be Retrieved To Be Retrieved 
+    </div>
+    },
+    { i: "g", 
+      id: "grid-item-lastrow1", 
+      x: 4, y: 6, w: 2, h: 2,
+      content: 
+      <div>
+        <h2>Press Me to Save Layout</h2>
+      </div>
+    },
+    { i: "h", 
+      id: "grid-item-lastrow1", 
+      x: 6, y: 6, w: 2, h: 2,
+      content:
+      <div className="changeGraph" onClick={toggleGraph}>
+        <h2>Press Me to Change Graph</h2>
+      </div>
+    },
   ]);
 
   useEffect(() => {
@@ -49,7 +127,7 @@ const MainContent = (props) => {
 
   useEffect(() => {
     const containerHeight = window.innerHeight;
-    const numberOfRows = 9; // Number of rows you want to display
+    const numberOfRows = 9; 
     const calculatedRowHeight = containerHeight / numberOfRows;
     setDynamicRowHeight(calculatedRowHeight);
 
@@ -65,6 +143,10 @@ const MainContent = (props) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+
+
+
 
   return (
     <div className="container-fluid">
@@ -82,8 +164,12 @@ const MainContent = (props) => {
         droppingItem={{ i: "xx", h: 50, w: 250 }}
       >
         {layout.map((itm) => (
-          <div key={itm.i} data-grid={itm} className="block">
-            {itm.i}
+          <div key={itm.i} data-grid={itm} className={`block ${itm.i}`}>
+          {itm.i === "d" && showAlternateGraph ? (
+            <AlternateGraph />
+          ) : (
+            itm.content 
+          )}
           </div>
         ))}
       </ResponsiveReactGridLayout>

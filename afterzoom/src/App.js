@@ -11,7 +11,8 @@ import {Routes,Route} from 'react-router';
 import React from 'react';
 import './App.css';
 import Chat from "./components/private-chat/chat";
-import InstructorChat from "./components/private-chat/instructor-chat"
+import InstructorChat from "./components/private-chat/instructor-chat";
+
 
 
 export default function App() {
