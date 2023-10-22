@@ -42,3 +42,9 @@
 .c {
     background-color: #282828;
 }
+
+.unread{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

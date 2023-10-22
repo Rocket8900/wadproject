@@ -146,8 +146,6 @@ const MainContent = (props) => {
 
 
 
-
-
   return (
     <div className="container-fluid">
       <ResponsiveReactGridLayout

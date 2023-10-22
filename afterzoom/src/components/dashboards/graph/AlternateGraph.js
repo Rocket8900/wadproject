@@ -9,7 +9,7 @@ class Graph extends Component {
 		const options = {
 			animationEnabled: true,	
 			title:{
-				text: "Lesson Trend",
+				text: "Your Lesson Trend (Data ToBeRetrieved)",
                 fontFamily: "Nunito",
                 fontWeight: "bold"
 			},
@@ -23,6 +23,7 @@ class Graph extends Component {
 			},
 			data: [{
 				type: "spline",
+                name: "number of lessons",
 				showInLegend: true,
 				dataPoints: [
 					{ y: 2, label: "Jan" },

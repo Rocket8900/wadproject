@@ -1,43 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { Spring } from "react-spring";
+import "./Unread.css";
 
 const Unread = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (progress <= 60) {
-        setProgress(prevProgress => prevProgress + 1);
-      } else {
-        clearInterval(interval);
-        setTimeout(() => {
-          const decrementInterval = setInterval(() => {
-            if (progress > 0) {
-              setProgress(prevProgress => prevProgress - 1);
-            } else {
-              clearInterval(decrementInterval);
-              setTimeout(() => {
-                setInterval(() => {
-                  if (progress < 60) {
-                    setProgress(prevProgress => prevProgress + 1);
-                  }
-                }, 1000); 
-              }, 15000);
-            }
-          }, 1000);
-        }, 15000);
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [progress]);
+    const progressInterval = setInterval(() => {
+      setProgress(prevProgress => {
+        if (prevProgress < 60) {
+          return prevProgress + 1;
+        } else {
+          clearInterval(progressInterval);
+          setTimeout(() => {
+            setProgress(0); 
+            setInterval(() => {
+              setProgress(prevProgress => {
+                if (prevProgress < 60) {
+                  return prevProgress + 1;
+                } else {
+                  clearInterval(progressInterval);
+                  return prevProgress;
+                }
+              });
+            }, 50);
+          }, 10000);
+        }
+      });
+    }, 50); 
+    return () => clearInterval(progressInterval);
+  }, []);
+
+  const progressBarHeight = `${(progress / 60) * 60}%`; // Calculate height based on progress (scaled to 60%)
 
   return (
-    <div className="progress vertical">
-      <Spring from={{ percent: 0 }} to={{ percent: progress }}>
-        {({ percent }) => (
-          <div style={{ height: `${percent}%` }} className="progress-bar"></div>
-        )}
-      </Spring>
+    <div className="unread-progress-container">
+      <div className="unread-messages"><h3>6 Unread Messages</h3></div>
+      <div className="progress vertical">
+        <div style={{ height: progressBarHeight }} className="progress-bar"></div>
+      </div>
     </div>
   );
 };

@@ -29,15 +29,15 @@ class Graph extends Component {
 					{ y: 20, label: "Jan" },
 					{ y: 45, label: "Feb" },
 					{ y: 50, label: "Mar" },
-					{ y: 50, label: "Apr" },
-					{ y: 51, label: "May" },
-					{ y: 60, label: "Jun" },
-					{ y: 50, label: "Jul" },
-					{ y: 40, label: "Aug" },
-					{ y: 40, label: "Sept" },
-					{ y: 70, label: "Oct" },
-					{ y: 75, label: "Nov" },
-					{ y: 80, label: "Dec" }
+					{ y: 70, label: "Apr" },
+					{ y: 80, label: "May" },
+					{ y: 0, label: "Jun" },
+					{ y: 0, label: "Jul" },
+					{ y: 0, label: "Aug" },
+					{ y: 0, label: "Sept" },
+					{ y: 0, label: "Oct" },
+					{ y: 0, label: "Nov" },
+					{ y: 0, label: "Dec" }
 				]
 			},
 			{
@@ -45,18 +45,18 @@ class Graph extends Component {
 				name: "FTT",
 				showInLegend: true,
 				dataPoints: [
-					{ y: 10, label: "Jan" },
-					{ y: 30, label: "Feb" },
-					{ y: 20, label: "Mar" },
-					{ y: 50, label: "Apr" },
-					{ y: 70, label: "May" },
-					{ y: 70, label: "Jun" },
-					{ y: 75, label: "Jul" },
+					{ y: 0, label: "Jan" },
+					{ y: 0, label: "Feb" },
+					{ y: 0, label: "Mar" },
+					{ y: 0, label: "Apr" },
+					{ y: 0, label: "May" },
+					{ y: 0, label: "Jun" },
+					{ y: 0, label: "Jul" },
 					{ y: 70, label: "Aug" },
-					{ y: 85, label: "Sept" },
-					{ y: 90, label: "Oct" },
-					{ y: 90, label: "Nov" },
-					{ y: 91, label: "Dec" }
+					{ y: 80, label: "Sept" },
+					{ y: 50, label: "Oct" },
+					{ y: 50, label: "Nov" },
+					{ y: 70, label: "Dec" }
 				]
 			}]
 		};
