@@ -1,0 +1,26 @@
+.unread-progress-container {
+  display: flex;
+  align-items: center;
+}
+
+.unread-messages {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.progress.vertical {
+  width: 20px;
+  height: 100px;
+  background-color: #f5f5f5;
+  border-radius: 3px;
+  position: relative;
+}
+
+.progress-bar {
+  background-color: #2196f3;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+}
+
+
