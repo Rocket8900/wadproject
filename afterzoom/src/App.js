@@ -11,7 +11,9 @@ import {Routes,Route} from 'react-router';
 import React from 'react';
 import './App.css';
 import Chat from "./components/private-chat/chat";
-import InstructorChat from "./components/private-chat/instructor-chat"
+import InstructorChat from "./components/private-chat/instructor-chat";
+import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
+import StudentNotebook from "./components/notebook/StudentNotebook";
 
 
 export default function App() {
@@ -29,6 +31,8 @@ export default function App() {
         <Route path="/student-chat" element={<Chat />} />
         <Route path="/instructor-chat" element={<InstructorChat />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
+        <Route path="/view-notebook" element={<StudentNotebook />} />
       </Routes>
     </div>
   ) 
