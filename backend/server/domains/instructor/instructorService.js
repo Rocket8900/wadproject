@@ -93,4 +93,31 @@ export default class InstructorService {
 
         }
     };
-}
+
+    static updateInstructorPicture = async (instructorId, s3Key) => {
+        try {
+            const instructorData = await prisma_db.instructor.findUnique({
+                where: {
+                    id: instructorId
+                }
+            })
+            if (instructorData) {
+                let currentS3Keys = instructorData.picture
+                currentS3Keys.push(s3Key)
+                const instructor = await prisma_db.instructor.update({
+                    where: {
+                        id: instructorId
+                    }, 
+                    data: {
+                        picture: currentS3Keys
+                    }
+                })
+                return instructor
+            }
+            return null
+        } catch (error) {
+            Logging.error(error);
+            return null
+        }
+    }
+} 

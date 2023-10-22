@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import morgan from 'morgan';
 import cors from "cors"
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -13,6 +12,7 @@ import { startServerSocket } from './domains/chatroom/chatRoomConnection.js';
 import { Server } from "socket.io";
 import Logging from './utils/loggings.js';
 import chatRoomRoute from './domains/chatroom/chatroomRoute.js';
+import s3Route from './domains/s3/s3Route.js';
 
 
 
@@ -50,7 +50,7 @@ app.use("/v1/api/instructor", instructorRoute)
 app.use("/v1/api/booking", bookingRoute)
 app.use("/v1/api/review", reviewRoute)
 app.use("/v1/api/chat", chatRoomRoute)
-
+app.use("/v1/api/s3", s3Route)
 
 
 startServerSocket(io)
