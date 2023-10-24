@@ -30,7 +30,7 @@ export function StudentDashboard() {
                     <button className="button" type="button">Find an Instructor</button>
                 </Link>
 
-                <Link to="/test-questions">
+                <Link to="/choose-quiz">
                     <button className="button" type="button">BTT/FTT Test Questions</button>
                 </Link>
 
