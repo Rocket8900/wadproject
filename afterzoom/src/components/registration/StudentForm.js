@@ -4,14 +4,13 @@ import React, { useState } from "react";
 
 function StudentForm() {
     const [formData, setFormData] = useState({
-        username: "user",
-        name: "",
-        email: "",
-        password: "",
-        gender: "",
-        language: "",
-        age: 21,
-        type: "auto",
+        "name": "",
+        "email": "",
+        "password": "",
+        "gender": "",
+        "language": "",
+        "age": 21,
+        "type": "auto",
       });
     
       const handleChange = (e) => {
@@ -85,7 +84,7 @@ function StudentForm() {
                 <input
                   type="radio"
                   name="gender"
-                  value="male"
+                  value="m"
                   onChange={handleChange}
                 />{" "}
                 Male
@@ -94,7 +93,7 @@ function StudentForm() {
                 <input
                   type="radio"
                   name="gender"
-                  value="female"
+                  value="f"
                   onChange={handleChange}
                 />{" "}
                 Female
