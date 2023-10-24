@@ -6,9 +6,8 @@ import { InstructorDashboard } from "./components/dashboards/InstructorDashboard
 import  Registration  from "./components/registration/registration";
 import InstructorsComponent from "./components/instructors/instructors";
 import InstructorDetail from "./components/instructors/InstructorDetail";
-// import Quiz from "./components/quiz/Quiz";
 import { ChooseQuiz } from "./components/quiz/choosequiz";
-import Quiz from "./components/quiz/quiz";
+import Quiz from "./components/quiz/quiz.js";
 import {Routes,Route} from 'react-router';
 import React from 'react';
 import './App.css';
