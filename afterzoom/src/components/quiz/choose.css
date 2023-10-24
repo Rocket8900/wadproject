@@ -1,0 +1,65 @@
+#main-content {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#cards {
+    justify-content: center;
+}
+
+.card {
+    /* position: relative; */
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 400px;
+    padding: 30px;
+    padding-right: 50px;
+    text-align: left;
+
+    background-position: right;
+    background-size: 80px;
+    
+}
+
+h1 {
+    margin: 20px;
+    padding: 20px;
+}
+
+h3 {
+    padding-top: 50px;
+    color: #3083DC;
+}
+
+p {
+    font-size: 16px;
+}
+
+
+h3, p, button {
+    margin: 20px;
+}
+
+.card img{
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    max-height: 120px;
+  }
+  
+  .card-1{
+    background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
+        background-repeat: no-repeat;
+  }
+  
+  .card-2{
+     background-image: url(https://ionicframework.com/img/getting-started/components-card.png);
+        background-repeat: no-repeat;
+  }
+  
+  /* @media(max-width: 990px){
+    .card{
+      margin: 20px;
+    }
+  } */

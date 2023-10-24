@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import { quiz } from './questions'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { btt_questions } from './btt'; // Import BTT questions
+import { ftt_questions } from './ftt'; // Import FTT questions
 import './quiz.css'
 
 
-const Quiz = () => {
-  const [activeQuestion, setActiveQuestion] = useState(0)
-  const [selectedAnswer, setSelectedAnswer] = useState('')
-  const [showResult, setShowResult] = useState(false)
+const Quiz = ({ type }) => {
+  const [activeQuestion, setActiveQuestion] = useState(0);
+  const [showResult, setShowResult] = useState(false);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null)
   const [result, setResult] = useState({
     score: 0,
@@ -14,38 +15,54 @@ const Quiz = () => {
     wrongAnswers: 0,
   })
 
-  const { questions } = quiz
-  const { question, choices, correctAnswer } = questions[activeQuestion]
+  
+  let questions;
+
+  // Import the BTT and FTT questions accordingly
+  if (type === 'btt') {
+    questions = btt_questions
+  }
+  else {
+    questions = ftt_questions
+  };
+  // console.log("bttquiz.js" + questions)
 
   const onClickNext = () => {
-    setSelectedAnswerIndex(null)
-    setResult((prev) =>
-      selectedAnswer
-        ? {
-            ...prev,
-            score: prev.score + 5,
-            correctAnswers: prev.correctAnswers + 1,
-          }
-        : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
-    )
-    if (activeQuestion !== questions.length - 1) {
-      setActiveQuestion((prev) => prev + 1)
-    } else {
-      setActiveQuestion(0)
-      setShowResult(true)
-    }
+    if (activeQuestion < questions.length - 1) {
+        setActiveQuestion(activeQuestion + 1);
+        setSelectedAnswerIndex(null) // Reset selected answer index
+        
+      } else {
+        setShowResult(true);
+      }
+
   }
 
-  const onAnswerSelected = (answer, index) => {
-    setSelectedAnswerIndex(index)
-    if (answer === correctAnswer) {
-      setSelectedAnswer(true)
-    } else {
-      setSelectedAnswer(false)
-    }
+  const onAnswerSelected = (index) => {
+    
+    if (selectedAnswerIndex === null) {
+        setSelectedAnswerIndex(index);
+        const isCorrect = questions[activeQuestion].answers[index].correct;
+  
+        if (isCorrect) {
+          setResult((prev) => ({
+            ...prev,
+            score: prev.score + 1,
+            correctAnswers: prev.correctAnswers + 1,
+          }));
+        } else {
+          setResult((prev) => ({
+            ...prev,
+            wrongAnswers: prev.wrongAnswers + 1,
+          }));
+        }
+      }
+    
   }
 
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`)
+
+  const currentQuestion = questions[activeQuestion];
 
   return (
     <div className="quiz-container">
@@ -55,14 +72,25 @@ const Quiz = () => {
             <span className="active-question-no">{addLeadingZero(activeQuestion + 1)}</span>
             <span className="total-question">/{addLeadingZero(questions.length)}</span>
           </div>
-          <h2>{question}</h2>
+          <h2>{currentQuestion.question}</h2>
+          <img src={currentQuestion.image} alt=""/>
           <ul>
-            {choices.map((answer, index) => (
+            {currentQuestion.answers.map((answer, index) => (
               <li
-                onClick={() => onAnswerSelected(answer, index)}
-                key={answer}
-                className={selectedAnswerIndex === index ? 'selected-answer' : null}>
-                {answer}
+                onClick={() => onAnswerSelected(index)}
+                key={index}
+                className={`${
+                    selectedAnswerIndex !== null &&
+                  (answer.correct || selectedAnswerIndex === index)
+                    ? answer.correct
+                      ? 'correct-answer'
+                      : 'wrong-answer'
+                    : ''
+                  }
+                  
+                  `}
+                  >
+                {answer.text}
               </li>
             ))}
           </ul>
@@ -87,10 +115,14 @@ const Quiz = () => {
           <p>
             Wrong Answers:<span> {result.wrongAnswers}</span>
           </p>
+
+          <Link to="/choose-quiz">
+                <button id="btt" class="btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5">Return to quiz home</button>
+            </Link>
         </div>
       )}
     </div>
   )
 }
 
-export default Quiz
+export default Quiz;
