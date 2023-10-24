@@ -21,7 +21,6 @@ import InstructorChat from "./components/private-chat/instructor-chat";
 export default function App() {
   return (
     <div>
-      <NavbarComponent/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
