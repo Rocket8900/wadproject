@@ -12,6 +12,7 @@ import AlternateGraph from "../graph/AlternateGraph";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const MainContent = (props) => {
+  const { bookings } = props;
   const [details, setDetails] = useState("");
   const [showAlternateGraph, setShowAlternateGraph] = useState(false); 
   const toggleGraph = () => {
@@ -22,6 +23,7 @@ const MainContent = (props) => {
   };
   const [compactType, setCompactType] = useState("vertical");
   const [mounted, setMounted] = useState(false);
+  const { student } = props;
   const [layout, setLayout] = useState([
     { 
       i: "a", 
@@ -29,7 +31,7 @@ const MainContent = (props) => {
       x: 0, y: 0, w: 6, h: 2,
       content: 
       <div>
-        <h2>Hello, ToBeRetrieved!  <PiHandWavingDuotone /></h2>
+        <h2>Hello, {student.name}  <PiHandWavingDuotone /></h2>
         <p>
         Your profile is ToBeRetrieved% complete
         Task List:
@@ -144,7 +146,7 @@ const MainContent = (props) => {
     };
   }, []);
 
-
+  
 
   return (
     <div className="container-fluid">

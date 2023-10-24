@@ -53,6 +53,8 @@ export function Login() {
   
       // Handle successful student login here
       console.log(response.data);
+
+
       // Redirect to the student dashboard
       navigate('/student-dashboard');
   
