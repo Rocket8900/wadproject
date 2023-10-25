@@ -68,7 +68,7 @@ function InstructorsComponent() {
                     <Card.Text>
                     Driver for {instructor.experience} years 
                     </Card.Text>
-                    <Link to={`/instructors/${instructor.id}`}><Button variant="primary">View Details</Button></Link>
+                    <Link to={`/instructor/${instructor.id}`}><Button variant="primary">View Details</Button></Link>
                 </Card.Body>
             </Card>
         ))}
