@@ -8,9 +8,11 @@ export default class ChatroomController {
         try {
             const senderId = req.user.id
             const receiverId = req.params.id
+
             let instructorId; 
             let studentId;
             const { sender, receiver } = await ChatroomService.whoIsWho(senderId, receiverId)
+            console.log(sender, receiver)
             if (sender.type == "student") {
                 studentId = sender.id
                 instructorId = receiver.id
@@ -18,7 +20,7 @@ export default class ChatroomController {
                 studentId = receiver.id
                 instructorId = sender.id
             }
-            console.log(receiver, sender)
+            console.log(instructorId, studentId)
             const chatHistory = await ChatroomService.getChatHistory(instructorId, studentId);
             return res.status(200).json({data: chatHistory})
         } catch (error) {
