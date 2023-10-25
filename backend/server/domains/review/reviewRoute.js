@@ -1,10 +1,10 @@
 import express from "express" 
 import ReviewController from "./reviewController.js"
-
+import AuthController from "../auth/authController.js"
 
 const reviewRoute = express.Router();
 
-
+reviewRoute.use(AuthController.validateUser)
 reviewRoute.post("/", ReviewController.leaveAReview);
 reviewRoute.get("/:id", ReviewController.viewSpecificReview)
 reviewRoute.patch("/:id", ReviewController.makeChangesToReview)

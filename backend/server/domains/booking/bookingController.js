@@ -4,6 +4,7 @@
 
 
 import Logging from "../../utils/loggings.js";
+import StudentService from "../student/studentService.js";
 import BookingService from "./bookingService.js";
 
 
@@ -28,7 +29,30 @@ export default class BookingController {
     static updateBookingById = async (req, res) => {
         try {   
             const id = req.params.id
-            const bookingData = req.body;
+            let bookingData = req.body;
+
+            if (bookingData['lesson']) {
+                // update student's lesson by instructor
+                const currBooking = await BookingService.getBookingById(id)
+                let pastLessons = currBooking["lesson"]
+                pastLessons.push(bookingData["lesson"])
+                bookingData = {"lesson":pastLessons}
+            }
+
+
+            if (bookingData["status"] && bookingData["status"] == "ACCEPTED") {
+                // update student's instructor
+                const currBooking = await BookingService.getBookingById(id)
+                const studentId = currBooking["studentId"]
+                const instructorId = currBooking["instructorId"]
+                const student = await StudentService.updateStudent(studentId, {"instructorId": instructorId})
+                if (student) {
+                    Logging.info(`${instructorId} accepted booking of ${studentId}`)
+                } else {
+                    Logging.error("error tagging student to instructor")
+                }
+            }
+
             const booking  = await BookingService.updateBooking(id, bookingData)
             if (booking) {
                 Logging.info("updated booking status")
