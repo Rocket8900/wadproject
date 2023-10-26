@@ -9,7 +9,7 @@ export default class SceneController {
       const scene = await SceneService.getScene(sceneId);
 
       if (!scene) {
-        Logging.info("failed to retrieved scene");
+        Logging.warn("failed to retrieved scene");
         return res.status(400).json({ data: "scene does not exist" });
       }
 
@@ -27,7 +27,7 @@ export default class SceneController {
       const key = await S3Service.putObject("afterzoom", "scenes", imgData);
 
       if (!key) {
-        Logging.info("failed to save s3 key");
+        Logging.warn("failed to save s3 key");
         return res.status(400).json({ data: "failed to save in s3" });
       }
 
@@ -35,7 +35,7 @@ export default class SceneController {
       const scene = await SceneService.createScene(sceneData);
 
       if (!scene) {
-        Logging.info("failed to create scene");
+        Logging.warn("failed to create scene");
         return res.status(400).json({ data: "failed to create scene" });
       }
 
@@ -52,7 +52,7 @@ export default class SceneController {
       const scenes = await SceneService.getAllOriginScenes();
 
       if (!scenes) {
-        Logging.info("failed to get origin scenes");
+        Logging.warn("failed to get origin scenes");
         return res.status(400).json({ data: "failed to get scenes" });
       }
 
