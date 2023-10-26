@@ -30,7 +30,7 @@ export default class InstructorController {
 
     static updateInstructorProfile = async (req, res) => {
         try {
-            const instructorId = req.params.id
+            const instructorId = req.user.id
             const instructorData = req.body
             const instructor = await InstructorService.updateInstructor(instructorId, instructorData);
             if (instructor) {
@@ -117,7 +117,7 @@ export default class InstructorController {
     static uploadInstructorPhoto = async (req, res) => {
         try {
             let imgData = req.file
-            const id = req.params.id
+            const id = req.user.id
             imgData["userId"] = id
             const data = await S3Service.putObject("afterzoom", "instructor", imgData)
             if (data) {
