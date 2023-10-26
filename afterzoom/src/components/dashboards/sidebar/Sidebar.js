@@ -19,14 +19,12 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
 import { Link, useParams } from 'react-router-dom';
 
-function Sidebar(props){
-  const { student } = props;
+const Sidebar = ({ student, bookings }) => {
+  const { name, age } = student;
   const [activeMenuItem, setActiveMenuItem] = useState("dashboard");
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
   };
-
-
 
   if (student.instructorId === null){
     var instructorr="not found";
@@ -47,7 +45,7 @@ function Sidebar(props){
         <SidebarContent>
           <div className="user-info-box">
             <div className="user-info">
-              <p>{student.name}</p>
+              <p>{name}</p>
               <p>Instructor ID: {instructorr}</p>
             </div>
           </div>
