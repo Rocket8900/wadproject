@@ -56,16 +56,20 @@ export default class AuthController {
     static validateInstructor = (req, res, next) => {
         if (req.user.type === "instructor") {
             next()
+        } else {
+            return res.status(401).json({ message: "unauthorized access" });
         }
-        return res.status(401).json({ message: "unauthorized access" });
+        
     }
 
-    
+
     static validateStudent = (req, res, next) => {
         if (req.user.type === "student") {
             next()
+        } else {
+            return res.status(401).json({ message: "unauthorized access" });
         }
-        return res.status(401).json({ message: "unauthorized access" });
+        
     }
 
 }

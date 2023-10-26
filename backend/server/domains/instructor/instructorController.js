@@ -69,7 +69,7 @@ export default class InstructorController {
 					message: "successful login",
 				});
 			} else {
-                Logging.info(`attempted login for instructor ${instructor.id}`)
+                Logging.info(`attempted login for instructor`)
 				return res.status(401).json({ message: "incorrect password/email" });
 			}
         } catch (error) {
