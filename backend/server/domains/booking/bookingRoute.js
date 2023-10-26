@@ -11,8 +11,12 @@ bookingRoute.use(AuthController.validateUser)
 bookingRoute.post("/", BookingController.makeABooking)
 bookingRoute.get("/:id", BookingController.getBookingById)
 bookingRoute.patch("/:id", BookingController.updateBookingById)
-bookingRoute.get("/student/:id", BookingController.viewAllBookingOfStudent)
-bookingRoute.get("/instructor/:id", BookingController.viewAllBookingsOfInstructor)
+
+bookingRoute.use(AuthController.validateStudent)
+bookingRoute.get("/student", BookingController.viewAllBookingOfStudent)
+
+bookingRoute.use(AuthController.validateInstructor)
+bookingRoute.get("/instructor", BookingController.viewAllBookingsOfInstructor)
 
 
 export {bookingRoute as default};

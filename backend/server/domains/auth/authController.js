@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 export default class AuthController {
 
-    static getAccessTokenFromHeaders(req) {
+    static getAccessTokenFromHeaders = (req) => {
         const authHeaders = req.headers.authorization || req.headers.Authorization;
         if (authHeaders && authHeaders.startsWith("Bearer ")) {
             return authHeaders.split(" ")[1];
@@ -11,7 +11,7 @@ export default class AuthController {
         return null;
     }
 
-    static verifyAccessToken(accessToken, req, res, next) {
+    static verifyAccessToken = (accessToken, req, res, next) => {
         jwt.verify(accessToken, process.env.SECRET_ACCESS_TOKEN, (err, decoded) => {
             if (err && err.name === 'TokenExpiredError') {
                 AuthController.verifyRefreshToken(req, res, next);
@@ -24,7 +24,7 @@ export default class AuthController {
         });
     }
 
-    static verifyRefreshToken(req, res, next) {
+    static verifyRefreshToken = (req, res, next) => {
         const refreshToken = req.cookies.refreshToken; // Adjust based on where you store the refresh token
         jwt.verify(refreshToken, process.env.SECRET_REFRESH_TOKEN, (err, decodedRefresh) => {
             if (err) {
@@ -39,7 +39,7 @@ export default class AuthController {
         });
     }
 
-    static async validateUser(req, res, next) {
+    static validateUser = async (req, res, next) => {
         try {
             const accessToken = AuthController.getAccessTokenFromHeaders(req);
             if (accessToken) {
@@ -52,5 +52,25 @@ export default class AuthController {
             return res.status(500).json({ error: "an unexpected error occurred" });
         }
     }
+
+    static validateInstructor = (req, res, next) => {
+        if (req.user.type === "instructor") {
+            next()
+        } else {
+            return res.status(401).json({ message: "unauthorized access" });
+        }
+        
+    }
+
+
+    static validateStudent = (req, res, next) => {
+        if (req.user.type === "student") {
+            next()
+        } else {
+            return res.status(401).json({ message: "unauthorized access" });
+        }
+        
+    }
+
 }
 

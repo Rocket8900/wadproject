@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  seed = "./seed/seed.js"
+  seed     = "./seed/seed.js"
 }
 
 datasource db {
@@ -23,6 +23,7 @@ model Student {
   language     String
   instructor   Instructor?   @relation(fields: [instructorId], references: [id])
   instructorId String?
+  quiz         Quiz[]
   reviews      Review[]
   bookings     Booking[]
   chatHistory  ChatHistory[]
@@ -79,11 +80,19 @@ model Review {
   @@unique([studentId, instructorId])
 }
 
-
 model Scene {
-  id String @id @default(uuid())
-  key String // s3 key
-  options Json[]  // {wrong: {id: XXX}, correct: {id: XXX}}
-  origin Boolean 
+  id      String  @id @default(uuid())
+  key     String // s3 key
+  options Json[] // {wrong: {id: XXX}, correct: {id: XXX}}
+  origin  Boolean
 }
 
+model Quiz {
+  id         String   @id @default(uuid())
+  studentId  String
+  type       String // btt or ftt
+  score      String // "10/10"
+  mistakes   Int[] // index of questions wrong
+  created_at DateTime @default(now())
+  student    Student  @relation(fields: [studentId], references: [id])
+}
