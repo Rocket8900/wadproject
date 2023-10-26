@@ -17,74 +17,79 @@ import {
 } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
-import Cookies from 'js-cookie';
+import { Link, useParams } from 'react-router-dom';
 
-
-const Sidebar = () => {
+function Sidebar(props){
+  const { student } = props;
   const [activeMenuItem, setActiveMenuItem] = useState("dashboard");
-
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
   };
 
 
+
+  if (student.instructorId === null){
+    var instructorr="not found";
+  }
+  else{
+    var instructorr=student.instructorId;
+  }
+
   return (
-    <>
-      <div id="sidebar">
-        <ProSidebar>
-          <SidebarHeader>
-            <div className="logotext">
-              <p>AfterZoom</p>
-            </div>
-          </SidebarHeader>
+    <div id="sidebar">
+      <ProSidebar>
+        <SidebarHeader>
+          <div className="logotext">
+            <p>AfterZoom</p>
+          </div>
+        </SidebarHeader>
 
-          <SidebarContent>
-            <div className="user-info-box">
-              <div className="user-info">
-                <p>ToBeRetrieved</p>
-                <p>Instructor ID: ToBeRetrieved</p>
-              </div>
+        <SidebarContent>
+          <div className="user-info-box">
+            <div className="user-info">
+              <p>{student.name}</p>
+              <p>Instructor ID: {instructorr}</p>
             </div>
-            <Menu iconShape="square">
-              <MenuItem
-                icon={<FaHome />}
-                active={activeMenuItem === "dashboard"}
-                onClick={() => handleMenuItemClick("dashboard")}
-              >
-                Dashboard
-              </MenuItem>
-              <MenuItem
-                icon={<FaList />}
-                active={activeMenuItem === "bookLesson"}
-                onClick={() => handleMenuItemClick("bookLesson")}
-              >
-                Book Lesson
-              </MenuItem>
-              <MenuItem
-                icon={<FaRegHeart />}
-                active={activeMenuItem === "practice"}
-                onClick={() => handleMenuItemClick("practice")}
-              >
-                BTT/FTT Practice
-              </MenuItem>
-              <MenuItem
-                icon={<FaCreativeCommonsBy />}
-                active={activeMenuItem === "simulator"}
-                onClick={() => handleMenuItemClick("simulator")}
-              >
-                Enter the Simulator
-              </MenuItem>
-            </Menu>
-          </SidebarContent>
+          </div>
+          <Menu iconShape="square">
+            <MenuItem
+              icon={<FaHome />}
+              active={activeMenuItem === "dashboard"}
+              onClick={() => handleMenuItemClick("dashboard")}
+            >
+              <Link to="/student-dashboard"><div className="mostInner">Dashboard</div></Link>
+            </MenuItem>
+            <MenuItem
+              icon={<FaList />}
+              active={activeMenuItem === "findInstructor"}
+              onClick={() => handleMenuItemClick("findInstructor")}
+            >
+              <Link to="/instructor"><div className="mostInner">Find Instructor</div></Link>
+            </MenuItem>
+            <MenuItem
+              icon={<FaRegHeart />}
+              active={activeMenuItem === "practice"}
+              onClick={() => handleMenuItemClick("practice")}
+            >
+              <Link to="/quiz"><div className="mostInner">BTT / FTT</div></Link>
+            </MenuItem>
+            <MenuItem
+              icon={<FaCreativeCommonsBy />}
+              active={activeMenuItem === "simulator"}
+              onClick={() => handleMenuItemClick("simulator")}
+            >
+              <Link to="/simulator"><div className="mostInner">Enter the Simulator</div></Link>
+            </MenuItem>
+          </Menu>
+        </SidebarContent>
 
-          <SidebarFooter>
-            <Menu iconShape="square">
-              <MenuItem icon={<FaCog />}>Sign Out</MenuItem>
-            </Menu>
-          </SidebarFooter>
-        </ProSidebar>
-      </div>
-    </>
+        <SidebarFooter>
+          <Menu iconShape="square">
+            <MenuItem icon={<FaCog />}>Sign Out</MenuItem>
+          </Menu>
+        </SidebarFooter>
+      </ProSidebar>
+    </div>
   );
 };
 

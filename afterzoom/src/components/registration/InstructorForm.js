@@ -10,7 +10,6 @@ function InstructorForm() {
         gender: "",
         language: "",
         age: 21,
-        rating: 0,
         experience: 23,
         type: "auto",
         carModel : "toyota",

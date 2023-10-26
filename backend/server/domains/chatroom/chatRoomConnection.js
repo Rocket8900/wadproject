@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-// import { redis_cache } from "../../utils/redisConnection.js";
+import { redis_cache } from "../../utils/redisConnection.js";
 import InstructorService from "../instructor/instructorService.js";
 import StudentService from "../student/studentService.js";
 import ChatroomController from "./chatroomController.js";

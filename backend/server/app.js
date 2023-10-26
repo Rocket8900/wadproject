@@ -13,6 +13,7 @@ import { Server } from "socket.io";
 import Logging from './utils/loggings.js';
 import chatRoomRoute from './domains/chatroom/chatroomRoute.js';
 import s3Route from './domains/s3/s3Route.js';
+import quizRoute from './domains/quiz/quizRoute.js';
 
 
 
@@ -51,6 +52,7 @@ app.use("/v1/api/booking", bookingRoute)
 app.use("/v1/api/review", reviewRoute)
 app.use("/v1/api/chat", chatRoomRoute)
 app.use("/v1/api/s3", s3Route)
+app.use("/v1/api/quiz", quizRoute)
 
 
 startServerSocket(io)

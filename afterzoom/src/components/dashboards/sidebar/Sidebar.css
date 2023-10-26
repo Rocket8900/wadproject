@@ -60,6 +60,12 @@
     background: #F5F5F5;
     color:black;
   }
+
+  .mostInner{
+    color:black;
+  }
+
+  
   #sidebar.logo {
     padding: 20px;
   }
@@ -89,4 +95,8 @@
   .user-info {
     font-size: 1vw;
     text-align: center;
+  }
+
+  #sidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item:hover {
+    background-color: #F5F5F5; 
   }
