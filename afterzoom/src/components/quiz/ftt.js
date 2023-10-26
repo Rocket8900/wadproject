@@ -1,11 +1,20 @@
 const ftt_questions = [
     {
-        question: "This sign indicates",
-        image: "https://www.sgdriving.net/question_pictures/69c00b986ae281c9_141157.jpg",
+        question: "When should you use the right outer most lane of a carriageway?",
+        image: "",
         answers: [
-            { text: "no entry for vehicles with overall width exceeding 2.3 meters.", correct: true },
-            { text: "no entry for vehicles with overall height exceeding 2.3 meters.", correct: false },
-            { text: "no entry for vehicles with overall width less than 2.3 meters.", correct: false },
+            { text: "When overtaking.", correct: true },
+            { text: "When all other lanes are occupied.", correct: false },
+            { text: "When driving at the maximum speed.", correct: false },
+        ]
+    },
+    {
+        question: "How is the handbrake released?",
+        image: "https://www.sgbtt.com/images/questions/300.jpg",
+        answers: [
+            { text: "By pulling up the lever.", correct: false },
+            { text: "By lowering the lever.", correct: false },
+            { text: "By slightly pulling the lever up before lowering it.", correct: true },
         ]
     },
     {
@@ -96,6 +105,69 @@ const ftt_questions = [
             { text: "should be used only in emergencies.", correct: false },
             { text: "confuses motorist following behind and increases the risk of accidents.", correct: false },
             { text: "gives adequate warning to motorists following behind.", correct: true },
+        ]
+    },
+    {
+        question: "When approaching a zebra crossing, you should",
+        image: "",
+        answers: [
+            { text: "stop only when there are pedestrians on the crossing.", correct: false },
+            { text: "slow down and do not overtake.", correct: true },
+            { text: "accelerate to pass it.", correct: false },
+        ]
+    },
+    {
+        question: "If you cannot steer straight because the road surface is not even, you should",
+        image: "",
+        answers: [
+            { text: "reduce speed.", correct: true },
+            { text: "loosen your grip on the steering wheel.", correct: false },
+            { text: "increase speed.", correct: false },
+        ]
+    },
+    {
+        question: "You will not be allowed to take your driving test if you have",
+        image: "",
+        answers: [
+            { text: "13 demerit points.", correct: true },
+            { text: "24 demerit points.", correct: false },
+            { text: "12 demerit points.", correct: false },
+        ]
+    },
+    {
+        question: "As you approach a bend, an automatic car will sometimes 'change up' because there is less pressure on the accelerator. To prevent this happening, you should",
+        image: "",
+        answers: [
+            { text: "brake as you go round the bend.", correct: false },
+            { text: "slow down before the bend and accelerate gently as you turn.", correct: true },
+            { text: "brake and accelerate at the same time.", correct: false },
+        ]
+    },
+    {
+        question: "You should not depress the clutch when",
+        image: "",
+        answers: [
+            { text: "going round a bend.", correct: true },
+            { text: "stopping.", correct: false },
+            { text: "changing gears.", correct: false },
+        ]
+    },
+    {
+        question: "Continuously using the 'Half-clutch' technique for long period of time will cause",
+        image: "",
+        answers: [
+            { text: "the engine brake to wear out faster.", correct: false },
+            { text: "the clutch linings to wear out faster.", correct: true },
+            { text: "the brake linings to wear out faster.", correct: false },
+        ]
+    },
+    {
+        question: "When you want to make a left turn, you should slow down and change to 3rd or 2nd gear",
+        image: "",
+        answers: [
+            { text: "while you are turning.", correct: false },
+            { text: "after turning.", correct: true },
+            { text: "before you begin the turn.", correct: false },
         ]
     },
 

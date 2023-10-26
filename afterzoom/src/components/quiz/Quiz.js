@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { btt_questions } from './btt'; // Import BTT questions
 import { ftt_questions } from './ftt'; // Import FTT questions

@@ -13,8 +13,8 @@ import React from 'react';
 import './App.css';
 import Chat from "./components/private-chat/chat";
 import InstructorChat from "./components/private-chat/instructor-chat";
-// import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
-// import StudentNotebook from "./components/notebook/StudentNotebook";
+import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
+import StudentNotebook from "./components/notebook/StudentNotebook";
 
 
 export default function App() {
@@ -34,9 +34,9 @@ export default function App() {
         <Route path="/choose-quiz" element={<ChooseQuiz />} />
         <Route path="/btt-quiz" element={<Quiz type="btt"/>} />
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
-{/*         ignore this
+        {/* ignore this */}
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
-        <Route path="/view-notebook" element={<StudentNotebook />} /> */}
+        <Route path="/view-notebook" element={<StudentNotebook />} />
       </Routes>
     </div>
   ) 
