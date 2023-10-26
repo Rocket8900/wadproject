@@ -27,12 +27,14 @@ function Sidebar(props){
   };
 
 
-
-  if (student.instructorId === null){
-    var instructorr="not found";
+  let instructorr = "not found";
+  if (student && student.instructorId !== null){
+    instructorr = student.instructorId;
   }
-  else{
-    var instructorr=student.instructorId;
+
+  let name = "Undefined";
+  if (student && student.name !== null){
+    name = student.name;
   }
 
   return (
@@ -47,7 +49,7 @@ function Sidebar(props){
         <SidebarContent>
           <div className="user-info-box">
             <div className="user-info">
-              <p>{student.name}</p>
+              <p>{name}</p>
               <p>Instructor ID: {instructorr}</p>
             </div>
           </div>
@@ -71,7 +73,7 @@ function Sidebar(props){
               active={activeMenuItem === "practice"}
               onClick={() => handleMenuItemClick("practice")}
             >
-              <Link to="/quiz"><div className="mostInner">BTT / FTT</div></Link>
+              <Link to="/choose-quiz"><div className="mostInner">BTT / FTT</div></Link>
             </MenuItem>
             <MenuItem
               icon={<FaCreativeCommonsBy />}

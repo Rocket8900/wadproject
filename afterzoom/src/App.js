@@ -16,6 +16,8 @@ import InstructorChat from "./components/private-chat/instructor-chat";
 import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
 import StudentNotebook from "./components/notebook/StudentNotebook";
 
+// import { UserProvider } from './UserContext';
+
 
 export default function App() {
   return (
@@ -34,10 +36,11 @@ export default function App() {
         <Route path="/choose-quiz" element={<ChooseQuiz />} />
         <Route path="/btt-quiz" element={<Quiz type="btt"/>} />
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
-        {/* ignore this */}
+        
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
         <Route path="/view-notebook" element={<StudentNotebook />} />
       </Routes>
     </div>
+    
   ) 
 }
