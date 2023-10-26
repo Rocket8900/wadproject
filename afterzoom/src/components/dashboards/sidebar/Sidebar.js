@@ -19,22 +19,18 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
 import { Link, useParams } from 'react-router-dom';
 
-function Sidebar(props){
-  const { student } = props;
+const Sidebar = ({ student, bookings }) => {
+  const { name, age } = student;
   const [activeMenuItem, setActiveMenuItem] = useState("dashboard");
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
   };
 
-
-  let instructorr = "not found";
-  if (student && student.instructorId !== null){
-    instructorr = student.instructorId;
+  if (student.instructorId === null){
+    var instructorr="not found";
   }
-
-  let name = "Undefined";
-  if (student && student.name !== null){
-    name = student.name;
+  else{
+    var instructorr=student.instructorId;
   }
 
   return (
