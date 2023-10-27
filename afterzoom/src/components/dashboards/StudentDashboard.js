@@ -22,7 +22,7 @@ export function StudentDashboard() {
                 const studentId = decodedToken.id;
 
                 const studentResponse = await axios.get(
-                    `http://localhost:3001/v1/api/student/profile/`,
+                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -30,6 +30,7 @@ export function StudentDashboard() {
                     }
                 );
                 setStudent(studentResponse.data.data);
+
 
 
                 const bookingsResponse = await axios.get(
@@ -41,7 +42,7 @@ export function StudentDashboard() {
                     }
                 );
                 console.log(bookingsResponse.data.data)
-                setBookings(bookingsResponse.data.data[0]);
+                setBookings(bookingsResponse.data.data);
                 
     
                 
