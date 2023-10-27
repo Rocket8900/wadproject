@@ -36,6 +36,8 @@ export default function App() {
         <Route path="/choose-quiz" element={<ChooseQuiz />} />
         <Route path="/btt-quiz" element={<Quiz type="btt"/>} />
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
+        <Route path="/topical-quiz" element={<Quiz type="topic"/>} />
+        <Route path="/review-quiz" element={<Quiz type="review"/>} />
         
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
         <Route path="/view-notebook" element={<StudentNotebook />} />
