@@ -14,49 +14,48 @@ export function StudentDashboard() {
     const { id } = useParams();
 
     useEffect(() => {
-        const fetchStudentProfile = async () => {
+        
+        const fetchData = async () => {
             try {
                 const token = getCookie("access_token");
                 const decodedToken = jwtDecode(token).user;
                 const studentId = decodedToken.id;
-                const response = await axios.get(
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+
+                const studentResponse = await axios.get(
+                    `http://localhost:3001/v1/api/student/profile/`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
                         },
                     }
                 );
-                setStudent(response.data.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
+                setStudent(studentResponse.data.data);
 
-        const fetchStudentBookings = async () => {
-            try {
-                const token = getCookie("access_token");
-                const decodedToken = jwtDecode(token).user;
-                const studentId = decodedToken.id;
-                const response = await axios.get(
-                    `http://localhost:3001/v1/api/booking/student/${studentId}`,
+
+                const bookingsResponse = await axios.get(
+                    `http://localhost:3001/v1/api/booking/student/`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
                         },
                     }
                 );
-                setBookings(response.data);
+                console.log(bookingsResponse.data.data)
+                setBookings(bookingsResponse.data.data[0]);
+                
+    
+                
+    
             } catch (error) {
                 console.error(error);
             }
         };
+    
+        fetchData(); 
+        
+    }, []); 
 
-        fetchStudentProfile();
-        fetchStudentBookings();
-    }, []);
-
-    if (student === null || bookings === null) {
+    if (bookings === null || student === null) {
         return <div>Loading...</div>;
     }
 
@@ -64,7 +63,7 @@ export function StudentDashboard() {
         <Container fluid>
             <Row>
                 <Col lg={2} md={2} sm={2} id="sidebar">
-                    <Sidebar student={student} bookings={bookings} />
+                    <Sidebar student={student} bookings={bookings} />i
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
                     <MainContent student={student} bookings={bookings} />
