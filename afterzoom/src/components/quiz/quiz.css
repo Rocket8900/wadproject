@@ -3,16 +3,20 @@
 body {
   font-family: 'Montserrat', sans-serif;
   color: #191716;
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
+  
   background-color: #eaeaea;
 }
 
 .quiz-container {
-  max-width: 500px;
-  min-width: 250px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  /* display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0; */
+  max-width: 800px;
+  /* min-width: 250px; */
   background: #ffffff;
   border-radius: 4px;
   margin-top: 30px;
@@ -84,6 +88,20 @@ body {
 .flex-right {
   display: flex;
   justify-content: flex-end;
+}
+
+/* correct answer */
+.quiz-container ul .correct-answer {
+  background-color: green;
+  color: white;
+  cursor: pointer;
+}
+
+/* wrong answer */
+.quiz-container ul .wrong-answer {
+  background-color: red;
+  color: white;
+  cursor: pointer;
 }
 
 .result h3 {

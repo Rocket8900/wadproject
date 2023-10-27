@@ -11,10 +11,14 @@ const studentRoute = express.Router()
 
 studentRoute.post("/register", StudentController.registerStudent)
 studentRoute.post("/login", StudentController.loginStudent)
+
+
 studentRoute.use(AuthController.validateUser)
 studentRoute.get("/list", StudentController.viewAllStudent)
 studentRoute.get("/profile/:id", StudentController.viewStudentProfile)
-studentRoute.patch("/profile/:id", StudentController.updateStudentProfile)
-studentRoute.patch("/profile/photo/:id", upload.single('photo'), StudentController.uploadStudentPhoto);
+
+studentRoute.use(AuthController.validateStudent)
+studentRoute.patch("/profile", StudentController.updateStudentProfile)
+studentRoute.patch("/profile/photo", upload.single('photo'), StudentController.uploadStudentPhoto);
 
 export { studentRoute as default }

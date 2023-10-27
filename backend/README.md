@@ -38,9 +38,8 @@
    - Params: student's ID
    - Authenticated path
 
-4. `/profile/:id` (PATCH)
+4. `/profile` (PATCH)
    - Description: Update student profile
-   - Params: student's ID
    - Body:
      ```json
      {
@@ -53,7 +52,7 @@
        "language": "Spanish"
      }
      ```
-   - Authenticated path
+   - Authenticated path (Just pass in JWT token)
 
 ### Instructor Endpoints
 
@@ -102,9 +101,8 @@
    - Params: instructor's ID
    - Authenticated path
 
-5. `/profile/:id` (PATCH)
+5. `/profile` (PATCH)
    - Description: Update instructor's profile
-   - Params: instructor's ID
    - Body:
      ```json
      {
@@ -118,7 +116,7 @@
        "carModel": "Honda"
      }
      ```
-   - Authenticated path
+   - Authenticated path (Just pass in JWT token)
 
 ### Booking Endpoints
 
@@ -152,15 +150,15 @@
      ```
    - Authenticated path
 
-4. `/student/:id` (GET)
+4. `/student` (GET)
    - Description: Get all bookings of a student
-   - Params: Student ID
-   - Authenticated path
+   - Authenticated path (Just pass in JWT token)
 
-5. `/instructor/:id` (GET)
+
+5. `/instructor` (GET)
    - Description: Get all bookings of a Instructor
-   - Params: Instructor ID
-   - Authenticated path
+   - Authenticated path (Just pass in JWT token)
+
 
 ### Review Endpoint
 
