@@ -12,7 +12,7 @@ import AlternateGraph from "../graph/AlternateGraph";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const MainContent = ({ student, bookings }) => {
-  const { name, age } = student;
+  const { id: studentId, selfie, name, age, email, gender, type, language, instructor, instructorId:stuInstructorId, reviews,bookings:stuBookings,chatHistory } = student;
   const [details, setDetails] = useState("");
   const [showAlternateGraph, setShowAlternateGraph] = useState(false); 
   const toggleGraph = () => {
@@ -23,23 +23,37 @@ const MainContent = ({ student, bookings }) => {
   };
   const [compactType, setCompactType] = useState("vertical");
   const [mounted, setMounted] = useState(false);
+  const missingPoints = [];
+  if (selfie===null){
+    missingPoints.push("Set Up Selfie");
+  }
+
+  if(stuInstructorId===null){
+    missingPoints.push("Find an Instructor");
+  }
   const [layout, setLayout] = useState([
-    { 
-      i: "a", 
-      id: "grid-item-hello-user", 
-      x: 0, y: 0, w: 6, h: 2,
-      content: 
-      <div>
-        <h2>Hello, {name}  <PiHandWavingDuotone /></h2>
-        <p>
-        Your profile is ToBeRetrieved% complete
-        Task List:
-        <ul>
-          <li>point 1 (ToBeRetrieved)</li>
-          <li>point 2 (ToBeRetrieved)</li>
-        </ul>
-        </p>
-      </div>},
+    {
+      i: "a",
+      id: "grid-item-hello-user",
+      x: 0,
+      y: 0,
+      w: 6,
+      h: 2,
+      content: (
+        <div>
+          <h2>Hello, {name}  <PiHandWavingDuotone /></h2>
+          <p>
+            Your profile is ToBeRetrieved% complete
+            Task List:
+            <ul>
+              {missingPoints.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+          </p>
+        </div>
+      )
+    },    
     { i: "b", 
       id: "grid-item-unread", 
       x: 6, y: 0, w: 2, h: 2,
@@ -51,7 +65,10 @@ const MainContent = ({ student, bookings }) => {
       x: 0, y: 2, w: 4, h: 4,
       content:
       <div>
-      <Calendar showDetailsHandle={showDetailsHandle} />
+      <Calendar
+        showDetailsHandle={showDetailsHandle}
+        bookings={bookings}
+      />
       </div>
     },
     { 
@@ -60,26 +77,19 @@ const MainContent = ({ student, bookings }) => {
       x: 4, y: 2, w: 4, h: 4,
       content:
       <div>
-      <Graph/>
+      <Graph 
+      bookings={bookings}
+      />
       </div>
     },
     { i: "e", 
       id: "grid-item-lastrow1", 
-      x: 0, y: 6, w: 2, h: 2,
+      x: 0, y: 6, w: 4, h: 2,
       content:
       <div>
-        <h3>Jump Back In</h3>
+        <h3>Notes</h3>
         To Be Retrieved To Be Retrieved To Be Retrieved To Be Retrieved 
       </div>
-    },
-    { i: "f", 
-      id: "grid-item-lastrow2", 
-      x: 2, y: 6, w: 2, h: 2,
-      content:
-      <div>
-      <h3>Your Notes</h3>
-      To Be Retrieved To Be Retrieved To Be Retrieved To Be Retrieved 
-    </div>
     },
     { i: "g", 
       id: "grid-item-lastrow1", 
@@ -93,7 +103,7 @@ const MainContent = ({ student, bookings }) => {
       id: "grid-item-lastrow1", 
       x: 6, y: 6, w: 2, h: 2,
       content:
-      <div className="changeGraph" onClick={toggleGraph}>
+      <div className="changeGraph" onClick={toggleGraph} >
         <h2>Press Me to Change Graph</h2>
       </div>
     },

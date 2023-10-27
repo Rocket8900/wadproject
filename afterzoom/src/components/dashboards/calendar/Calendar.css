@@ -207,4 +207,15 @@
     flex-basis: calc(14.2857% - 6px); /* 100% / 7 cells - 6px for the total gap */
     margin-right: 6px; /* 6px gap between cells */
   }
+  .event-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red; /* or any color you want */
+  }
+
+  .event-details {
+    color:white;
+    text-align:center;
+  }
   
