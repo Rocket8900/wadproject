@@ -1,0 +1,132 @@
+/* Layout and General Styles */
+
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+#note-add {
+  margin-bottom: 15px;
+}
+
+.note-box {
+  position: relative;
+  font-size: 14px;
+  padding: 15px;
+  margin-bottom: 5px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alerts {
+  margin-left: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #3c763d;
+}
+
+/* Panel Styles */
+.panel {
+  box-shadow: 2px 2px 4px #ccc;
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.panel h3{
+  padding-top:0px;
+}
+
+/* Typography Styles */
+label {
+  font-size: 18px;
+}
+
+/* Delete Button Styles */
+.note-container {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.note-buttons {
+  position: absolute;
+  top: 10px;
+  right: 80px;
+  padding:0px;
+}
+
+.add-to-dashboard {
+  margin-left:0px;
+  position: absolute;
+  top: 0;
+  font-weight: bold;
+  font-size: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  z-index: 1; 
+  background-color: transparent;
+  transform: translateY(-50%);
+}
+ 
+.delete {
+  margin-right:0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: bold;
+  font-size: 22px;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  z-index: 1; 
+  transform: translateY(-50%);
+}
+
+
+.delete:hover {
+  text-decoration: none;
+  color: #777777;
+}
+
+:root {
+  --green-bg: #dff0d8;
+  --green-border: #d6e9c6;
+  --red-bg: #f2dede;
+  --red-border: #ebccd1;
+  --blue-bg: #d9edf7;
+  --blue-border: #bce8f1;
+  --orange-bg: #fcf8e3;
+  --orange-border: #faebcc;
+}
+
+.green {
+  background-color: var(--green-bg);
+  border-color: var(--green-border);
+}
+
+.red {
+  background-color: var(--red-bg);
+  border-color: var(--red-border);
+}
+
+.blue {
+  background-color: var(--blue-bg);
+  border-color: var(--blue-border);
+}
+
+.orange {
+  background-color: var(--orange-bg);
+  border-color: var(--orange-border);
+}
+
