@@ -99,10 +99,12 @@ model Quiz {
 }
 
 model Note {
-  id         String   @id @default(uuid())
-  studentId  String
-  content    String
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
-  student    Student  @relation(fields: [studentId], references: [id])
+  id             String   @id @default(uuid())
+  studentId      String
+  content        String
+  color          String
+  addToDashboard Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @default(now())
+  student        Student  @relation(fields: [studentId], references: [id])
 }
