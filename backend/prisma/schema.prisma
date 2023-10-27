@@ -24,6 +24,7 @@ model Student {
   instructor   Instructor?   @relation(fields: [instructorId], references: [id])
   instructorId String?
   quiz         Quiz[]
+  notes        Note[]
   reviews      Review[]
   bookings     Booking[]
   chatHistory  ChatHistory[]
@@ -94,5 +95,14 @@ model Quiz {
   score      String // "10/10"
   mistakes   Int[] // index of questions wrong
   created_at DateTime @default(now())
+  student    Student  @relation(fields: [studentId], references: [id])
+}
+
+model Note {
+  id         String   @id @default(uuid())
+  studentId  String
+  content    String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
   student    Student  @relation(fields: [studentId], references: [id])
 }
