@@ -7,7 +7,7 @@ import  Registration  from "./components/registration/registration";
 import InstructorsComponent from "./components/instructors/instructors";
 import InstructorDetail from "./components/instructors/InstructorDetail";
 import { ChooseQuiz } from "./components/quiz/choosequiz";
-import Quiz from "./components/quiz/quiz.js";
+import Quiz from "./components/quiz/Quiz.js";
 import {Routes,Route} from 'react-router';
 import React from 'react';
 import './App.css';
