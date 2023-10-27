@@ -95,7 +95,7 @@ const Sidebar = ({ student, bookings }) => {
               active={activeMenuItem === "practice"}
               onClick={() => handleMenuItemClick("practice")}
             >
-              <Link to="/quiz"><div className="mostInner">BTT / FTT</div></Link>
+              <Link to="/choose-quiz"><div className="mostInner">BTT / FTT</div></Link>
             </MenuItem>
             <MenuItem
               icon={<FaCreativeCommonsBy />}

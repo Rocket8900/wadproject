@@ -37,10 +37,13 @@ export default function App() {
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/bookingStudent" element={<BookingStudent />} />
-        {/* ignore this */}
+        <Route path="/topical-quiz" element={<Quiz type="topic"/>} />
+        <Route path="/review-quiz" element={<Quiz type="review"/>} />
+        
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
         <Route path="/view-notebook" element={<StudentNotebook />} />
       </Routes>
     </div>
+    
   ) 
 }
