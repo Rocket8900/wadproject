@@ -132,4 +132,5 @@ export default class StudentController {
       return res.status(500).json({ error: "an unexpected error occurred" });
     }
   };
+
 }

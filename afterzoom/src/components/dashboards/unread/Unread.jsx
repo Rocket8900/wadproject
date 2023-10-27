@@ -3,7 +3,6 @@ import "./Unread.css";
 
 const Unread = () => {
   const [progress, setProgress] = useState(0);
-
   useEffect(() => {
     const progressInterval = setInterval(() => {
       setProgress(prevProgress => {

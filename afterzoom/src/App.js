@@ -15,9 +15,8 @@ import Chat from "./components/private-chat/chat";
 import InstructorChat from "./components/private-chat/instructor-chat";
 import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
 import StudentNotebook from "./components/notebook/StudentNotebook";
-
-// import { UserProvider } from './UserContext';
-
+import NotesPage from "./components/notes/NotesPage";
+import { BookingStudent } from "./components/bookingLesson/BookingStudent";
 
 export default function App() {
   return (
@@ -36,6 +35,8 @@ export default function App() {
         <Route path="/choose-quiz" element={<ChooseQuiz />} />
         <Route path="/btt-quiz" element={<Quiz type="btt"/>} />
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
+        <Route path="/notes" element={<NotesPage />} />
+        <Route path="/bookingStudent" element={<BookingStudent />} />
         <Route path="/topical-quiz" element={<Quiz type="topic"/>} />
         <Route path="/review-quiz" element={<Quiz type="review"/>} />
         

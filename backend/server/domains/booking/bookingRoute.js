@@ -9,10 +9,16 @@ const bookingRoute = express.Router()
 
 bookingRoute.use(AuthController.validateUser)
 bookingRoute.post("/", BookingController.makeABooking)
+
+
+bookingRoute.get("/student", AuthController.validateStudent, BookingController.viewAllBookingOfStudent)
+
+
+bookingRoute.get("/instructor", AuthController.validateInstructor, BookingController.viewAllBookingsOfInstructor)
+
+// Now place the generic /:id route
 bookingRoute.get("/:id", BookingController.getBookingById)
 bookingRoute.patch("/:id", BookingController.updateBookingById)
-bookingRoute.get("/student/:id", BookingController.viewAllBookingOfStudent)
-bookingRoute.get("/instructor/:id", BookingController.viewAllBookingsOfInstructor)
 
 
 export {bookingRoute as default};

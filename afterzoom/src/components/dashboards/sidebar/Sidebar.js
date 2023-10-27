@@ -20,11 +20,30 @@ import "./Sidebar.css";
 import { Link, useParams } from 'react-router-dom';
 
 const Sidebar = ({ student, bookings }) => {
-  const { name, age } = student;
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 9);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const { name, instructorId } = student;
   const [activeMenuItem, setActiveMenuItem] = useState("dashboard");
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
   };
+
+  const findInstructorLabel = instructorId ? "Book a Lesson" : "Find Instructor";
+  const findInstructorLink = instructorId ? "/bookingStudent" : "/instructor";
 
   if (student.instructorId === null){
     var instructorr="not found";
@@ -43,12 +62,15 @@ const Sidebar = ({ student, bookings }) => {
         </SidebarHeader>
 
         <SidebarContent>
+        {!isSmallScreen && (
           <div className="user-info-box">
             <div className="user-info">
               <p>{name}</p>
               <p>Instructor ID: {instructorr}</p>
             </div>
           </div>
+        )}
+
           <Menu iconShape="square">
             <MenuItem
               icon={<FaHome />}
@@ -58,12 +80,16 @@ const Sidebar = ({ student, bookings }) => {
               <Link to="/student-dashboard"><div className="mostInner">Dashboard</div></Link>
             </MenuItem>
             <MenuItem
-              icon={<FaList />}
-              active={activeMenuItem === "findInstructor"}
-              onClick={() => handleMenuItemClick("findInstructor")}
-            >
-              <Link to="/instructor"><div className="mostInner">Find Instructor</div></Link>
-            </MenuItem>
+            icon={<FaList />}
+            active={activeMenuItem === "findInstructor"}
+            onClick={() => handleMenuItemClick("findInstructor")}
+          >
+            <Link to={findInstructorLink}>
+              <div className="mostInner">{findInstructorLabel}</div>
+            </Link>
+          </MenuItem>
+
+
             <MenuItem
               icon={<FaRegHeart />}
               active={activeMenuItem === "practice"}

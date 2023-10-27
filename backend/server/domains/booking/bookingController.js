@@ -84,7 +84,7 @@ export default class BookingController {
 
     static viewAllBookingOfStudent = async (req, res) => {
         try {
-            const studentId = req.params.id
+            const studentId = req.user.id
             const bookings = await BookingService.getBookingsByStudent(studentId);
             if (bookings) {
                 Logging.info(`get bookings for ${studentId}`)
@@ -100,7 +100,7 @@ export default class BookingController {
 
     static viewAllBookingsOfInstructor= async (req, res) => {
         try {
-            const instructorId = req.params.id
+            const instructorId = req.user.id
             const bookings = await BookingService.getBookingOfInstructor(instructorId);
             if (bookings) {
                 Logging.info(`get bookings for ${instructorId}`)

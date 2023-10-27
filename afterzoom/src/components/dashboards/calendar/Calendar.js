@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {
   format,
   subMonths,
@@ -13,10 +13,28 @@ import {
 } from "date-fns";
 import "./Calendar.css";
 
-const Calendar = ({ showDetailsHandle }) => {
+const Calendar = ({ showDetailsHandle, bookings })=> {
+  const { id: bookingId, lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings; 
+  const [eventDetails, setEventDetails] = useState('');
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    // Format lessons and update events state
+    if (lesson) {
+      const formattedLessons = lesson.map(lesson => {
+        return {
+          title: lesson.title,
+          date: new Date(lesson.date).toISOString()
+        };
+      });
+      setEvents(formattedLessons);
+    }
+  }, [lesson]);
+  
+  
 
   const changeMonthHandle = (btnType) => {
     if (btnType === "prev") {
@@ -40,8 +58,21 @@ const Calendar = ({ showDetailsHandle }) => {
 
   const onDateClickHandle = (day, dayStr) => {
     setSelectedDate(day);
-    showDetailsHandle(dayStr);
+    const eventsForDay = events.filter(
+      (event) =>
+        isSameDay(new Date(event.date), new Date(day.getFullYear(), day.getMonth(), day.getDate()))
+    );
+  
+    const eventDetailsText = eventsForDay.map((event) => {
+      const eventTitle = event.title;
+      const eventDate = format(new Date(event.date), "yyyy-MM-dd");
+      const eventTime = format(new Date(event.date), "HH:mm:ss");
+      return `${eventTitle}<br>${eventDate}<br>${eventTime}<br>`;
+    }).join('');
+  
+    setEventDetails(eventDetailsText || "No events for this day");
   };
+
 
   const renderHeader = () => {
     const dateFormat = "MMM yyyy";
@@ -82,6 +113,10 @@ const Calendar = ({ showDetailsHandle }) => {
       for (let i = 0; i < 7; i++) {
         formattedDate = format(day, dateFormat);
         const cloneDay = day;
+        const eventsForDay = events.filter(
+          (event) =>
+            isSameDay(new Date(event.date), new Date(cloneDay.getFullYear(), cloneDay.getMonth(), cloneDay.getDate()))
+        );
         days.push(
           <div
             className={`col cell ${
@@ -91,7 +126,7 @@ const Calendar = ({ showDetailsHandle }) => {
                 ? "selected"
                 : ""
             }`}
-            key={day}
+            key={day.toISOString()} // Use the date string as the key
             onClick={() => {
               const dayStr = format(cloneDay, "ccc dd MMM yy");
               onDateClickHandle(cloneDay, dayStr);
@@ -99,11 +134,14 @@ const Calendar = ({ showDetailsHandle }) => {
           >
             <span className="number">{formattedDate}</span>
             <span className="bg">{formattedDate}</span>
+            {eventsForDay.map((event, index) => (
+              <div key={index} className="event-circle" />
+            ))}
           </div>
         );
         day = addDays(day, 1);
       }
-
+  
       rows.push(
         <div className="row" key={day}>
           {days}
@@ -113,6 +151,8 @@ const Calendar = ({ showDetailsHandle }) => {
     }
     return <div className="body">{rows}</div>;
   };
+  
+
   const renderFooter = () => {
     return (
       <div className="header row flex-middle">
@@ -133,6 +173,7 @@ const Calendar = ({ showDetailsHandle }) => {
       {renderDays()}
       {renderCells()}
       {renderFooter()}
+      <div className="event-details" dangerouslySetInnerHTML={{ __html: eventDetails }} /> 
     </div>
   );
 };
