@@ -19,18 +19,22 @@ const Calendar = ({ showDetailsHandle, bookings })=> {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [events, setEvents] = useState([]);
 
-
-  const formattedLessons = lesson.map(lesson => {
-    return {
-      title: lesson.title,
-      date: new Date(lesson.date).toISOString()
-    };
-  });
+  useEffect(() => {
+    // Format lessons and update events state
+    if (lesson) {
+      const formattedLessons = lesson.map(lesson => {
+        return {
+          title: lesson.title,
+          date: new Date(lesson.date).toISOString()
+        };
+      });
+      setEvents(formattedLessons);
+    }
+  }, [lesson]);
   
-  const [events, setEvents] = useState(formattedLessons);
-
-
+  
 
   const changeMonthHandle = (btnType) => {
     if (btnType === "prev") {

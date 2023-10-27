@@ -9,6 +9,7 @@ import Unread from '../unread/Unread'
 import Graph from '../graph/Graph'
 import AlternateGraph from "../graph/AlternateGraph"; 
 
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const MainContent = ({ student, bookings }) => {
@@ -23,14 +24,74 @@ const MainContent = ({ student, bookings }) => {
   };
   const [compactType, setCompactType] = useState("vertical");
   const [mounted, setMounted] = useState(false);
+
+  let completeness=0;
   const missingPoints = [];
   if (selfie===null){
     missingPoints.push("Set Up Selfie");
+    completeness=completeness+1;
   }
-
   if(stuInstructorId===null){
     missingPoints.push("Find an Instructor");
+    completeness=completeness+1;
   }
+  let updatedCompleteness;
+
+  if (completeness === 1) {
+    updatedCompleteness = 90;
+  } else if (completeness === 2) {
+    updatedCompleteness = 80;
+  } else {
+    updatedCompleteness = 100;
+  }
+
+
+
+  const [sections, setSections] = useState([
+    {
+      id: 1,
+      title: 'Section 1',
+      notes: [],
+    },
+    {
+      id: 2,
+      title: 'Section 2',
+      notes: [],
+    },
+  ]);
+
+  const handleAddNote = (sectionId, newNote) => {
+    const updatedSections = sections.map((section) => {
+      if (section.id === sectionId) {
+        return {
+          ...section,
+          notes: [...section.notes, newNote],
+        };
+      }
+      return section;
+    });
+    setSections(updatedSections);
+  };
+
+  const handleDeleteNote = (sectionId, noteId) => {
+    const updatedSections = sections.map((section) => {
+      if (section.id === sectionId) {
+        return {
+          ...section,
+          notes: section.notes.filter((note) => note.id !== noteId),
+        };
+      }
+      return section;
+    });
+    setSections(updatedSections);
+  };
+
+
+
+
+
+
+
   const [layout, setLayout] = useState([
     {
       i: "a",
@@ -39,20 +100,18 @@ const MainContent = ({ student, bookings }) => {
       y: 0,
       w: 6,
       h: 2,
-      content: (
-        <div>
-          <h2>Hello, {name}  <PiHandWavingDuotone /></h2>
-          <p>
-            Your profile is ToBeRetrieved% complete
-            Task List:
-            <ul>
-              {missingPoints.map((point, index) => (
-                <li key={index}>{point}</li>
-              ))}
-            </ul>
-          </p>
-        </div>
-      )
+      content: 
+<div style={{ textAlign: 'left' }}>
+  <h2>Hello, {name} <PiHandWavingDuotone /></h2>
+  Your profile is {updatedCompleteness}% complete <br/>
+  Task List:
+  <ul>
+    {missingPoints.map((point, index) => (
+      <li key={index}>{point}</li>
+    ))}
+  </ul>
+</div>
+      
     },    
     { i: "b", 
       id: "grid-item-unread", 
@@ -86,9 +145,8 @@ const MainContent = ({ student, bookings }) => {
       id: "grid-item-lastrow1", 
       x: 0, y: 6, w: 4, h: 2,
       content:
-      <div>
-        <h3>Notes</h3>
-        To Be Retrieved To Be Retrieved To Be Retrieved To Be Retrieved 
+      <div >
+        <h2>NOTES</h2>
       </div>
     },
     { i: "g", 
@@ -112,6 +170,8 @@ const MainContent = ({ student, bookings }) => {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+
 
   const onCompactTypeChange = () => {
     const oldCompactType = compactType;

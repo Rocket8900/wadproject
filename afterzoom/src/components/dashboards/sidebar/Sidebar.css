@@ -100,3 +100,22 @@
   #sidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item:hover {
     background-color: #F5F5F5; 
   }
+
+  /* Add these styles to your CSS file or style tag */
+  @media (max-width: 950px) {
+    .user-info-box {
+      display: none;
+    }
+
+    
+    .mostInner  {
+      display: none !important;
+    }
+    .pro-sidebar .pro-menu .pro-menu-item .pro-item-content .pro-inner-item .pro-item-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width:150%;
+    }
+  }
+

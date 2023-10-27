@@ -12,13 +12,15 @@ class Graph extends Component {
     render() {
 		const { bookings } = this.props;
 		const { id: bookingId, lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings; 
+		if (!bookings || !bookings.lesson) {
+            return <div>No lesson data available</div>;
+        }
 
         const monthlyDataPoints = Array.from({ length: 12 }, () => ({
             y: 0,
             label: ''
         }));
 
-        // Iterate over lessons and update monthly data points
         lesson.forEach(lesson => {
             const lessonDate = new Date(lesson.date);
             const monthIndex = lessonDate.getMonth();
@@ -29,7 +31,7 @@ class Graph extends Component {
         const options = {
             animationEnabled: true,
             title: {
-                text: "Lessons per Month",
+                text: "Lesson Trends",
                 fontFamily: "Nunito",
                 fontWeight: "bold"
             },
