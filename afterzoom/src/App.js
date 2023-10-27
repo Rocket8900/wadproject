@@ -16,7 +16,7 @@ import InstructorChat from "./components/private-chat/instructor-chat";
 import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
 import StudentNotebook from "./components/notebook/StudentNotebook";
 import NotesPage from "./components/notes/NotesPage";
-import { bookingStudent } from "./components/bookingLesson/bookingStudent";
+import { BookingStudent } from "./components/bookingLesson/BookingStudent";
 
 export default function App() {
   return (
@@ -36,7 +36,7 @@ export default function App() {
         <Route path="/btt-quiz" element={<Quiz type="btt"/>} />
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
         <Route path="/notes" element={<NotesPage />} />
-        <Route path="/bookingStudent" element={<bookingStudent />} />
+        <Route path="/bookingStudent" element={<BookingStudent />} />
         {/* ignore this */}
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
         <Route path="/view-notebook" element={<StudentNotebook />} />
