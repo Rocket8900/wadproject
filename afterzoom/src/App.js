@@ -16,7 +16,7 @@ import InstructorChat from "./components/private-chat/instructor-chat";
 import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
 import StudentNotebook from "./components/notebook/StudentNotebook";
 import NotesPage from "./components/notes/NotesPage";
-import { BookingStudent } from "./components/bookingLesson/bookingStudent";
+import { BookingStudent } from "./components/bookingLesson/BookingStudent";
 
 export default function App() {
   return (
