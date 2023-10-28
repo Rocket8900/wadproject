@@ -39,7 +39,7 @@ model Instructor {
   gender       String
   email        String        @unique
   password     String
-  language     String
+  language     String[]
   experience   Int
   type         String // enums("auto", "manual", "both")
   carModel     String
