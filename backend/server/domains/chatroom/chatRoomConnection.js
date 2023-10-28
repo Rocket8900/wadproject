@@ -4,6 +4,7 @@ import InstructorService from "../instructor/instructorService.js";
 import StudentService from "../student/studentService.js";
 import ChatroomController from "./chatroomController.js";
 import Logging from "../../utils/loggings.js";
+import NotificationController from "../notification/notificationController.js";
 
 
 
@@ -45,6 +46,9 @@ export const startServerSocket = (io) => {
             console.log(`found receiver socket ${receiverSocketId}`);
             io.to(receiverSocketId).emit("private_message", content);
             io.to(socket.id).emit("private_message", content);
+          } else {
+            // add a notification for the receiver (using receiverId)
+            await NotificationController.createNewNotification(receiverId)
           }
         }
       })
