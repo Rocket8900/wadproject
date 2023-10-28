@@ -11,7 +11,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class Graph extends Component {
     render() {
 		const { bookings } = this.props;
-		const { id: bookingId, lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings; 
+		const { id: bookingId, lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings || {}; 
 		if (!bookings || !bookings.lesson) {
             return <div>No lesson data available</div>;
         }

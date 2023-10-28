@@ -14,12 +14,14 @@ import {
 import "./Calendar.css";
 
 const Calendar = ({ showDetailsHandle, bookings })=> {
-  const { id: bookingId, lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings; 
+  const { id: bookingId, lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings || {}; 
   const [eventDetails, setEventDetails] = useState('');
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [events, setEvents] = useState([]);
+
+  
 
   useEffect(() => {
     // Format lessons and update events state
