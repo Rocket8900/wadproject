@@ -5,7 +5,6 @@ import InstructorService from "../instructor/instructorService.js";
 
 export default class ChatroomService {
 
-    // details of connection and messages saved on mongodb (nosql)
 
     
     static getChatHistory = async (instructorId, studentId) => {

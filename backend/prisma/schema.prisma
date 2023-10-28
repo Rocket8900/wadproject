@@ -20,7 +20,7 @@ model Student {
   password     String // hashed!
   gender       String
   type         String // enums("auto", "manual")
-  language     String
+  language     String[]
   instructor   Instructor?   @relation(fields: [instructorId], references: [id])
   instructorId String?
   quiz         Quiz[]
@@ -93,7 +93,7 @@ model Quiz {
   studentId  String
   type       String // btt or ftt
   score      String // "10/10"
-  mistakes   Int[] // index of questions wrong
+  mistakes   Json[] // questions wrong
   created_at DateTime @default(now())
   student    Student  @relation(fields: [studentId], references: [id])
 }
