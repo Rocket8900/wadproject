@@ -24,7 +24,7 @@ body {
     --fwB: 700;
   }
 
- .title {
+ .Hometitle {
     font-size: 5.3rem;
     font-weight: bold;
   } 
@@ -292,9 +292,9 @@ body{
   font-family: 'Ubuntu', sans-serif;
 }
 
-main{
+/* main{
   background-color: hsl(var(--Light-gray) / .5);
-}
+} */
 
 
 @media (min-width:60rem){
@@ -304,7 +304,7 @@ main{
     background-color: hsl(var(--Light-gray) / .5);
     min-height: 100vh;
   }
-  main{
+  /* main{
     
     display: grid;
     background-color: hsl(var(--white));
@@ -313,7 +313,7 @@ main{
     border-radius: 20px;
     width: 1200px;
 
-  }
+  } */
 }
 
 .featurePic {
@@ -437,7 +437,7 @@ main{
   }
 }
 
-form{
+.regiform{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -451,7 +451,7 @@ form{
   width: 100%;
 }
 
-form > *:first-child{
+.regiform > *:first-child{
   align-self: center;
   margin-inline: 1rem;
 }
@@ -482,7 +482,7 @@ form > *:first-child{
 }
 
 @media(min-width: 60rem){
-  form{
+  .regiform{
       grid-column: 2/4;
       padding-block: 0;
    } 

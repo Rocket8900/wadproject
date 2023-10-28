@@ -63,7 +63,7 @@ export default function MyForm({step, next, prev, goto}) {
       >
         {({values, errors, touched}) => (
          
-          <Form >
+          <Form className='regiform'>
             {step === 0 && <WhoAreYou 
               Field={Field}
               values={values} 
