@@ -19,23 +19,22 @@ import InstructorChat from "./components/private-chat/instructor-chat";
 import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
 import StudentNotebook from "./components/notebook/StudentNotebook";
 import NotesPage from "./components/notes/NotesPage";
-import { BookingStudent } from "./components/bookingLesson/BookingStudent";
+import { BookingStudent } from "./components/bookingLesson/bookingStudent";
 
 export default function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/newregistration" element={<Newregistration />} />
-        <Route path="/registration" element={<Registration />} />
+        {/* <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} /> */}
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
         <Route path="/instructors" element={<InstructorsComponent />} />
         <Route path="/instructor" element={<InstructorDetail />} />
         <Route path="/student-chat" element={<Chat />} />
         <Route path="/instructor-chat" element={<InstructorChat />} />
-        <Route path="/regi" element={<RegistrationTest />} />
+        {/* <Route path="/regi" element={<RegistrationTest />} /> */}
 
         <Route path="/choose-quiz" element={<ChooseQuiz />} />
         <Route path="/btt-quiz" element={<Quiz type="btt"/>} />
