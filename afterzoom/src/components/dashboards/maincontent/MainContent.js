@@ -138,6 +138,7 @@ const MainContent = ({ student, bookings }) => {
       <div>
       <Graph 
       bookings={bookings}
+      student={student}
       />
       </div>
     },

@@ -8,6 +8,7 @@ import {
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
+import { BsFillClipboard2Fill } from "react-icons/bs";
 import {
   FaList,
   FaRegHeart,
@@ -19,7 +20,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
 import { Link, useParams } from 'react-router-dom';
 
-const Sidebar = ({ student, bookings }) => {
+const Sidebar = ({ student }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -95,7 +96,7 @@ const Sidebar = ({ student, bookings }) => {
               active={activeMenuItem === "practice"}
               onClick={() => handleMenuItemClick("practice")}
             >
-              <Link to="/quiz"><div className="mostInner">BTT / FTT</div></Link>
+              <Link to="/choose-quiz"><div className="mostInner">BTT / FTT</div></Link>
             </MenuItem>
             <MenuItem
               icon={<FaCreativeCommonsBy />}
@@ -104,6 +105,16 @@ const Sidebar = ({ student, bookings }) => {
             >
               <Link to="/simulator"><div className="mostInner">Enter the Simulator</div></Link>
             </MenuItem>
+            <MenuItem
+              icon={<BsFillClipboard2Fill />}
+              active={activeMenuItem === "yourNotes"}
+              onClick={() => handleMenuItemClick("yourNotes")}
+            >
+              <Link to="/notes"><div className="mostInner">Your Notes</div></Link>
+            </MenuItem>
+
+
+
           </Menu>
         </SidebarContent>
 

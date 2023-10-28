@@ -76,7 +76,7 @@ export function StudentDashboard() {
         <Container fluid>
             <Row>
                 <Col lg={2} md={2} sm={2} id="sidebar">
-                    <Sidebar student={student} bookings={bookings} />i
+                    <Sidebar student={student} />i
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
                     <MainContent student={student} bookings={bookings} />

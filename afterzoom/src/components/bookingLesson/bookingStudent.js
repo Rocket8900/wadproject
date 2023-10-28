@@ -64,6 +64,7 @@ export function BookingStudent() {
                     <Sidebar student={student} bookings={bookings} />i
                 </Col>
                 <Col lg={10} md={10} sm={10} id="bookingStudentContent">
+                    
                     <BookingStudentContent student={student} bookings={bookings} />
                 </Col>
             </Row>

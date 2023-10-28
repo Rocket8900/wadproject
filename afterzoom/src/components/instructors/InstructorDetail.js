@@ -30,11 +30,16 @@ function InstructorDetail() {
 
   return (
     <div>
-      <h2>{instructor.name}</h2>
-      <p>Experience: {instructor.experience} years</p>
-      <p>Gender: {instructor.gender}</p>
-      <Link to={`/chat`}><Button variant="primary">Chat with instructor!</Button></Link>
-      <Link to={`/`}><Button variant="primary">Request to be enrolled</Button></Link>
+      {instructor && Object.keys(instructor).length > 0 ? (
+        <>
+          <h2>{instructor.name}</h2>
+          <p>Experience: {instructor.experience} years</p>
+          <p>Gender: {instructor.gender}</p>
+          <Link to={`/chat`}><Button variant="primary">Chat with instructor!</Button></Link>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 }
