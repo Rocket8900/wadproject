@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Sidebar from "./sidebar/Sidebar";
-import MainContent from "./maincontent/MainContent";
+import Sidebar from "../dashboards/sidebar/Sidebar";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
+import BookingStudentContent from "./BookingStudentContent/BookingStudentContent";
 
-export function StudentDashboard() {
+
+export function BookingStudent() {
     const [student, setStudent] = useState(null);
     const [bookings, setBookings] = useState(null);
     const { id } = useParams();
@@ -41,24 +42,8 @@ export function StudentDashboard() {
                         },
                     }
                 );
-                console.log(bookingsResponse.data.data)
                 setBookings(bookingsResponse.data.data[0]);
-
-                // const quizResponse = await axios.get(
-                //     `http://localhost:3001/v1/api/quiz`,
-                //     {
-                //         headers: {
-                //             Authorization: `Bearer ${token}`,
-                //         },
-                //     }
-                // );
-                // console.log(bookingsResponse.data.data)
-                // setBookings(bookingsResponse.data.data[0]);
-
-      
                 
-    
-
             } catch (error) {
                 console.error(error);
             }
@@ -76,10 +61,10 @@ export function StudentDashboard() {
         <Container fluid>
             <Row>
                 <Col lg={2} md={2} sm={2} id="sidebar">
-                    <Sidebar student={student} />i
+                    <Sidebar student={student} bookings={bookings} />i
                 </Col>
-                <Col lg={10} md={10} sm={10} id="main-content">
-                    <MainContent student={student} bookings={bookings} />
+                <Col lg={10} md={10} sm={10} id="bookingStudentContent">
+                    <BookingStudentContent student={student} bookings={bookings} />
                 </Col>
             </Row>
         </Container>

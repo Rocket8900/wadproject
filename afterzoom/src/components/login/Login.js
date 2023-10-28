@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import carImage from './car.jpg'; // Import car image
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// import { useUserContext } from '../../UserContext';
 
 export function Login() {
   const navigate = useNavigate();
+  // const { setUser } = useUserContext(); // Access setUser from the context
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

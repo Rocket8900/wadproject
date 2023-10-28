@@ -21,7 +21,6 @@ export default class StudentService {
 
     static deleteStudent = async (studentId) => {
         try {
-
             const student = await prisma_db.student.delete({
                 where: {
                     id: studentId

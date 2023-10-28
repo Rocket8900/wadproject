@@ -15,8 +15,7 @@ export default class ChatroomService {
                     studentId_instructorId: {
                         studentId: studentId,
                         instructorId: instructorId
-                    }
-                   
+                    }     
                 }
             })
             Logging.info("*chat history service* db query for chat history")
