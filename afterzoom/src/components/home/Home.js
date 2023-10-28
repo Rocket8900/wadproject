@@ -3,9 +3,9 @@ import {Hero} from './Hero/Hero';
 import TestimonialCarousel from './Testimonials/Testimonials'
 
 export function Home() {
-  return <>
+  return <div className='homeBody'>
     <Hero/>
     <Features/>        
     <TestimonialCarousel/>  
-  </>
+  </div>
 }

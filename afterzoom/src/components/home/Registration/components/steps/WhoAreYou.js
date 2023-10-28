@@ -101,7 +101,7 @@ const card ={
     type="radio" 
     name='gender'
     id='male'
-    value= 'male'
+    value= 'Male'
   />
 
   <m.label 
@@ -119,7 +119,7 @@ const card ={
     type="radio" 
     name='gender'
     id='female'
-    value='female'
+    value='Female'
   />
 
   <m.label 

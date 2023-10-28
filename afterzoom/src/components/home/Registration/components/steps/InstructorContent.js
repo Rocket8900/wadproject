@@ -53,9 +53,20 @@ export default function InstructorContent({Field, values,c1,c2,c3, setC1,setC2,s
           Experience
         </label>
         <Field 
-          type="text" 
+          type="number" 
           name='experience' 
           placeholder='Enter Years of Experience'
+        />
+      </div>
+
+      <div className="input-container">
+        <label htmlFor="name">
+          Car Model
+        </label>
+        <Field 
+          type="text" 
+          name='carModel' 
+          placeholder='Enter your car brand and model'
         />
       </div>
 

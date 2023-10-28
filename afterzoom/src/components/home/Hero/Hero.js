@@ -132,7 +132,7 @@ export function Hero() {
     return <>
 
     <motion.div initial='initial' animate='animate'>
-      <motion.div className="content_wrapper" initial={{opacity:0,scale:0}} animate={{opacity:1, scale:1}} transition={{duration:0.3, ease:easeing}}>
+      <motion.div className="content_wrapperhome" initial={{opacity:0,scale:0}} animate={{opacity:1, scale:1}} transition={{duration:0.3, ease:easeing}}>
         <div className="left_content_wrapper">
 
           <motion.h2>
