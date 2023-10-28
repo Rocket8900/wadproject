@@ -51,7 +51,7 @@ export default function StudentContent({Field, values,c1,c2,c3, setC1,setC2,setC
           <Field
             id='online'
             type="checkbox" 
-            name="checked" 
+            name="language" 
             value='english'
             onClick={() => setC1(!c1)}
           />
@@ -75,7 +75,7 @@ export default function StudentContent({Field, values,c1,c2,c3, setC1,setC2,setC
         <Field 
           id='storage'
           type="checkbox" 
-          name="checked" 
+          name="language" 
           value='Malay'
           onClick={() => setC2(!c2)}
         />
@@ -98,7 +98,7 @@ export default function StudentContent({Field, values,c1,c2,c3, setC1,setC2,setC
         <Field 
           id='custom'
           type="checkbox" 
-          name="checked" 
+          name="language" 
           value='Mandarin'
           onClick={() => setC3(!c3)}
         />
@@ -120,7 +120,7 @@ export default function StudentContent({Field, values,c1,c2,c3, setC1,setC2,setC
         <Field 
           id='Tamil'
           type="checkbox" 
-          name="checked" 
+          name="language" 
           value='Tamil'
           onClick={() => setC4(!c4)}
         />

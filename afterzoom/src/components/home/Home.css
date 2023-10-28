@@ -1,22 +1,35 @@
+body {
+  overflow-y: scroll;
+}
+
 :root {
     --light-green: #effffa;
     --dark-blue: #e1e1e1;
     --black: #000000;
     --white: #fff;
-  }
+    --Marine-blue: 213 96% 18%;
+    --purpleish-blue: 243 100% 62%;
+    --pastel-blue: 228 100% 84%;
+    --light-blue: 206 94% 87%;
+    --strawberry-red: 354 84% 57%;
+    
+    --cool-gray: 231 11% 63%;
+    --Light-gray: 229 24% 87%;
+    --magnolia: 217 100% 97%;
+    --alabaster: 231 100% 99%;
+    --white: 0 0% 100%;
   
-  * {
-    overflow: visible;
+    --fwL: 400;
+    --fwM: 500;
+    --fwB: 700;
   }
 
-  /* HERO SECTION */
-
-  .title {
+ .title {
     font-size: 5.3rem;
     font-weight: bold;
-  }
+  } 
   
-  .content_wrapper {
+  .content_wrapperhome {
     width: 100vw;
     margin: 0;
     height: 100vh;
@@ -25,7 +38,6 @@
     align-items: center;
     padding: 3%;
     background-image: linear-gradient(rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5) 50%) , url("Hero/herobgd.jpg");
-    z-index: 10;
     background-position: center; 
     background-size: cover; 
   }
@@ -62,7 +74,6 @@
   
   .left_content_wrapper .btn_group {
     display: flex;
-    /* width: 70%; */
     justify-content: space-between;
   }
   
@@ -142,11 +153,9 @@
     text-transform: capitalize;
     margin-top: 20px;
     line-height: 1.5;
-    overflow: hidden;
-  }
+  } 
   
   .tabWrapper {
-    /* width: 750px; */
     background-color: #1a1a1a;
     border-radius: 10px;
     border: 1px black solid;
@@ -199,9 +208,7 @@
   }
 
   
-  .service_cards .card {
-    /* display: flex;
-    flex-direction: column; */
+  .service_cards .cardItem {
     border: 1px solid lightgrey;
     border-radius: 12px;
     background-color: #f5f5f5;
@@ -213,12 +220,12 @@
     text-align: center;
   }
 
-  .service_cards .card h2 {
+  .service_cards .cardItem h2 {
     text-align: center;
     font-size: 3rem;
   }
   
-.service_cards .card:hover {
+.service_cards .cardItem:hover {
     background-color: #d3d3d3;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
     cursor: pointer;
@@ -226,7 +233,6 @@
   }
 
   
-/* Box sizing rules */
 *,
 *::before,
 *::after {
@@ -235,33 +241,24 @@
   padding: 0;
 }
 
-/* .regimodal { transform: none;
-right: 15%;
-} */
-
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role='list'],
 ol[role='list'] {
   list-style: none;
 }
 
-/* Set core root defaults */
 html:focus-within {
   scroll-behavior: smooth;
 }
 
-/* Set core body defaults */
 body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 }
 
-/* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-/* Inherit fonts for inputs and buttons */
 input,
 button,
 textarea,
@@ -273,7 +270,7 @@ li{
     list-style: none;
 }
 
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
    scroll-behavior: auto;
@@ -289,29 +286,6 @@ li{
   }
 }
 
-
-/* custom CSS */
-
-:root{
-  /* primary colors */
-  --Marine-blue: 213 96% 18%;
-  --purpleish-blue: 243 100% 62%;
-  --pastel-blue: 228 100% 84%;
-  --light-blue: 206 94% 87%;
-  --strawberry-red: 354 84% 57%;
-  
-  /* neutral colors */
-  --cool-gray: 231 11% 63%;
-  --Light-gray: 229 24% 87%;
-  --magnolia: 217 100% 97%;
-  --alabaster: 231 100% 99%;
-  --white: 0 0% 100%;
-
-  /* font weight */
-  --fwL: 400;
-  --fwM: 500;
-  --fwB: 700;
-}
 
 
 body{
@@ -336,9 +310,7 @@ main{
     background-color: hsl(var(--white));
     grid-template-columns: repeat(3,1fr);
     padding: 1rem;
-    /* margin-block: 1rem; */
     border-radius: 20px;
-    /* height: 680px; */
     width: 1200px;
 
   }
@@ -513,15 +485,13 @@ form > *:first-child{
   form{
       grid-column: 2/4;
       padding-block: 0;
-      /* padding-inline: 7rem; */
-  }
+   } 
 
   .btn-container{
       background-color: hsl(var(--white));
       display: flex;
       justify-content: space-between;
       padding: 0rem 1rem 2rem 1rem;
-      /* margin-bottom: 1rem; */
       align-items: center;
   }
 
@@ -965,14 +935,13 @@ form .radio-container > input[type='radio']:checked + label {
   padding: 1.2rem 0;
   margin-top: 2rem;
   border-radius: 5px;
-  text-align: center;
-  /* padding-block: 1.5rem; */
+  text-align: center; 
   outline: 1px solid hsl(var(--cool-gray));
   display: flex;
   justify-content: space-between;
   gap: 3rem;
   flex-direction: column;
-}
+} 
 
 .radio-container > label div{
   display: flex;
@@ -1096,3 +1065,5 @@ form .instructor-container > input[type='radio']:checked + label {
 }
   
 }
+
+

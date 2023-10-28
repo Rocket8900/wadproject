@@ -44,8 +44,8 @@ export default function MyForm({step, next, prev, goto}) {
           gender: '',
           // type:'',
           age:'',
-          // language: [],
-          language: "english",
+          language: [],
+          // language: "english",
           // experience: '',
           // affiliation: '',
         }}
