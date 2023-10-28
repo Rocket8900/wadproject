@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Cookie from 'js-cookie';
+import jwtDecode from "jwt-decode";
 
 function InstructorDetail() {
   const { id } = useParams();
@@ -12,7 +13,9 @@ function InstructorDetail() {
   useEffect(() => {
     const getInstructorData = async () => {
       try {
+        const decodedToken = jwtDecode(token).user; 
         const token = Cookie.get('access_token'); 
+        const id = decodedToken.id;
         // Fetch individual instructor data based on the 'id' parameter
         console.log(id)
         const response = await axios.get(`http://localhost:3001/v1/api/instructor/list/${id}`, {

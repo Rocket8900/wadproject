@@ -57,7 +57,7 @@ function Person() {
 <Row className="justify-content-center">
   <Col xs={12} sm={12} md={6} lg={6} xl={2}>
     <motion.div className="service_cards" variants={container} initial="hidden" exit="exit" whileInView="show" viewport={{once: false}}>
-      <motion.div className="card" variants={item}>
+      <motion.div className="cardItem" variants={item}>
         {/* <img src={pic} className="person"></img> */}
         <h2>Nashwyn</h2>
         <h6>Best thing to ever exist</h6>
@@ -67,7 +67,7 @@ function Person() {
 
   <Col xs={12} md={6} lg={6} xl={2}>
     <motion.div className="service_cards" variants={container} initial="hidden" exit="exit" whileInView="show" viewport={{once: false}}>
-      <motion.div className="card" variants={item}>
+      <motion.div className="cardItem" variants={item}>
         <h2>Clarissa</h2>
         <p>Just wow.</p>
       </motion.div>
@@ -76,7 +76,7 @@ function Person() {
 
   <Col xs={12} md={6} lg={6} xl={2}>
     <motion.div className="service_cards" variants={container} initial="hidden" exit="exit" whileInView="show" viewport={{once: false}}>
-      <motion.div className="card" variants={item}>
+      <motion.div className="cardItem" variants={item}>
         <h2>Zhi Hui</h2>
         <p>Stunning and breathtaking</p>
       </motion.div>
@@ -85,7 +85,7 @@ function Person() {
 
   <Col xs={12} md={6} lg={6} xl={2}>
     <motion.div className="service_cards" variants={container} initial="hidden" exit="exit" whileInView="show" viewport={{once: false}}>
-      <motion.div className="card" variants={item}>
+      <motion.div className="cardItem" variants={item}>
         <h2>Shawn</h2>
         <p>I love this website so damn much</p>
       </motion.div>
@@ -94,7 +94,7 @@ function Person() {
 
   <Col xs={12} md={6} lg={6} xl={2}>
     <motion.div className="service_cards" variants={container} initial="hidden" exit="exit" whileInView="show" viewport={{once: false}}>
-      <motion.div className="card" variants={item}>
+      <motion.div className="cardItem" variants={item}>
         <h2>See Jae</h2>
         <p>Take all my money</p>
       </motion.div>
