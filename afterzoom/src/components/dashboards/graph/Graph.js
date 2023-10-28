@@ -1,72 +1,66 @@
+
+
+
+
 import React, { Component } from 'react';
 import CanvasJSReact from '@canvasjs/react-charts';
 
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class Graph extends Component {	
-	render() {
-		const options = {
-			animationEnabled: true,	
-			title:{
-				text: "Simulation Score (Data ToBeRetrieved)",
+class Graph extends Component {
+    render() {
+		const { student, bookings } = this.props;
+		const { id: studentId, selfie, name, age, email, gender, type, language, instructor, instructorId:stuInstructorId, reviews,bookings:stuBookings,chatHistory } = student;
+		const { id: bookingId, lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings || {}; 
+		if ((!bookings || !bookings.lesson) && stuInstructorId===null) {
+            return <div>No lesson data available. Go find an Instructor QUICK !</div>;
+        }
+		if (!bookings || !bookings.lesson) {
+            return <div>No lesson data available. Go book a Lesson QUICK !</div>;
+        }
+
+        const monthlyDataPoints = Array.from({ length: 12 }, () => ({
+            y: 0,
+            label: ''
+        }));
+
+        lesson.forEach(lesson => {
+            const lessonDate = new Date(lesson.date);
+            const monthIndex = lessonDate.getMonth();
+            monthlyDataPoints[monthIndex].y++;
+            monthlyDataPoints[monthIndex].label = lessonDate.toLocaleString('default', { month: 'short' });
+        });
+
+        const options = {
+            animationEnabled: true,
+            title: {
+                text: "Lesson Trends",
                 fontFamily: "Nunito",
                 fontWeight: "bold"
-			},
-			axisY : {
-				title: "Score in Percentage",
+            },
+            axisY: {
+                title: "Number of Lessons",
                 fontFamily: "Nunito"
-			},
-			toolTip: {
-				shared: true,
+            },
+            toolTip: {
+                shared: true,
                 fontFamily: "Nunito"
-			},
-			data: [{
-				type: "spline",
-				name: "BTT",
-				showInLegend: true,
-				dataPoints: [
-					{ y: 20, label: "Jan" },
-					{ y: 45, label: "Feb" },
-					{ y: 50, label: "Mar" },
-					{ y: 70, label: "Apr" },
-					{ y: 80, label: "May" },
-					{ y: 0, label: "Jun" },
-					{ y: 0, label: "Jul" },
-					{ y: 0, label: "Aug" },
-					{ y: 0, label: "Sept" },
-					{ y: 0, label: "Oct" },
-					{ y: 0, label: "Nov" },
-					{ y: 0, label: "Dec" }
-				]
-			},
-			{
-				type: "spline",
-				name: "FTT",
-				showInLegend: true,
-				dataPoints: [
-					{ y: 0, label: "Jan" },
-					{ y: 0, label: "Feb" },
-					{ y: 0, label: "Mar" },
-					{ y: 0, label: "Apr" },
-					{ y: 0, label: "May" },
-					{ y: 0, label: "Jun" },
-					{ y: 0, label: "Jul" },
-					{ y: 70, label: "Aug" },
-					{ y: 80, label: "Sept" },
-					{ y: 50, label: "Oct" },
-					{ y: 50, label: "Nov" },
-					{ y: 70, label: "Dec" }
-				]
-			}]
-		};
-		
-		return (
-			<div>
-				<CanvasJSChart options={options} />
-			</div>
-		);
-	}
+            },
+            data: [{
+                type: "spline",
+                name: "Lessons",
+                showInLegend: true,
+                dataPoints: monthlyDataPoints
+            }]
+        };
+
+        return (
+            <div>
+                <CanvasJSChart options={options} />
+            </div>
+        );
+    }
 }
 
 export default Graph;

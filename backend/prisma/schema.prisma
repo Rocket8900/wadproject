@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  seed = "./seed/seed.js"
+  seed     = "./seed/seed.js"
 }
 
 datasource db {
@@ -20,9 +20,11 @@ model Student {
   password     String // hashed!
   gender       String
   type         String // enums("auto", "manual")
-  language     String
+  language     String[]
   instructor   Instructor?   @relation(fields: [instructorId], references: [id])
   instructorId String?
+  quiz         Quiz[]
+  notes        Note[]
   reviews      Review[]
   bookings     Booking[]
   chatHistory  ChatHistory[]
@@ -37,7 +39,7 @@ model Instructor {
   gender       String
   email        String        @unique
   password     String
-  language     String
+  language     String[]
   experience   Int
   type         String // enums("auto", "manual", "both")
   carModel     String
@@ -79,11 +81,30 @@ model Review {
   @@unique([studentId, instructorId])
 }
 
-
 model Scene {
-  id String @id @default(uuid())
-  key String // s3 key
-  options Json[]  // {wrong: {id: XXX}, correct: {id: XXX}}
-  origin Boolean 
+  id      String  @id @default(uuid())
+  key     String // s3 key
+  options Json[] // {wrong: {id: XXX}, correct: {id: XXX}}
+  origin  Boolean
 }
 
+model Quiz {
+  id         String   @id @default(uuid())
+  studentId  String
+  type       String // btt or ftt
+  score      String // "10/10"
+  mistakes   Json[] // questions wrong
+  created_at DateTime @default(now())
+  student    Student  @relation(fields: [studentId], references: [id])
+}
+
+model Note {
+  id             String   @id @default(uuid())
+  studentId      String
+  content        String
+  color          String
+  addToDashboard Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @default(now())
+  student        Student  @relation(fields: [studentId], references: [id])
+}

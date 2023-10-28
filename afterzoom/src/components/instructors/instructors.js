@@ -102,8 +102,7 @@ function InstructorsComponent() {
                   onChange={handleCheckboxChange}
                 /> Male
               </label>
-            </div>
-            <div>
+              <br/>
               <label>
                 <input
                   type="checkbox"

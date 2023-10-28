@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Cookie from 'js-cookie';
+import jwtDecode from "jwt-decode";
 
 function InstructorDetail() {
   const { id } = useParams();

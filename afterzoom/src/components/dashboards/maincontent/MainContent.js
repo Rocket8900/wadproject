@@ -9,9 +9,11 @@ import Unread from '../unread/Unread'
 import Graph from '../graph/Graph'
 import AlternateGraph from "../graph/AlternateGraph"; 
 
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-const MainContent = (props) => {
+const MainContent = ({ student, bookings }) => {
+  const { id: studentId, selfie, name, age, email, gender, type, language, instructor, instructorId:stuInstructorId, reviews,bookings:stuBookings,chatHistory } = student;
   const [details, setDetails] = useState("");
   const [showAlternateGraph, setShowAlternateGraph] = useState(false); 
   const toggleGraph = () => {
@@ -22,23 +24,95 @@ const MainContent = (props) => {
   };
   const [compactType, setCompactType] = useState("vertical");
   const [mounted, setMounted] = useState(false);
+
+  let completeness=0;
+  const missingPoints = [];
+  if (selfie===null){
+    missingPoints.push("Set Up Selfie");
+    completeness=completeness+1;
+  }
+  if(stuInstructorId===null){
+    missingPoints.push("Find an Instructor");
+    completeness=completeness+1;
+  }
+  let updatedCompleteness;
+
+  if (completeness === 1) {
+    updatedCompleteness = 90;
+  } else if (completeness === 2) {
+    updatedCompleteness = 80;
+  } else {
+    updatedCompleteness = 100;
+  }
+
+
+
+  const [sections, setSections] = useState([
+    {
+      id: 1,
+      title: 'Section 1',
+      notes: [],
+    },
+    {
+      id: 2,
+      title: 'Section 2',
+      notes: [],
+    },
+  ]);
+
+  const handleAddNote = (sectionId, newNote) => {
+    const updatedSections = sections.map((section) => {
+      if (section.id === sectionId) {
+        return {
+          ...section,
+          notes: [...section.notes, newNote],
+        };
+      }
+      return section;
+    });
+    setSections(updatedSections);
+  };
+
+  const handleDeleteNote = (sectionId, noteId) => {
+    const updatedSections = sections.map((section) => {
+      if (section.id === sectionId) {
+        return {
+          ...section,
+          notes: section.notes.filter((note) => note.id !== noteId),
+        };
+      }
+      return section;
+    });
+    setSections(updatedSections);
+  };
+
+
+
+
+
+
+
   const [layout, setLayout] = useState([
-    { 
-      i: "a", 
-      id: "grid-item-hello-user", 
-      x: 0, y: 0, w: 6, h: 2,
+    {
+      i: "a",
+      id: "grid-item-hello-user",
+      x: 0,
+      y: 0,
+      w: 6,
+      h: 2,
       content: 
-      <div>
-        <h2>Hello, ToBeRetrieved!  <PiHandWavingDuotone /></h2>
-        <p>
-        Your profile is ToBeRetrieved% complete
-        Task List:
-        <ul>
-          <li>point 1 (ToBeRetrieved)</li>
-          <li>point 2 (ToBeRetrieved)</li>
-        </ul>
-        </p>
-      </div>},
+<div style={{ textAlign: 'left' }}>
+  <h2>Hello, {name} <PiHandWavingDuotone /></h2>
+  Your profile is {updatedCompleteness}% complete <br/>
+  Task List:
+  <ul>
+    {missingPoints.map((point, index) => (
+      <li key={index}>{point}</li>
+    ))}
+  </ul>
+</div>
+      
+    },    
     { i: "b", 
       id: "grid-item-unread", 
       x: 6, y: 0, w: 2, h: 2,
@@ -50,7 +124,10 @@ const MainContent = (props) => {
       x: 0, y: 2, w: 4, h: 4,
       content:
       <div>
-      <Calendar showDetailsHandle={showDetailsHandle} />
+      <Calendar
+        showDetailsHandle={showDetailsHandle}
+        bookings={bookings}
+      />
       </div>
     },
     { 
@@ -59,26 +136,19 @@ const MainContent = (props) => {
       x: 4, y: 2, w: 4, h: 4,
       content:
       <div>
-      <Graph/>
+      <Graph 
+      bookings={bookings}
+      student={student}
+      />
       </div>
     },
     { i: "e", 
       id: "grid-item-lastrow1", 
-      x: 0, y: 6, w: 2, h: 2,
+      x: 0, y: 6, w: 4, h: 2,
       content:
-      <div>
-        <h3>Jump Back In</h3>
-        To Be Retrieved To Be Retrieved To Be Retrieved To Be Retrieved 
+      <div >
+        <h2>NOTES</h2>
       </div>
-    },
-    { i: "f", 
-      id: "grid-item-lastrow2", 
-      x: 2, y: 6, w: 2, h: 2,
-      content:
-      <div>
-      <h3>Your Notes</h3>
-      To Be Retrieved To Be Retrieved To Be Retrieved To Be Retrieved 
-    </div>
     },
     { i: "g", 
       id: "grid-item-lastrow1", 
@@ -92,7 +162,7 @@ const MainContent = (props) => {
       id: "grid-item-lastrow1", 
       x: 6, y: 6, w: 2, h: 2,
       content:
-      <div className="changeGraph" onClick={toggleGraph}>
+      <div className="changeGraph" onClick={toggleGraph} >
         <h2>Press Me to Change Graph</h2>
       </div>
     },
@@ -101,6 +171,8 @@ const MainContent = (props) => {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+
 
   const onCompactTypeChange = () => {
     const oldCompactType = compactType;
@@ -144,12 +216,11 @@ const MainContent = (props) => {
     };
   }, []);
 
-
+  
 
   return (
     <div className="container-fluid">
       <ResponsiveReactGridLayout
-        {...props}
         rowHeight={dynamicRowHeight}
         cols={{ lg: 8, md: 8, sm: 8, xs: 8, xxs: 8 }}
         layout={layout}
