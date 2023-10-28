@@ -1,7 +1,10 @@
-import NavbarComponent from "./components/ui/Navbar";
+
 import { Home } from "./components/home/Home";
 import { Login } from "./components/login/Login";
+import  NewLogin  from "./components/home/login/Login";
+import  Newregistration  from "./components/registration/newregistration";
 import { StudentDashboard } from "./components/dashboards/StudentDashboard";
+import RegistrationTest from "./components/home/Registration/Registration"
 import { InstructorDashboard } from "./components/dashboards/InstructorDashboard";
 import  Registration  from "./components/registration/registration";
 import InstructorsComponent from "./components/instructors/instructors";
@@ -23,6 +26,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/newregistration" element={<Newregistration />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
@@ -30,7 +34,8 @@ export default function App() {
         <Route path="/instructor" element={<InstructorDetail />} />
         <Route path="/student-chat" element={<Chat />} />
         <Route path="/instructor-chat" element={<InstructorChat />} />
-        
+        <Route path="/regi" element={<RegistrationTest />} />
+
         <Route path="/choose-quiz" element={<ChooseQuiz />} />
         <Route path="/btt-quiz" element={<Quiz type="btt"/>} />
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
