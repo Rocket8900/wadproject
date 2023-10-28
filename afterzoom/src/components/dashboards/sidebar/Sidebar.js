@@ -8,6 +8,7 @@ import {
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
+import { BsFillClipboard2Fill } from "react-icons/bs";
 import {
   FaList,
   FaRegHeart,
@@ -104,6 +105,16 @@ const Sidebar = ({ student }) => {
             >
               <Link to="/simulator"><div className="mostInner">Enter the Simulator</div></Link>
             </MenuItem>
+            <MenuItem
+              icon={<BsFillClipboard2Fill />}
+              active={activeMenuItem === "yourNotes"}
+              onClick={() => handleMenuItemClick("yourNotes")}
+            >
+              <Link to="/notes"><div className="mostInner">Your Notes</div></Link>
+            </MenuItem>
+
+
+
           </Menu>
         </SidebarContent>
 
