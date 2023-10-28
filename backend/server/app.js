@@ -15,7 +15,7 @@ import chatRoomRoute from './domains/chatroom/chatroomRoute.js';
 import s3Route from './domains/s3/s3Route.js';
 import quizRoute from './domains/quiz/quizRoute.js';
 import noteRoute from './domains/note/noteRoute.js';
-
+import notificationRoute from './domains/notification/notificationRoute.js';
 
 
 
@@ -55,6 +55,8 @@ app.use("/v1/api/chat", chatRoomRoute)
 app.use("/v1/api/s3", s3Route)
 app.use("/v1/api/quiz", quizRoute)
 app.use("/v1/api/note", noteRoute)
+app.use("/v1/api/notification", notificationRoute)
+
 
 
 startServerSocket(io)

@@ -25,6 +25,36 @@ export default class ChatroomService {
         }
     }
 
+    static getStudentChatHistory = async (studentId) => {
+        try {
+            const chatHistories = await prisma_db.chatHistory.findMany({
+                where: {
+                    studentId: studentId
+                }
+            })
+            Logging.info("*chat history* db query for all chat history for student")
+            return chatHistories
+        } catch (error) {
+            Logging.error(error)
+            return null
+        }
+    } 
+
+    static getInstructorChatHistory = async (instructorId) => {
+        try {
+            const chatHistories = await prisma_db.chatHistory.findMany({
+                where: {
+                    instructorId: instructorId
+                }
+            })
+            Logging.info("*chat history* db query for all chat history for instructor")
+            return chatHistories
+        } catch (error) {
+            Logging.error(error)
+            return null
+        }
+    } 
+
     static createChatHistory = async (instructorId, studentId, message) => {
         try {
             const chatHistory = await prisma_db.chatHistory.create({
