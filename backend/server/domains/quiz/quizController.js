@@ -46,22 +46,24 @@ export default class QuizController {
 
             if (!quizzes) {
                 Logging.warn("failed to past quizzes");
-                return res.status(400).json({ data: "failed to retrieve past quiz data" });
+                return res.status(400).jskon({ data: "failed to retrieve past quiz data" });
             }
+x 
+            let collectiveMistakes = []
 
-            let collectiveMistakes = {"btt": [], "ftt": []}
-            
             for (let quiz in quizzes) {
                 if (quizzes[quiz].mistakes) {
-                    if (quizzes[quiz].type == "btt") {
-                        collectiveMistakes["btt"].push(...quizzes[quiz].mistakes)
-                    } else { // "ftt"
-                        collectiveMistakes["ftt"].push(...quizzes[quiz].mistakes)
-                    }
+                    collectiveMistakes.push(...quizzes[quiz].mistakes)
                 }
             }
+            const stringifiedArray = collectiveMistakes.map(obj => JSON.stringify(obj));
+            // Create a set from the stringified array
+            const uniqueSet = new Set(stringifiedArray);
+            // Convert the set back to an array of JSON objects
+            const resultSet = new Set([...uniqueSet].map(str => JSON.parse(str)));
             Logging.info("get all mistakes from all latest quizzes")
-            return res.status(200).json({data: collectiveMistakes})
+
+            return res.status(200).json({ data: [...resultSet] });
         } catch (error) {
             Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });

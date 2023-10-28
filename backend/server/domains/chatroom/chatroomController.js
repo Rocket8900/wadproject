@@ -13,6 +13,7 @@ export default class ChatroomController {
             let studentId;
             const { sender, receiver } = await ChatroomService.whoIsWho(senderId, receiverId)
             console.log(sender, receiver)
+            
             if (sender.type == "student") {
                 studentId = sender.id
                 instructorId = receiver.id

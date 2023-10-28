@@ -12,7 +12,16 @@ export default class BookingController {
 
     static makeABooking = async (req, res) => {
         try {
-            const bookingData  = req.body
+            const studentId = req.user.id
+
+            const { instructorId }  = req.body
+
+            const bookingData = {
+                instructorId: instructorId,
+                studentId: studentId
+            }
+
+            
             const booking = await BookingService.createBooking(bookingData);
             if (booking) {
                 Logging.info("new booking created")
