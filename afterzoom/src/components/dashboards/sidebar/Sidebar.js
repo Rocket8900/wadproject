@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; 
 import {
   ProSidebar,
   Menu,
@@ -18,7 +17,7 @@ import {
 } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ student }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -53,6 +52,8 @@ const Sidebar = ({ student }) => {
     var instructorr=student.instructorId;
   }
 
+
+  
   return (
     <div id="sidebar">
       <ProSidebar>
@@ -78,26 +79,32 @@ const Sidebar = ({ student }) => {
               active={activeMenuItem === "dashboard"}
               onClick={() => handleMenuItemClick("dashboard")}
             >
-              <Link to="/student-dashboard"><div className="mostInner">Dashboard</div></Link>
+              <Link to="/student-dashboard" ><div className="mostInner">Dashboard</div></Link>
             </MenuItem>
             <MenuItem
-            icon={<FaList />}
-            active={activeMenuItem === "findInstructor"}
-            onClick={() => handleMenuItemClick("findInstructor")}
-          >
-            <Link to={findInstructorLink}>
-              <div className="mostInner">{findInstructorLabel}</div>
-            </Link>
-          </MenuItem>
-
+              icon={<FaList />}
+              active={activeMenuItem === "findInstructor"}
+              onClick={() => handleMenuItemClick("findInstructor")}
+            >
+              <Link to={findInstructorLink}>
+                {instructorId ? (
+                  <div className="mostInner">Book a Lesson</div>
+                ) : (
+                  <div className="mostInner">Find Instructor</div>
+                )}
+              </Link>
+            </MenuItem>
 
             <MenuItem
               icon={<FaRegHeart />}
               active={activeMenuItem === "practice"}
               onClick={() => handleMenuItemClick("practice")}
             >
-              <Link to="/choose-quiz"><div className="mostInner">BTT / FTT</div></Link>
+            <Link to="/choose-quiz">
+              <div className="mostInner">BTT / FTT</div></Link>
+              
             </MenuItem>
+
             <MenuItem
               icon={<FaCreativeCommonsBy />}
               active={activeMenuItem === "simulator"}
@@ -112,9 +119,6 @@ const Sidebar = ({ student }) => {
             >
               <Link to="/notes"><div className="mostInner">Your Notes</div></Link>
             </MenuItem>
-
-
-
           </Menu>
         </SidebarContent>
 
