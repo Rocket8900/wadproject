@@ -19,7 +19,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
 import { Link, useParams } from 'react-router-dom';
 
-const Sidebar = ({ student, bookings }) => {
+const Sidebar = ({ student }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {

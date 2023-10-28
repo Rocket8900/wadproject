@@ -40,30 +40,30 @@ export function ChooseQuiz() {
             }
         };
 
-        const fetchStudentBookings = async () => {
-            try {
-                const token = getCookie("access_token");
-                const decodedToken = jwtDecode(token).user;
-                const studentId = decodedToken.id;
-                const response = await axios.get(
-                    `http://localhost:3001/v1/api/booking/student/${studentId}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-                setBookings(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
+        // const fetchStudentBookings = async () => {
+        //     try {
+        //         const token = getCookie("access_token");
+        //         const decodedToken = jwtDecode(token).user;
+        //         const studentId = decodedToken.id;
+        //         const response = await axios.get(
+        //             `http://localhost:3001/v1/api/booking/student/${studentId}`,
+        //             {
+        //                 headers: {
+        //                     Authorization: `Bearer ${token}`,
+        //                 },
+        //             }
+        //         );
+        //         setBookings(response.data);
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // };
 
         fetchStudentProfile();
-        fetchStudentBookings();
+        // fetchStudentBookings();
     }, []);
 
-    if (student === null || bookings === null) {
+    if (student === null) {
         return <div>Loading...</div>;
     }
 
@@ -71,7 +71,7 @@ export function ChooseQuiz() {
         <Container fluid>
             <Row>
                 <Col lg={2} md={2} sm={2} id="sidebar">
-                    <Sidebar student={student} bookings={bookings}/>
+                    <Sidebar student={student} />
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
                     <h1 class="title-text pb-2">Choose Question Type</h1>
