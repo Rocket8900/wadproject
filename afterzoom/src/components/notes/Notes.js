@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Notes.css"
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Notes = (student) => {
+
   const { id: studentId, selfie, name, age, email, gender, type, language, instructor, instructorId:stuInstructorId, reviews,bookings:stuBookings,chatHistory } = student;
   const [inputText, setInputText] = useState('');
   const [color, setColor] = useState('green');
   const [alert, setAlert] = useState('');
   const [notes, setNotes] = useState([]);
+  const [noteAdded, setNoteAdded] = useState(false);
+  const token = getCookie("access_token");
+  const decodedToken = jwtDecode(token).user;
 
   const handleInputText = (e) => {
     setInputText(e.target.value);
@@ -21,14 +28,42 @@ const Notes = (student) => {
         bgColor: color,
         addToDashboard: false, 
       };
+
+
+      axios.post(`http://localhost:3001/v1/api/note`, {
+        "content": JSON.stringify(newNote)
+      }
+      , {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => {
+        console.log('Note added successfully:', response.data);
+      })
+      .catch(error => {
+        console.error('Error adding note:', error);
+      });
+
       setNotes([...notes, newNote]);
       setInputText('');
       setAlert('Note Added!');
       setTimeout(() => {
         setAlert('');
       }, 1000);
+
+  
+
+
+
+
+
     }
   };
+
+
+  
   
   const handleAddToDashboard = (id) => {
     const updatedNotes = notes.map((note) =>
@@ -155,3 +190,10 @@ const Notes = (student) => {
 };
 
 export default Notes;
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+

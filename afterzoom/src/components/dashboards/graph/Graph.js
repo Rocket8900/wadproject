@@ -10,10 +10,14 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class Graph extends Component {
     render() {
-		const { bookings } = this.props;
+		const { student, bookings } = this.props;
+		const { id: studentId, selfie, name, age, email, gender, type, language, instructor, instructorId:stuInstructorId, reviews,bookings:stuBookings,chatHistory } = student;
 		const { id: bookingId, lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings || {}; 
+		if ((!bookings || !bookings.lesson) && stuInstructorId===null) {
+            return <div>No lesson data available. Go find an Instructor QUICK !</div>;
+        }
 		if (!bookings || !bookings.lesson) {
-            return <div>No lesson data available</div>;
+            return <div>No lesson data available. Go book a Lesson QUICK !</div>;
         }
 
         const monthlyDataPoints = Array.from({ length: 12 }, () => ({
