@@ -27,7 +27,7 @@ export default function App() {
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
         <Route path="/instructors" element={<InstructorsComponent />} />
-        <Route path="/instructor" element={<InstructorDetail />} />
+        <Route path="/instructor/:id" element={<InstructorDetail />} />
         <Route path="/student-chat" element={<Chat />} />
         <Route path="/instructor-chat" element={<InstructorChat />} />
         

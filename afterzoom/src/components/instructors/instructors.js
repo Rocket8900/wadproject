@@ -22,7 +22,7 @@ function InstructorCard({ instructor }) {
       <div className="content">
         <h2 className="title">{instructor.name}</h2>
         <p className="copy">Instructor for {instructor.experience} years</p>
-        <Link to={`/instructors/${instructor.id}`}>
+        <Link to={`/instructor/${instructor.id}`}>
           <button className="btn">View Details</button>
         </Link>
       </div>
@@ -170,7 +170,7 @@ function InstructorsComponent() {
                   value="manual"
                   checked={filter.type.includes('manual')}
                   onChange={handleCheckboxChange}
-                /> manual
+                /> Manual
               </label>
             </div>
             
