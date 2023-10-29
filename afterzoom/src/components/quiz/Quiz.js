@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { btt_questions } from './btt'; // Import BTT questions
 import { ftt_questions } from './ftt'; // Import FTT questions
 import './quiz.css'
 
+// Function to combine questions of a specific category from both BTT and FTT
+function combineQuestionsByCategory(btt_questions, ftt_questions, category) {
+  const combinedQuestions = [
+      ...btt_questions.filter(question => question.category === category),
+      ...ftt_questions.filter(question => question.category === category),
+  ];
+  return combinedQuestions;
+}
 
 const Quiz = ({ type }) => {
+  const location = useLocation();
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null)
@@ -16,30 +25,56 @@ const Quiz = ({ type }) => {
     wrongAnswers: 0,
   })
   const [mistakes, setMistakes] = useState([]);
+  const [isQuizEnded, setIsQuizEnded] = useState(false);
 
 
   let questions;
 
-  useEffect(() => {
-    // Check if the user has an existing mistakes array in the database
-    axios.get('http://localhost:3001/v1/api/quiz')
+  // useEffect(() => {
+  //   // Check if the user has existing mistakes in the database
+  //   axios.get('http://localhost:3001/v1/api/quiz/review')
+  //     .then((response) => {
+  //       console.log(response.data)
+  //       console.log(response.data.data)
+
+  //       // If the user has a mistakes array, initialize "mistakes" accordingly
+  //       if (response.data.data !== null) {
+  //         // setUserHasMistakes(true);
+  //         setMistakes(response.data.data);
+  //         console.log("response.data is not null")
+          
+  //         // For "review," use the mistakes array as the question set
+  //         if (type === 'review') {
+  //           questions = mistakes;
+  //         }
+  //       }
+  //       // user does not have previous mistakes
+  //       else {
+  //         return ("You don't have any mistakes to review. Start a new quiz!")
+  //       }
+  //   });
+  // }, [type]);
+
+  if (type === "review") {
+    axios.get('http://localhost:3001/v1/api/quiz/review')
       .then((response) => {
         console.log(response.data)
         console.log(response.data.data)
 
-        // If the user has a mistakes array, initialize "mistakes" accordingly
+        // If the user has a mistakes array, set this as question bank for "review"
         if (response.data.data !== null) {
           // setUserHasMistakes(true);
-          setMistakes(response.data.data);
+          // setMistakes(response.data.data);
           console.log("response.data is not null")
+          questions = response.data.data
           
-          // For "review," use the mistakes array as the question set
-          if (type === 'review') {
-            questions = mistakes;
-          }
+        }
+        // user does not have previous mistakes
+        else {
+          return ("You don't have any mistakes to review. Start a new quiz!")
         }
     });
-  }, [type]);
+  }
   
 
   // Import the BTT and FTT questions accordingly
@@ -48,7 +83,13 @@ const Quiz = ({ type }) => {
   }
   else if (type === 'ftt') {
     questions = ftt_questions
-  };
+  }
+  else if (type === "topic") {
+    
+    const searchParams = new URLSearchParams(location.search);
+    const selectedCategory = searchParams.get('category'); // Get the selected category from the URL
+    questions = combineQuestionsByCategory(btt_questions, ftt_questions, selectedCategory)
+  }
   // console.log("bttquiz.js" + questions)
 
   const onClickNext = () => {
@@ -57,7 +98,7 @@ const Quiz = ({ type }) => {
         setSelectedAnswerIndex(null) // Reset selected answer index
         
       } else {
-        saveMistakesToDatabase();
+        storeResultsToDatabase();
         setShowResult(true);
       }
 
@@ -112,13 +153,20 @@ const Quiz = ({ type }) => {
 
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`)
 
-  const saveMistakesToDatabase = () => {
+  const endQuiz = () => {
+    setShowResult(true);
+    setIsQuizEnded(true);
+  };
+
+  const storeResultsToDatabase = () => {
     // Create a request object
     const requestData = {
+      type: type,
+      score: result.correctAnswers,
       mistakes: mistakes,
     };
 
-    // Send the "mistakes" array to the backend
+    // Send the quiz results to the backend
     axios.post('http://localhost:3001/v1/api/quiz', requestData)
       .then((response) => {
         // Handle the response if needed
@@ -163,19 +211,21 @@ const Quiz = ({ type }) => {
             ))}
           </ul>
           <div className="flex-right">
+            <button onClick={endQuiz}>End Quiz</button>
             <button onClick={onClickNext} disabled={selectedAnswerIndex === null}>
               {activeQuestion === questions.length - 1 ? 'Finish' : 'Next'}
             </button>
+
           </div>
         </div>
       ) : (
         <div className="result">
           <h3>Result</h3>
           <p>
-            Total Question: <span>{questions.length}</span>
+            Your score: <span>{ 100 * result.correctAnswers / (activeQuestion + 1)}%</span>
           </p>
           <p>
-            Total Score:<span> {result.score}</span>
+            Total Questions:<span> {activeQuestion + 1}</span>
           </p>
           <p>
             Correct Answers:<span> {result.correctAnswers}</span>
