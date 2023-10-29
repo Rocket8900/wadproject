@@ -108,3 +108,11 @@ model Note {
   updated_at     DateTime @default(now())
   student        Student  @relation(fields: [studentId], references: [id])
 }
+
+
+model Notification {
+  id String @id @default(uuid())
+  userId String
+  read Boolean @default(false)
+  created_at DateTime @default(now())
+}

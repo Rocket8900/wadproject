@@ -13,7 +13,7 @@ export default class ChatroomController {
             let studentId;
             const { sender, receiver } = await ChatroomService.whoIsWho(senderId, receiverId)
             console.log(sender, receiver)
-            
+
             if (sender.type == "student") {
                 studentId = sender.id
                 instructorId = receiver.id
@@ -67,9 +67,41 @@ export default class ChatroomController {
             console.log(entry)
             return entry
         } catch (error) {
+            
             return null
         }
     }
 
+    static retrieveAllStudentChatHistory = async (req,res) => {
+        try {
+            const studentId = req.user.id
+            const chatHistories = await ChatroomService.getStudentChatHistory(studentId)
+            if (!chatHistories) {
+                Logging.error("error returning returning chat histories")
+                return res.status(400).json({ error: "unable to return chat histories"})
+            }
+            Logging.info(`retrieved all chat history for student ${studentId}`)
+            return res.status(200).json({data: chatHistories})
+        } catch (error) {
+            Logging.error(error)
+            return res.status(500).json({ error: "an unexpected error occurred" });
+        }
+    }
+
+    static retrieveAllInstructorChatHistory = async (req,res) => {
+        try {
+            const instructorId = req.user.id
+            const chatHistories = await ChatroomService.getInstructorChatHistory(instructorId)
+            if (!chatHistories) {
+                Logging.error("error returning returning chat histories")
+                return res.status(400).json({ error: "unable to return chat histories"})
+            }
+            Logging.info(`retrieved all chat history for student ${instructorId}`)
+            return res.status(200).json({data: chatHistories})
+        } catch (error) {
+            Logging.error(error)
+            return res.status(500).json({ error: "an unexpected error occurred" });
+        }
+    }
 
 }
