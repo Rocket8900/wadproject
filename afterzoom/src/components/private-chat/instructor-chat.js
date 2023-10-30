@@ -178,7 +178,7 @@ function ChatWithStudentPage() {
                 <InstructorSidebar/>
               </Col>
               <Col lg={10} md={10} sm={10} id="main-content">
-                 <InstructorChatPage/ >
+                 <InstructorChatPage />
               </Col>
           </Row>
       </Container>
