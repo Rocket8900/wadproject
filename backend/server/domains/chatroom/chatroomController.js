@@ -81,7 +81,12 @@ export default class ChatroomController {
                 return res.status(400).json({ error: "unable to return chat histories"})
             }
             Logging.info(`retrieved all chat history for student ${studentId}`)
-            return res.status(200).json({data: chatHistories})
+            let recipients = []
+
+            for (let chat in chatHistories) {
+                recipients.push(chatHistories[chat].instructorId)
+            }
+            return res.status(200).json({data: recipients})
         } catch (error) {
             Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });
@@ -96,8 +101,12 @@ export default class ChatroomController {
                 Logging.error("error returning returning chat histories")
                 return res.status(400).json({ error: "unable to return chat histories"})
             }
+            let recipients = []
+            for (let chat in chatHistories) {
+                recipients.push(chatHistories[chat].studentId)
+            }
             Logging.info(`retrieved all chat history for student ${instructorId}`)
-            return res.status(200).json({data: chatHistories})
+            return res.status(200).json({data: recipients})
         } catch (error) {
             Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });
