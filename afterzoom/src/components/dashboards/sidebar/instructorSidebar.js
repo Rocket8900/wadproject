@@ -36,9 +36,9 @@ const Sidebar = ({ instructor }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  // const { name, instructorId } = instructor;
+
+  const { name, instructorId } = instructor;
   const [activeMenuItem, setActiveMenuItem] = useState("dashboard");
-  // const name = instructor.name
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
   };
@@ -53,7 +53,9 @@ const Sidebar = ({ instructor }) => {
   //   var instructorr=student.instructorId;
   // }
 
-
+  if (name === null || instructorId === null) {
+    return <div>Loading...</div>;
+  }
   
   return (
     <div id="sidebar">
@@ -68,8 +70,7 @@ const Sidebar = ({ instructor }) => {
         {!isSmallScreen && (
           <div className="user-info-box">
             <div className="user-info">
-              {/* <p>Hi {name}!</p> */}
-              {/* <p>Instructor ID: {instructorr}</p> */}
+              <p>Hi {name}!</p>
             </div>
           </div>
         )}
