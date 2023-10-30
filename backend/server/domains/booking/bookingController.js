@@ -21,7 +21,7 @@ export default class BookingController {
                 studentId: studentId
             }
 
-            
+
             const booking = await BookingService.createBooking(bookingData);
             if (booking) {
                 Logging.info("new booking created")

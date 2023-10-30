@@ -52,12 +52,24 @@ model Instructor {
 
 model Booking {
   id           String     @id @default(uuid())
-  lesson       Json[]
+  lessons       Lesson[]
   studentId    String
   instructorId String
   status       String     @default("PENDING") // pending, accepted, ongoing, rejected, cancelled
   student      Student    @relation(fields: [studentId], references: [id])
   instructor   Instructor @relation(fields: [instructorId], references: [id])
+
+  
+}
+
+model Lesson {
+  id String @id @default(uuid())
+  title String
+  date DateTime 
+  description String?
+  feedback String?
+  bookingId String
+  booking Booking @relation(fields: [bookingId], references: [id])
 }
 
 model ChatHistory {
