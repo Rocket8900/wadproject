@@ -22,6 +22,8 @@ import NotesPage from "./components/notes/NotesPage";
 import { BookingStudent } from "./components/bookingLesson/bookingStudent";
 import InstructorLessonList from "./components/instructors/InstructorLessonList";
 import InstructorStudentList from "./components/instructors/InstructorStudentList"
+import Simulator from "./components/simulation/Simulator";
+import SimulatorSceneOne from "./components/simulation/SimulatorSceneOne";
 
 export default function App() {
   return (
@@ -44,6 +46,9 @@ export default function App() {
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
         <Route path="/topical-quiz" element={<Quiz type="topic"/>} />
         <Route path="/review-quiz" element={<Quiz type="review"/>} />
+        
+        <Route path="/simulator" element={<Simulator/>} />
+        <Route path="/simulatorSceneOne" element={<SimulatorSceneOne/>} />
 
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/bookingStudent" element={<BookingStudent />} />

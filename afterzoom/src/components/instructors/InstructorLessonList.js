@@ -14,7 +14,7 @@ function InstructorLessonList() {
                 <InstructorSidebar/>
               </Col>
               <Col lg={10} md={10} sm={10} id="main-content">
-                This is where all the bookings go
+                This is where all the lessons go 
               </Col>
           </Row>
       </Container>
