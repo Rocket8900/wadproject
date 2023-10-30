@@ -16,8 +16,9 @@ import React from 'react';
 import './App.css';
 import Chat from "./components/private-chat/chat";
 import InstructorChat from "./components/private-chat/instructor-chat";
-import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
-import StudentNotebook from "./components/notebook/StudentNotebook";
+import InstructorFeedbackPage from "./components/viewLessons/InstructorFeedback";
+import StudentNotebook from "./components/viewLessons/others/StudentNotebook";
+import StudentView from "./components/viewLessons/StudentView";
 import NotesPage from "./components/notes/NotesPage";
 import { BookingStudent } from "./components/bookingLesson/bookingStudent";
 
@@ -47,6 +48,7 @@ export default function App() {
         
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
         <Route path="/view-notebook" element={<StudentNotebook />} />
+        <Route path="/studentview" element={<StudentView />} />
       </Routes>
     </div>
     

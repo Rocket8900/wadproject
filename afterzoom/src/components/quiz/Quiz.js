@@ -30,67 +30,51 @@ const Quiz = ({ type }) => {
 
   let questions;
 
-  // useEffect(() => {
-  //   // Check if the user has existing mistakes in the database
-  //   axios.get('http://localhost:3001/v1/api/quiz/review')
-  //     .then((response) => {
-  //       console.log(response.data)
-  //       console.log(response.data.data)
-
-  //       // If the user has a mistakes array, initialize "mistakes" accordingly
-  //       if (response.data.data !== null) {
-  //         // setUserHasMistakes(true);
-  //         setMistakes(response.data.data);
-  //         console.log("response.data is not null")
-          
-  //         // For "review," use the mistakes array as the question set
-  //         if (type === 'review') {
-  //           questions = mistakes;
-  //         }
-  //       }
-  //       // user does not have previous mistakes
-  //       else {
-  //         return ("You don't have any mistakes to review. Start a new quiz!")
-  //       }
-  //   });
-  // }, [type]);
-
-  if (type === "review") {
-    axios.get('http://localhost:3001/v1/api/quiz/review')
-      .then((response) => {
-        console.log(response.data)
-        console.log(response.data.data)
-
-        // If the user has a mistakes array, set this as question bank for "review"
-        if (response.data.data !== null) {
-          // setUserHasMistakes(true);
-          // setMistakes(response.data.data);
-          console.log("response.data is not null")
-          questions = response.data.data
-          
-        }
-        // user does not have previous mistakes
-        else {
-          return ("You don't have any mistakes to review. Start a new quiz!")
-        }
-    });
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (type === "review") {
+          const response = await axios.get('http://localhost:3001/v1/api/quiz/review');
+          console.log(response.data);
+          console.log(response.data.data)
   
+          // If the user has a mistakes array, set this as question bank for "review"
+          if (response.data.data !== null) {
+            // setUserHasMistakes(true);
+            // setMistakes(response.data.data);
+            console.log("response.data is not null")
+            questions = response.data.data
+            
+          }
+          // user does not have previous mistakes
+          else {
+            return (<div>You don't have any mistakes to review. Start a new quiz!</div>)
+          }
+        }
+        else if (type === 'btt') {
+          questions = btt_questions
+        }
+        else if (type === 'ftt') {
+          questions = ftt_questions
+        }
+        else if (type === "topic") {
+          
+          const searchParams = new URLSearchParams(location.search);
+          const selectedCategory = searchParams.get('category'); // Get the selected category from the URL
+          questions = combineQuestionsByCategory(btt_questions, ftt_questions, selectedCategory)
+        }
+      }
+      catch (error) {
+        // Handle errors
+        console.error('Error fetching questions:', error);
+      }
+    }
 
-  // Import the BTT and FTT questions accordingly
-  if (type === 'btt') {
-    questions = btt_questions
-  }
-  else if (type === 'ftt') {
-    questions = ftt_questions
-  }
-  else if (type === "topic") {
+    fetchData();
     
-    const searchParams = new URLSearchParams(location.search);
-    const selectedCategory = searchParams.get('category'); // Get the selected category from the URL
-    questions = combineQuestionsByCategory(btt_questions, ftt_questions, selectedCategory)
-  }
-  // console.log("bttquiz.js" + questions)
+  }, [type]);
+
+  
 
   const onClickNext = () => {
     if (activeQuestion < questions.length - 1) {
@@ -177,6 +161,15 @@ const Quiz = ({ type }) => {
         console.error('Error saving mistakes:', error);
       });
   };
+
+  if (!questions || activeQuestion === null || activeQuestion < 0 || activeQuestion >= questions.length) {
+    console.log("activeQuestion: " + activeQuestion)
+    console.log(questions)
+    return (
+      <div>Error message goes here...</div>
+    );
+  }
+  
 
   const currentQuestion = questions[activeQuestion];
 
