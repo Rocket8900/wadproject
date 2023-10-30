@@ -9,8 +9,8 @@ import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
 
 export function InstructorDashboard() {
+    
     const [instructor, setInstructor] = useState(null);
-    const [bookings, setBookings] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
@@ -32,32 +32,6 @@ export function InstructorDashboard() {
                 );
                 setInstructor(instructorResponse.data.data);
                 console.log(instructorResponse.data.data)
-
-
-                // const bookingsResponse = await axios.get(
-                //     `http://localhost:3001/v1/api/booking/instructor/`,
-                //     {
-                //         headers: {
-                //             Authorization: `Bearer ${token}`,
-                //         },
-                //     }
-                // );
-                // console.log(bookingsResponse.data.data)
-                // setBookings(bookingsResponse.data.data[0]);
-
-                // const quizResponse = await axios.get(
-                //     `http://localhost:3001/v1/api/quiz`,
-                //     {
-                //         headers: {
-                //             Authorization: `Bearer ${token}`,
-                //         },
-                //     }
-                // );
-                // console.log(bookingsResponse.data.data)
-                // setBookings(bookingsResponse.data.data[0]);
-
-      
-                
     
 
             } catch (error) {
@@ -69,9 +43,9 @@ export function InstructorDashboard() {
         
     }, []); 
 
-    // if (bookings === null || instructor === null) {
-    //     return <div>Loading...</div>;
-    // }
+    if (instructor === null) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <Container fluid>
