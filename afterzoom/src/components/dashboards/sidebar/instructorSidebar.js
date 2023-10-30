@@ -98,7 +98,7 @@ const Sidebar = ({ instructor }) => {
               active={activeMenuItem === "findInstructor"}
               onClick={() => handleMenuItemClick("findInstructor")}
             >
-              <Link to="/FaChild">
+              <Link to="/instructorstudents">
                 <div className="mostInner">See your students</div>
               </Link>
             </MenuItem>
