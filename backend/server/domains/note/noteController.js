@@ -29,7 +29,8 @@ export default class NoteController {
         try {
 
             const noteId = req.params.id
-            const noteData = req.body
+            let noteData = req.body
+            noteData["updated_at"] = new Date().toISOString();
             const note = await NotesService.updateSpecificNote(noteId, noteData);
             if (!note) {
                 Logging.warn("failed to update note")

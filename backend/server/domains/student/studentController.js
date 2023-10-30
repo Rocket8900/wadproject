@@ -111,7 +111,7 @@ export default class StudentController {
   static uploadStudentPhoto = async (req, res) => {
     try {
       let imgData = req.file;
-      const id = req.params.id;
+      const id = req.user.id;
       imgData["userId"] = id;
       const data = await S3Service.putObject("afterzoom", "student", imgData);
       if (data) {
