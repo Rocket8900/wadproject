@@ -9,8 +9,9 @@ import {
 } from "react-pro-sidebar";
 import { BsFillClipboard2Fill } from "react-icons/bs";
 import {
+  FaRocketchat,
   FaList,
-  FaRegHeart,
+  FaChild,
   FaHome,
   FaCreativeCommonsBy,
   FaCog,
@@ -19,7 +20,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
 import { Link } from 'react-router-dom';
 
-const Sidebar = ({ student }) => {
+const Sidebar = ({ instructor }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -35,22 +36,22 @@ const Sidebar = ({ student }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const { name, instructorId } = student;
+  // const { name, instructorId } = instructor;
   const [activeMenuItem, setActiveMenuItem] = useState("dashboard");
+  // const name = instructor.name
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
   };
 
-  const findInstructorLabel = instructorId ? "Book a Lesson" : "Find Instructor";
-  const findInstructorLink = instructorId ? "/bookingStudent" : "/instructor";
+  // const findInstructorLabel = instructorId ? "Book a Lesson" : "Find Instructor";
+  // const findInstructorLink = instructorId ? "/bookingStudent" : "/instructor";
 
-  if (student.instructorId === null){
-    var instructorr="not found";
-  }
-  else{
-    var instructorr=student.instructorId;
-  }
+  // if (student.instructorId === null){
+  //   var instructorr="not found";
+  // }
+  // else{
+  //   var instructorr=student.instructorId;
+  // }
 
 
   
@@ -67,8 +68,8 @@ const Sidebar = ({ student }) => {
         {!isSmallScreen && (
           <div className="user-info-box">
             <div className="user-info">
-              <p>{name}</p>
-              <p>Instructor ID: {instructorr}</p>
+              {/* <p>Hi {name}!</p> */}
+              {/* <p>Instructor ID: {instructorr}</p> */}
             </div>
           </div>
         )}
@@ -79,46 +80,39 @@ const Sidebar = ({ student }) => {
               active={activeMenuItem === "dashboard"}
               onClick={() => handleMenuItemClick("dashboard")}
             >
-              <Link to="/student-dashboard" ><div className="mostInner">Dashboard</div></Link>
+              <Link to="/instructor-dashboard" ><div className="mostInner">Dashboard</div></Link>
             </MenuItem>
+
             <MenuItem
               icon={<FaList />}
               active={activeMenuItem === "findInstructor"}
               onClick={() => handleMenuItemClick("findInstructor")}
             >
-              <Link to={findInstructorLink}>
-                {instructorId ? (
-                  <div className="mostInner">Book a Lesson</div>
-                ) : (
-                  <div className="mostInner">Find Instructor</div>
-                )}
+              <Link to="/bookings">
+                <div className="mostInner">Check your bookings</div>
               </Link>
             </MenuItem>
 
             <MenuItem
-              icon={<FaRegHeart />}
-              active={activeMenuItem === "practice"}
-              onClick={() => handleMenuItemClick("practice")}
+              icon={<FaChild />}
+              active={activeMenuItem === "findInstructor"}
+              onClick={() => handleMenuItemClick("findInstructor")}
             >
-            <Link to="/choose-quiz">
-              <div className="mostInner">BTT / FTT</div></Link>
-              
+              <Link to="/FaChild">
+                <div className="mostInner">See your students</div>
+              </Link>
             </MenuItem>
 
             <MenuItem
-              icon={<FaCreativeCommonsBy />}
-              active={activeMenuItem === "simulator"}
-              onClick={() => handleMenuItemClick("simulator")}
+              icon={<FaRocketchat />}
+              active={activeMenuItem === "instructorChat"}
+              onClick={() => handleMenuItemClick("instructorChat")}
             >
-              <Link to="/simulator"><div className="mostInner">Enter the Simulator</div></Link>
+              <Link to="/instructor-chat">
+                <div className="mostInner">Open your chat</div>
+              </Link>
             </MenuItem>
-            <MenuItem
-              icon={<BsFillClipboard2Fill />}
-              active={activeMenuItem === "yourNotes"}
-              onClick={() => handleMenuItemClick("yourNotes")}
-            >
-              <Link to="/notes"><div className="mostInner">Your Notes</div></Link>
-            </MenuItem>
+
           </Menu>
         </SidebarContent>
 
