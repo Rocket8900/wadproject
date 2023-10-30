@@ -80,7 +80,7 @@ export function InstructorDashboard() {
                     <InstructorSidebar instructor={instructor} />
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
-
+                    
                 </Col>
             </Row>
         </Container>

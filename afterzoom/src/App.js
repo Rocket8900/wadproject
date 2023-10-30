@@ -21,6 +21,7 @@ import StudentNotebook from "./components/notebook/StudentNotebook";
 import NotesPage from "./components/notes/NotesPage";
 import { BookingStudent } from "./components/bookingLesson/bookingStudent";
 import InstructorLessonList from "./components/instructors/InstructorLessonList";
+import InstructorStudentList from "./components/instructors/InstructorStudentList"
 
 export default function App() {
   return (
@@ -36,7 +37,7 @@ export default function App() {
         <Route path="/student-chat" element={<Chat />} />
         <Route path="/instructor-chat" element={<InstructorChat />} />
         <Route path="/instructorbookings" element={<InstructorLessonList />} />
-        
+        <Route path="/instructorstudents" element={<InstructorStudentList />} />        
 
         <Route path="/choose-quiz" element={<ChooseQuiz />} />
         <Route path="/btt-quiz" element={<Quiz type="btt"/>} />
