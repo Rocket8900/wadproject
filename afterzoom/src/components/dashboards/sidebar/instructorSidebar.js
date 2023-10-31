@@ -7,22 +7,81 @@ import {
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
-import { BsFillClipboard2Fill } from "react-icons/bs";
 import {
   FaRocketchat,
   FaList,
   FaChild,
   FaHome,
-  FaCreativeCommonsBy,
   FaCog,
 } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
-import { Link } from 'react-router-dom';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Cookies from 'js-cookie';
+import profile from './sampleprofile.jpg'
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+
+function ProfileModal(props) {
+  const { instructor } = props;
+  const [name, setName] = useState(instructor.name);
+  const [carModel, setCarModel] = useState(instructor.carModel);
+  const [imageFile, setImageFile] = useState(null);
+  const handleProfileUpdate = (e) => {
+    console.log('Updated Name:', name);
+    console.log('Updated Car Model:', carModel);
+    if (imageFile) {
+      console.log('Selected Image File:', imageFile);
+    }
+  }
+
+  const handleImageUpload = (e) => {
+    const selectedFile = e.target.files[0];
+    setImageFile(selectedFile);
+  };
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Edit profile
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>  
+        <div>
+          <label>Upload Image:</label>
+          <input type="file" onChange={handleImageUpload}  />
+        </div>
+        <div>
+          <label>Name:</label>
+          <input type="text" value={instructor.name}  onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div>
+          <label>Car:</label>
+          <input type="text" value={instructor.carModel} onChange={(e) => setCarModel(e.target.value)}
+ />
+        </div>
+      </Modal.Body>
+
+      <Modal.Footer>
+        <Button onClick={handleProfileUpdate}>Submit</Button>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
 
 const Sidebar = ({ instructor }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-
+  const [modalShow, setModalShow] = React.useState(false);
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 9);
@@ -42,23 +101,27 @@ const Sidebar = ({ instructor }) => {
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
   };
-
-  // const findInstructorLabel = instructorId ? "Book a Lesson" : "Find Instructor";
-  // const findInstructorLink = instructorId ? "/bookingStudent" : "/instructor";
-
-  // if (student.instructorId === null){
-  //   var instructorr="not found";
-  // }
-  // else{
-  //   var instructorr=student.instructorId;
-  // }
+  const handleDeleteCookie = () => {
+    Cookies.remove('access_token');
+    <Link to={'/'}></Link>
+  }
+  const navigate = useNavigate();
+  const navigateToHome = () => {
+    navigate('/');
+  };
 
   if (name === null || instructorId === null) {
     return <div>Loading...</div>;
   }
-  
+  console.log(instructor)
   return (
     <div id="sidebar">
+                    <ProfileModal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              instructor={instructor}
+            />
+            
       <ProSidebar>
         <SidebarHeader>
           <div className="logotext">
@@ -66,14 +129,24 @@ const Sidebar = ({ instructor }) => {
           </div>
         </SidebarHeader>
 
+
         <SidebarContent>
-        {!isSmallScreen && (
-          <div className="user-info-box">
+        {/* {!isSmallScreen && ( */}
+          <div className="user-info-box" onClick={() => setModalShow(true)}>
+            <Container>
+              <Row>
+                <Col lg = {5} md={12}>
+                    <img className="sidebarprofile" src={profile} alt="Logo" />
+                  </Col>
+                <Col lg = {7} md={12}><p>Hi {name}!</p></Col>
+              </Row>
+            </Container>
             <div className="user-info">
-              <p>Hi {name}!</p>
+
+
             </div>
           </div>
-        )}
+        {/* )} */}
 
           <Menu iconShape="square">
             <MenuItem
@@ -119,7 +192,7 @@ const Sidebar = ({ instructor }) => {
 
         <SidebarFooter>
           <Menu iconShape="square">
-            <MenuItem icon={<FaCog />}>Sign Out</MenuItem>
+            <MenuItem icon={<FaCog />} onClick={navigateToHome}>Sign Out</MenuItem>
           </Menu>
         </SidebarFooter>
       </ProSidebar>
