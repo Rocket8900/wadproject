@@ -64,6 +64,9 @@ export default class BookingService {
             const booking = await prisma_db.booking.findMany({
                 where: {
                     studentId: studentId
+                },
+                include: {
+                    lessons: true
                 }
             })
             return booking
@@ -84,6 +87,9 @@ export default class BookingService {
             const booking = await prisma_db.booking.findMany({
                 where: {
                     instructorId: instructorId
+                }, 
+                include: {
+                    lessons: true
                 }
             })
             return booking

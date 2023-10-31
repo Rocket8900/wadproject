@@ -16,10 +16,15 @@ import React from 'react';
 import './App.css';
 import Chat from "./components/private-chat/chat";
 import InstructorChat from "./components/private-chat/instructor-chat";
-import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
-import StudentNotebook from "./components/notebook/StudentNotebook";
+import InstructorFeedbackPage from "./components/viewLessons/InstructorFeedback";
+import StudentNotebook from "./components/viewLessons/others/StudentNotebook";
+import StudentView from "./components/viewLessons/StudentView";
 import NotesPage from "./components/notes/NotesPage";
 import { BookingStudent } from "./components/bookingLesson/bookingStudent";
+import InstructorLessonList from "./components/instructors/InstructorLessonList";
+import InstructorStudentList from "./components/instructors/InstructorStudentList"
+import Simulator from "./components/simulation/Simulator";
+import SimulatorSceneOne from "./components/simulation/SimulatorSceneOne";
 
 export default function App() {
   return (
@@ -34,19 +39,24 @@ export default function App() {
         <Route path="/instructor/:id" element={<InstructorDetail />} />
         <Route path="/student-chat" element={<Chat />} />
         <Route path="/instructor-chat" element={<InstructorChat />} />
-        {/* <Route path="/regi" element={<RegistrationTest />} /> */}
+        <Route path="/instructorbookings" element={<InstructorLessonList />} />
+        <Route path="/instructorstudents" element={<InstructorStudentList />} />        
 
         <Route path="/choose-quiz" element={<ChooseQuiz />} />
         <Route path="/btt-quiz" element={<Quiz type="btt"/>} />
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
         <Route path="/topical-quiz" element={<Quiz type="topic"/>} />
         <Route path="/review-quiz" element={<Quiz type="review"/>} />
+        
+        <Route path="/simulator" element={<Simulator/>} />
+        <Route path="/simulatorSceneOne" element={<SimulatorSceneOne/>} />
 
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/bookingStudent" element={<BookingStudent />} />
         
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
         <Route path="/view-notebook" element={<StudentNotebook />} />
+        <Route path="/studentview" element={<StudentView />} />
       </Routes>
     </div>
     
