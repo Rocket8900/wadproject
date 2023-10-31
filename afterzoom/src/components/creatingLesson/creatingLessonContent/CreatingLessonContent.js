@@ -1,5 +1,6 @@
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect, useParams } from "react";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
@@ -22,20 +23,42 @@ const styles = {
     width: '70%',
     borderRadius: '10px',
   },
-
 };
 
 export default function CreatingLessonContent() {
-
-
-
-  
+  const [instructor, setInstructor] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     selectedDate: null,
     category: '',
   });
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = getCookie("access_token");
+        const decodedToken = jwtDecode(token).user;
+        const instructorId = decodedToken.id;
+
+        const instructorResponse = await axios.get(
+          `http://localhost:3001/v1/api/instructor/profile/${instructorId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setInstructor(instructorResponse.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -57,6 +80,10 @@ export default function CreatingLessonContent() {
     console.log('Form Data:', formData);
   };
 
+  if (instructor === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div style={styles.container}>
       <h1>Create a Lesson</h1>
@@ -77,7 +104,7 @@ export default function CreatingLessonContent() {
           onChange={handleInputChange}
           style={styles.inputField}
         />
-         <label htmlFor="category">Category:</label>
+        <label htmlFor="category">Category:</label>
         <select
           name="category"
           id="category"
@@ -91,7 +118,6 @@ export default function CreatingLessonContent() {
           <option value="history">History</option>
           {/* Add more categories as needed */}
         </select>
-
         <label htmlFor="category">Date:</label>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <StaticDateTimePicker
@@ -106,4 +132,10 @@ export default function CreatingLessonContent() {
       </form>
     </div>
   );
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
 }
