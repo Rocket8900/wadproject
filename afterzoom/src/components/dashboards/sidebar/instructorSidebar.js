@@ -18,7 +18,11 @@ import {
 } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
-import { Link } from 'react-router-dom';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+
+import Cookies from 'js-cookie';
+
+
 
 const Sidebar = ({ instructor }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -42,7 +46,15 @@ const Sidebar = ({ instructor }) => {
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
   };
-
+  const handleDeleteCookie = () => {
+    Cookies.remove('access_token');
+    <Link to={'/'}></Link>
+  }
+  const navigate = useNavigate();
+  const navigateToHome = () => {
+    navigate('/');
+  };
+  
   // const findInstructorLabel = instructorId ? "Book a Lesson" : "Find Instructor";
   // const findInstructorLink = instructorId ? "/bookingStudent" : "/instructor";
 
@@ -56,6 +68,7 @@ const Sidebar = ({ instructor }) => {
   if (name === null || instructorId === null) {
     return <div>Loading...</div>;
   }
+
   
   return (
     <div id="sidebar">
@@ -119,7 +132,7 @@ const Sidebar = ({ instructor }) => {
 
         <SidebarFooter>
           <Menu iconShape="square">
-            <MenuItem icon={<FaCog />}>Sign Out</MenuItem>
+            <MenuItem icon={<FaCog />} onClick={navigateToHome}>Sign Out</MenuItem>
           </Menu>
         </SidebarFooter>
       </ProSidebar>
