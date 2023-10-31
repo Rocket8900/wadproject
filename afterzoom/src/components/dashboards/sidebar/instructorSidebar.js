@@ -24,6 +24,7 @@ import Cookies from 'js-cookie';
 import profile from './sampleprofile.jpg'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useLocation } from 'react-router-dom';
 
 
 function ProfileModal(props) {
@@ -80,6 +81,7 @@ function ProfileModal(props) {
 }
 
 const Sidebar = ({ instructor }) => {
+  const location = useLocation();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
   useEffect(() => {
@@ -95,6 +97,19 @@ const Sidebar = ({ instructor }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    if (currentPath === "/instructor-dashboard") {
+      setActiveMenuItem("dashboard");
+    } else if (currentPath === "/instructorbookings") {
+      setActiveMenuItem("instructorbookings");
+    } else if (currentPath === "/instructorstudents") {
+      setActiveMenuItem("instructorstudents");
+    } else if (currentPath === "/instructor-chat") {
+      setActiveMenuItem("instructorChat");
+    }
+  }, [location.pathname]);
 
   const { name, instructorId } = instructor;
   const [activeMenuItem, setActiveMenuItem] = useState("dashboard");
@@ -114,6 +129,9 @@ const Sidebar = ({ instructor }) => {
     return <div>Loading...</div>;
   }
   console.log(instructor)
+
+
+
   return (
     <div id="sidebar">
                     <ProfileModal
@@ -159,8 +177,8 @@ const Sidebar = ({ instructor }) => {
 
             <MenuItem
               icon={<FaList />}
-              active={activeMenuItem === "findInstructor"}
-              onClick={() => handleMenuItemClick("findInstructor")}
+              active={activeMenuItem === "instructorbookings"}
+              onClick={() => handleMenuItemClick("instructorbookings")}
             >
               <Link to="/instructorbookings">
                 <div className="mostInner">Check your bookings</div>
@@ -169,8 +187,8 @@ const Sidebar = ({ instructor }) => {
 
             <MenuItem
               icon={<FaChild />}
-              active={activeMenuItem === "findInstructor"}
-              onClick={() => handleMenuItemClick("findInstructor")}
+              active={activeMenuItem === "instructorstudents"}
+              onClick={() => handleMenuItemClick("instructorstudents")}
             >
               <Link to="/instructorstudents">
                 <div className="mostInner">See your students</div>
