@@ -326,6 +326,8 @@ body{
 }
   
 .info-holder{
+  width: 100% !important;
+  min-height: 100%;
   background-image: url('Registration/assets/bg-sidebar-mobile.svg');
   background-repeat: no-repeat;
   background-position: top;
@@ -445,6 +447,7 @@ body{
 
 .form-box {
   width: 100%;
+  display: flex;
 }
 
 .instructorform {
@@ -1065,5 +1068,4 @@ form .instructor-container > input[type='radio']:checked + label {
 }
   
 }
-
 
