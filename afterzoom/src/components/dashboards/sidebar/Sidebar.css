@@ -101,6 +101,12 @@
     background-color: #F5F5F5; 
   }
 
+  .sidebarprofile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
   /* Add these styles to your CSS file or style tag */
   @media (max-width: 950px) {
     .user-info-box {
@@ -155,6 +161,7 @@
   opacity: 0;
   transform: translateY(-20px);
 }
+
 
   }
 
