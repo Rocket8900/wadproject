@@ -7,6 +7,16 @@ body {
   background-color: #eaeaea;
 }
 
+img {
+  width: 200px;
+  height: auto;
+}
+
+.bottom-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 .quiz-container {
   text-align: left;
   margin-left: auto;
@@ -63,7 +73,7 @@ body {
   border: 1px solid #3083dc;
 }
 
-.quiz-container button {
+button {
   background: #191716;
   border-radius: 9px;
   font-size: 18px;
@@ -75,11 +85,11 @@ body {
   margin-top: 15px;
 }
 
-.quiz-container button:hover {
+button:hover {
   background-color: #3083dc;
 }
 
-.quiz-container button:disabled {
+button:disabled {
   background: #e7e8e9;
   color: #9fa3a9;
   cursor: not-allowed;
