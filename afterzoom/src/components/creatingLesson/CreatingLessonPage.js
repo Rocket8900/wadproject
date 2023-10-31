@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
-import CreatingLessonContent from "./creatingLessonContent/CreatingLessonContent";
+import CreatingLessonContent from "../instructors/CreatingLessonContent";
 
 
 export function CreatingLesson() {
