@@ -21,6 +21,10 @@ import StudentNotebook from "./components/viewLessons/others/StudentNotebook";
 import StudentView from "./components/viewLessons/StudentView";
 import NotesPage from "./components/notes/NotesPage";
 import { BookingStudent } from "./components/bookingLesson/bookingStudent";
+import InstructorLessonList from "./components/instructors/InstructorLessonList";
+import InstructorStudentList from "./components/instructors/InstructorStudentList"
+import Simulator from "./components/simulation/Simulator";
+import SimulatorSceneOne from "./components/simulation/SimulatorSceneOne";
 
 export default function App() {
   return (
@@ -35,13 +39,17 @@ export default function App() {
         <Route path="/instructor" element={<InstructorDetail />} />
         <Route path="/student-chat" element={<Chat />} />
         <Route path="/instructor-chat" element={<InstructorChat />} />
-        {/* <Route path="/regi" element={<RegistrationTest />} /> */}
+        <Route path="/instructorbookings" element={<InstructorLessonList />} />
+        <Route path="/instructorstudents" element={<InstructorStudentList />} />        
 
         <Route path="/choose-quiz" element={<ChooseQuiz />} />
         <Route path="/btt-quiz" element={<Quiz type="btt"/>} />
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
         <Route path="/topical-quiz" element={<Quiz type="topic"/>} />
         <Route path="/review-quiz" element={<Quiz type="review"/>} />
+        
+        <Route path="/simulator" element={<Simulator/>} />
+        <Route path="/simulatorSceneOne" element={<SimulatorSceneOne/>} />
 
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/bookingStudent" element={<BookingStudent />} />

@@ -44,6 +44,9 @@ export default class InstructorService {
             const instructor = await prisma_db.instructor.findUnique({
                 where: {
                     id: instructorId
+                },
+                include: {
+                    students: true
                 }
             });
             return instructor;

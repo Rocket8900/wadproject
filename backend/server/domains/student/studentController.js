@@ -87,7 +87,7 @@ export default class StudentController {
 
   static updateStudentProfile = async (req, res) => {
     try {
-      const studentId = req.params.id;
+      const studentId = req.user.id;
       const student = await StudentService.updateStudent(studentId, req.body);
       Logging.info(`updated details for student ${student.id}`);
       return res.status(201).json({ data: student });
@@ -111,7 +111,7 @@ export default class StudentController {
   static uploadStudentPhoto = async (req, res) => {
     try {
       let imgData = req.file;
-      const id = req.params.id;
+      const id = req.user.id;
       imgData["userId"] = id;
       const data = await S3Service.putObject("afterzoom", "student", imgData);
       if (data) {
