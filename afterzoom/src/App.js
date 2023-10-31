@@ -20,7 +20,7 @@ import InstructorFeedbackPage from "./components/viewLessons/InstructorFeedback"
 import StudentNotebook from "./components/viewLessons/others/StudentNotebook";
 import StudentView from "./components/viewLessons/StudentView";
 import NotesPage from "./components/notes/NotesPage";
-import { BookingStudent } from "./components/bookingLesson/bookingStudent";
+import { CreatingLesson } from "./components/creatingLesson/CreatingLessonPage";
 import InstructorLessonList from "./components/instructors/InstructorLessonList";
 import InstructorStudentList from "./components/instructors/InstructorStudentList"
 import Simulator from "./components/simulation/Simulator";
@@ -52,7 +52,7 @@ export default function App() {
         <Route path="/simulatorSceneOne" element={<SimulatorSceneOne/>} />
 
         <Route path="/notes" element={<NotesPage />} />
-        <Route path="/bookingStudent" element={<BookingStudent />} />
+        <Route path="/creatingLesson" element={<CreatingLesson />} />
         
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
         <Route path="/view-notebook" element={<StudentNotebook />} />
