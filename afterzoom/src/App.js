@@ -52,11 +52,11 @@ export default function App() {
         <Route path="/simulatorSceneOne" element={<SimulatorSceneOne/>} />
 
         <Route path="/notes" element={<NotesPage />} />
-        <Route path="/bookingStudent" element={<BookingStudent />} />
+        {/* <Route path="/bookingStudent" element={<BookingStudent />} /> */}
         
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
         <Route path="/view-notebook" element={<StudentNotebook />} />
-        <Route path="/studentview" element={<StudentView />} />
+        <Route path="/bookingStudent" element={<StudentView />} />
       </Routes>
     </div>
     

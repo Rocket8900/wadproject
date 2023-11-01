@@ -109,64 +109,14 @@ const Quiz = ({ type }) => {
     fetchData();
   }, [type, location]);
 
-  
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       if (type === "review") {
-  //         const response = await axios.get('http://localhost:3001/v1/api/quiz/review');
-  //         console.log(response.data);
-  //         console.log(response.data.data)
-  
-  //         // If the user has a mistakes array, set this as question bank for "review"
-  //         if (response.data.data !== null) {
-  //           // setUserHasMistakes(true);
-  //           // setMistakes(response.data.data);
-  //           console.log("response.data is not null")
-  //           questions = response.data.data
-            
-  //         }
-  //         // user does not have previous mistakes
-  //         else {
-  //           setError("You don't have any mistakes to review. Start a new quiz!")
-  //         }
-  //       }
-  //       else if (type === 'btt') {
-  //         questions = btt_questions
-  //       }
-  //       else if (type === 'ftt') {
-  //         questions = ftt_questions
-  //       }
-  //       else if (type === "topic") {
-          
-  //         const searchParams = new URLSearchParams(location.search);
-  //         const selectedCategory = searchParams.get('category'); // Get the selected category from the URL
-  //         questions = combineQuestionsByCategory(btt_questions, ftt_questions, selectedCategory)
-  //       }
-
-  //       setIsLoading(false);
-  //     }
-  //     catch (error) {
-  //       // Handle errors
-  //       console.error('Error fetching questions:', error);
-  //       setError('Error fetching questions: ' + error.message);
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-    
-  // }, [type]);
-
-  
 
   const onClickNext = () => {
-    if (activeQuestion < questions.length - 1) {
+    if ((activeQuestion < questions.length - 1) & !isQuizEnded) {
         setActiveQuestion(activeQuestion + 1);
         setSelectedAnswerIndex(null) // Reset selected answer index
         
-      } else {
+      } else { // if quiz has ended
         storeResultsToDatabase();
         setShowResult(true);
       }
@@ -225,13 +175,14 @@ const Quiz = ({ type }) => {
   const endQuiz = () => {
     setShowResult(true);
     setIsQuizEnded(true);
+    storeResultsToDatabase();
   };
 
   const storeResultsToDatabase = () => {
     // Create a request object
     const requestData = {
       type: type,
-      score: result.correctAnswers,
+      score: toString(result.correctAnswers),
       mistakes: mistakes,
     };
 
