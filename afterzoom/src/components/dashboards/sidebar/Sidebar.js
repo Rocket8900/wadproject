@@ -44,7 +44,7 @@ const Sidebar = ({ student }) => {
     setActiveMenuItem(menuItem);
   };
 
-  const findInstructorLabel = instructorId ? "Book a Lesson" : "Find Instructor";
+  const findInstructorLabel = instructorId ? "View Bookings" : "Find Instructor";
   const findInstructorLink = instructorId ? "/bookingStudent" : "/instructor";
 
   if (student.instructorId === null){

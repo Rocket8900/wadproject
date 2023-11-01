@@ -53,10 +53,11 @@ export default function App() {
 
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/creatingLesson" element={<CreatingLesson />} />
+        {/* <Route path="/bookingStudent" element={<BookingStudent />} /> */}
         
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
         <Route path="/view-notebook" element={<StudentNotebook />} />
-        <Route path="/studentview" element={<StudentView />} />
+        <Route path="/bookingStudent" element={<StudentView />} />
       </Routes>
     </div>
     
