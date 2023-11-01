@@ -23,7 +23,8 @@ instructorRoute.get("/profile/:id", InstructorController.viewSpecificInstructor)
 
 instructorRoute.use(AuthController.validateInstructor) // instructor-only auth
 instructorRoute.patch("/profile", InstructorController.updateInstructorProfile);
-instructorRoute.patch("/profile/photo", upload.single('photo'), InstructorController.uploadInstructorPhoto);
+instructorRoute.patch("/carousel/photo", upload.single('photo'), InstructorController.uploadInstructorPhoto);
+instructorRoute.patch("/profile/photo", upload.single('photo'), InstructorController.uploadInstructorDP);
 
 
 
