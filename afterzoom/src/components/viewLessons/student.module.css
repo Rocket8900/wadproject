@@ -4,13 +4,30 @@
 
 .body {
   background-color: #f5f5f5;
+  /* display: flex;
+  flex-direction: row;  */
+  /* Change to a row layout to put sidebar and content side by side */
 }
+#sidebar {
+  font-family: 'Inter', sans-serif;
+  padding-left: 20px;
+  
+  height: 100%; /* Make sure the sidebar takes full height */
+  
+  /* position: fixed;  */
+  /* Fix the sidebar's position */
+}
+
 #main-content {
   /* padding-left: 23px;
   padding-right: 20px; */
   padding: 0;
+  /* margin-left: 16%; */
   font-family: 'Inter', sans-serif;
   font-size: 14px;
+  display: flex; /* Use flexbox to contain elements */
+  flex-direction: column; /* Stack child elements vertically */
+  align-items: center; /* Center child elements horizontally */
 }
 
 #main-content h1 {
@@ -20,6 +37,7 @@
   font-weight: 900;
   color: #3083dc;
   margin: 10px;
+  margin-top: 20px;
 }
 
 .container {
@@ -27,20 +45,24 @@
   text-align: center; */
   background-color: white;
   width: 90%;
-  margin-top: 30px;
+  max-height: calc(100vh - 50px); /* Calculate maximum height based on viewport height minus some margin */
+  margin-top: 20px;
   /* margin-left: 100px; */
   padding: 10px;
   /* border: 1px solid rgb(188, 188, 192); */
   border-radius: 20px;
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  overflow: auto; /* Add horizontal scrolling when needed */
+  table-layout: fixed; /* Prevent table from expanding past the container */
 }
 
 .rwd-table {
   margin: auto;
-  /* min-width: 300px; */
-  max-width: 95%;
+  width: 95%;
   border-collapse: collapse;
+  table-layout: fixed; /* Prevent table from expanding past the container */
+
 }
 
 .rwd-table thead {
@@ -66,6 +88,8 @@
 
 .rwd-table td {
   display: block;
+  word-wrap: break-word; /* content wrap to next line */
+  overflow-wrap: break-word; /* Add this property for better browser support */
 }
 
 .rwd-table td:first-child {
@@ -76,9 +100,6 @@
   margin-bottom: .5em;
 }
 
-.rwd-table td:nth-child(6) {
-  width: 20%;
-}
 
 /* FOR TABLE IN SMALL SCREEN */
 .rwd-table td:before {
@@ -115,7 +136,7 @@
     border-top: none;
   }
   .container {
-    margin-top: 50px;
+    margin-top: 20px;
   }
 }
 @media screen and (min-width: 768px) {
