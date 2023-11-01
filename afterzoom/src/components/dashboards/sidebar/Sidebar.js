@@ -18,10 +18,12 @@ import {
 import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 
 const Sidebar = ({ student }) => {
+  const location = useLocation();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 9);
@@ -42,7 +44,7 @@ const Sidebar = ({ student }) => {
     setActiveMenuItem(menuItem);
   };
 
-  const findInstructorLabel = instructorId ? "Book a Lesson" : "Find Instructor";
+  const findInstructorLabel = instructorId ? "View Bookings" : "Find Instructor";
   const findInstructorLink = instructorId ? "/bookingStudent" : "/instructor";
 
   if (student.instructorId === null){
@@ -51,6 +53,22 @@ const Sidebar = ({ student }) => {
   else{
     var instructorr=student.instructorId;
   }
+
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    if (currentPath === "/student-dashboard") {
+      setActiveMenuItem("dashboard");
+    } else if (currentPath === "/bookingStudent" || currentPath === "/instructor") {
+      setActiveMenuItem("findInstructor");
+    } else if (currentPath === "/choose-quiz") {
+      setActiveMenuItem("practice");
+    } else if (currentPath === "/simulator") {
+      setActiveMenuItem("simulator");
+    } else if (currentPath === "/notes") {
+      setActiveMenuItem("yourNotes");
+    }
+  }, [location.pathname]);
 
 
   

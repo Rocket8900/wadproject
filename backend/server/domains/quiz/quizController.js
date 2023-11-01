@@ -46,9 +46,9 @@ export default class QuizController {
 
             if (!quizzes) {
                 Logging.warn("failed to past quizzes");
-                return res.status(400).jskon({ data: "failed to retrieve past quiz data" });
+                return res.status(400).json({ data: "failed to retrieve past quiz data" });
             }
-
+ 
             let collectiveMistakes = []
 
             for (let quiz in quizzes) {

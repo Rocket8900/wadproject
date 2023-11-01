@@ -8,7 +8,7 @@ import RegistrationTest from "./components/home/Registration/Registration"
 import { InstructorDashboard } from "./components/dashboards/InstructorDashboard";
 import  Registration  from "./components/registration/registration";
 import InstructorsComponent from "./components/instructors/instructors";
-import InstructorDetail from "./components/instructors/InstructorDetail";
+// import InstructorDetail from "./components/instructors/InstructorDetail";
 import { ChooseQuiz } from "./components/quiz/choosequiz";
 import Quiz from "./components/quiz/Quiz.js";
 import {Routes,Route} from 'react-router';
@@ -16,12 +16,15 @@ import React from 'react';
 import './App.css';
 import Chat from "./components/private-chat/chat";
 import InstructorChat from "./components/private-chat/instructor-chat";
-import InstructorFeedbackPage from "./components/notebook/InstructorFeedback";
-import StudentNotebook from "./components/notebook/StudentNotebook";
+import InstructorFeedbackPage from "./components/viewLessons/InstructorFeedback";
+import StudentNotebook from "./components/viewLessons/others/StudentNotebook";
+import StudentView from "./components/viewLessons/StudentView";
 import NotesPage from "./components/notes/NotesPage";
-import { BookingStudent } from "./components/bookingLesson/bookingStudent";
+import { CreatingLesson } from "./components/creatingLesson/CreatingLessonPage";
 import InstructorLessonList from "./components/instructors/InstructorLessonList";
 import InstructorStudentList from "./components/instructors/InstructorStudentList"
+import Simulator from "./components/simulation/Simulator";
+import SimulatorSceneOne from "./components/simulation/SimulatorSceneOne";
 
 export default function App() {
   return (
@@ -33,7 +36,7 @@ export default function App() {
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
         <Route path="/instructors" element={<InstructorsComponent />} />
-        <Route path="/instructor" element={<InstructorDetail />} />
+        {/* <Route path="/instructor/:id" element={<InstructorDetail />} /> */}
         <Route path="/student-chat" element={<Chat />} />
         <Route path="/instructor-chat" element={<InstructorChat />} />
         <Route path="/instructorbookings" element={<InstructorLessonList />} />
@@ -44,12 +47,17 @@ export default function App() {
         <Route path="/ftt-quiz" element={<Quiz type="ftt"/>} />
         <Route path="/topical-quiz" element={<Quiz type="topic"/>} />
         <Route path="/review-quiz" element={<Quiz type="review"/>} />
+        
+        <Route path="/simulator" element={<Simulator/>} />
+        <Route path="/simulatorSceneOne" element={<SimulatorSceneOne/>} />
 
         <Route path="/notes" element={<NotesPage />} />
-        <Route path="/bookingStudent" element={<BookingStudent />} />
+        <Route path="/creatingLesson" element={<CreatingLesson />} />
+        {/* <Route path="/bookingStudent" element={<BookingStudent />} /> */}
         
         <Route path="/post-feedback" element={<InstructorFeedbackPage />} />
         <Route path="/view-notebook" element={<StudentNotebook />} />
+        <Route path="/bookingStudent" element={<StudentView />} />
       </Routes>
     </div>
     

@@ -48,7 +48,7 @@ body {
   padding: 1rem;
   width: 100%;
   text-align: center;
-  color: whitesmoke;
+  color: whitesmoke !important;
   background-color: whitesmoke;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
 }
@@ -112,9 +112,9 @@ body {
 }
 
 .title {
-  font-size: 1.3rem;
+  font-size: 1.3rem !important;
   font-weight: bold;
-  line-height: 1.2;
+  line-height: 1.2 !important;
 }
 
 .copy {
@@ -125,19 +125,20 @@ body {
 }
 
 .btn {
-  cursor: pointer;
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.65rem;
-  font-weight: bold;
-  letter-spacing: 0.025rem;
-  text-transform: uppercase;
-  color: white;
-  background-color: black;
+  cursor: pointer !important;
+  margin-top: 1.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  font-size: 0.65rem !important;
+  font-weight: bold !important;
+  letter-spacing: 0.025rem !important;
+  text-transform: uppercase !important;
+  color: rgb(180, 180, 180) !important;
+  background-color: black !important;
   border: none;
 }
 .btn:hover {
   background-color: #0d0d0d;
+  color: white !important;
 }
 .btn:focus {
   outline: 1px dashed yellow;
@@ -196,12 +197,15 @@ form{
 
 .inline{
   display: flex;
+  font-family: 'Ubuntu', sans-serif;
+  margin-left: 10px;
 }
 
 .header{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .dashboardLink{
@@ -210,5 +214,14 @@ form{
   color: black;
   margin-right: 40px;
 }
+
+.title{
+  text-align: center !important;
+}
+
+form{
+  margin-right: auto;
+}
+
 /* # sourceMappingURL=card.css.map */
 
