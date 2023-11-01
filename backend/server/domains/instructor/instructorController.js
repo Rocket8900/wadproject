@@ -140,5 +140,31 @@ export default class InstructorController {
         }
     }
 
+    static uploadInstructorDP = async (req, res) => {
+        try {
+            let imgData = req.file
+            const id = req.user.id
+            imgData["userId"] = id
+            const data = await S3Service.putObject("afterzoom", "instructor", imgData)
+            if (data) {
+                Logging.info("successfully uploaded onto s3")
+                const s3Key = data.Key
+                const instructor = await InstructorService.updateInstructor(id, {"dp": s3Key})
+                if (instructor) {
+                    Logging.info("successfully stored s3 key on db")
+                    return res.status(200).json({data: "successfully uploaded photo"});
+                } else {
+                    Logging.warn("failed to store s3 key on db")
+                }
+            } else {
+                Logging.warn("failed to upload onto s3")
+            }
+            return res.status(400).json({data: "failed to upload photo"})
+        } catch (error) {
+            Logging.error(error)
+            return res.status(500).json({ error: "an unexpected error occurred" });
+        }
+    }
+
     // todo: if delete the photo, remove the key from picture[] but how??
 }
