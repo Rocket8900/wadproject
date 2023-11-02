@@ -6,7 +6,6 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class Graph extends Component {	
 	render() {
-		const { quiz } = this.props;
 		const options = {
 			animationEnabled: true,	
 			title:{
@@ -15,7 +14,7 @@ class Graph extends Component {
                 fontWeight: "bold"
 			},
 			axisY : {
-				title: "Quiz Scores",
+				title: "Number of Lessons",
                 fontFamily: "Nunito"
 			},
 			toolTip: {
