@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
+import "./Dashboard.css"
 
 export function StudentDashboard() {
     const [student, setStudent] = useState(null);
@@ -86,8 +87,10 @@ export function StudentDashboard() {
     return (
         <Container fluid>
             <Row>
-                <Col lg={2} md={2} sm={2} id="sidebar">
+                <Col lg={2} md={2} sm={2} id="sidebar" className="sidebar-sticky">
+            
                     <Sidebar student={student} />
+
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
                     <MainContent student={student} bookings={bookings} quiz={quiz} notes={notes}/>
