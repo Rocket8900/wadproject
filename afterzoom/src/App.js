@@ -8,7 +8,7 @@ import Quiz from "./components/quiz/Quiz.js";
 import {Routes,Route} from 'react-router';
 import React from 'react';
 import './App.css';
-import Chat from "./components/private-chat/chat";
+import Chat from "./components/private-chat/student-chat.js";
 import InstructorChat from "./components/private-chat/instructor-chat";
 import InstructorFeedbackPage from "./components/viewLessons/InstructorFeedback";
 import StudentNotebook from "./components/viewLessons/others/StudentNotebook";

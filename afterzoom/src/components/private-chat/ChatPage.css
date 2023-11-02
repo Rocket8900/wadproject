@@ -34,9 +34,9 @@
     position: relative;
 }
 
-.message p {
-    margin: 0;
-}
+  .message p {
+      margin: 0;
+  }
 
 .message.received {
     background-color: #d9e3f0; /* Different color for better differentiation */

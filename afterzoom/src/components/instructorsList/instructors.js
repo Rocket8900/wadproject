@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Cookie from 'js-cookie';
-import "./styles/card.css";
+import styles from './card.module.css';
 import Modal from 'react-bootstrap/Modal';
 import {createRoot} from 'react-dom';
 import Button from 'react-bootstrap/Button';
@@ -13,6 +13,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Carousel from 'react-bootstrap/Carousel';
+import MapView from "./MapView";
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -22,7 +23,9 @@ function getCookie(name) {
 
 // function for setting background image
 const backgroundImageStyle = (urls) => {
+  console.log(urls)
   if (Array.isArray(urls) && urls.length > 0) {
+    
     return {
       backgroundImage: `url(${urls[0]})`,
     };
@@ -33,7 +36,6 @@ const backgroundImageStyle = (urls) => {
 
 // component for creating Instructor Card
 function InstructorCard({ instructor, showModal }) {
-
   const [modalShow, setModalShow] = useState(false);
 
   const handleModalShow = () => {
@@ -45,11 +47,11 @@ function InstructorCard({ instructor, showModal }) {
   };
 
   return (
-    <div className="card" style={backgroundImageStyle(instructor.picture)}>
-      <div className="content">
-        <h2 className="title">{instructor.name}</h2>
-        <p className="copy">Instructor for {instructor.experience} years</p>
-        <button variant="primary" className="btn" onClick={handleModalShow}>
+    <div className={styles.card} style={backgroundImageStyle(instructor.picture)}>
+      <div className={styles.content}>
+        <h2 className={styles.title}>{instructor.name}</h2>
+        <p className={styles.copy}>Instructor for {instructor.experience} years</p>
+        <button variant="primary" className={styles.btn} onClick={handleModalShow}>
           View Details
         </button>
         <div>
@@ -66,6 +68,7 @@ function InstructorCard({ instructor, showModal }) {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body style={{ display: 'flex', alignItems: 'center' }}>
+
   {/* Left Column (Carousel) */}
   <div className="col-md-6">
     <Carousel>
@@ -98,6 +101,9 @@ function InstructorCard({ instructor, showModal }) {
     </div>
   );
 }
+
+
+
 
 function InstructorsComponent() {
   const [instructors, setInstructors] = useState([]);
@@ -205,100 +211,138 @@ if (bookings === null || student === null) {
                     <Sidebar student={student} />
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
-                  <div className="header">
-                    <h1 style={{fontSize: 'xx-large'}}>INSTRUCTORS</h1>
-                    <Link to={`/student-dashboard`} className='dashboardLink'>
-                      <span >Dashboard</span>
-                    </Link>
+                  <div className={styles.header}>
+                    <h1>Instructors</h1>
                   </div>
-                    <div className="inline">
-                      <form>
-                        <div>
-                          <h4>Gender:</h4>
-                          <label>
-                            <input
-                              type="checkbox"
-                              name="gender"
-                              value="Male"
-                              checked={filter.gender.includes('Male')}
-                              onChange={handleCheckboxChange}
-                            /> Male
-                          </label>
-                          <br/>
-                          <label>
-                            <input
+                    <div className={styles.inline}>
+
+
+                      <form className="controls" id="Filters">
+
+          
+                        <div className={styles.FilterBox}>
+
+                        <fieldset>
+                          <MapView/>
+                        </fieldset>
+
+                        <br/>
+                        <br/>
+
+                        <fieldset>
+                        <h4>Gender</h4>
+                        <div className={styles.checkbox}>
+                          <input type="checkbox" name="gender" value="Male" checked={filter.gender.includes('Male')} onChange={handleCheckboxChange}/>
+                          <label>Male</label>
+                        </div>
+                        <div className={styles.checkbox}>
+                        <input
                               type="checkbox"
                               name="gender"
                               value="Female"
                               checked={filter.gender.includes('Female')}
                               onChange={handleCheckboxChange}
-                            /> Female
-                          </label>
+                            /> 
+                          <label>Female</label>
                         </div>
+                        </fieldset>
+
+
+
+
+
                         <br />
-                        <div>
-                          <h4>Affiliation:</h4>
-                          <label>
-                            <input
+
+                        <br/>
+                     
+
+                          <fieldset>
+                          <h4>Affiliation</h4>
+
+                          <div className={styles.checkbox}>
+                          <input
                               type="checkbox"
                               name="affiliation"
                               value="BBDC"
                               checked={filter.affiliation.includes('BBDC')}
                               onChange={handleCheckboxChange}
-                            /> BBDC
-                          </label>
-                        <br/>
-                          <label>
-                            <input
+                            /> 
+                          <label>BBDC</label>
+                        </div>
+
+                        <div className={styles.checkbox}>
+                        <input
                               type="checkbox"
                               name="affiliation"
                               value="SSDC"
                               checked={filter.affiliation.includes('SSDC')}
                               onChange={handleCheckboxChange}
-                            /> SSDC
-                          </label>
-                        <br/>
-                          <label>
-                            <input
+                            /> 
+                          <label>SSDC</label>
+                        </div>
+
+                        <div className={styles.checkbox}>
+                        <input
                               type="checkbox"
                               name="affiliation"
                               value="CDC"
                               checked={filter.affiliation.includes('CDC')}
                               onChange={handleCheckboxChange}
-                            /> CDC
-                          </label>
+                            /> 
+                          <label>CDC</label>
                         </div>
+                        </fieldset>
+  
+               
+                        
                         <br/>
-                        <div>
-                          <h4>Transmission:</h4>
-                          <label>
-                            <input
+                        <br/>
+
+                        <fieldset>
+                        <h4>Transmission</h4>
+                        <div className={styles.checkbox}>
+                        <input
                               type="checkbox"
                               name="type"
                               value="auto"
                               checked={filter.type.includes('auto')}
                               onChange={handleCheckboxChange}
-                            /> Auto
-                          </label>
-                        <br/>
-                          <label>
-                            <input
+                            />
+                          <label>Auto</label>
+                        </div>
+
+                        <div className={styles.checkbox}>
+                        <input
                               type="checkbox"
                               name="type"
                               value="manual"
                               checked={filter.type.includes('manual')}
                               onChange={handleCheckboxChange}
-                            /> Manual
-                          </label>
-                        </div>                     
+                            />
+                          <label>Manual</label>
+                        </div>
+
+                        </fieldset>
+
+
+
+                      </div>    
+              
                       </form>
 
+
+
+
                       {/* Render InstructorCard component for each filtered instructor */}
-                      <main className="page-content">
-                        {filteredInstructors.map((instructor) => (
-                          <InstructorCard key={instructor.id} instructor={instructor} />
-                        ))}
-                      </main>
+                      <Container fluid>
+                        <Row>
+                          {filteredInstructors.map((instructor) => (
+                            <Col key={instructor.id} lg={4} md={6} sm={12}>
+                              <InstructorCard instructor={instructor} />
+                            </Col>
+                          ))}
+                        </Row>
+                      </Container>
                     </div>
               </Col>
             </Row>
