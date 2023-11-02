@@ -69,8 +69,8 @@ export default function InstructorContent({Field, values,c1,c2,c3, setC1,setC2,s
           placeholder='Enter your car brand and model'
         />
       </div>
-
-      <div className="instructor-container">
+      <div className='customLabelParent' style={{marginTop:"2rem", marginBottom:"1rem"}}><div className='customLabel'>Affiliation</div></div>
+      <div className="instructor-container" >
   <Field 
     type="radio" 
     name='affiliation'
@@ -127,7 +127,7 @@ export default function InstructorContent({Field, values,c1,c2,c3, setC1,setC2,s
     </div>
   </m.label>
 </div>
-
+<div className='customLabelParent' style={{marginTop:"2rem", marginBottom:"1rem"}}><div className='customLabel'>Language(s)</div></div>
         <m.div className='addOn-form'>
         <m.label 
           style={{

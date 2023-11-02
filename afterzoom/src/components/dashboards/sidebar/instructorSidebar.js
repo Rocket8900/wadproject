@@ -26,25 +26,30 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios'; // Import Axios
 import { useLocation } from 'react-router-dom';
+import jwtDecode from "jwt-decode";
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
 
 const ProfileModal = ({ modalProps, instructor }) => {
   const [name, setName] = useState(instructor.name);
   const [carModel, setCarModel] = useState(instructor.carModel);
   const [imageFile, setImageFile] = useState(null);
 
+
   const handleProfileUpdate = (e) => {
-    // Update name and car model
     const data = {
       name: name,
       carModel: carModel,
     };
-
     function getCookie(name) {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
       if (parts.length === 2) return parts.pop().split(";").shift();
     }
-
     axios.patch('http://localhost:3001/v1/api/instructor/profile/', data)
       .then((response) => {
         console.log('Name and car model updated successfully');
@@ -53,7 +58,6 @@ const ProfileModal = ({ modalProps, instructor }) => {
         console.error('Error updating name and car model:', error);
       });
 
-    // Update image
     if (imageFile) {
       const formData = new FormData();
       formData.append('photo', imageFile);
@@ -132,19 +136,44 @@ const Sidebar = ({ instructor }) => {
   const location = useLocation();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [modalShow, setModalShow] = useState(false);
-
+  const [profileImage, setProfileImage] = useState(profile); 
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 9);
     };
-
     window.addEventListener("resize", handleResize);
 
     handleResize();
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
+  }, []);
+
+  useEffect(() => {
+  const fetchPic = async () => {
+    try {
+        const token = getCookie("access_token");
+        const decodedToken = jwtDecode(token).user;
+        const instructorId = decodedToken.id;
+
+        const picResponse = await axios.get(
+
+            `http://localhost:3001/v1/api/s3/instructor/single/`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+          console.log(picResponse.data.data)
+          setProfileImage(picResponse.data.data);
+          
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    fetchPic(); 
   }, []);
 
   useEffect(() => {
@@ -172,14 +201,11 @@ const Sidebar = ({ instructor }) => {
   const navigateToHome = () => {
     navigate('/');
   };
-
   if (name === null || instructorId === null) {
     return <div>Loading...</div>;
   }
-  console.log(instructor)
 
-
-
+  
   return (
     <div id="sidebar">
       <ProfileModal
@@ -202,7 +228,7 @@ const Sidebar = ({ instructor }) => {
             <Container>
               <Row>
                 <Col lg={5} md={12}>
-                  <img className="sidebarprofile" src={profile} alt="Logo" />
+                  <img className="sidebarprofile" src={profileImage} alt="Logo" />
                 </Col>
                 <Col lg={7} md={12}><p>Hi {name}!</p></Col>
               </Row>

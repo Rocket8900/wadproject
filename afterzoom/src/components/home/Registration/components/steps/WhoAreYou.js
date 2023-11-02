@@ -1,6 +1,4 @@
 import '../../../Home.css'
-
-// framer motion
 import { motion as m } from 'framer-motion'
 
 export default function PersonalInfo({Field, errors, touched}) {
@@ -57,8 +55,9 @@ const card ={
       </div>
       
 
-
+<div className='customLabelParent'><div className='customLabel'>Role</div></div>
 <div className="radio-container">
+
   <Field 
     type="radio" 
     name='type'
@@ -96,6 +95,7 @@ const card ={
   </m.label>
 </div>
 
+<div className='customLabelParent'><div className='customLabel'>Gender</div></div>
 <div className="radio-container">
   <Field 
     type="radio" 
