@@ -1,0 +1,176 @@
+{
+    "1" : {
+        "key": "scenes/1.JPG",
+        "origin": true,
+        "markers": [
+            {
+                "id": "accel",
+                "position": { "yaw": 3.5, "pitch": -0.5 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Accelerate"
+            },
+            {
+                "id": "signal",
+                "position": { "yaw": 3.0, "pitch": -0.2 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Signal left"
+            },
+            {
+                "id": "check",
+                "position": { "yaw": 4.2, "pitch": 0 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Check right for cars"
+            }
+        ],
+        "options" : {
+            "success": "",
+            "fail": ""
+        }
+    },
+
+
+    "2a": {
+        "key" : "scenes/2a.JPG",
+        "origin": true,
+        "markers": [
+            {
+                "id": "signal",
+                "position": { "yaw": 0, "pitch": -0.2 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Signal Right"
+            },
+            {
+                "id": "check",
+                "position": { "yaw": 1.1, "pitch": 0 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Check Right Mirror for cars"
+            },
+            {
+                "id": "accel",
+                "position": { "yaw": 0.5, "pitch": -0.5 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Accelerate"
+            }
+        ],
+        "options" : {
+            "success": "f0009e37-6c56-471e-a3e8-e6a91b871e98",
+            "fail": ""
+        }
+    },
+
+    "2b": {
+        "key" : "scenes/2b.JPG",
+        "origin": false,
+        "markers": [
+           
+        ],
+        "options" : {
+            "success": "",
+            "fail": ""
+        }
+    },
+
+    "3a": {
+        "key": "scenes/3a.JPG",
+        "origin": true,
+        "markers": [
+            {
+                "id": "check",
+                "position": { "yaw": 0.85, "pitch": 0 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Check Mirrors"
+            },     
+            {
+                "id": "turnCorrect",
+                "position": { "yaw": 0.1, "pitch": 0 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Turn the steering wheel right and reverse"
+            }
+        ],
+        "options" : {
+            "success": "a6107a81-85ad-4dc2-9602-4ccaeaec8ed8",
+            "fail": ""
+        }
+    },
+
+    "3b": {
+        "key": "scenes/3b.JPG",
+        "origin": false,
+        "markers": [
+            {
+                "id": "turnCorrect1",
+                "position": { "yaw": -0.2, "pitch": 0 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Turn the wheel left and reverse"
+            },
+            {
+                "id": "turnWrong",
+                "position": { "yaw": -0.1, "pitch": 0 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Continue reversing in the same direction"
+            }        
+        ],
+        "options" : {
+            "success": "cd075b5e-9ce7-4355-b418-f76dfbbad4a7",
+            "fail": "c79fd1d5-0286-4563-9d33-9e67bcf6f4da"
+        }
+    },
+
+    "3c1": {
+        "key": "scenes/3c1.JPG",
+        "origin": false,
+        "markers": [
+
+        ],
+        "options" : {
+            "success": "",
+            "fail": ""
+        }
+    },
+
+    "3c2": {
+        "key": "scenes/3c2.JPG",
+        "origin": false,
+        "markers": [
+            {
+                "id": "turnBack",
+                "position": { "yaw": -0.5, "pitch": 0 },
+                "size": { "width": 32, "height": 32 },
+                "anchor": "bottom center",
+                "zoomLvl": 100,
+                "tooltip": "Move forward in the same direction"
+            }            
+        ],
+        "options":{
+            "success": "",
+            "fail": ""
+        }
+    }
+    
+
+
+
+}
+  
+
+

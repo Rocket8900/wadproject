@@ -34,6 +34,7 @@ export default class S3Service {
       return null;
     }
   };
+  
 
   static getSignedUrl = async (objectKey) => {
     try {

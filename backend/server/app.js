@@ -17,6 +17,7 @@ import quizRoute from './domains/quiz/quizRoute.js';
 import noteRoute from './domains/note/noteRoute.js';
 import notificationRoute from './domains/notification/notificationRoute.js';
 import lessonRoute from './domains/lesson/lessonRoute.js';
+import sceneRoute from './domains/scene/sceneRoute.js';
 
 
 dotenv.config()
@@ -57,6 +58,8 @@ app.use("/v1/api/quiz", quizRoute)
 app.use("/v1/api/note", noteRoute)
 app.use("/v1/api/notification", notificationRoute)
 app.use("/v1/api/lesson", lessonRoute)
+app.use("/v1/api/scene", sceneRoute)
+
 
 
 

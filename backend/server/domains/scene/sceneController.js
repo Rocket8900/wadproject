@@ -1,5 +1,5 @@
 import SceneService from "./sceneService.js";
-import Logging from "../../utils/loggings";
+import Logging from "../../utils/loggings.js";
 import S3Service from "../s3/s3Service.js";
 
 export default class SceneController {
@@ -23,15 +23,7 @@ export default class SceneController {
 
   static makeScene = async (req, res) => {
     try {
-      const { body: sceneData, file: imgData } = req;
-      const key = await S3Service.putObject("afterzoom", "scenes", imgData);
-
-      if (!key) {
-        Logging.warn("failed to save s3 key");
-        return res.status(400).json({ data: "failed to save in s3" });
-      }
-
-      sceneData["key"] = key;
+      const sceneData = req.body
       const scene = await SceneService.createScene(sceneData);
 
       if (!scene) {
