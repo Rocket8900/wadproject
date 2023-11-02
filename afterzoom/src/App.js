@@ -7,7 +7,7 @@ import { StudentDashboard } from "./components/dashboards/StudentDashboard";
 import RegistrationTest from "./components/home/Registration/Registration"
 import { InstructorDashboard } from "./components/dashboards/InstructorDashboard";
 import  Registration  from "./components/registration/registration";
-import InstructorsComponent from "./components/instructors/instructors";
+import InstructorsComponent from "./components/instructorsList/instructors";
 // import InstructorDetail from "./components/instructors/InstructorDetail";
 import { ChooseQuiz } from "./components/quiz/choosequiz";
 import Quiz from "./components/quiz/Quiz.js";
