@@ -4,13 +4,47 @@ import CanvasJSReact from '@canvasjs/react-charts';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class Graph extends Component {	
-	render() {
-		const { quiz } = this.props;
-		const options = {
+class Graph extends Component {
+    render() {
+        const { quiz } = this.props;
+
+        const monthlyScores = {
+            Jan: { totalScore: 0, count: 0 },
+            Feb: { totalScore: 0, count: 0 },
+            Mar: { totalScore: 0, count: 0 },
+            Apr: { totalScore: 0, count: 0 },
+            May: { totalScore: 0, count: 0 },
+            Jun: { totalScore: 0, count: 0 },
+            Jul: { totalScore: 0, count: 0 },
+            Aug: { totalScore: 0, count: 0 },
+            Sept: { totalScore: 0, count: 0 },
+            Oct: { totalScore: 0, count: 0 },
+            Nov: { totalScore: 0, count: 0 },
+            Dec: { totalScore: 0, count: 0 }
+        };
+
+        quiz.forEach(item => {
+            const createdAt = new Date(item.created_at);
+            const month = createdAt.toLocaleString('en-us', { month: 'short' });
+            const score = parseInt(item.score.split('/')[0]);
+
+            if (!isNaN(score)) {
+                monthlyScores[month].totalScore += score;
+                monthlyScores[month].count += 1;
+            }
+        });
+
+        const dataPoints = Object.keys(monthlyScores).map(month => {
+            const averageScore = monthlyScores[month].count > 0
+                ? monthlyScores[month].totalScore / monthlyScores[month].count
+                : 0;
+            return { y: averageScore, label: month };
+        });
+
+        const options = {
 			animationEnabled: true,	
 			title:{
-				text: "Your Lesson Trend (Data ToBeRetrieved)",
+				text: "Your Scores",
                 fontFamily: "Nunito",
                 fontWeight: "bold"
 			},
@@ -22,33 +56,20 @@ class Graph extends Component {
 				shared: true,
                 fontFamily: "Nunito"
 			},
-			data: [{
-				type: "spline",
-                name: "number of lessons",
-				showInLegend: true,
-				dataPoints: [
-					{ y: 2, label: "Jan" },
-					{ y: 4, label: "Feb" },
-					{ y: 5, label: "Mar" },
-					{ y: 0, label: "Apr" },
-					{ y: 0, label: "May" },
-					{ y: 0, label: "Jun" },
-					{ y: 7, label: "Jul" },
-					{ y: 9, label: "Aug" },
-					{ y: 5, label: "Sept" },
-					{ y: 2, label: "Oct" },
-					{ y: 2, label: "Nov" },
-					{ y: 2, label: "Dec" }
-				]
-			}]
-		};
-		
-		return (
-			<div>
-				<CanvasJSChart options={options} />
-			</div>
-		);
-	}
+            data: [{
+                type: "spline",
+                name: "Average Quiz Scores",
+                showInLegend: true,
+                dataPoints: dataPoints
+            }]
+        };
+
+        return (
+            <div>
+                <CanvasJSChart options={options} />
+            </div>
+        );
+    }
 }
 
 export default Graph;

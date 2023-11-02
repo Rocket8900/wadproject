@@ -34,7 +34,7 @@ export function StudentDashboard() {
                 setStudent(studentResponse.data.data);
 
 
-                const quizResponse = await axios.get(
+                const bookingsResponse = await axios.get(
                     `http://localhost:3001/v1/api/booking/student/`,
                     {
                         headers: {
@@ -42,20 +42,19 @@ export function StudentDashboard() {
                         },
                     }
                 );
-                setQuiz(quizResponse.data.data[0]);
+                setBookings(bookingsResponse.data.data[0]);
 
-                // const quizResponse = await axios.get(
-                //     `http://localhost:3001/v1/api/quiz`,
-                //     {
-                //         headers: {
-                //             Authorization: `Bearer ${token}`,
-                //         },
-                //     }
-                // );
-                // console.log(bookingsResponse.data.data)
-                // setBookings(bookingsResponse.data.data[0]);
+                const quizResponse = await axios.get(
+                    `http://localhost:3001/v1/api/quiz/`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                setQuiz(quizResponse.data.data);
+                console.log(quiz)
 
-      
                 
     
 
@@ -68,7 +67,7 @@ export function StudentDashboard() {
         
     }, []); 
 
-    if ( student === null) {
+    if (bookings === null || student === null) {
         return <div>Loading...</div>;
     }
 
