@@ -11,6 +11,7 @@ import jwtDecode from "jwt-decode";
 export default function NotesPage() {
     const [student, setStudent] = useState(null);
     const [bookings, setBookings] = useState(null);
+    const [notes, setNotes] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
@@ -41,8 +42,18 @@ export default function NotesPage() {
                         },
                     }
                 );
-                console.log(bookingsResponse.data.data)
                 setBookings(bookingsResponse.data.data[0]);
+
+
+                const notesResponse = await axios.get(
+                    `http://localhost:3001/v1/api/note/list`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                setNotes(notesResponse.data.data);
 
     
             } catch (error) {
@@ -65,7 +76,7 @@ export default function NotesPage() {
                     <Sidebar student={student} bookings={bookings} />i
                 </Col>
                 <Col lg={10} md={10} sm={10} id="notes">
-                    <Notes student={student} bookings={bookings} />
+                    <Notes notes={notes} />
                 </Col>
             </Row>
         </Container>
