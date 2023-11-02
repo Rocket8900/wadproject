@@ -20,7 +20,99 @@ body {
   place-items: center;
 }
 
-.page-content {
+fieldset{
+  display: inline-block;
+  vertical-align: top;
+  padding:15px !important;
+  background: #2e5ffe72;
+  border-radius: 6px;
+  width:20em;
+  margin-right: 5px;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+}
+
+
+fieldset label{
+  font: 'nunito';
+  color:white;
+  font-size:1em;
+}
+
+fieldset h4{
+  font: 'nunito';
+  color:white;
+  font-weight:bold;
+  font-size:1.6em;
+}
+
+.checkbox{
+  display: block;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+
+.checkbox input[type="checkbox"]{
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  margin: 0;
+  opacity: 0;
+  z-index: 1;
+}
+
+.checkbox label{
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  padding-left: 1.5em;
+}
+
+.checkbox label:before,
+.checkbox label:after{
+  content: '';
+  display: block;
+  position: absolute;
+}
+
+.checkbox label:before{
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  background: #ddd;
+  border-radius: 3px;
+}
+
+.checkbox label:after{
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: #68b8c4;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkbox input:checked ~ label:after{
+  opacity: 1;
+}
+
+.checkbox input:focus ~ label:before{
+  background: #eee;
+}
+
+.pageContent {
   display: grid;
   grid-gap: 1rem;
   padding: 1rem;
@@ -51,6 +143,8 @@ body {
   color: whitesmoke !important;
   background-color: whitesmoke;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
+  margin:15px !important;
+  border-radius: 6px;;
 }
 @media (min-width: 600px) {
   .card {
@@ -202,11 +296,21 @@ form{
 }
 
 .header{
+  padding-top:20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-family: 'Ubuntu', sans-serif;
+  justify-content: center;
 }
+
+.header h1{
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 3em;
+  font-weight: bold;
+  color:#2E5FFE;
+}
+
+
 
 .dashboardLink{
   margin-left: auto;
@@ -222,6 +326,7 @@ form{
 form{
   margin-right: auto;
 }
+
 
 /* # sourceMappingURL=card.css.map */
 
