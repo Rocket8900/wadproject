@@ -14,10 +14,9 @@ const s3Route = express.Router()
 s3Route.use(AuthController.validateUser)
 
 s3Route.get("/instructor/bulk", S3Controller.bulkRetrieveSignedUrlsBasedOnInstructorId)
-s3Route.get("/instructor/single", S3Controller.singleRetrieveSignedUrlsBasedOnInstructorId)
 
 s3Route.get("/student/single", S3Controller.singleRetrieveSignedUrlsBasedOnStudentId)
 s3Route.get("/instructor/single", S3Controller.singleRetrieveSignedUrlsBasedOnInstructorId)
-
+s3Route.get("/scene/single/:id", S3Controller.singleRetrieveSignedUrlsBasedOnSceneId)
 
 export {s3Route as default}
