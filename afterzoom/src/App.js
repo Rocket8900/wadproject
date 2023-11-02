@@ -19,12 +19,13 @@ import InstructorLessonList from "./components/instructors/InstructorLessonList"
 import InstructorStudentList from "./components/instructors/InstructorStudentList"
 import Simulator from "./components/simulation/Simulator";
 import SimulatorSceneOne from "./components/simulation/SimulatorSceneOne";
-
+import NotFound from "./components/Error/ErrorPage"
 
 export default function App() {
   return (
     <div>
       <Routes>
+        <Route path='*' element={<NotFound />}/>
         <Route path="/" element={<Home />} />
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
