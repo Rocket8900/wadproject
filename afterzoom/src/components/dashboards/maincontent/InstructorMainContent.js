@@ -6,14 +6,37 @@ import "react-resizable/css/styles.css";
 import { PiHandWavingDuotone} from 'react-icons/pi';
 import Calendar from '../calendar/Calendar'; 
 import Unread from '../unread/Unread'
-import Graph from '../graph/Graph'
-import AlternateGraph from "../graph/AlternateGraph"; 
+import Graph from '../graph/InstruGraph'
+import AlternateGraph from "../graph/InstruAlternateGraph"; 
 
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-const MainContent = ({ student, bookings, quiz }) => {
-  const { id: studentId, selfie, name, age, email, gender, type, language, instructor, instructorId:stuInstructorId, reviews,bookings:stuBookings,chatHistory } = student;
+const InstructorMainContent = ({ instructor, bookings }) => {
+
+  const {
+    id: instructorId,
+    picture:instructorPicture,
+    name: instructorName,
+    age: instructorAge,
+    affiliation: instructorAffiliation,
+    gender: instructorGender,
+    email: instructorEmail,
+    password: instructorPassword,
+    language: instructorLanguage,
+    experience: instructorExperience,
+    type: instructorType,
+    carModel: instructorCarModel,
+    students: instructorStudents,
+    bookings: instructorBookings,
+    reviews: instructorReviews,
+    chatHistory: instructorChats
+  } = instructor;
+
+
+
+
+
   const [details, setDetails] = useState("");
   const [showAlternateGraph, setShowAlternateGraph] = useState(false); 
   const toggleGraph = () => {
@@ -25,24 +48,11 @@ const MainContent = ({ student, bookings, quiz }) => {
   const [compactType, setCompactType] = useState("vertical");
   const [mounted, setMounted] = useState(false);
 
-  let completeness=0;
+  let updatedCompleteness=100;
   const missingPoints = [];
-  if (selfie===null){
+  if (instructorPicture===null){
     missingPoints.push("Set Up Selfie");
-    completeness=completeness+1;
-  }
-  if(stuInstructorId===null){
-    missingPoints.push("Find an Instructor");
-    completeness=completeness+1;
-  }
-  let updatedCompleteness;
-
-  if (completeness === 1) {
-    updatedCompleteness = 90;
-  } else if (completeness === 2) {
-    updatedCompleteness = 80;
-  } else {
-    updatedCompleteness = 100;
+    updatedCompleteness=90;
   }
 
 
@@ -102,7 +112,7 @@ const MainContent = ({ student, bookings, quiz }) => {
       h: 2,
       content: 
 <div style={{ textAlign: 'left' }}>
-  <h2>Hello, {name} <PiHandWavingDuotone /></h2>
+  <h2>Hello, {instructorName} <PiHandWavingDuotone /></h2>
   Your profile is {updatedCompleteness}% complete <br/>
   Task List:
   <ul>
@@ -138,7 +148,7 @@ const MainContent = ({ student, bookings, quiz }) => {
       <div>
       <Graph 
       bookings={bookings}
-      student={student}
+      instructor={instructor}
       />
       </div>
     },
@@ -235,7 +245,7 @@ const MainContent = ({ student, bookings, quiz }) => {
         {layout.map((itm) => (
           <div key={itm.i} data-grid={itm} className={`block ${itm.i}`}>
           {itm.i === "d" && showAlternateGraph ? (
-            <AlternateGraph quiz={quiz}/>
+            <AlternateGraph />
           ) : (
             itm.content 
           )}
@@ -246,4 +256,4 @@ const MainContent = ({ student, bookings, quiz }) => {
   );
 }
 
-export default MainContent;
+export default InstructorMainContent;
