@@ -30,31 +30,12 @@
     margin: 0;
 }
 
-/* #cards {
-    justify-content: center;
-} */
-
-/* .cardstyle {
-  padding: 0;
-  margin-left: 10px;
-  margin-right: 10px;
-} */
-
 .card {
     /* position: relative; */
     padding: 0;
     margin: 15px;
-    /* max-width: 30%; */
-    /* width: 320px; */
-    /* margin-left: 10px;
-    margin-right: 10px; */
     margin-bottom: 20px;
-    /* height: 200px; */
-    /* padding: 30px;
-    padding-right: 50px; */
     text-align: left;
-    /* margin-left: 10px; */
-    /* margin-right: 10px; */
     border-radius: 4px;
     background: #fff;
     box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
@@ -96,31 +77,3 @@
     font-size: 14px;
     font-family: 'Inter', sans-serif;
 }
-
-/* .card img{
-    position: absolute;
-    top: 20px;
-    right: 15px;
-    max-height: 120px;
-  } */
-  
-  /* .card-1{
-    background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
-        background-repeat: no-repeat;
-    background-position: right;
-    background-size: 80px;
-  }
-  
-  .card-2{
-     background-image: url(https://ionicframework.com/img/getting-started/components-card.png);
-        background-repeat: no-repeat;
-    background-position: right;
-    background-size: 80px;
-  }
-
-  .card-3{
-    background-image: url(https://ionicframework.com/img/getting-started/theming-card.png);
-       background-repeat: no-repeat;
-   background-position: right;
-   background-size: 80px;
- } */
