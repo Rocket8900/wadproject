@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
 import InstructorMainContent from './maincontent/InstructorMainContent'
+import "./Dashboard.css"
 export function InstructorDashboard() {
     
     const [instructor, setInstructor] = useState(null);
