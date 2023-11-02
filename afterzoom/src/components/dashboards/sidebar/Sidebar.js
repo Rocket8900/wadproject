@@ -14,6 +14,7 @@ import {
   FaHome,
   FaCreativeCommonsBy,
   FaCog,
+  FaRocketchat
 } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
@@ -136,6 +137,15 @@ const Sidebar = ({ student }) => {
               onClick={() => handleMenuItemClick("yourNotes")}
             >
               <Link to="/notes"><div className="mostInner">Your Notes</div></Link>
+            </MenuItem>
+            <MenuItem
+              icon={<FaRocketchat />}
+              active={activeMenuItem === "instructorChat"}
+              onClick={() => handleMenuItemClick("instructorChat")}
+            >
+              <Link to="/student-chat">
+                <div className="mostInner">Open your chat</div>
+              </Link>
             </MenuItem>
           </Menu>
         </SidebarContent>
