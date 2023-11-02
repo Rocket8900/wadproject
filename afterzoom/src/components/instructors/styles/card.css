@@ -209,15 +209,6 @@ form{
   text-align: center; */
 }
 
-.dashboardLink{
-  margin-left: auto;
-  text-decoration: none;
-  color: black;
-  margin-right: 40px;
-  font-family: 'Poppins', sans-serif;
-  display: inline-block;
-}
-
 .title{
   text-align: center !important;
 }

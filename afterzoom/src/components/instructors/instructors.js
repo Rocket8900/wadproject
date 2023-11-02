@@ -206,10 +206,7 @@ if (bookings === null || student === null) {
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
                   <div className="headerCJ">
-                    <h1 className='top'>INSTRUCTORS</h1>
-                    <Link to={`/student-dashboard`} className='dashboardLink'>
-                      <span>Dashboard</span>
-                    </Link>
+                    <h1 className='top'>View Instructors</h1>
                   </div>
                     <div className="inline">
                       <form>
