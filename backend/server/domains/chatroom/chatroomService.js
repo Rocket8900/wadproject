@@ -136,7 +136,8 @@ export default class ChatroomService {
             }
             return result
         } catch (error) {
-            
+            Logging.error(error)
+            return null;
         }
     }
 
