@@ -21,6 +21,29 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
+
+const reverseGeocode = async (latitude, longitude) => {
+  try {
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyC2Qnl98e6FirAZSVRYEyzYfs_0jPaTsSk`
+    );
+
+    const results = response.data.results;
+    if (results && results.length > 0) {
+      const formattedAddress = results[0].formatted_address;
+      console.log("Formatted Address:", formattedAddress);
+      return formattedAddress;
+    } else {
+      console.log("No address found for the given coordinates.");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error reverse geocoding:", error);
+    return null;
+  }
+};
+
+
 // function for setting background image
 const backgroundImageStyle = (urls) => {
   console.log(urls)
@@ -33,6 +56,7 @@ const backgroundImageStyle = (urls) => {
     return {};
   }
 };
+
 
 const handleChatClick = async (instructorId) => {
   try {
@@ -53,8 +77,17 @@ const handleChatClick = async (instructorId) => {
 };
 
 
+
 // component for creating Instructor Card
-function InstructorCard({ instructor, showModal }) {
+function InstructorCard({ instructor, showModal, onAddMarker }) {
+
+  const handleAddMarkerClick = () => {
+    const { name, preferedLocation } = instructor;
+    if (preferedLocation && preferedLocation.latitude && preferedLocation.longitude) {
+      onAddMarker(name, preferedLocation.latitude, preferedLocation.longitude);
+    }
+  };
+
   const [modalShow, setModalShow] = useState(false);
 
   const handleModalShow = () => {
@@ -106,7 +139,15 @@ function InstructorCard({ instructor, showModal }) {
     <p>Gender: {instructor.gender}</p>
     <p>Affiliation: {instructor.affiliation}</p>
     <p>Transmission: {instructor.type}</p>
+
+    {/* <p>Preferred Location: {reverseGeocode(instructor.preferedLocation.latitude, instructor.preferedLocation.longitude)};</p> */}
+
     <Link to={`/student-chat`}><Button variant="dark" onClick={() => handleChatClick(instructor.id)} >Chat with instructor!</Button></Link>
+    
+       {instructor.preferedLocation && (
+        <button onClick={handleAddMarkerClick}>Add Marker</button>
+      )}
+
   </div>
 </Modal.Body>
           <Modal.Footer>
@@ -125,6 +166,7 @@ function InstructorCard({ instructor, showModal }) {
 
 
 function InstructorsComponent() {
+  const [markerCoordinates, setMarkerCoordinates] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const [student, setStudent] = useState(null);
   const [bookings, setBookings] = useState(null);
@@ -134,6 +176,10 @@ function InstructorsComponent() {
     affiliation: [],
     type: []
   });
+
+  const handleAddMarker = (name, latitude, longitude) => {
+    setMarkerCoordinates([...markerCoordinates, { name, latitude, longitude }]);
+  };
 
   useEffect(() => {
     const getInstructorsData = async () => {
@@ -242,7 +288,7 @@ if (bookings === null || student === null) {
                         <div className={styles.FilterBox}>
 
                         <fieldset>
-                          <MapView/>
+                          <MapView markerCoordinates={markerCoordinates} />
                         </fieldset>
 
                         <br/>
@@ -357,7 +403,7 @@ if (bookings === null || student === null) {
                         <Row>
                           {filteredInstructors.map((instructor) => (
                             <Col key={instructor.id} lg={4} md={6} sm={12}>
-                              <InstructorCard instructor={instructor} />
+                              <InstructorCard instructor={instructor} onAddMarker={handleAddMarker}  />
                             </Col>
                           ))}
                         </Row>
