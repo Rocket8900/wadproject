@@ -1,14 +1,8 @@
 
 import { Home } from "./components/home/Home";
-import { Login } from "./components/login/Login";
-import  NewLogin  from "./components/home/login/Login";
-import  Newregistration  from "./components/registration/newregistration";
 import { StudentDashboard } from "./components/dashboards/StudentDashboard";
-import RegistrationTest from "./components/home/Registration/Registration"
 import { InstructorDashboard } from "./components/dashboards/InstructorDashboard";
-import  Registration  from "./components/registration/registration";
-import InstructorsComponent from "./components/instructorsList/instructors";
-// import InstructorDetail from "./components/instructors/InstructorDetail";
+import InstructorsComponent from "./components/instructors/instructors";
 import { ChooseQuiz } from "./components/quiz/choosequiz";
 import Quiz from "./components/quiz/Quiz.js";
 import {Routes,Route} from 'react-router';
@@ -26,13 +20,12 @@ import InstructorStudentList from "./components/instructors/InstructorStudentLis
 import Simulator from "./components/simulation/Simulator";
 import SimulatorSceneOne from "./components/simulation/SimulatorSceneOne";
 
+
 export default function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<Registration />} /> */}
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
         <Route path="/instructors" element={<InstructorsComponent />} />
