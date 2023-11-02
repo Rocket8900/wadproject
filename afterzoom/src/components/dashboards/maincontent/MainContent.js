@@ -8,11 +8,12 @@ import Calendar from '../calendar/Calendar';
 import Unread from '../unread/Unread'
 import Graph from '../graph/Graph'
 import AlternateGraph from "../graph/AlternateGraph"; 
+import NotesViewDashboard from '../../notes/NotesViewDashboard'
 
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-const MainContent = ({ student, bookings, quiz }) => {
+const MainContent = ({ student, bookings, quiz}) => {
   const { id: studentId, selfie, name, age, email, gender, type, language, instructor, instructorId:stuInstructorId, reviews,bookings:stuBookings,chatHistory } = student;
   const [details, setDetails] = useState("");
   const [showAlternateGraph, setShowAlternateGraph] = useState(false); 
@@ -24,6 +25,7 @@ const MainContent = ({ student, bookings, quiz }) => {
   };
   const [compactType, setCompactType] = useState("vertical");
   const [mounted, setMounted] = useState(false);
+
 
   let completeness=0;
   const missingPoints = [];
@@ -89,9 +91,6 @@ const MainContent = ({ student, bookings, quiz }) => {
 
 
 
-
-
-
   const [layout, setLayout] = useState([
     {
       i: "a",
@@ -147,7 +146,8 @@ const MainContent = ({ student, bookings, quiz }) => {
       x: 0, y: 6, w: 4, h: 2,
       content:
       <div >
-        <h2>NOTES</h2>
+        <NotesViewDashboard/>
+      
       </div>
     },
     { i: "g", 
@@ -197,6 +197,7 @@ const MainContent = ({ student, bookings, quiz }) => {
 
   const [dynamicRowHeight, setDynamicRowHeight] = useState(0);
 
+
   useEffect(() => {
     const containerHeight = window.innerHeight;
     const numberOfRows = 9; 
@@ -216,7 +217,7 @@ const MainContent = ({ student, bookings, quiz }) => {
     };
   }, []);
 
-  
+
 
   return (
     <div className="container-fluid">

@@ -4,15 +4,14 @@ import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const Notes = (student) => {
-  const { id: studentId, selfie, name, age, email, gender, type, language, instructor, instructorId:stuInstructorId, reviews,bookings:stuBookings,chatHistory } = student;
+const Notes = ({ notes }) => {
   const [inputText, setInputText] = useState('');
   const [color, setColor] = useState('green');
-  const [alert, setAlert] = useState('');
-  const [notes, setNotes] = useState([]);
-  const [noteAdded, setNoteAdded] = useState(false);
   const token = getCookie("access_token");
   const decodedToken = jwtDecode(token).user;
+  const studentId = decodedToken.id;
+
+
 
   const handleInputText = (e) => {
     setInputText(e.target.value);
@@ -22,16 +21,12 @@ const Notes = (student) => {
     if (inputText.trim() !== '') {
       const formattedNote = inputText.replace(/\n/g, '<br>');
       const newNote = {
-        id: notes.length + 1,
         content: formattedNote,
-        bgColor: color,
+        color: color,
         addToDashboard: false, 
       };
 
-
-      axios.post(`http://localhost:3001/v1/api/note`, {
-        "content": JSON.stringify(newNote)
-      }
+      axios.post(`http://localhost:3001/v1/api/note`, newNote
       , {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -40,51 +35,54 @@ const Notes = (student) => {
       })
       .then(response => {
         console.log('Note added successfully:', response.data);
+        window.location.reload();
       })
       .catch(error => {
         console.error('Error adding note:', error);
       });
-
-      setNotes([...notes, newNote]);
-      setInputText('');
-      setAlert('Note Added!');
-      setTimeout(() => {
-        setAlert('');
-      }, 1000);
-
-  
-
-
-
-
-
     }
   };
 
 
   
   
-  const handleAddToDashboard = (id) => {
-    const updatedNotes = notes.map((note) =>
-      note.id === id ? { ...note, addToDashboard: true } : note
-    );
-    setNotes(updatedNotes);
-    setAlert('Note added to Dashboard!');
-    setTimeout(() => {
-      setAlert('');
-    }, 1000);
+  const handleAddToDashboard = (id, addToDashboard) => {
+    axios.patch(`http://localhost:3001/v1/api/note/${id}`, {
+      addToDashboard: !addToDashboard,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(response => {
+      console.log('Note updated successfully:', response.data);   
+      window.location.reload();   
+    })
+    .catch(error => {
+      console.error('Error updating note:', error);
+    });
   };
   
   
 
   const handleDeleteNote = (id) => {
-    const updatedNotes = notes.filter((note) => note.id !== id);
-    setNotes(updatedNotes);
-    setAlert('Note Deleted!');
-    setTimeout(() => {
-      setAlert('');
-    }, 1000);
+    axios.delete(`http://localhost:3001/v1/api/note/${id}`,
+     {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => {
+      console.log('Note deleted successfully:', response.data);
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Error adding note:', error);
+    });
   };
+
+
 
   return (
     <div className="container text-center">
@@ -139,7 +137,6 @@ const Notes = (student) => {
               <button className="btn" onClick={handleAddNote}>
                 Add Note
               </button>
-              <span className="alerts">{alert}</span>
             </div>
           </div>
           <br>
@@ -150,33 +147,33 @@ const Notes = (student) => {
           <h3 className="text-center">Notes</h3>
           <hr />
           <div>
-          {notes.length === 0 ? (
+          {Array.isArray(notes) && notes.length === 0 ? (
             <h3>No Notes</h3>
           ) : (
             notes.map((note) => (
-                <div key={note.id} className={`${styles.noteContainer} ${styles[note.bgColor]}`}>
-                  <div className="note-buttons">
-                    <button
-                      className="add-to-dashboard"
-                      onClick={() => handleAddToDashboard(note.id)}
-                    >
+              <div key={note.id} className={`${styles.noteContainer} ${styles[note.color]}`}>
+                <div className="note-buttons">
+                  {!note.addToDashboard ? (
+                    <button className="add-to-dashboard" onClick={() => handleAddToDashboard(note.id, note.addToDashboard)}>
                       Add to Dashboard
                     </button>
-                    <button
-                      className="delete btn btn-default"
-                      onClick={() => handleDeleteNote(note.id)}
-                    >
-                      &times;
+                  ) : (
+                    <button className="unadd-to-dashboard" onClick={() => handleAddToDashboard(note.id, note.addToDashboard)}>
+                      Unadd to Dashboard
                     </button>
-                  </div>
-                  <div
-                      className="note-box alert col-12"
-                      dangerouslySetInnerHTML={{ __html: note.content }}
-                  />
+                  )}
+                  <button
+                    className="delete btn btn-default"
+                    onClick={() => handleDeleteNote(note.id)}
+                  >
+                    &times;
+                  </button>
                 </div>
-
-
-
+                <div
+                  className="note-box alert col-12"
+                  dangerouslySetInnerHTML={{ __html: note.content }}
+                />
+              </div>
             ))
           )}
 
@@ -187,7 +184,6 @@ const Notes = (student) => {
     </div>
   );
 };
-
 export default Notes;
 
 function getCookie(name) {
