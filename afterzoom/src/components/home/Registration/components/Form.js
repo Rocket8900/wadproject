@@ -5,11 +5,10 @@ import StudentContent from './steps/StudentContent'
 import InstructorContent from './steps/InstructorContent'
 import WhoAreYou from './steps/WhoAreYou'
 import ThankyouPage from './steps/ThankyouPage'
+import ErrorContent from './steps/ErrorContent'
 import { useState } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'; 
 import { FiX } from "react-icons/fi"; 
-
-// import * as Yup from 'yup'
 
 import {motion} from 'framer-motion'
 
@@ -42,7 +41,7 @@ export default function MyForm({step, next, prev, goto}) {
           password: '',
           // // confirmpassword: '',
           gender: '',
-          // type:'',
+          type:'',
           age:'',
           language: [],
           // language: "english",
@@ -99,6 +98,19 @@ export default function MyForm({step, next, prev, goto}) {
               setC4={setC4}
               />}
 
+            {step === 2 && values.type === '' && <ErrorContent  
+              Field={Field}
+              values={values} 
+              c1={c1} 
+              c2={c2} 
+              c3={c3}
+              c4={c4} 
+              setC1={setC1} 
+              setC2={setC2} 
+              setC3={setC3}
+              setC4={setC4}
+              />}
+
             {step === 3 && <ThankyouPage goto={goto} values={values}/>}
            
             
@@ -118,7 +130,7 @@ export default function MyForm({step, next, prev, goto}) {
               >Go Back</motion.button>}
 
               {step === 0 && <div></div>}
-              { step !== 3 && <motion.button 
+              { step !== 3  && <motion.button 
                 className='next-btn' 
                 type='submit'
                 variants={btn}

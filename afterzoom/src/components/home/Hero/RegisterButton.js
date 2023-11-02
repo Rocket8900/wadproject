@@ -26,7 +26,7 @@ const RegisterButton = () => {
   return (
     <>  
       <motion.div
-        className="btn btn_secondary text-center"
+        className="btn"
         variants={btnGroup}
         onClick={() => setRegiOpen(true)}
         whileHover={{ scale: 1.05 }}
