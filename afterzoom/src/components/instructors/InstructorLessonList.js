@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import CreatingLessonContent from './CreatingLessonContent';
-import './lessonlist.css';
+import styles from './lessonlist.module.css';
 
 
 function getCookie(name) {
@@ -220,17 +220,17 @@ function InstructorLessonList() {
 
 
   return (
-    <Container fluid>
+    <div className={styles.body}>
       <Row>
-        <Col lg={2} md={2} sm={2} id="sidebar">
+        <Col lg={2} md={2} sm={2} id={styles.sidebar}>
           <InstructorSidebar instructor={instructor} />
         </Col>
-        <Col lg={10} md={10} sm={10} id="main-content">
+        <Col lg={10} md={10} sm={10} id={styles["main-content"]}>
           <h1>Your bookings overview</h1>
 
-          <div className="container1">
+          <div className={styles.container1}>
             <h3>Upcoming Lessons</h3>
-            <table className="rwd-table">
+            <table className={styles["rwd-table"]}>
               <thead>
                 <tr>
                   <th>STUDENT NAME</th>
@@ -249,46 +249,50 @@ function InstructorLessonList() {
                     <td data-th="Date">{formatDateToReadableString(lesson.date) || '-'}</td>
                     <td data-th="Description">{lesson.description || '-'}</td>
                     <td data-th="Feedback">{lesson.feedback || '-'}</td>
-                    <td></td>
+                    {/* <td></td> */}
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
           
-          <div className='container2'>
+          <div className={styles.container2}>
             <h3>Past Lessons</h3>
-            <table className="rwd-table">
+            <table className={styles["rwd-table"]}>
               <thead>
                 <tr>
-                  <th>Student Name</th>
-                  <th>Lesson Title</th>
-                  <th>Lesson Date</th>
-                  <th>Lesson Description</th>
-                  <th>Lesson Feedback</th>
-                  <th>Edit Feedback</th>
+                  <th>STUDENT NAME</th>
+                  <th>LESSON TITLE</th>
+                  <th>DATE</th>
+                  <th>DESCRIPTION</th>
+                  <th>FEEDBACK</th>
+                  {/* <th>Edit Feedback</th> */}
                 </tr>
               </thead>
               <tbody>
                 {pastLessons.map(({ booking, lesson }) => (
                   <tr key={lesson.id}>
-                    <td>{studentNames[booking.studentId]}</td>
-                    <td>{lesson.title}</td>
-                    <td>{formatDateToReadableString(lesson.date)}</td>
-                    <td>{lesson.description}</td>
-                    <td>{lesson.feedback}</td>
+                    <td data-th="Student Name">{studentNames[booking.studentId] || '-'}</td>
+                    <td data-th="Lesson Title">{lesson.title || 'Untitled'}</td>
+                    <td data-th="Date">{formatDateToReadableString(lesson.date) || '-'}</td>
+                    <td data-th="Description">{lesson.description || '-'}</td>
+                    <td data-th="Feedback" className="feedback">{lesson.feedback || '-'}</td>
                     <td>
-                      <Button
-                        variant="primary"
-                        onClick={() => {
-                          setSelectedLessonFeedback(lesson.feedback);
-                          setIsOpen(true);
-                        }}
-                      >
-                        Edit Feedback
-                      </Button>{' '}
+                      {isOpen ? (
+                        <FeedBackModal isOpen={isOpen} setIsOpen={setIsOpen} booking={lesson} />
+                      ) : (
+                        <div>
+                          <Button
+                            variant="primary"
+                            onClick={() => setIsOpen(true)}
+                          >
+                            Edit
+                          </Button>
+                        </div>
+                      )}
                     </td>
-                    <FeedBackModal isOpen={isOpen} setIsOpen={setIsOpen} booking={lesson} />
+
+                    
                   </tr>
                 ))}
               </tbody>
@@ -297,7 +301,7 @@ function InstructorLessonList() {
           
         <div>
         <StyledButton ref={setAnchor} onClick={() => setOpen((o) => !o)} type="button">
-          Create a New Lesson
+          Add New Lesson
         </StyledButton>
         <BasePopup anchor={anchor} open={open} withTransition>
           {(props) => (
@@ -315,7 +319,7 @@ function InstructorLessonList() {
       </Row>
 
 
-    </Container>
+    </div>
   );
 }
 
@@ -443,8 +447,8 @@ const StyledButton = styled('button')(
   position: fixed;
   bottom: 16px;
   right: 16px;
-  font-family: IBM Plex Sans, sans-serif;
-  font-weight: 600;
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.5;
   background-color: ${blue[500]};
