@@ -1,10 +1,7 @@
-
-
-
-
 import React, { useEffect, useRef } from "react";
 
 const MapView = ({markerCoordinates}) => {
+    console.log(markerCoordinates)
   const mapRef = useRef(null);
   const searchInputRef = useRef(null);
 
