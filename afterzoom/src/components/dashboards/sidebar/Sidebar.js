@@ -44,8 +44,8 @@ const Sidebar = ({ student }) => {
     setActiveMenuItem(menuItem);
   };
 
-  const findInstructorLabel = instructorId ? "View Bookings" : "Find Instructor";
-  const findInstructorLink = instructorId ? "/bookingStudent" : "/instructor";
+  const findInstructorLabel = instructorId ? "View Lessons" : "Find Instructor";
+  const findInstructorLink = instructorId ? "/bookingStudent" : "/instructors";
 
   if (student.instructorId === null){
     var instructorr="not found";
@@ -59,7 +59,7 @@ const Sidebar = ({ student }) => {
     const currentPath = location.pathname;
     if (currentPath === "/student-dashboard") {
       setActiveMenuItem("dashboard");
-    } else if (currentPath === "/bookingStudent" || currentPath === "/instructor") {
+    } else if (currentPath === "/bookingStudent" || currentPath === "/instructors") {
       setActiveMenuItem("findInstructor");
     } else if (currentPath === "/choose-quiz") {
       setActiveMenuItem("practice");
@@ -106,7 +106,7 @@ const Sidebar = ({ student }) => {
             >
               <Link to={findInstructorLink}>
                 {instructorId ? (
-                  <div className="mostInner">Book a Lesson</div>
+                  <div className="mostInner">View Lessons</div>
                 ) : (
                   <div className="mostInner">Find Instructor</div>
                 )}

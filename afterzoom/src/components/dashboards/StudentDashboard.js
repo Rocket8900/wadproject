@@ -7,11 +7,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
+import "./Dashboard.css"
 
 export function StudentDashboard() {
     const [student, setStudent] = useState(null);
     const [bookings, setBookings] = useState(null);
     const [quiz, setQuiz] = useState(null);
+    const [notes, setNotes] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
@@ -53,7 +55,18 @@ export function StudentDashboard() {
                     }
                 );
                 setQuiz(quizResponse.data.data);
-                console.log(quiz)
+
+
+                const notesResponse = await axios.get(
+                    `http://localhost:3001/v1/api/note/list`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                setNotes(notesResponse.data.data);
+
 
                 
     
@@ -74,11 +87,13 @@ export function StudentDashboard() {
     return (
         <Container fluid>
             <Row>
-                <Col lg={2} md={2} sm={2} id="sidebar">
+                <Col lg={2} md={2} sm={2} id="sidebar" className="sidebar-sticky">
+            
                     <Sidebar student={student} />
+
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
-                    <MainContent student={student} bookings={bookings} quiz={quiz}/>
+                    <MainContent student={student} bookings={bookings} quiz={quiz} notes={notes}/>
                 </Col>
             </Row>
         </Container>

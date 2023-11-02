@@ -21,6 +21,7 @@ model Student {
   gender       String
   type         String // enums("auto", "manual")
   language     String[]
+  layout Json?
   instructor   Instructor?   @relation(fields: [instructorId], references: [id])
   instructorId String?
   quiz         Quiz[]
@@ -44,6 +45,7 @@ model Instructor {
   experience   Int
   type         String // enums("auto", "manual", "both")
   carModel     String
+  layout Json?
   students     Student[]
   availability DateTime[]
   bookings     Booking[]
@@ -95,7 +97,8 @@ model Review {
 model Scene {
   id      String  @id @default(uuid())
   key     String // s3 key
-  options Json[] // {wrong: {id: XXX}, correct: {id: XXX}}
+  markers Json[]
+  options Json // {wrong: {id: XXX}, correct: {id: XXX}}
   origin  Boolean
 }
 

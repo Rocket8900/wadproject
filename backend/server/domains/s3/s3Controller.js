@@ -2,6 +2,7 @@ import S3Service from "./s3Service.js"
 import Logging from "../../utils/loggings.js"
 import InstructorService from "../instructor/instructorService.js"
 import StudentService from "../student/studentService.js"
+import SceneService from "../scene/sceneService.js"
 
 
 export default class S3Controller {
@@ -50,4 +51,21 @@ export default class S3Controller {
             return res.status(500).json({ error: "an unexpected error occurred" });
         }       
     }
+
+    static singleRetrieveSignedUrlsBasedOnSceneId = async (req, res) => {
+        try {
+            const sceneId = req.params.id
+            const urlId = (await SceneService.getScene(sceneId)).key
+            const signedUrl = await S3Service.getSignedUrl(urlId)
+            if (signedUrl) {
+                return res.status(200).json({data: signedUrl})
+            }
+            return res.status(400).json({data: "unable to retrieve scene"})
+        } catch (error) {
+            Logging.error(error)
+            return res.status(500).json({ error: "an unexpected error occurred" });
+        }       
+    }
+
+
 }
