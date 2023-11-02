@@ -66,27 +66,27 @@ function InstructorCard({ instructor, showModal }) {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body style={{ display: 'flex', alignItems: 'center' }}>
-  {/* Left Column (Carousel) */}
-  <div className="col-md-6">
-    <Carousel>
-      {instructor.picture.map((url, index) => (
-        <Carousel.Item key={index}>
-          <img src={url} alt={`Instructor ${index + 1}`} />
-        </Carousel.Item>
-      ))}
-    </Carousel>
-  </div>
+            {/* Left Column (Carousel) */}
+            <div className="col-md-6">
+              <Carousel>
+                {instructor.picture.map((url, index) => (
+                  <Carousel.Item key={index}>
+                    <img src={url} alt={`Instructor ${index + 1}`} />
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            </div>
 
-  {/* Right Column (Instructor Info) */}
-  <div className="col-md-6">
-    <h1>{instructor.name}</h1>
-    <h4>Experience: {instructor.experience} years</h4>
-    <p>Gender: {instructor.gender}</p>
-    <p>Affiliation: {instructor.affiliation}</p>
-    <p>Transmission: {instructor.type}</p>
-    <Link to={`/student-chat`}><Button variant="dark">Chat with instructor!</Button></Link>
-  </div>
-</Modal.Body>
+            {/* Right Column (Instructor Info) */}
+            <div className="col-md-6">
+              <h1>{instructor.name}</h1>
+              <h4>Experience: {instructor.experience} years</h4>
+              <p>Gender: {instructor.gender}</p>
+              <p>Affiliation: {instructor.affiliation}</p>
+              <p>Transmission: {instructor.type}</p>
+              <Link to={`/student-chat`}><Button variant="dark">Chat with instructor!</Button></Link>
+            </div>
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleModalClose}>
               Close
@@ -205,10 +205,10 @@ if (bookings === null || student === null) {
                     <Sidebar student={student} />
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
-                  <div className="header">
-                    <h1 style={{fontSize: 'xx-large'}}>INSTRUCTORS</h1>
+                  <div className="headerCJ">
+                    <h1 style={{fontSize: 'xx-large', textAlign:'center', color:'#00072D', margin:'auto', position:'relative'}}>INSTRUCTORS</h1>
                     <Link to={`/student-dashboard`} className='dashboardLink'>
-                      <span >Dashboard</span>
+                      <span>Dashboard</span>
                     </Link>
                   </div>
                     <div className="inline">

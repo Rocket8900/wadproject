@@ -25,6 +25,8 @@ import InstructorLessonList from "./components/instructors/InstructorLessonList"
 import InstructorStudentList from "./components/instructors/InstructorStudentList"
 import Simulator from "./components/simulation/Simulator";
 import SimulatorSceneOne from "./components/simulation/SimulatorSceneOne";
+import SimulatorSceneTwo from "./components/simulation/SimulatorSceneTwo";
+import SimulatorSceneThree from "./components/simulation/SimulatorSceneThree";
 
 export default function App() {
   return (
@@ -50,6 +52,8 @@ export default function App() {
         
         <Route path="/simulator" element={<Simulator/>} />
         <Route path="/simulatorSceneOne" element={<SimulatorSceneOne/>} />
+        <Route path="/simulatorSceneTwo" element={<SimulatorSceneTwo/>} />
+        <Route path="/simulatorSceneThree" element={<SimulatorSceneThree/>} />
 
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/creatingLesson" element={<CreatingLesson />} />
