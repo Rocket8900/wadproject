@@ -1,10 +1,15 @@
-/* Layout and General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+h1 {
+  font-family: 'Poppins', sans-serif;
+  color:#2E5FFE;
+}
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .container {
@@ -33,7 +38,7 @@ body {
   color: #3c763d;
 }
 
-/* Panel Styles */
+
 .panel {
   box-shadow: 2px 2px 4px #ccc;
   background-color: white;

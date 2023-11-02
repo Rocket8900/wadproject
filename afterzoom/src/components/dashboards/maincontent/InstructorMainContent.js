@@ -12,7 +12,7 @@ import AlternateGraph from "../graph/InstruAlternateGraph";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-const InstructorMainContent = ({ instructor, bookings, quiz }) => {
+const InstructorMainContent = ({ instructor, bookings }) => {
 
   const {
     id: instructorId,
