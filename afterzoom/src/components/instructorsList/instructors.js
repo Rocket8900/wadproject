@@ -58,6 +58,24 @@ const backgroundImageStyle = (urls) => {
 };
 
 
+const handleChatClick = async (instructorId) => {
+  try {
+    const token = getCookie("access_token"); // Assuming you use Cookies for storing the token
+    
+    const response = await axios.post(`http://localhost:3001/v1/api/chat/${instructorId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    
+    // Handle the response or set state here, if needed
+    console.log(response.data);
+    window.location.reload();
+  } catch (error) {
+    console.error('Error when clicking the button:', error);
+  }
+};
+
 
 
 // component for creating Instructor Card
@@ -121,11 +139,15 @@ function InstructorCard({ instructor, showModal, onAddMarker }) {
     <p>Gender: {instructor.gender}</p>
     <p>Affiliation: {instructor.affiliation}</p>
     <p>Transmission: {instructor.type}</p>
+
     {/* <p>Preferred Location: {reverseGeocode(instructor.preferedLocation.latitude, instructor.preferedLocation.longitude)};</p> */}
-    <Link to={`/student-chat`}><Button variant="dark">Chat with instructor!</Button></Link>
-    {instructor.preferedLocation && (
+
+    <Link to={`/student-chat`}><Button variant="dark" onClick={() => handleChatClick(instructor.id)} >Chat with instructor!</Button></Link>
+    
+       {instructor.preferedLocation && (
         <button onClick={handleAddMarkerClick}>Add Marker</button>
       )}
+
   </div>
 </Modal.Body>
           <Modal.Footer>

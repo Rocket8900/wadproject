@@ -206,7 +206,7 @@ const Sidebar = ({ instructor }) => {
     }
   }, [location.pathname]);
 
-  const { name, instructorId } = instructor;
+  const { name, instructorId } = instructor || { name: '', instructorId: '' };
   const [activeMenuItem, setActiveMenuItem] = useState("dashboard");
 
   const handleMenuItemClick = (menuItem) => {
