@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&family=Montserrat:wght@300;400&family=Poppins:wght@300;700&display=swap');
+
 .body {
-    font-family: sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
 }
 
@@ -23,19 +25,20 @@
 
 
 .a {
-    background-color: #2E5FFE;
+    background-color: #246e0f;
     color:white;
 }
 
 .a h2{
-    font-family: 'Nunito', sans-serif;
-    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
     font-size:2.3vw;
 }
   
 .a p{
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size:1.2vw;
+    margin: 0;
 }
 
   
@@ -43,7 +46,16 @@
     background-color: #282828;
 }
 
+.c, .d, .e, .g, .h {
+    font-family: 'Poppins', sans-serif;
+}
+
+.g h2, .h h2 {
+    font-size: 20px;
+}
+
 .unread{
+    font-family: 'Poppins', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
