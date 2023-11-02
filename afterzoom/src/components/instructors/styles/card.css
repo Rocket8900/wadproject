@@ -205,7 +205,8 @@ form{
   display: flex !important;
   justify-content: center !important;
   align-items: center;
-  font-family: 'Ubuntu', sans-serif;
+  /* font-family: 'Ubuntu', sans-serif;
+  text-align: center; */
 }
 
 .dashboardLink{
@@ -213,6 +214,8 @@ form{
   text-decoration: none;
   color: black;
   margin-right: 40px;
+  font-family: 'Poppins', sans-serif;
+  display: inline-block;
 }
 
 .title{
@@ -223,5 +226,17 @@ form{
   margin-right: auto;
 }
 
+.top{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  color: #3083dc;
+  margin: 10px;
+  padding: 10px;
+  /* margin-left: auto;
+  margin-right: auto;
+  text-align: center; */
+  flex-grow: 1; /* This allows the element to take up the available space */
+  text-align: center;
+}
 /* # sourceMappingURL=card.css.map */
 

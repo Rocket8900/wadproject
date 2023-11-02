@@ -29,7 +29,7 @@ function SimulatorSceneOne() {
     const [room, setRoom] = useState("starter"); // Declare state unconditionally
     const [clickCounter, setClickCounter] = useState(0);
     const [showModal, setShowModal] = useState(false);
-    const 
+    
 
 
     useEffect(() => {
