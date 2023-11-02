@@ -11,6 +11,7 @@ import jwtDecode from "jwt-decode";
 export function StudentDashboard() {
     const [student, setStudent] = useState(null);
     const [bookings, setBookings] = useState(null);
+    const [quiz, setQuiz] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
@@ -33,7 +34,7 @@ export function StudentDashboard() {
                 setStudent(studentResponse.data.data);
 
 
-                const bookingsResponse = await axios.get(
+                const quizResponse = await axios.get(
                     `http://localhost:3001/v1/api/booking/student/`,
                     {
                         headers: {
@@ -41,8 +42,7 @@ export function StudentDashboard() {
                         },
                     }
                 );
-                console.log(bookingsResponse.data.data)
-                setBookings(bookingsResponse.data.data[0]);
+                setQuiz(quizResponse.data.data[0]);
 
                 // const quizResponse = await axios.get(
                 //     `http://localhost:3001/v1/api/quiz`,
@@ -68,7 +68,7 @@ export function StudentDashboard() {
         
     }, []); 
 
-    if (bookings === null || student === null) {
+    if ( student === null) {
         return <div>Loading...</div>;
     }
 
@@ -79,7 +79,7 @@ export function StudentDashboard() {
                     <Sidebar student={student} />
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
-                    <MainContent student={student} bookings={bookings} />
+                    <MainContent student={student} bookings={bookings} quiz={quiz}/>
                 </Col>
             </Row>
         </Container>
