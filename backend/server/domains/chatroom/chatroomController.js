@@ -113,4 +113,33 @@ export default class ChatroomController {
         }
     }
 
+    static createEmptyChatHistory = async (req, res) => {
+        try {
+            const receiverId = req.params.id
+            const senderId = req.user.id
+
+            let instructorId; 
+            let studentId;
+            const { sender, receiver } = await ChatroomService.whoIsWho(senderId, receiverId)
+
+            if (sender.type == "student") {
+                studentId = sender.id
+                instructorId = receiver.id
+            } else {
+                studentId = receiver.id
+                instructorId = sender.id
+            }
+            const chat = await ChatroomService.createChatHistory(instructorId, studentId, []);
+            if (chat) {
+                Logging.info("*chat history controller* saved new message")
+            } else{
+                Logging.warn("*chat history controller* failed to save new message")
+            }
+            return res.status(201).json({data: "new chat started"})
+        } catch (error) {
+            Logging.error(error)
+            return res.status(500).json({ error: "an unexpected error occurred" });
+        }
+    }
+
 }
