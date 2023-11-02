@@ -45,7 +45,7 @@ export function StudentDashboard() {
                 setBookings(bookingsResponse.data.data[0]);
 
                 const quizResponse = await axios.get(
-                    `http://localhost:3001/v1/api/booking/student/`,
+                    `http://localhost:3001/v1/api/quiz/`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ export function StudentDashboard() {
                     }
                 );
                 setQuiz(quizResponse.data.data);
-                console.log(bookings)
+                console.log(quiz)
 
                 
     

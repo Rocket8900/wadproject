@@ -21,7 +21,6 @@ const Calendar = ({ showDetailsHandle, bookings })=> {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [events, setEvents] = useState([]);
 
-  console.log(lesson)
 
   useEffect(() => {
     // Format lessons and update events state
