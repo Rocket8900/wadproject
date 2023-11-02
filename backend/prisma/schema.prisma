@@ -13,7 +13,7 @@ datasource db {
 
 model Student {
   id           String        @id @default(uuid())
-  selfie       String?
+  selfie       String? @default("student/default")
   age          Int
   name         String
   email        String        @unique
@@ -33,7 +33,7 @@ model Student {
 
 model Instructor {
   id           String        @id @default(uuid())
-  dp           String?
+  dp           String? @default("student/default")
   picture      String[]
   name         String
   age          Int
