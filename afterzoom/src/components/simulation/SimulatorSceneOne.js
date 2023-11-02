@@ -4,9 +4,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Sidebar from '../dashboards/sidebar/Sidebar';
-import sceneOne from './Test_Pano.jpg';
-import sceneTwo from './Test_Pano.jpg';
-import sceneThree from './Test_Pano.jpg';
 import marker from './download.png';
 import jwtDecode from "jwt-decode";
 import { useParams } from "react-router-dom";
@@ -29,7 +26,10 @@ function SimulatorSceneOne() {
     const [room, setRoom] = useState("starter"); // Declare state unconditionally
     const [clickCounter, setClickCounter] = useState(0);
     const [showModal, setShowModal] = useState(false);
-    
+    const [showModal1, setShowModal1] = useState(true);
+    const [showModal2, setShowModal2] = useState(false);
+    const [showModal3, setShowModal3] = useState(false);
+
 
 
     useEffect(() => {
@@ -80,13 +80,13 @@ function SimulatorSceneOne() {
             ) {
               if (prevCounter === 2) {
                 setRoom("true");
-                toggleModal();
+                return toggleModal();
               }
-              alert("Correct!");
+              toggleModal3();
               return prevCounter + 1;
             } else {
               // Display a message or handle invalid marker clicks
-              alert("Try Again" + prevCounter + clickedMarkerId);
+              toggleModal2();
               return prevCounter; // Return the current counter unchanged
             }
 
@@ -95,8 +95,10 @@ function SimulatorSceneOne() {
       };
 
     const toggleModal = () => setShowModal(!showModal);
-
-
+    const toggleModal1 = () => setShowModal1(!showModal1);
+    const toggleModal2 = () => setShowModal2(!showModal2);
+    const toggleModal3 = () => setShowModal3(!showModal3);
+    
     const plugins = [
         [MarkersPlugin, {
             markers: [
@@ -149,34 +151,15 @@ function SimulatorSceneOne() {
                                 width={"100%"}
                                 onReady={handleReady}
                                 littlePlanet={false}
+                                defaultYaw={9.8}
+                                // mousemove={true}
                             ></ReactPhotoSphereViewer>
-                        )}
-                        {room === "true" && (
-                            <ReactPhotoSphereViewer
-                                ref={photoSphereRef}
-                                src=''
-                                height={"100vh"}
-                                plugins={plugins}
-                                width={"100%"}
-                                onReady={handleReady}
-                                littlePlanet={false}
-                            ></ReactPhotoSphereViewer>
-                        )}
-                        {room === "false" && (
-                            <ReactPhotoSphereViewer
-                                ref={photoSphereRef}
-                                src=''
-                                height={"100vh"}
-                                width={"100%"}
-                                plugins={plugins}
-                                onReady={handleReady}
-                                littlePlanet={false}
-                            ></ReactPhotoSphereViewer>
-                        )}
+
+                        )}                       
                     </div>
                 </Col>
             </Row>
-                <Modal show={showModal} onHide={toggleModal}>
+                <Modal show={showModal} onHide={toggleModal} centered>
                     <Modal.Header closeButton>
                         <Modal.Title>Congratulations!</Modal.Title>
                     </Modal.Header>
@@ -185,10 +168,49 @@ function SimulatorSceneOne() {
                     </Modal.Body>
                     <Modal.Footer>
                         <Link to={`/simulator`}>
-                            <Button variant="secondary" onClick={toggleModal}>
+                            <Button variant="secondary">
                                 Choose a new level
                             </Button>
                         </Link>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={showModal1} onHide={toggleModal1} centered>
+                    <Modal.Header>
+                        <Modal.Title>Welcome to the SIMULATION</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>You find yourself at a T-Junction with no traffic light and you need to make a left turn. What should you do?</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                            <Button variant="secondary" onClick={toggleModal1}>
+                                BEGIN
+                            </Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={showModal2} onHide={toggleModal2} centered>
+                    <Modal.Header>
+                        <Modal.Title>Oops!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>That's not it. Try Again!</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                            <Button variant="secondary" onClick={toggleModal2}>
+                                Try Again
+                            </Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={showModal3} onHide={toggleModal3} centered>
+                    <Modal.Header>
+                        <Modal.Title></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Good work! What's next?</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                            <Button variant="secondary" onClick={toggleModal3}>
+                                CONTINUE
+                            </Button>
                     </Modal.Footer>
                 </Modal>
         </Container>
