@@ -22,11 +22,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Cookies from 'js-cookie';
 import profile from './sampleprofile.jpg';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import axios from 'axios'; // Import Axios
+import axios from 'axios'; 
 import { useLocation } from 'react-router-dom';
 import jwtDecode from "jwt-decode";
+import { motion as m } from 'framer-motion'
+import { Formik, Field, Form, ErrorMessage } from 'formik'; 
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -34,13 +35,27 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
-const ProfileModal = ({ modalProps, instructor }) => {
+const btn ={
+  hover: {
+    scale:[null, 1.1, 1.05],
+    transition:{
+      duration: .2
+    },
+  },
+  tap:{
+    scale: .98,
+  }    
+}
+
+const ProfileModal = ({modal, setModal, instructor }) => {
   const [name, setName] = useState(instructor.name);
-  const [carModel, setCarModel] = useState(instructor.carModel);
+  const [carModel, setCarModel] = useState(instructor.carModel);   
   const [imageFile, setImageFile] = useState(null);
 
 
+
   const handleProfileUpdate = (e) => {
+    console.log('called');
     const data = {
       name: name,
       carModel: carModel,
@@ -57,7 +72,7 @@ const ProfileModal = ({ modalProps, instructor }) => {
       .catch((error) => {
         console.error('Error updating name and car model:', error);
       });
-
+      window.location.reload()
     if (imageFile) {
       const formData = new FormData();
       formData.append('photo', imageFile);
@@ -74,6 +89,7 @@ const ProfileModal = ({ modalProps, instructor }) => {
           console.error('Error updating image:', error);
         });
     }
+    setModal(false)
   }
 
   const handleInstructorName = (e) => {
@@ -89,45 +105,48 @@ const ProfileModal = ({ modalProps, instructor }) => {
     setImageFile(selectedFile);
   };
 
-  return (
-    <Modal
-      {...modalProps}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Edit profile
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div>
-          <label>Upload Image:</label>
-          <input type="file" onChange={handleImageUpload} />
-        </div>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => handleInstructorName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Car:</label>
-          <input
-            type="text"
-            value={carModel}
-            onChange={(e) => handleCarModel(e.target.value)}
-          />
-        </div>
-      </Modal.Body>
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
-      <Modal.Footer>
-        <Button onClick={handleProfileUpdate}>Submit</Button>
-        <Button onClick={modalProps.onHide}>Close</Button>
-      </Modal.Footer>
+  return (
+    <Modal show={modal} onHide={() => setModal(false)} dialogClassName="modal-lg modal-dialog-centered rounded">
+      <div className="loginModal" style={{ backdropFilter: "blur(5px)", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "35px", minHeight: "50vh"}}>
+        <m.main initial={{ y: '-100%' }} animate={{ y: '0%' }} className='loginForm-box '>
+          <Formik>
+            <Form>
+              <h1 className="loginTitle">Edit Profile</h1>
+              <div className="input-container" style={{marginBottom:"20px"}}>
+                <label htmlFor="Name">Name</label>
+                <Field 
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => handleInstructorName(e.target.value)}
+                />
+              </div>
+              <div className="input-container" style={{marginBottom:"20px"}}>
+                <label htmlFor="CarModel">Car Model</label>
+                <Field 
+                  type="text"
+                  placeholder="Car Model"
+                  value={carModel}
+                  onChange={(e) => handleCarModel(e.target.value)}
+                />
+              </div>
+              <div className="input-container">
+                <label>Upload Image: </label>
+                <input type="file" onChange={handleImageUpload} />
+              </div>
+              
+              <m.div className="login-btn-container" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.5}} style={{marginTop: "40px"}}>
+                <m.button className='next-btn' type='button' variants={btn} whileHover='hover' whileTap='tap' onClick={() => setModal(false)}>Cancel</m.button>
+                <m.button className='next-btn' type='submit' variants={btn} whileHover='hover' whileTap='tap' onClick={handleProfileUpdate}>Submit</m.button>
+              </m.div>
+            </Form>
+          </Formik>
+        </m.main>
+      </div>
     </Modal>
   );
 }
@@ -135,7 +154,7 @@ const ProfileModal = ({ modalProps, instructor }) => {
 const Sidebar = ({ instructor }) => {
   const location = useLocation();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [modalShow, setModalShow] = useState(false);
+  const [modal, setModal] = useState(false);
   const [profileImage, setProfileImage] = useState(profile); 
   useEffect(() => {
     const handleResize = () => {
@@ -150,27 +169,25 @@ const Sidebar = ({ instructor }) => {
   }, []);
 
   useEffect(() => {
-  const fetchPic = async () => {
-    try {
+    const fetchPic = async () => {
+      try {
         const token = getCookie("access_token");
         const decodedToken = jwtDecode(token).user;
         const instructorId = decodedToken.id;
 
         const picResponse = await axios.get(
-
-            `http://localhost:3001/v1/api/s3/instructor/single/`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
+          `http://localhost:3001/v1/api/s3/instructor/single/`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
-          console.log(picResponse.data.data)
-          setProfileImage(picResponse.data.data);
-          
-        } catch (error) {
-            console.error(error);
-        }
+        console.log(picResponse.data.data)
+        setProfileImage(picResponse.data.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     fetchPic(); 
@@ -205,14 +222,15 @@ const Sidebar = ({ instructor }) => {
     return <div>Loading...</div>;
   }
 
-  
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
   return (
     <div id="sidebar">
       <ProfileModal
-        modalProps={{
-          show: modalShow,
-          onHide: () => setModalShow(false),
-        }}
+        modal={modal}
+        setModal={setModal} 
         instructor={instructor}
       />
 
@@ -224,16 +242,16 @@ const Sidebar = ({ instructor }) => {
         </SidebarHeader>
 
         <SidebarContent>
-          <div className="user-info-box" onClick={() => setModalShow(true)}>
+          <div className="user-info-box" onClick={() => toggleModal()}>
             <Container>
               <Row>
                 <Col lg={5} md={12}>
                   <img className="sidebarprofile" src={profileImage} alt="Logo" />
                 </Col>
-                <Col lg={7} md={12}><p>Hi {name}!</p></Col>
+                <Col lg={7} md={12}><div className="user-info">Hi {name}!</div></Col>
               </Row>
             </Container>
-            <div className="user-info"></div>
+            <p className="profileEditInfo">Click me to edit your profile!</p>
           </div>
 
           <Menu iconShape="square">
@@ -241,6 +259,7 @@ const Sidebar = ({ instructor }) => {
               icon={<FaHome />}
               active={activeMenuItem === "dashboard"}
               onClick={() => handleMenuItemClick("dashboard")}
+              className="mostinnerouter"
             >
               <Link to="/instructor-dashboard"><div className="mostInner">Dashboard</div></Link>
             </MenuItem>
@@ -249,6 +268,7 @@ const Sidebar = ({ instructor }) => {
               icon={<FaList />}
               active={activeMenuItem === "instructorbookings"}
               onClick={() => handleMenuItemClick("instructorbookings")}
+              className="mostinnerouter"
             >
               <Link to="/instructorbookings">
                 <div className="mostInner">Check your bookings</div>
@@ -259,6 +279,7 @@ const Sidebar = ({ instructor }) => {
               icon={<FaChild />}
               active={activeMenuItem === "instructorstudents"}
               onClick={() => handleMenuItemClick("instructorstudents")}
+              className="mostinnerouter"
             >
               <Link to="/instructorstudents">
                 <div className="mostInner">See your students</div>
@@ -269,6 +290,7 @@ const Sidebar = ({ instructor }) => {
               icon={<FaRocketchat />}
               active={activeMenuItem === "instructorChat"}
               onClick={() => handleMenuItemClick("instructorChat")}
+              className="mostinnerouter"
             >
               <Link to="/instructor-chat">
                 <div className="mostInner">Open your chat</div>
@@ -279,7 +301,7 @@ const Sidebar = ({ instructor }) => {
 
         <SidebarFooter>
           <Menu iconShape="square">
-            <MenuItem icon={<FaCog />} onClick={navigateToHome}>Sign Out</MenuItem>
+            <MenuItem icon={<FaCog />} onClick={navigateToHome} className="mostinnerouterSignOut"><div className="mostInner ">Sign Out</div></MenuItem>
           </Menu>
         </SidebarFooter>
       </ProSidebar>

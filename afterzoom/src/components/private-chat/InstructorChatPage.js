@@ -26,6 +26,7 @@ function InstructorChatPage() {
             Authorization: `Bearer ${token}`
           }
         });
+        console.log(response.data.data);
         setStudents(response.data.data);
       } catch (error) {
         console.error("Error fetching students with chat history:", error);

@@ -175,7 +175,7 @@ li{
   .service_container .title_wrapper .service_title {
     display: block;
     text-align: center;
-    color: var(--Marine-blue) !important;
+    color: var(--Marine-blue);
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 2rem;
