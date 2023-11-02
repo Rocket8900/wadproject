@@ -6,7 +6,6 @@ import { ftt_questions } from './ftt'; // Import FTT questions
 import './quiz.css';
 import Sidebar from '../dashboards/sidebar/Sidebar';
 import jwtDecode from "jwt-decode";
-import Row from 'react-bootstrap/Row';
 import Col from "react-bootstrap/Col";
 
 // Function to combine questions of a specific category from both BTT and FTT
@@ -220,10 +219,11 @@ const Quiz = ({ type }) => {
   // }
 
   if (!questions || questions.length === 0) {
-    // If there are no questions or mistakes, display a message and buttons
+    // If there are no questions or mistakes, display a message and 
+
     return (
       <div className="pagebody">
-        <Row>
+        <div className="row">
           <Col lg={2} md={2} sm={2} id="sidebar">
             <Sidebar student={student} />
           </Col>
@@ -234,7 +234,7 @@ const Quiz = ({ type }) => {
               <button className="btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5">Return to quizzes</button>
             </Link>
           </Col>
-        </Row>
+        </div>
       </div>
     );
   }
@@ -244,7 +244,7 @@ const Quiz = ({ type }) => {
 
   return (
     <div className="pagebody">
-        <Row>
+        <div className="row">
           <Col lg={2} md={2} sm={2} id="sidebar">
             <Sidebar student={student} />
           </Col>
@@ -315,7 +315,7 @@ const Quiz = ({ type }) => {
             </div>
           </Col>
 
-        </Row>
+        </div>
     </div>
   )
 }

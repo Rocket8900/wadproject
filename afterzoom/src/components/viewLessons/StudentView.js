@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../dashboards/sidebar/Sidebar';
 import jwtDecode from "jwt-decode";
-import Row from 'react-bootstrap/Row';
 import Col from "react-bootstrap/Col";
 import styles from './student.module.css'
 
@@ -106,8 +105,8 @@ if (bookings === null || student === null) {
 
     return (
         <div className={styles.body}>
-            <Row>
-                <Col lg={2} md={2} sm={2} id={styles.sidebar}>
+            <div className="row">
+                <Col lg={2} md={2} sm={2} id="sidebar">
                     <Sidebar student={student} />
                 </Col>
 
@@ -143,7 +142,7 @@ if (bookings === null || student === null) {
                         </table>
                     </div>
                 </Col>
-            </Row>
+            </div>
         </div>
         
     )

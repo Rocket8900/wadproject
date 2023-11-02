@@ -7,10 +7,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
-
+import InstructorMainContent from './maincontent/InstructorMainContent'
 export function InstructorDashboard() {
     
     const [instructor, setInstructor] = useState(null);
+    const [bookings, setBookings] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
@@ -30,7 +31,20 @@ export function InstructorDashboard() {
                         },
                     }
                 );
+
                 setInstructor(instructorResponse.data.data);
+
+
+                const bookingResponse = await axios.get(
+
+                    `http://localhost:3001/v1/api/booking/instructor`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                setBookings(bookingResponse.data.data);
                 console.log(instructorResponse.data.data)
     
 
@@ -54,7 +68,7 @@ export function InstructorDashboard() {
                     <InstructorSidebar instructor={instructor} />
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
-                    
+                    <InstructorMainContent instructor={instructor} bookings={bookings}/>
                 </Col>
             </Row>
         </Container>

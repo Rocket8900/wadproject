@@ -69,6 +69,17 @@ export function ChooseQuiz() {
         return <div>Loading...</div>;
     }
 
+    const startTopicalQuiz = () => {
+        if (selectedCategory === '') {
+            // Show an alert if no category is selected
+            alert('Choose a category!');
+        } else {
+            // Navigate to the topical quiz page with the selected category
+            window.location.href = `/topical-quiz?category=${selectedCategory}`;
+        }
+    }
+
+
     return (
         <Container fluid className={styles.container}>
             <Row>
@@ -76,13 +87,13 @@ export function ChooseQuiz() {
                     <Sidebar student={student} />
                 </Col>
                 <Col lg={10} md={10} sm={10} id={styles["main-content"]}>
-                    <h1 className={`title-text pb-2 ${styles.h1}`}>Choose Question Type</h1>
+                    <h1>Choose Question Type</h1>
 
                     <div className="row" id={styles.cards}>
                         <div className={`col-md-5 col-sm-10 ${styles.cardstyle}`}>
                         <div className={`${styles.card} ${styles["card-1"]}`}>
-                            <h3 className={styles.h3}>Basic Theory Test</h3>
-                            <p className={styles.p}>A curated set of practice quizzes for the BTT.</p>
+                            <h3>Basic Theory Test</h3>
+                            <p>A curated set of practice quizzes for the BTT.</p>
                             <Link to="/btt-quiz">
                                 <button id="btt" className={`btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}>Start</button>
                             </Link>
@@ -91,8 +102,8 @@ export function ChooseQuiz() {
                         </div>
                         <div className={`col-md-5 col-sm-10 ${styles.cardstyle}`}>
                         <div className={`${styles.card} ${styles["card-2"]}`}>
-                            <h3 className={styles.h3}>Final Theory Test</h3>
-                            <p className={styles.p}>A curated set of practice quizzes for the FTT.</p>
+                            <h3>Final Theory Test</h3>
+                            <p>A curated set of practice quizzes for the FTT.</p>
                             <Link to="/ftt-quiz">
                                 <button id="ftt" className={`btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}>Start</button>
                             </Link>
@@ -103,8 +114,8 @@ export function ChooseQuiz() {
                     <div className="row" id={styles.cards}>
                         <div className={`col-md-5 col-sm-10 ${styles.cardstyle}`}>
                         <div className={`${styles.card} ${styles.cardrow2} ${styles["card-3"]}`}>
-                            <h3 className={styles.h3}>Practice by Topics</h3>
-                            <p className={styles.p}>Choose practice quizzes by topic to target your weak areas.</p>
+                            <h3>Practice by Topics</h3>
+                            <p>Choose practice quizzes by topic to target your weak areas.</p>
                             <select
                                     id="categoryDropdown"
                                     className="form-select"
@@ -118,16 +129,22 @@ export function ChooseQuiz() {
                                         </option>
                                     ))}
                             </select>
-                            <Link to={`/topical-quiz?category=${selectedCategory}`}>
-                                <button id="topic" className={`btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}>Start</button>
-                            </Link>
+                            {/* <Link to={`/topical-quiz?category=${selectedCategory}`}> */}
+                                <button 
+                                    id="topic" 
+                                    className={`btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}
+                                    onClick={startTopicalQuiz}
+                                    >
+                                    Start
+                                </button>
+                            {/* </Link> */}
                         </div>
                         </div>
 
                         <div className={`col-md-5 col-sm-10 ${styles.cardstyle}`}>
                         <div className={`${styles.card} ${styles.cardrow2} ${styles["card-4"]}`}>
-                            <h3 className={styles.h3}>Review Mistakes</h3>
-                            <p className={styles.p}>Review all your mistakes from previous practice quizzes.</p>
+                            <h3>Review Mistakes</h3>
+                            <p>Review all your mistakes from previous practice quizzes.</p>
                             <Link to="/review-quiz">
                                 <button id="review" className={`btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}>Review</button>
                             </Link>

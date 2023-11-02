@@ -3,7 +3,7 @@
 .container {
   padding: 0;
   padding-left: 10px;
-  background-color: #eaeaea;
+  background-color: #f5f5f5;
 }
 
 #main-content {
@@ -14,9 +14,9 @@
     background-color: #eaeaea;
 }
 
-#cards {
+/* #cards {
     justify-content: center;
-}
+} */
 
 .cardstyle {
   padding: 0;
@@ -41,10 +41,6 @@
     padding: 18px 80px 18px 36px;
     cursor: pointer;
     
-}
-
-.cardrow2 {
-  height: 240px;
 }
 
 .card:hover{
@@ -99,10 +95,3 @@
    background-position: right;
    background-size: 80px;
  }
-
- .card-4{
-  background-image: url('./quiz-image.png');
-     background-repeat: no-repeat;
- background-position: right;
- background-size: 90px;
-}
