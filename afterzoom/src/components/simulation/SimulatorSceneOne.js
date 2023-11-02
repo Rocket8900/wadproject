@@ -4,13 +4,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Sidebar from '../dashboards/sidebar/Sidebar';
-import sceneOne from './Test_Pano.jpg';
-import sceneTwo from './Test_Pano.jpg';
-import sceneThree from './Test_Pano.jpg';
 import marker from './download.png';
 import jwtDecode from "jwt-decode";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -24,6 +24,13 @@ function SimulatorSceneOne() {
     const [student, setStudent] = useState(null);
     const { id } = useParams();
     const [room, setRoom] = useState("starter"); // Declare state unconditionally
+    const [clickCounter, setClickCounter] = useState(0);
+    const [showModal, setShowModal] = useState(false);
+    const [showModal1, setShowModal1] = useState(true);
+    const [showModal2, setShowModal2] = useState(false);
+    const [showModal3, setShowModal3] = useState(false);
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -59,40 +66,75 @@ function SimulatorSceneOne() {
     const handleReady = (instance) => {
         const markersPlugs = instance.getPlugin(MarkersPlugin);
         markersPlugs.addEventListener("select-marker", (e) => {
-            if (e.marker.config.id === 'true') {
+          const clickedMarkerId = e.marker.config.id;
+      
+          console.log(clickCounter)
+      
+          // Use the functional form of setClickCounter
+          setClickCounter(prevCounter => {
+            // Check if the clicked marker is the next one in the sequence
+            if (
+              (clickedMarkerId === "signal" && prevCounter === 0) ||
+              (clickedMarkerId === "check" && prevCounter === 1) ||
+              (clickedMarkerId === "accel" && prevCounter === 2)
+            ) {
+              if (prevCounter === 2) {
                 setRoom("true");
+                return toggleModal();
+              }
+              toggleModal3();
+              return prevCounter + 1;
             } else {
-                setRoom("false");
+              // Display a message or handle invalid marker clicks
+              toggleModal2();
+              return prevCounter; // Return the current counter unchanged
             }
-        });
-    }
 
+          });
+        });
+      };
+
+    const toggleModal = () => setShowModal(!showModal);
+    const toggleModal1 = () => setShowModal1(!showModal1);
+    const toggleModal2 = () => setShowModal2(!showModal2);
+    const toggleModal3 = () => setShowModal3(!showModal3);
+    
     const plugins = [
         [MarkersPlugin, {
             markers: [
                 {
-                    id: 'true',
-                    position: { yaw: 0.32, pitch: 0.11 },
+                    id: 'accel',
+                    position: { yaw: 3.5, pitch: -0.5 },
                     image: 'download.png',
                     size: { width: 32, height: 32 },
                     anchor: 'bottom center',
                     zoomLvl: 100,
-                    tooltip: 'This is for true',
+                    tooltip: 'Accelerate',
                 },
                 {
-                    id: 'false',
-                    position: { yaw: 0.52, pitch: 0.31 },
+                    id: 'signal',
+                    position: { yaw: 3.0, pitch: -0.2 },
                     image: 'download.png',
                     size: { width: 32, height: 32 },
                     anchor: 'bottom center',
                     zoomLvl: 100,
-                    tooltip: 'This is for false',
+                    tooltip: 'Signal left',
                 },
+                {
+                    id: 'check',
+                    position: { yaw: 4.2, pitch: 0 },
+                    image: 'download.png',
+                    size: { width: 32, height: 32 },
+                    anchor: 'bottom center',
+                    zoomLvl: 100,
+                    tooltip: 'Check right for cars',
+                }
             ]
         }],
     ];
 
     return (
+        
         <Container fluid>
             <Row>
                 <Col lg={2} md={2} sm={2} id="sidebar">
@@ -103,39 +145,74 @@ function SimulatorSceneOne() {
                         {room === "starter" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='filmdrafttwo.jpg'
+                                src='t-junc.jpg'
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}
                                 onReady={handleReady}
                                 littlePlanet={false}
+                                defaultYaw={9.8}
+                                // mousemove={true}
                             ></ReactPhotoSphereViewer>
-                        )}
-                        {room === "true" && (
-                            <ReactPhotoSphereViewer
-                                ref={photoSphereRef}
-                                src={sceneTwo}
-                                height={"100vh"}
-                                plugins={plugins}
-                                width={"100%"}
-                                onReady={handleReady}
-                                littlePlanet={false}
-                            ></ReactPhotoSphereViewer>
-                        )}
-                        {room === "false" && (
-                            <ReactPhotoSphereViewer
-                                ref={photoSphereRef}
-                                src={sceneThree}
-                                height={"100vh"}
-                                width={"100%"}
-                                plugins={plugins}
-                                onReady={handleReady}
-                                littlePlanet={false}
-                            ></ReactPhotoSphereViewer>
-                        )}
+
+                        )}                       
                     </div>
                 </Col>
             </Row>
+                <Modal show={showModal} onHide={toggleModal} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Congratulations!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Congratulations on completing this scenario!</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Link to={`/simulator`}>
+                            <Button variant="secondary">
+                                Choose a new level
+                            </Button>
+                        </Link>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={showModal1} onHide={toggleModal1} centered>
+                    <Modal.Header>
+                        <Modal.Title>Welcome to the SIMULATION</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>You find yourself at a T-Junction with no traffic light and you need to make a left turn. What should you do?</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                            <Button variant="secondary" onClick={toggleModal1}>
+                                BEGIN
+                            </Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={showModal2} onHide={toggleModal2} centered>
+                    <Modal.Header>
+                        <Modal.Title>Oops!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>That's not it. Try Again!</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                            <Button variant="secondary" onClick={toggleModal2}>
+                                Try Again
+                            </Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={showModal3} onHide={toggleModal3} centered>
+                    <Modal.Header>
+                        <Modal.Title></Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Good work! What's next?</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                            <Button variant="secondary" onClick={toggleModal3}>
+                                CONTINUE
+                            </Button>
+                    </Modal.Footer>
+                </Modal>
         </Container>
     );
 }
