@@ -2,7 +2,7 @@
 import { Home } from "./components/home/Home";
 import { StudentDashboard } from "./components/dashboards/StudentDashboard";
 import { InstructorDashboard } from "./components/dashboards/InstructorDashboard";
-import InstructorsComponent from "./components/instructors/instructors";
+import InstructorsComponent from "./components/instructorsList/instructors";
 import { ChooseQuiz } from "./components/quiz/choosequiz";
 import Quiz from "./components/quiz/Quiz.js";
 import {Routes,Route} from 'react-router';
