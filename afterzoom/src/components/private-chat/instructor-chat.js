@@ -69,7 +69,7 @@ function ChatWithStudentPage() {
                 <InstructorSidebar instructor={instructor}/>
               </Col>
               <Col lg={10} md={10} sm={10} id="main-content">
-                 <InstructorChatPage />
+                 <InstructorChatPage instructor={instructor}/>
               </Col>
           </Row>
       </Container>
