@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import "./MainContent.css";
+import "./InstructorMainContent.css";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { PiHandWavingDuotone} from 'react-icons/pi';
@@ -111,15 +111,20 @@ const InstructorMainContent = ({ instructor, bookings }) => {
       w: 6,
       h: 2,
       content: 
-<div style={{ textAlign: 'left' }}>
-  <h2>Hello, {instructorName} <PiHandWavingDuotone /></h2>
-  Your profile is {updatedCompleteness}% complete <br/>
-  Task List:
-  <ul>
-    {missingPoints.map((point, index) => (
-      <li key={index}>{point}</li>
-    ))}
-  </ul>
+<div className="greet" style={{ textAlign: 'left' }}>
+  <h2>Welcome back, {instructorName} <PiHandWavingDuotone /></h2>
+  <p>Your profile is {updatedCompleteness}% complete</p> 
+  {/* <br/> */}
+  <p>Task List:</p>
+  {updatedCompleteness < 100 ? (
+    <ul>
+      {missingPoints.map((point, index) => (
+        <li key={index}>{point}</li>
+      ))}
+    </ul>
+  ) : (
+    "  -"
+  )}
 </div>
       
     },    

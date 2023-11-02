@@ -15,7 +15,7 @@ import {
   FaCog,
 } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
-import "./Sidebar.css";
+import "./insSidebar.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -246,12 +246,12 @@ const Sidebar = ({ instructor }) => {
             <Container>
               <Row>
                 <Col lg={5} md={12}>
-                  <img className="sidebarprofile" src={profileImage} alt="Logo" />
+                  <img className="sidebarprofile" src={profileImage} alt="pic" />
                 </Col>
-                <Col lg={7} md={12}><div className="user-info">Hi {name}!</div></Col>
+                <Col lg={7} md={12}><div className="user-info">Hello, {name}!</div></Col>
               </Row>
             </Container>
-            <p className="profileEditInfo">Click me to edit your profile!</p>
+            <p className="profileEditInfo">Click me to edit your profile</p>
           </div>
 
           <Menu iconShape="square">
@@ -271,7 +271,7 @@ const Sidebar = ({ instructor }) => {
               className="mostinnerouter"
             >
               <Link to="/instructorbookings">
-                <div className="mostInner">Check your bookings</div>
+                <div className="mostInner">Bookings</div>
               </Link>
             </MenuItem>
 
@@ -282,7 +282,7 @@ const Sidebar = ({ instructor }) => {
               className="mostinnerouter"
             >
               <Link to="/instructorstudents">
-                <div className="mostInner">See your students</div>
+                <div className="mostInner">View Students</div>
               </Link>
             </MenuItem>
 
@@ -293,7 +293,7 @@ const Sidebar = ({ instructor }) => {
               className="mostinnerouter"
             >
               <Link to="/instructor-chat">
-                <div className="mostInner">Open your chat</div>
+                <div className="mostInner">Open Chat</div>
               </Link>
             </MenuItem>
           </Menu>
