@@ -103,7 +103,7 @@ function SimulatorSceneOne() {
                         {room === "starter" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='filmdraft.jpeg'
+                                src='filmdrafttwo.jpg'
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}
