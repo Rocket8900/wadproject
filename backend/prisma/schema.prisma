@@ -45,7 +45,7 @@ model Instructor {
   experience   Int
   type         String // enums("auto", "manual", "both")
   carModel     String
-  preferedLocation String?
+  preferedLocation Json?
   layout Json?
   students     Student[]
   availability DateTime[]

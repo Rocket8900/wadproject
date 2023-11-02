@@ -90,6 +90,7 @@ function InstructorChatPage({instructor}) {
       }
       setInput("");
     }
+
   };
 
   const handleStudentChange = async (e) => {

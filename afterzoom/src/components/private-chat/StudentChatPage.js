@@ -13,9 +13,18 @@ function StudentChatPage({student}) {
   const [socket, setSocket] = useState(null);
   const [instructors, setInstructors] = useState([]);
   const [selectedInstructorId, setSelectedInstructorId] = useState("");
+  const [messageCounter, setMessageCounter] = useState(0);
+  const [instructorImages, setInstructorImages] = useState({});
+
+
   const token = Cookies.get("access_token");
   
   useEffect(() => {
+    if (messageCounter > 0) {
+        setTimeout(() => {
+            handleInstructorChange(selectedInstructorId);
+        }, 1000); // 1 seconds delay
+    }
     const fetchInstructors = async () => {
       try {
         const response = await axios.get(
@@ -40,8 +49,31 @@ function StudentChatPage({student}) {
         }
         let finalProfiles = [];
         for (let i = 0; i < instructorProfile.length; i++) {
-          finalProfiles.push(instructorProfile[i].data);
+        let profileData = instructorProfile[i].data;
+
+        if (profileData.dp !== null) {
+            try {
+            const url = await axios.get(`http://localhost:3001/v1/api/s3/instructor/single/${profileData.id}`, {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                },
+            });
+
+            let imgUrl = "./Screenshot 2023-11-03 at 4.14.19 AM.png";
+            if (url && url.data) {
+                imgUrl = url.data;
+            }
+            profileData['s3ImageUrl'] = imgUrl;  // Add the S3 URL to the profile data
+
+            } catch (error) {
+            console.error("Error fetching instructor image:", error);
+            profileData['s3ImageUrl'] = "./Screenshot 2023-11-03 at 4.14.19 AM.png";  // default image in case of error
+            }
         }
+        
+        finalProfiles.push(profileData);
+        }
+        console.log(finalProfiles);
         setInstructors(finalProfiles);
       } catch (error) {
         console.error("Error fetching instructors with chat history:", error);
@@ -66,7 +98,7 @@ function StudentChatPage({student}) {
     return () => {
       if (socket) socket.disconnect();
     };
-  }, []);
+  }, [messageCounter]);
 
   const sendMessage = () => {
     if (input.trim()) {
@@ -77,6 +109,7 @@ function StudentChatPage({student}) {
         });
       }
       setInput("");
+      setMessageCounter((prev) => prev + 1);
     }
   };
 
@@ -112,21 +145,20 @@ function StudentChatPage({student}) {
           <div className="chat-header">
             <h2>Chats</h2>
             <div className="custom-dropdown">
-              <div className="custom-dropdown-selected">
-                {selectedInstructorId
-                  ? instructors.find((instructor) => instructor.id === selectedInstructorId).name
-                  : "Select an instructor"}
-              </div>
               <div className="custom-dropdown-options">
-                {instructors.map((instructor) => (
-                  <div
+              {instructors.map((instructor) => (
+                <div
                     key={instructor.id}
-                    onClick={() => handleInstructorChange(instructor.id)}
+                    onClick={() => {
+                        handleInstructorChange(instructor.id);
+                        // Assuming you no longer need the fetchInstructorImage function here since you're loading all images initially
+                    }}
                     className="custom-dropdown-option-individual"
-                  >
+                >
+                    <img src={instructorImages[instructor.id]} alt={`Image of ${instructor.name}`} />
                     {instructor.name}
-                  </div>
-                ))}
+                </div>
+            ))}
               </div>
             </div>
           </div>

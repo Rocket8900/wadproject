@@ -26,9 +26,11 @@ export default class S3Controller {
         try {
             const studentId = req.user.id
             const urlId = (await StudentService.getStudentById(studentId)).selfie
-            const signedUrl = await S3Service.getSignedUrl(urlId)
-            if (signedUrl) {
-                return res.status(200).json({data: signedUrl})
+            if (urlId !== null) {
+                const signedUrl = await S3Service.getSignedUrl(urlId)
+                if (signedUrl) {
+                    return res.status(200).json({data: signedUrl})
+                }
             }
             return res.status(400).json({data: "unable to retrieve image"})
         } catch (error) {
@@ -41,9 +43,11 @@ export default class S3Controller {
         try {
             const instructorId = req.user.id
             const urlId = (await InstructorService.getInstructorById(instructorId)).dp
-            const signedUrl = await S3Service.getSignedUrl(urlId)
-            if (signedUrl) {
-                return res.status(200).json({data: signedUrl})
+            if (urlId !== null) {
+                const signedUrl = await S3Service.getSignedUrl(urlId)
+                if (signedUrl) {
+                    return res.status(200).json({data: signedUrl})
+                }
             }
             return res.status(400).json({data: "unable to retrieve image"})
         } catch (error) {
@@ -56,9 +60,11 @@ export default class S3Controller {
         try {
             const sceneId = req.params.id
             const urlId = (await SceneService.getScene(sceneId)).key
-            const signedUrl = await S3Service.getSignedUrl(urlId)
-            if (signedUrl) {
-                return res.status(200).json({data: signedUrl})
+            if (urlId !== null) {
+                const signedUrl = await S3Service.getSignedUrl(urlId)
+                if (signedUrl) {
+                    return res.status(200).json({data: signedUrl})
+                }
             }
             return res.status(400).json({data: "unable to retrieve scene"})
         } catch (error) {
