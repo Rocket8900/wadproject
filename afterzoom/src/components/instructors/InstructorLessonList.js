@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/system';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import CreatingLessonContent from './CreatingLessonContent';
+import './lessonlist.css';
 
 
 function getCookie(name) {
@@ -225,72 +226,76 @@ function InstructorLessonList() {
           <InstructorSidebar instructor={instructor} />
         </Col>
         <Col lg={10} md={10} sm={10} id="main-content">
-          <h2>This is where all the lessons go</h2>
+          <h1>Your bookings overview</h1>
 
-          <h3>Upcoming Lessons</h3>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Student Name</th>
-                <th>Lesson Title</th>
-                <th>Lesson Date</th>
-                <th>Lesson Description</th>
-                <th>Lesson Feedback</th>
-                <th>Modify Feedback</th>
-              </tr>
-            </thead>
-            <tbody>
-              {upcomingLessons.map(({ booking, lesson }) => (
-                <tr key={lesson.id}>
-                  <td>{studentNames[booking.studentId]}</td>
-                  <td>{lesson.title}</td>
-                  <td>{formatDateToReadableString(lesson.date)}</td>
-                  <td>{lesson.description}</td>
-                  <td>{lesson.feedback}</td>
-                  <td></td>
+          <div className="container1">
+            <h3>Upcoming Lessons</h3>
+            <table className="rwd-table">
+              <thead>
+                <tr>
+                  <th>STUDENT NAME</th>
+                  <th>LESSON TITLE</th>
+                  <th>DATE</th>
+                  <th>DESCRIPTION</th>
+                  <th>FEEDBACK</th>
+                  {/* <th>Modify Feedback</th> */}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <h3>Past Lessons</h3>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Student Name</th>
-                <th>Lesson Title</th>
-                <th>Lesson Date</th>
-                <th>Lesson Description</th>
-                <th>Lesson Feedback</th>
-                <th>Edit Feedback</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pastLessons.map(({ booking, lesson }) => (
-                <tr key={lesson.id}>
-                  <td>{studentNames[booking.studentId]}</td>
-                  <td>{lesson.title}</td>
-                  <td>{formatDateToReadableString(lesson.date)}</td>
-                  <td>{lesson.description}</td>
-                  <td>{lesson.feedback}</td>
-                  <td>
-                    <Button
-                      variant="primary"
-                      onClick={() => {
-                        setSelectedLessonFeedback(lesson.feedback);
-                        setIsOpen(true);
-                      }}
-                    >
-                      Edit Feedback
-                    </Button>{' '}
-                  </td>
-                  <FeedBackModal isOpen={isOpen} setIsOpen={setIsOpen} booking={lesson} />
+              </thead>
+              <tbody>
+                {upcomingLessons.map(({ booking, lesson }) => (
+                  <tr key={lesson.id}>
+                    <td data-th="Student Name">{studentNames[booking.studentId] || '-'}</td>
+                    <td data-th="Lesson Title">{lesson.title || 'Untitled'}</td>
+                    <td data-th="Date">{formatDateToReadableString(lesson.date) || '-'}</td>
+                    <td data-th="Description">{lesson.description || '-'}</td>
+                    <td data-th="Feedback">{lesson.feedback || '-'}</td>
+                    <td></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+          <div className='container2'>
+            <h3>Past Lessons</h3>
+            <table className="rwd-table">
+              <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Lesson Title</th>
+                  <th>Lesson Date</th>
+                  <th>Lesson Description</th>
+                  <th>Lesson Feedback</th>
+                  <th>Edit Feedback</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <div>
+              </thead>
+              <tbody>
+                {pastLessons.map(({ booking, lesson }) => (
+                  <tr key={lesson.id}>
+                    <td>{studentNames[booking.studentId]}</td>
+                    <td>{lesson.title}</td>
+                    <td>{formatDateToReadableString(lesson.date)}</td>
+                    <td>{lesson.description}</td>
+                    <td>{lesson.feedback}</td>
+                    <td>
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          setSelectedLessonFeedback(lesson.feedback);
+                          setIsOpen(true);
+                        }}
+                      >
+                        Edit Feedback
+                      </Button>{' '}
+                    </td>
+                    <FeedBackModal isOpen={isOpen} setIsOpen={setIsOpen} booking={lesson} />
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+        <div>
         <StyledButton ref={setAnchor} onClick={() => setOpen((o) => !o)} type="button">
           Create a New Lesson
         </StyledButton>

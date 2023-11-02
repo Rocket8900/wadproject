@@ -1,0 +1,181 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&family=Montserrat:wght@300;400&family=Poppins:wght@300;700&display=swap');
+
+.body {
+  background-color: #f5f5f5;
+  width: 100%;
+  /* display: flex;
+  flex-direction: row;  */
+  /* Change to a row layout to put sidebar and content side by side */
+}
+/* #sidebar {
+  font-family: 'Inter', sans-serif;
+  padding-left: 20px; */
+  
+  /* height: 100%;  */
+  /* Make sure the sidebar takes full height */
+  
+  /* position: fixed;  */
+  /* Fix the sidebar's position */
+/* } */
+
+#main-content {
+  /* padding-left: 23px;
+  padding-right: 20px; */
+  padding: 0;
+  background-color: #f5f5f5;
+  /* margin-left: 16%; */
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  display: flex; /* Use flexbox to contain elements */
+  flex-direction: column; /* Stack child elements vertically */
+  align-items: center; /* Center child elements horizontally */
+}
+
+#main-content h1 {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.4em;
+  font-weight: 900;
+  color: #099d33;
+  margin: 10px;
+  margin-top: 20px;
+}
+
+#main-content h3 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 2.5%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #46474a;
+}
+
+.container1, .container2 {
+  /* display: block;
+  text-align: center; */
+  background-color: white;
+  width: 90%;
+  /* max-height: calc(100vh - 50px);  */
+  /* Calculate maximum height based on viewport height minus some margin */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* margin-left: 100px; */
+  padding: 10px;
+  /* border: 1px solid rgb(188, 188, 192); */
+  border-radius: 20px;
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  overflow: auto; /* Add horizontal scrolling when needed */
+  table-layout: fixed; /* Prevent table from expanding past the container */
+}
+
+.rwd-table {
+  margin: auto;
+  width: 95%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Prevent table from expanding past the container */
+
+}
+
+.rwd-table thead {
+  border-top: none;
+  /* background: #3083dc; */
+  color: #42ae46;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+}
+
+.rwd-table tr {
+  /* border-top: 1px solid #ddd; */
+  border-bottom: 1px solid #ddd;
+  /* background-color: #f5f9fc; */
+}
+
+/* .rwd-table tr:nth-child(odd):not(:first-child) {
+  background-color: #f5f5f5;
+} */
+
+.rwd-table th {
+  display: none;
+}
+
+.rwd-table td {
+  display: block;
+  word-wrap: break-word; /* content wrap to next line */
+  overflow-wrap: break-word; /* Add this property for better browser support */
+}
+
+.rwd-table td:first-child {
+  margin-top: .5em;
+}
+
+.rwd-table td:last-child {
+  margin-bottom: .5em;
+}
+
+
+/* FOR TABLE IN SMALL SCREEN */
+.rwd-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 120px;
+  display: inline-block;
+  color: #191716;
+}
+
+.rwd-table th,
+.rwd-table td {
+  text-align: left;
+}
+
+.rwd-table {
+  color: #74777d;
+  border-radius: .4em;
+  overflow: auto;
+}
+
+.rwd-table tr {
+  border-color: #bfbfbf;
+}
+
+.rwd-table th,
+.rwd-table td {
+  padding: .5em 1em;
+}
+
+/* FOR SMALL SCREEN VIEW */
+@media screen and (max-width: 768px) {
+  .rwd-table tr:nth-child(2) {
+    border-top: none;
+  }
+  .container {
+    margin-top: 20px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .rwd-table tbody tr:hover {
+    background-color: #eaeaea;
+  }
+  .rwd-table td:before {
+    display: none;
+  }
+  .rwd-table th,
+  .rwd-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  .rwd-table th:first-child,
+  .rwd-table td:first-child {
+    padding-left: 0;
+  }
+  .rwd-table th:last-child,
+  .rwd-table td:last-child {
+    padding-right: 0;
+  }
+  .rwd-table th,
+  .rwd-table td {
+    padding: 1em !important;
+  }
+}
