@@ -7,8 +7,9 @@ import InstructorSidebar from '../dashboards/sidebar/instructorSidebar';
 import Cookie from 'js-cookie';
 import jwtDecode from "jwt-decode";
 import { useParams } from "react-router-dom";
-import Table from 'react-bootstrap/Table';
+// import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import styles from './studentlist.module.css';
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -140,60 +141,78 @@ function InstructorLessonList() {
     return <div>Loading...</div>;
   }
 
+  let count = 0
+
   return (
     <Container fluid>
       <Row>
         <Col lg={2} md={2} sm={2} id="sidebar">
           <InstructorSidebar instructor={instructor} />
         </Col>
-        <Col lg={10} md={10} sm={10} id="main-content">
-          <div>These are my students</div>
-          <Table striped bordered hover size="sm">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>email</th>
-              </tr>
-            </thead>
-            <tbody>
-              {students.map((student) => (
-                <tr key={student.id}>
-                  <td>{student.name}</td>
-                  <td>{student.email}</td>
+        <Col lg={10} md={10} sm={10} id={styles["main-content"]}>
+          <h1>Your Students</h1>
+
+          <div className={styles.container1}>
+            <h3>Current Students</h3>
+            <table className={styles["rwd-table"]}>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>NAME</th>
+                  <th>EMAIL</th>
+                  <th>TYPE</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-          <div>These are prospective students</div>
-          <Table striped bordered hover size="sm">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>email</th>
-                <th>accept</th>
-                <th>decline</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pendingBookings.map((booking, index) => (
-                <tr key={booking.id}>
-                  <td>{studentProfiles[index] ? studentProfiles[index].name : 'Loading...'}</td>
-                  <td>{studentProfiles[index] ? studentProfiles[index].email : 'Loading...'}</td>
-                  <td>
-                    <Button 
-                    variant="primary"
-                    onClick={() => acceptBooking(booking.id)}>
-                      Accept</Button>{' '}
-                  </td>
-                  <td>
-                    <Button 
-                    variant="primary"
-                    onClick={() => rejectBooking(booking.id)}>Reject</Button>{' '}
-                  </td>
+              </thead>
+              <tbody>
+                {students.map((student) => (
+                  <tr key={student.id}>
+                    <td data-th="Index">{++count}</td>
+                    <td data-th="Student Name">{student.name || '-'}</td>
+                    <td data-th="Email">{student.email || '-'}</td>
+                    <td data-th="Type of transmission">{student.type || '-'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+          <div className={styles.container1}>
+            <h3>Prospective Students</h3>
+            <table className={styles["rwd-table"]}>
+              <thead>
+                <tr>
+                  <th>NAME</th>
+                  <th>EMAIL</th>
+                  <th>TYPE</th>
+                  <th>ACTION TO TAKE</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {pendingBookings.map((booking, index) => (
+                  <tr key={booking.id}>
+                    <td data-th="Student Name">{studentProfiles[index] ? studentProfiles[index].name : 'Loading...'}</td>
+                    <td data-th="Email">{studentProfiles[index] ? studentProfiles[index].email : 'Loading...'}</td>
+                    <td data-th="Type">{studentProfiles[index] ? studentProfiles[index].type : 'Loading...'}</td>
+                    <td data-th="Action to take" className={styles.actions}>
+                      <Button 
+                      variant="success" className='accept'
+                      onClick={() => acceptBooking(booking.id)}>
+                        Accept
+                      </Button>{' '}
+
+                      <Button 
+                      variant="danger" className='decline'
+                      onClick={() => rejectBooking(booking.id)}>
+                        Reject
+                      </Button>{' '}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
         </Col>
       </Row>
     </Container>
