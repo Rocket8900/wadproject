@@ -31,6 +31,25 @@ const backgroundImageStyle = (urls) => {
   }
 };
 
+const handleChatClick = async (instructorId) => {
+  try {
+    const token = getCookie("access_token"); // Assuming you use Cookies for storing the token
+    
+    const response = await axios.post(`http://localhost:3001/v1/api/chat/${instructorId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    
+    // Handle the response or set state here, if needed
+    console.log(response.data);
+    window.location.reload();
+  } catch (error) {
+    console.error('Error when clicking the button:', error);
+  }
+};
+
+
 // component for creating Instructor Card
 function InstructorCard({ instructor, showModal }) {
 
@@ -84,7 +103,7 @@ function InstructorCard({ instructor, showModal }) {
     <p>Gender: {instructor.gender}</p>
     <p>Affiliation: {instructor.affiliation}</p>
     <p>Transmission: {instructor.type}</p>
-    <Link to={`/student-chat`}><Button variant="dark">Chat with instructor!</Button></Link>
+    <Link to={`/student-chat`}><Button variant="dark" onClick={() => handleChatClick(instructor.id)} >Chat with instructor!</Button></Link>
   </div>
 </Modal.Body>
           <Modal.Footer>
