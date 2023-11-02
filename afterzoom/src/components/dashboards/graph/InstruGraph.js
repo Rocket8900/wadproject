@@ -25,7 +25,7 @@ class Graph extends Component {
             reviews: instructorReviews,
             chatHistory: instructorChats
           } = instructor;
-		const { id: bookingId, lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings || {}; 
+		const { id: bookingId, lessons:lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings || {}; 
 		if ((!bookings || !bookings.lesson) && instructorStudents===null) {
             return <div>No lesson data available. Got to Find a Student First !</div>;
         }
