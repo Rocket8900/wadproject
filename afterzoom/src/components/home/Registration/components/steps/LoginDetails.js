@@ -55,15 +55,6 @@ const card ={
         />
       </div>
 
-      <div className="input-container">
-        <label htmlFor="confirmpassword">Confirm Password</label>
-        <Field 
-          type="password" 
-          name='confirmpassword' 
-          placeholder='Confirm Your Password'
-        />
-      </div>
-
 
     </m.div>
   )
