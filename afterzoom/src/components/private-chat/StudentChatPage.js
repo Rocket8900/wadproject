@@ -14,7 +14,7 @@ function StudentChatPage({student}) {
   const [instructors, setInstructors] = useState([]);
   const [selectedInstructorId, setSelectedInstructorId] = useState("");
   const [messageCounter, setMessageCounter] = useState(0);
-  const [instructorImages, setInstructorImages] = useState({});
+
 
 
   const token = Cookies.get("access_token");
@@ -25,6 +25,7 @@ function StudentChatPage({student}) {
             handleInstructorChange(selectedInstructorId);
         }, 1000); // 1 seconds delay
     }
+
     const fetchInstructors = async () => {
       try {
         const response = await axios.get(
@@ -45,33 +46,23 @@ function StudentChatPage({student}) {
               Authorization: `Bearer ${token}`,
             },
           });
-          instructorProfile.push(profile.data);
+
+          let profileDetails = profile.data;
+          if (profileDetails.data.dp == null) {
+            profileDetails.data.dp = "/Screenshot 2023-11-03 at 4.14.19 AM.png"
+          } else {
+            profileDetails.data.dp = await axios.get(`http://localhost:3001/v1/api/s3/instructor/${profileDetails.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                  }
+            })
+          }
+
+          instructorProfile.push(profileDetails);
         }
         let finalProfiles = [];
         for (let i = 0; i < instructorProfile.length; i++) {
-        let profileData = instructorProfile[i].data;
-
-        if (profileData.dp !== null) {
-            try {
-            const url = await axios.get(`http://localhost:3001/v1/api/s3/instructor/single/${profileData.id}`, {
-                headers: {
-                Authorization: `Bearer ${token}`,
-                },
-            });
-
-            let imgUrl = "./Screenshot 2023-11-03 at 4.14.19 AM.png";
-            if (url && url.data) {
-                imgUrl = url.data;
-            }
-            profileData['s3ImageUrl'] = imgUrl;  // Add the S3 URL to the profile data
-
-            } catch (error) {
-            console.error("Error fetching instructor image:", error);
-            profileData['s3ImageUrl'] = "./Screenshot 2023-11-03 at 4.14.19 AM.png";  // default image in case of error
-            }
-        }
-        
-        finalProfiles.push(profileData);
+          finalProfiles.push(instructorProfile[i].data);
         }
         console.log(finalProfiles);
         setInstructors(finalProfiles);
@@ -80,7 +71,12 @@ function StudentChatPage({student}) {
       }
     };
 
+
+
+
     fetchInstructors();
+
+
 
     const connectToSocketServer = () => {
       const newSocket = io("http://localhost:3001", {
@@ -141,27 +137,44 @@ function StudentChatPage({student}) {
   return (
     <Container fluid>
       <Row>
-        <Col lg={2} md={2} sm={2} id="sidebar">
-          <div className="chat-header">
-            <h2>Chats</h2>
-            <div className="custom-dropdown">
-              <div className="custom-dropdown-options">
-              {instructors.map((instructor) => (
-                <div
-                    key={instructor.id}
-                    onClick={() => {
-                        handleInstructorChange(instructor.id);
-                        // Assuming you no longer need the fetchInstructorImage function here since you're loading all images initially
-                    }}
-                    className="custom-dropdown-option-individual"
-                >
-                    <img src={instructorImages[instructor.id]} alt={`Image of ${instructor.name}`} />
-                    {instructor.name}
+      <Col lg={2} md={2} sm={2} id="sidebar" style={{background: 'linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%)'}}>
+            <div className="chat-header">
+                <h2>Chats</h2>
+                <div className="custom-dropdown">
+                    <div className="custom-dropdown-options">
+                    {instructors.map((instructor) => (
+                        <button 
+                            key={instructor.id}
+                            onClick={() => {
+                                handleInstructorChange(instructor.id);
+                            }}
+                            className="btn btn-light d-flex align-items-center mb-3 w-100"
+                            style={{
+                                borderRadius: '15px',
+                                transition: 'background-color 0.3s'
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#eef2f7'}
+                            onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
+                        >
+                            <img 
+                                src={instructor.dp} 
+                                alt={`Image of ${instructor.name}`} 
+                                style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '50%', marginRight: '10px' }} 
+                            />
+                            <span style={{
+                                fontSize: 'small',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                                maxWidth: 'calc(100% - 50px)'  // considering image width and margin
+                            }}>
+                                {instructor.name}
+                            </span>
+                        </button>
+                    ))}
+                    </div>
                 </div>
-            ))}
-              </div>
             </div>
-          </div>
         </Col>
         <Col lg={10} md={10} sm={10} id="main-content">
           <div className="chat-page">
