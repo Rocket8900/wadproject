@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import "./Notes.css"
+import styles from './Notes.module.css';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const Notes = (student) => {
-
   const { id: studentId, selfie, name, age, email, gender, type, language, instructor, instructorId:stuInstructorId, reviews,bookings:stuBookings,chatHistory } = student;
   const [inputText, setInputText] = useState('');
   const [color, setColor] = useState('green');
@@ -88,7 +87,7 @@ const Notes = (student) => {
   };
 
   return (
-    <div className="container">
+    <div className="container text-center">
       <div className="row">
         <div className="col-12 text-center">
           <h1>Your Personal Notepad</h1>
@@ -137,7 +136,7 @@ const Notes = (student) => {
                   Orange &nbsp;
                 </div>
               </form>
-              <button className="btn btn-success" onClick={handleAddNote}>
+              <button className="btn" onClick={handleAddNote}>
                 Add Note
               </button>
               <span className="alerts">{alert}</span>
@@ -155,7 +154,7 @@ const Notes = (student) => {
             <h3>No Notes</h3>
           ) : (
             notes.map((note) => (
-                <div key={note.id} className="note-container">
+                <div key={note.id} className={`${styles.noteContainer} ${styles[note.bgColor]}`}>
                   <div className="note-buttons">
                     <button
                       className="add-to-dashboard"
@@ -171,8 +170,8 @@ const Notes = (student) => {
                     </button>
                   </div>
                   <div
-                    className={`${note.bgColor} note-box alert col-12`}
-                    dangerouslySetInnerHTML={{ __html: note.content }}
+                      className="note-box alert col-12"
+                      dangerouslySetInnerHTML={{ __html: note.content }}
                   />
                 </div>
 
