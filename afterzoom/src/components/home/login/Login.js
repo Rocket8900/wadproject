@@ -6,7 +6,7 @@ import carImage from './car.jpg'; // Import car image
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { motion as m } from 'framer-motion'
-import { Formik, Field, Form, ErrorMessage } from 'formik'; 
+import { Formik, Field, Form } from 'formik'; 
 
 const LoginModal = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
@@ -104,7 +104,12 @@ const LoginModal = ({ isOpen, setIsOpen }) => {
           animate={{ y: '0%' }}
           className='loginForm-box '
         >
-<Formik>
+<Formik
+  initialValues={{
+    email: '',
+    password: '',
+  }}
+>
   <Form>
     <h1 className="loginTitle">Login</h1>
 <div className="input-container" style={{marginBottom:"20px"}}>

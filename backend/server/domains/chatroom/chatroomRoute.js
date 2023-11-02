@@ -7,8 +7,7 @@ const chatRoomRoute = express.Router()
 
 chatRoomRoute.use(AuthController.validateUser)
 chatRoomRoute.get("/:id", ChatroomController.startChatting)
-
-
+chatRoomRoute.post("/:id", ChatroomController.createEmptyChatHistory)
 chatRoomRoute.get("/student/list", AuthController.validateStudent, ChatroomController.retrieveAllStudentChatHistory)
 chatRoomRoute.get("/instructor/list", AuthController.validateInstructor, ChatroomController.retrieveAllInstructorChatHistory)
 

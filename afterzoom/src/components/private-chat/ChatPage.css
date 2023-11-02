@@ -1,6 +1,16 @@
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  overflow: auto;
+}
+
 .chat-page {
     font-family: 'Arial', sans-serif;
-
+    overflow: hidden;
     width: 100%;
     min-height: 100vh;
   }
@@ -34,9 +44,9 @@
     position: relative;
 }
 
-.message p {
-    margin: 0;
-}
+  .message p {
+      margin: 0;
+  }
 
 .message.received {
     background-color: #d9e3f0; /* Different color for better differentiation */
@@ -83,10 +93,10 @@
 }
 
   .chat-input {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     margin-top: 20px;
-    width: 100%;
+    width: 68%;
     display: flex;
     justify-content: space-between;
   }

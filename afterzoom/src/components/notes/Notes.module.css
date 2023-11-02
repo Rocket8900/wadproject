@@ -1,8 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-h1 {
+
+
+.header {
+  margin: 10px;
+  padding: 10px;
   font-family: 'Poppins', sans-serif;
-  color:#2E5FFE;
+  font-weight: 900;
+  color: #3083dc;
+}
+
+.miniheader {
+  margin: 10px;
+  padding: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  color: #3083dc;
 }
 
 body {
@@ -38,6 +51,10 @@ body {
   color: #3c763d;
 }
 
+.accordian {
+  margin-bottom: 20px; 
+}
+
 
 .panel {
   box-shadow: 2px 2px 4px #ccc;
@@ -56,46 +73,64 @@ label {
 }
 
 /* Delete Button Styles */
-.note-container {
+.noteContainer {
   position: relative;
   margin-bottom: 20px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 15px;
+  min-height: 10vh;
 }
 
-.note-buttons {
-  position: absolute;
-  top: 20px;
-  right: 80px;
-  padding:0px;
+.notedContainer {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 15px;
+  min-height: 30vh;
 }
 
-.add-to-dashboard {
-  margin-left:0px;
-  position: absolute;
-  top: 0;
+.noteButtons {
+  position: relative;
+  bottom: 0px;
+  right: 0px;
+  padding: 0px;
+  border-radius: 15px;
+}
+
+.parentContainer {
+  position: relative;
+}
+
+.addtodashboard {
+  background-color: #493EFC;
+  color: rgba(242, 242, 242, 1);
+  position: relative;
+  bottom: 10;
   font-weight: bold;
   font-size: 10px;
   cursor: pointer;
   text-decoration: none;
-  border: none;
   z-index: 1; 
-  background-color: transparent;
-  transform: translateY(-50%);
+  width: 60%;
+  border-radius: 15px;
 }
  
 .delete {
-  margin-right:0px;
+  background-color: #493EFC;
+  color: rgba(242, 242, 242, 1);
+  margin-right: 0px;
+  padding: 8px 15px 8px 15px;
+  margin: 0;
   position: absolute;
   top: 0;
   right: 0;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 18px;
   cursor: pointer;
   text-decoration: none;
   border: none;
-  z-index: 1; 
-  transform: translateY(-50%);
+  z-index: 1;
+  border-radius: 50%;
 }
 
 
@@ -135,3 +170,49 @@ label {
   border-color: var(--orange-border);
 }
 
+.noteContainer{
+
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1rem;
+}
+
+.noteContainer > label {
+  padding: 1.2rem 0 ;
+
+  border-radius: 5px;
+  text-align: center; 
+  outline: 1px solid hsl(var(--cool-gray));
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-direction: column;
+  border: 1px solid black;
+} 
+
+.addbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.noteContainer > input[type='radio'] {
+  display: none;
+
+}
+
+.noteContainer > input[type='radio']:checked + label {
+  background-color: hsl(var(--purpleish-blue) / .1);
+}
+
+
+.noteContainer > label div{
+  display: flex;
+  flex-direction: column;
+
+}
+.noteContainer > label div span{
+  color: hsl(var(--cool-gray));
+}

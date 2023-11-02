@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Cookie from 'js-cookie';
-import "./styles/card.css";
+import styles from './card.module.css';
 import Modal from 'react-bootstrap/Modal';
 import {createRoot} from 'react-dom';
 import Button from 'react-bootstrap/Button';
@@ -13,6 +13,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Carousel from 'react-bootstrap/Carousel';
+import MapView from "./MapView";
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -20,9 +21,34 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
+
+const reverseGeocode = async (latitude, longitude) => {
+  try {
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyC2Qnl98e6FirAZSVRYEyzYfs_0jPaTsSk`
+    );
+
+    const results = response.data.results;
+    if (results && results.length > 0) {
+      const formattedAddress = results[0].formatted_address;
+      console.log("Formatted Address:", formattedAddress);
+      return formattedAddress;
+    } else {
+      console.log("No address found for the given coordinates.");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error reverse geocoding:", error);
+    return null;
+  }
+};
+
+
 // function for setting background image
 const backgroundImageStyle = (urls) => {
+  console.log(urls)
   if (Array.isArray(urls) && urls.length > 0) {
+    
     return {
       backgroundImage: `url(${urls[0]})`,
     };
@@ -31,8 +57,36 @@ const backgroundImageStyle = (urls) => {
   }
 };
 
+
+const handleChatClick = async (instructorId) => {
+  try {
+    const token = getCookie("access_token"); // Assuming you use Cookies for storing the token
+    
+    const response = await axios.post(`http://localhost:3001/v1/api/chat/${instructorId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    
+    // Handle the response or set state here, if needed
+    console.log(response.data);
+    window.location.reload();
+  } catch (error) {
+    console.error('Error when clicking the button:', error);
+  }
+};
+
+
+
 // component for creating Instructor Card
-function InstructorCard({ instructor, showModal }) {
+function InstructorCard({ instructor, showModal, onAddMarker }) {
+
+  const handleAddMarkerClick = () => {
+    const { name, preferedLocation } = instructor;
+    if (preferedLocation && preferedLocation.latitude && preferedLocation.longitude) {
+      onAddMarker(name, preferedLocation.latitude, preferedLocation.longitude);
+    }
+  };
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -45,11 +99,11 @@ function InstructorCard({ instructor, showModal }) {
   };
 
   return (
-    <div className="card" style={backgroundImageStyle(instructor.picture)}>
-      <div className="content">
-        <h2 className="title">{instructor.name}</h2>
-        <p className="copy">Instructor for {instructor.experience} years</p>
-        <button variant="primary" className="btn" onClick={handleModalShow}>
+    <div className={styles.card} style={backgroundImageStyle(instructor.picture)}>
+      <div className={styles.content}>
+        <h2 className={styles.title}>{instructor.name}</h2>
+        <p className={styles.copy}>Instructor for {instructor.experience} years</p>
+        <button variant="primary" className={styles.btn} onClick={handleModalShow}>
           View Details
         </button>
         <div>
@@ -66,27 +120,36 @@ function InstructorCard({ instructor, showModal }) {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body style={{ display: 'flex', alignItems: 'center' }}>
-            {/* Left Column (Carousel) */}
-            <div className="col-md-6">
-              <Carousel>
-                {instructor.picture.map((url, index) => (
-                  <Carousel.Item key={index}>
-                    <img src={url} alt={`Instructor ${index + 1}`} />
-                  </Carousel.Item>
-                ))}
-              </Carousel>
-            </div>
 
-            {/* Right Column (Instructor Info) */}
-            <div className="col-md-6">
-              <h1>{instructor.name}</h1>
-              <h4>Experience: {instructor.experience} years</h4>
-              <p>Gender: {instructor.gender}</p>
-              <p>Affiliation: {instructor.affiliation}</p>
-              <p>Transmission: {instructor.type}</p>
-              <Link to={`/student-chat`}><Button variant="dark">Chat with instructor!</Button></Link>
-            </div>
-          </Modal.Body>
+  {/* Left Column (Carousel) */}
+  <div className="col-md-6">
+    <Carousel>
+      {instructor.picture.map((url, index) => (
+        <Carousel.Item key={index}>
+          <img src={url} alt={`Instructor ${index + 1}`} />
+        </Carousel.Item>
+      ))}
+    </Carousel>
+  </div>
+
+  {/* Right Column (Instructor Info) */}
+  <div className="col-md-6">
+    <h1>{instructor.name}</h1>
+    <h4>Experience: {instructor.experience} years</h4>
+    <p>Gender: {instructor.gender}</p>
+    <p>Affiliation: {instructor.affiliation}</p>
+    <p>Transmission: {instructor.type}</p>
+
+    {/* <p>Preferred Location: {reverseGeocode(instructor.preferedLocation.latitude, instructor.preferedLocation.longitude)};</p> */}
+
+    <Link to={`/student-chat`}><Button variant="dark" onClick={() => handleChatClick(instructor.id)} >Chat with instructor!</Button></Link>
+    
+       {instructor.preferedLocation && (
+        <button onClick={handleAddMarkerClick}>Add Marker</button>
+      )}
+
+  </div>
+</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleModalClose}>
               Close
@@ -99,7 +162,11 @@ function InstructorCard({ instructor, showModal }) {
   );
 }
 
+
+
+
 function InstructorsComponent() {
+  const [markerCoordinates, setMarkerCoordinates] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const [student, setStudent] = useState(null);
   const [bookings, setBookings] = useState(null);
@@ -109,6 +176,10 @@ function InstructorsComponent() {
     affiliation: [],
     type: []
   });
+
+  const handleAddMarker = (name, latitude, longitude) => {
+    setMarkerCoordinates([...markerCoordinates, { name, latitude, longitude }]);
+  };
 
   useEffect(() => {
     const getInstructorsData = async () => {
@@ -205,97 +276,138 @@ if (bookings === null || student === null) {
                     <Sidebar student={student} />
                 </Col>
                 <Col lg={10} md={10} sm={10} id="main-content">
-                  <div className="headerCJ">
-                    <h1 className='top'>View Instructors</h1>
+                  <div className={styles.header}>
+                    <h1>Instructors</h1>
                   </div>
-                    <div className="inline">
-                      <form>
-                        <div>
-                          <h4>Gender:</h4>
-                          <label>
-                            <input
-                              type="checkbox"
-                              name="gender"
-                              value="Male"
-                              checked={filter.gender.includes('Male')}
-                              onChange={handleCheckboxChange}
-                            /> Male
-                          </label>
-                          <br/>
-                          <label>
-                            <input
+                    <div className={styles.inline}>
+
+
+                      <form className="controls" id="Filters">
+
+          
+                        <div className={styles.FilterBox}>
+
+                        <fieldset>
+                          <MapView markerCoordinates={markerCoordinates} />
+                        </fieldset>
+
+                        <br/>
+                        <br/>
+
+                        <fieldset>
+                        <h4>Gender</h4>
+                        <div className={styles.checkbox}>
+                          <input type="checkbox" name="gender" value="Male" checked={filter.gender.includes('Male')} onChange={handleCheckboxChange}/>
+                          <label>Male</label>
+                        </div>
+                        <div className={styles.checkbox}>
+                        <input
                               type="checkbox"
                               name="gender"
                               value="Female"
                               checked={filter.gender.includes('Female')}
                               onChange={handleCheckboxChange}
-                            /> Female
-                          </label>
+                            /> 
+                          <label>Female</label>
                         </div>
+                        </fieldset>
+
+
+
+
+
                         <br />
-                        <div>
-                          <h4>Affiliation:</h4>
-                          <label>
-                            <input
+
+                        <br/>
+                     
+
+                          <fieldset>
+                          <h4>Affiliation</h4>
+
+                          <div className={styles.checkbox}>
+                          <input
                               type="checkbox"
                               name="affiliation"
                               value="BBDC"
                               checked={filter.affiliation.includes('BBDC')}
                               onChange={handleCheckboxChange}
-                            /> BBDC
-                          </label>
-                        <br/>
-                          <label>
-                            <input
+                            /> 
+                          <label>BBDC</label>
+                        </div>
+
+                        <div className={styles.checkbox}>
+                        <input
                               type="checkbox"
                               name="affiliation"
                               value="SSDC"
                               checked={filter.affiliation.includes('SSDC')}
                               onChange={handleCheckboxChange}
-                            /> SSDC
-                          </label>
-                        <br/>
-                          <label>
-                            <input
+                            /> 
+                          <label>SSDC</label>
+                        </div>
+
+                        <div className={styles.checkbox}>
+                        <input
                               type="checkbox"
                               name="affiliation"
                               value="CDC"
                               checked={filter.affiliation.includes('CDC')}
                               onChange={handleCheckboxChange}
-                            /> CDC
-                          </label>
+                            /> 
+                          <label>CDC</label>
                         </div>
+                        </fieldset>
+  
+               
+                        
                         <br/>
-                        <div>
-                          <h4>Transmission:</h4>
-                          <label>
-                            <input
+                        <br/>
+
+                        <fieldset>
+                        <h4>Transmission</h4>
+                        <div className={styles.checkbox}>
+                        <input
                               type="checkbox"
                               name="type"
                               value="auto"
                               checked={filter.type.includes('auto')}
                               onChange={handleCheckboxChange}
-                            /> Auto
-                          </label>
-                        <br/>
-                          <label>
-                            <input
+                            />
+                          <label>Auto</label>
+                        </div>
+
+                        <div className={styles.checkbox}>
+                        <input
                               type="checkbox"
                               name="type"
                               value="manual"
                               checked={filter.type.includes('manual')}
                               onChange={handleCheckboxChange}
-                            /> Manual
-                          </label>
-                        </div>                     
+                            />
+                          <label>Manual</label>
+                        </div>
+
+                        </fieldset>
+
+
+
+                      </div>    
+              
                       </form>
 
+
+
+
                       {/* Render InstructorCard component for each filtered instructor */}
-                      <main className="page-content">
-                        {filteredInstructors.map((instructor) => (
-                          <InstructorCard key={instructor.id} instructor={instructor} />
-                        ))}
-                      </main>
+                      <Container fluid>
+                        <Row>
+                          {filteredInstructors.map((instructor) => (
+                            <Col key={instructor.id} lg={4} md={6} sm={12}>
+                              <InstructorCard instructor={instructor} onAddMarker={handleAddMarker}  />
+                            </Col>
+                          ))}
+                        </Row>
+                      </Container>
                     </div>
               </Col>
             </Row>

@@ -1,20 +1,14 @@
 
 import { Home } from "./components/home/Home";
-import { Login } from "./components/login/Login";
-import  NewLogin  from "./components/home/login/Login";
-import  Newregistration  from "./components/registration/newregistration";
 import { StudentDashboard } from "./components/dashboards/StudentDashboard";
-import RegistrationTest from "./components/home/Registration/Registration"
 import { InstructorDashboard } from "./components/dashboards/InstructorDashboard";
-import  Registration  from "./components/registration/registration";
-import InstructorsComponent from "./components/instructors/instructors";
-// import InstructorDetail from "./components/instructors/InstructorDetail";
+import InstructorsComponent from "./components/instructorsList/instructors";
 import { ChooseQuiz } from "./components/quiz/choosequiz";
 import Quiz from "./components/quiz/Quiz.js";
 import {Routes,Route} from 'react-router';
 import React from 'react';
 import './App.css';
-import Chat from "./components/private-chat/chat";
+import Chat from "./components/private-chat/student-chat.js";
 import InstructorChat from "./components/private-chat/instructor-chat";
 import InstructorFeedbackPage from "./components/viewLessons/InstructorFeedback";
 import StudentNotebook from "./components/viewLessons/others/StudentNotebook";
@@ -31,13 +25,12 @@ import SimulatorScene3a from "./components/simulation/SimulatorScene3a";
 import Scene3success from "./components/simulation/SceneThreeSuccess";
 import Scene3fail from "./components/simulation/SceneThreeFail";
 
+
 export default function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<Registration />} /> */}
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
         <Route path="/instructors" element={<InstructorsComponent />} />

@@ -14,6 +14,7 @@ import {
   FaHome,
   FaCreativeCommonsBy,
   FaCog,
+  FaRocketchat
 } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./Sidebar.css";
@@ -96,6 +97,7 @@ const Sidebar = ({ student }) => {
               icon={<FaHome />}
               active={activeMenuItem === "dashboard"}
               onClick={() => handleMenuItemClick("dashboard")}
+              className="mostinnerouter"
             >
               <Link to="/student-dashboard" ><div className="mostInner">Dashboard</div></Link>
             </MenuItem>
@@ -103,6 +105,7 @@ const Sidebar = ({ student }) => {
               icon={<FaList />}
               active={activeMenuItem === "findInstructor"}
               onClick={() => handleMenuItemClick("findInstructor")}
+              className="mostinnerouter"
             >
               <Link to={findInstructorLink}>
                 {instructorId ? (
@@ -117,6 +120,7 @@ const Sidebar = ({ student }) => {
               icon={<FaRegHeart />}
               active={activeMenuItem === "practice"}
               onClick={() => handleMenuItemClick("practice")}
+              className="mostinnerouter"
             >
             <Link to="/choose-quiz">
               <div className="mostInner">BTT / FTT</div></Link>
@@ -127,6 +131,7 @@ const Sidebar = ({ student }) => {
               icon={<FaCreativeCommonsBy />}
               active={activeMenuItem === "simulator"}
               onClick={() => handleMenuItemClick("simulator")}
+              className="mostinnerouter"
             >
               <Link to="/simulator"><div className="mostInner">Enter the Simulator</div></Link>
             </MenuItem>
@@ -134,15 +139,25 @@ const Sidebar = ({ student }) => {
               icon={<BsFillClipboard2Fill />}
               active={activeMenuItem === "yourNotes"}
               onClick={() => handleMenuItemClick("yourNotes")}
+              className="mostinnerouter"
             >
               <Link to="/notes"><div className="mostInner">Your Notes</div></Link>
+            </MenuItem>
+            <MenuItem
+              icon={<FaRocketchat />}
+              active={activeMenuItem === "instructorChat"}
+              onClick={() => handleMenuItemClick("instructorChat")}
+            >
+              <Link to="/student-chat">
+                <div className="mostInner">Open your chat</div>
+              </Link>
             </MenuItem>
           </Menu>
         </SidebarContent>
 
         <SidebarFooter>
           <Menu iconShape="square">
-            <MenuItem icon={<FaCog />}>Sign Out</MenuItem>
+            <MenuItem icon={<FaCog />} className="mostinnerouterSignOut">Sign Out</MenuItem>
           </Menu>
         </SidebarFooter>
       </ProSidebar>

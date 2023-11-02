@@ -90,6 +90,7 @@ function InstructorChatPage({instructor}) {
       }
       setInput("");
     }
+
   };
 
   const handleStudentChange = async (e) => {
@@ -164,7 +165,7 @@ function InstructorChatPage({instructor}) {
                         <strong>You:</strong> {message.text}
                       </p>
                       <p>
-                        <i>{timestampToDate(message.timestamp)}</i>
+                        <i style={{fontSize:"0.8vw"}}>{timestampToDate(message.timestamp)}</i>
                       </p>
                     </>
                   ) : (
@@ -173,7 +174,7 @@ function InstructorChatPage({instructor}) {
                         <strong>{message.sender.name}:</strong> {message.text}
                       </p>
                       <p>
-                        <i>{timestampToDate(message.timestamp)}</i>
+                        <i style={{fontSize:"0.8vw"}}>{timestampToDate(message.timestamp)}</i>
                       </p>
                     </>
                   )}
