@@ -20,6 +20,7 @@ body {
     border-radius: 5px;
     text-align: center;
     height: 100vh;
+    margin-left: 0px;
   }
   
   .chat-window {
@@ -28,6 +29,7 @@ body {
     margin: 10px;
     /* height: 400px; */
     overflow-y: scroll;
+    overflow-x: hidden;
     /* margin-top: 20px; */
     position: relative;
     display: flex;
