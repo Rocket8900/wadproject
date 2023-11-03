@@ -158,7 +158,9 @@ const Sidebar = ({ student }) => {
 
         <SidebarFooter>
           <Menu iconShape="square">
+            <Link to="/">
             <MenuItem icon={<FaCog />} className="mostinnerouterSignOut">Sign Out</MenuItem>
+            </Link>
           </Menu>
         </SidebarFooter>
       </ProSidebar>
