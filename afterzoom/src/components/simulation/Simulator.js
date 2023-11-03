@@ -8,6 +8,7 @@ import jwtDecode from "jwt-decode";
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import styles from './simulator.module.css';
+import ThreeDotsWave from "../loader/loader";
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -50,7 +51,7 @@ function Simulator() {
     }, []); 
 
     if (student === null) {
-        return <div>Loading...</div>;
+        return <ThreeDotsWave/>;
     }
 
   return (

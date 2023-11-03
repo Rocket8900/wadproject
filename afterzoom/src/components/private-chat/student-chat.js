@@ -10,6 +10,7 @@ import StudentSidebar from '../dashboards/sidebar/Sidebar';
 import StudentChatPage from './StudentChatPage'; // This will be the student chat mirror you requested earlier
 import { useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import ThreeDotsWave from "../loader/loader";
 
 function ChatWithInstructorPage() {
    
@@ -50,7 +51,7 @@ function ChatWithInstructorPage() {
 }
 
   if (student === null) {
-    return <div>Loading...</div>;
+    return <ThreeDotsWave/>;
 }
 
   return (

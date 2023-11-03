@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Sidebar from '../dashboards/sidebar/Sidebar';
 import jwtDecode from "jwt-decode";
 import styles from './choose.module.css';
+import ThreeDotsWave from "../loader/loader";
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -66,7 +67,7 @@ export function ChooseQuiz() {
     }, []);
 
     if (student === null) {
-        return <div>Loading...</div>;
+        return <ThreeDotsWave/>;
     }
 
     const startTopicalQuiz = () => {

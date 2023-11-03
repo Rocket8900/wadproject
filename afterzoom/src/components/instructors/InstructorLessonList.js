@@ -14,6 +14,7 @@ import { styled } from '@mui/system';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import CreatingLessonContent from './CreatingLessonContent';
 import styles from './lessonlist.module.css';
+import ThreeDotsWave from "../loader/loader";
 
 
 function getCookie(name) {
@@ -196,7 +197,7 @@ function InstructorLessonList() {
   }, [bookings]);
 
   if (instructor === null || bookings === null) {
-    return <div>Loading...</div>;
+    return <ThreeDotsWave/>;
   }
 
   const currentDate = new Date();

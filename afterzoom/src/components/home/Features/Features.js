@@ -17,21 +17,21 @@ const tabs = [
                     <div className="col-sm-12 col-md-12 col-lg-4 mb-3">
                         <img src={search} className='featurePic'></img>
                         <h4>Find your best match</h4>
-                        <h6 className='featureInfo'>Search through and filter to find the best instructor for you</h6>
+                        <h6 className='featureInfoOne'>Search through and filter to find the best instructor for you</h6>
                         <h6 className='featureInfo'>Ensure that they cater towards your learning style</h6>
                         <h6 className='featureInfo'>Find instructors that fit your budget</h6>
                     </div>
                     <div className="col-sm-12 col-md-12 col-lg-4 mb-3">
                     <img src={book} className='featurePic'></img>
                         <h4>Help book lessons</h4>
-                        <h6 className='featureInfo'>Gone are the days of having to text teachers to ask when they are free</h6>
+                        <h6 className='featureInfoOne'>Gone are the days of having to text teachers to ask when they are free</h6>
                         <h6 className='featureInfo'>See past and upcoming lessons</h6>
                         <h6 className='featureInfo'>See their free lessons at a glance</h6>
                     </div>
                     <div className="col-sm-12 col-md-12 col-lg-4 mb-3">
                         <img src={pen} className='featurePic'></img>
                         <h4>Supplement your learning</h4>
-                        <h6 className='featureInfo'>Practice our btt and ftt tips for guaranteed passes</h6>
+                        <h6 className='featureInfoOne'>Practice our btt and ftt tips for guaranteed passes</h6>
                         <h6 className='featureInfo'>Enter our simluation based training to practice scenarios</h6>
                         <h6 className='featureInfo'>Enter notes to remember your learning</h6>
                     </div>
@@ -46,19 +46,19 @@ const tabs = [
                     <div className="col-sm-12 col-md-12 col-lg-4 mb-3">
                         <img src={search} className='featurePic'></img>
                         <h4>Find more students</h4>
-                        <h6 className='featureInfo'>Allow students to search for u</h6>
+                        <h6 className='featureInfoOne'>Allow students to search for u</h6>
                         <h6 className='featureInfo'>Ensure you have more students</h6>
                     </div>
                     <div className="col-sm-12 col-md-12 col-lg-4 mb-3">
                     <img src={book} className='featurePic'></img>
                         <h4>Help book lessons</h4>
-                        <h6 className='featureInfo'>Let students book automatically</h6>
+                        <h6 className='featureInfoOne'>Let students book automatically</h6>
                         <h6 className='featureInfo'>See past and upcoming lessons</h6>
                     </div>
                     <div className="col-sm-12 col-md-12 col-lg-4 mb-3">
                         <img src={pen} className='featurePic'></img>
                         <h4>Supplement your student learning</h4>
-                        <h6 className='featureInfo'>Implement notes</h6>
+                        <h6 className='featureInfoOne'>Implement notes</h6>
 
                     </div>
                 </div>;
