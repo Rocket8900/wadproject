@@ -13,9 +13,19 @@ function StudentChatPage({student}) {
   const [socket, setSocket] = useState(null);
   const [instructors, setInstructors] = useState([]);
   const [selectedInstructorId, setSelectedInstructorId] = useState("");
+  const [messageCounter, setMessageCounter] = useState(0);
+
+
+
   const token = Cookies.get("access_token");
   
   useEffect(() => {
+    if (messageCounter > 0) {
+        setTimeout(() => {
+            handleInstructorChange(selectedInstructorId);
+        }, 1000); // 1 seconds delay
+    }
+
     const fetchInstructors = async () => {
       try {
         const response = await axios.get(
@@ -36,19 +46,37 @@ function StudentChatPage({student}) {
               Authorization: `Bearer ${token}`,
             },
           });
-          instructorProfile.push(profile.data);
+
+          let profileDetails = profile.data;
+          if (profileDetails.data.dp == null) {
+            profileDetails.data.dp = "/Screenshot 2023-11-03 at 4.14.19 AM.png"
+          } else {
+            profileDetails.data.dp = await axios.get(`http://localhost:3001/v1/api/s3/instructor/${profileDetails.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                  }
+            })
+          }
+
+          instructorProfile.push(profileDetails);
         }
         let finalProfiles = [];
         for (let i = 0; i < instructorProfile.length; i++) {
           finalProfiles.push(instructorProfile[i].data);
         }
+        console.log(finalProfiles);
         setInstructors(finalProfiles);
       } catch (error) {
         console.error("Error fetching instructors with chat history:", error);
       }
     };
 
+
+
+
     fetchInstructors();
+
+
 
     const connectToSocketServer = () => {
       const newSocket = io("http://localhost:3001", {
@@ -66,7 +94,7 @@ function StudentChatPage({student}) {
     return () => {
       if (socket) socket.disconnect();
     };
-  }, []);
+  }, [messageCounter]);
 
   const sendMessage = () => {
     if (input.trim()) {
@@ -77,6 +105,7 @@ function StudentChatPage({student}) {
         });
       }
       setInput("");
+      setMessageCounter((prev) => prev + 1);
     }
   };
 
@@ -108,28 +137,44 @@ function StudentChatPage({student}) {
   return (
     <Container fluid>
       <Row>
-        <Col lg={2} md={2} sm={2} id="sidebar">
-          <div className="chat-header">
-            <h2>Chats</h2>
-            <div className="custom-dropdown">
-              <div className="custom-dropdown-selected">
-                {selectedInstructorId
-                  ? instructors.find((instructor) => instructor.id === selectedInstructorId).name
-                  : "Select an instructor"}
-              </div>
-              <div className="custom-dropdown-options">
-                {instructors.map((instructor) => (
-                  <div
-                    key={instructor.id}
-                    onClick={() => handleInstructorChange(instructor.id)}
-                    className="custom-dropdown-option-individual"
-                  >
-                    {instructor.name}
-                  </div>
-                ))}
-              </div>
+      <Col lg={2} md={2} sm={2} id="sidebar" style={{background: 'linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%)'}}>
+            <div className="chat-header">
+                <h2>Chats</h2>
+                <div className="custom-dropdown">
+                    <div className="custom-dropdown-options">
+                    {instructors.map((instructor) => (
+                        <button 
+                            key={instructor.id}
+                            onClick={() => {
+                                handleInstructorChange(instructor.id);
+                            }}
+                            className="btn btn-light d-flex align-items-center mb-3 w-100"
+                            style={{
+                                borderRadius: '15px',
+                                transition: 'background-color 0.3s'
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#eef2f7'}
+                            onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
+                        >
+                            <img 
+                                src={instructor.dp} 
+                                alt={`Image of ${instructor.name}`} 
+                                style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '50%', marginRight: '10px' }} 
+                            />
+                            <span style={{
+                                fontSize: 'small',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                                maxWidth: 'calc(100% - 50px)'  // considering image width and margin
+                            }}>
+                                {instructor.name}
+                            </span>
+                        </button>
+                    ))}
+                    </div>
+                </div>
             </div>
-          </div>
         </Col>
         <Col lg={10} md={10} sm={10} id="main-content">
           <div className="chat-page">

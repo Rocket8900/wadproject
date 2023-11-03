@@ -97,6 +97,7 @@ const Sidebar = ({ student }) => {
               icon={<FaHome />}
               active={activeMenuItem === "dashboard"}
               onClick={() => handleMenuItemClick("dashboard")}
+              className="mostinnerouter"
             >
               <Link to="/student-dashboard" ><div className={styles.mostInner}>Dashboard</div></Link>
             </MenuItem>
@@ -104,6 +105,7 @@ const Sidebar = ({ student }) => {
               icon={<FaList />}
               active={activeMenuItem === "findInstructor"}
               onClick={() => handleMenuItemClick("findInstructor")}
+              className="mostinnerouter"
             >
               <Link to={findInstructorLink}>
                 {instructorId ? (
@@ -118,6 +120,7 @@ const Sidebar = ({ student }) => {
               icon={<FaRegHeart />}
               active={activeMenuItem === "practice"}
               onClick={() => handleMenuItemClick("practice")}
+              className="mostinnerouter"
             >
             <Link to="/choose-quiz">
               <div className={styles.mostInner}>BTT / FTT</div></Link>
@@ -128,6 +131,7 @@ const Sidebar = ({ student }) => {
               icon={<FaCreativeCommonsBy />}
               active={activeMenuItem === "simulator"}
               onClick={() => handleMenuItemClick("simulator")}
+              className="mostinnerouter"
             >
               <Link to="/simulator"><div className={styles.mostInner}>Enter the Simulator</div></Link>
             </MenuItem>
@@ -135,6 +139,7 @@ const Sidebar = ({ student }) => {
               icon={<BsFillClipboard2Fill />}
               active={activeMenuItem === "yourNotes"}
               onClick={() => handleMenuItemClick("yourNotes")}
+              className="mostinnerouter"
             >
               <Link to="/notes"><div className={styles.mostInner}>Your Notes</div></Link>
             </MenuItem>
@@ -142,6 +147,7 @@ const Sidebar = ({ student }) => {
               icon={<FaRocketchat />}
               active={activeMenuItem === "instructorChat"}
               onClick={() => handleMenuItemClick("instructorChat")}
+              className="mostinnerouter"
             >
               <Link to="/student-chat">
                 <div className={styles.mostInner}>Open your chat</div>
@@ -152,7 +158,7 @@ const Sidebar = ({ student }) => {
 
         <SidebarFooter>
           <Menu iconShape="square">
-            <MenuItem icon={<FaCog />}>Sign Out</MenuItem>
+            <MenuItem icon={<FaCog />} className="mostinnerouterSignOut">Sign Out</MenuItem>
           </Menu>
         </SidebarFooter>
       </ProSidebar>

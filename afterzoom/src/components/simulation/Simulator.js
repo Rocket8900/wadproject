@@ -69,7 +69,7 @@ function Simulator() {
                             </div>
                                 <div className={styles["card-body"]}>
                                 <h3>Level 1</h3>
-                                <p>Some text for Simulator Scene 1</p>
+                                <p>What to do at a T-Junction</p>
                                 <Link to="/simulatorSceneOne">
                                     <button className={`btn btn-outline-primary text-center col-lg-8 col-sm-12`}>Enter Scene 1</button>
                                 </Link>
@@ -82,8 +82,8 @@ function Simulator() {
                             </div>
                                 <div className={styles["card-body"]}>
                                 <h3>Level 2</h3>
-                                <p>Some text for Simulator Scene 2</p>
-                                <Link to="/simulatorSceneOne">
+                                <p>Basic Overtaking</p>
+                                <Link to="/simulatorSceneTwo">
                                     <button className={`btn btn-outline-primary text-center col-lg-8 col-sm-12`}>Enter Scene 2</button>
                                 </Link>
                             </div>
@@ -95,8 +95,8 @@ function Simulator() {
                             </div>
                                 <div className={styles["card-body"]}>
                                 <h3>Level 3</h3>
-                                <p>Some text for Simulator Scene 3</p>
-                                <Link to="/simulatorSceneOne">
+                                <p>Parallel Parking</p>
+                                <Link to="/simulatorSceneThree">
                                     <button className={`btn btn-outline-primary text-center col-lg-8 col-sm-12`}>Enter Scene 3</button>
                                 </Link>
                             </div>

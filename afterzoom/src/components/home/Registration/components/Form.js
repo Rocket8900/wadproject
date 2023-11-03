@@ -7,8 +7,8 @@ import WhoAreYou from './steps/WhoAreYou'
 import ThankyouPage from './steps/ThankyouPage'
 import ErrorContent from './steps/ErrorContent'
 import { useState } from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'; 
 import { FiX } from "react-icons/fi"; 
+import { Formik, Form, Field } from 'formik';
 
 import {motion} from 'framer-motion'
 
@@ -35,18 +35,18 @@ export default function MyForm({step, next, prev, goto}) {
 
     return (
       <Formik
+      
         initialValues={{
           name: '',
           email: '',
           password: '',
-          // // confirmpassword: '',
           gender: '',
           type:'',
-          age:'',
+          age:'', 
           language: [],
-          // language: "english",
           // experience: '',
           // affiliation: '',
+          // carModel: '',
         }}
         
         onSubmit={ (values, {resetForm}) => {

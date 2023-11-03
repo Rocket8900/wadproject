@@ -104,7 +104,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
 
   const [layout, setLayout] = useState([
     {
-      i: "a",
+      i: "ab",
       id: "grid-item-hello-user",
       x: 0,
       y: 0,

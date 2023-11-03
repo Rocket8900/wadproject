@@ -1,14 +1,8 @@
 
 import { Home } from "./components/home/Home";
-import { Login } from "./components/login/Login";
-import  NewLogin  from "./components/home/login/Login";
-import  Newregistration  from "./components/registration/newregistration";
 import { StudentDashboard } from "./components/dashboards/StudentDashboard";
-import RegistrationTest from "./components/home/Registration/Registration"
 import { InstructorDashboard } from "./components/dashboards/InstructorDashboard";
-import  Registration  from "./components/registration/registration";
-import InstructorsComponent from "./components/instructors/instructors";
-// import InstructorDetail from "./components/instructors/InstructorDetail";
+import InstructorsComponent from "./components/instructorsList/instructors";
 import { ChooseQuiz } from "./components/quiz/choosequiz";
 import Quiz from "./components/quiz/Quiz.js";
 import {Routes,Route} from 'react-router';
@@ -25,14 +19,20 @@ import InstructorLessonList from "./components/instructors/InstructorLessonList"
 import InstructorStudentList from "./components/instructors/InstructorStudentList"
 import Simulator from "./components/simulation/Simulator";
 import SimulatorSceneOne from "./components/simulation/SimulatorSceneOne";
+import NotFound from "./components/Error/ErrorPage"
+import SimulatorSceneTwo from "./components/simulation/SimulatorSceneTwo";
+import SimulatorSceneThree from "./components/simulation/SimulatorSceneThree";
+import SimulatorScene3a from "./components/simulation/SimulatorScene3a";
+import Scene3success from "./components/simulation/SceneThreeSuccess";
+import Scene3fail from "./components/simulation/SceneThreeFail";
+
 
 export default function App() {
   return (
     <div>
       <Routes>
+        <Route path='*' element={<NotFound />}/>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<Registration />} /> */}
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
         <Route path="/instructors" element={<InstructorsComponent />} />
@@ -50,6 +50,11 @@ export default function App() {
         
         <Route path="/simulator" element={<Simulator/>} />
         <Route path="/simulatorSceneOne" element={<SimulatorSceneOne/>} />
+        <Route path="/simulatorSceneTwo" element={<SimulatorSceneTwo/>} />
+        <Route path="/simulatorSceneThree" element={<SimulatorSceneThree/>} />
+        <Route path="/simulatorScene3a" element={<SimulatorScene3a/>} />
+        <Route path="/3s" element={<Scene3success/>} />
+        <Route path="/3f" element={<Scene3fail/>} />
 
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/creatingLesson" element={<CreatingLesson />} />
