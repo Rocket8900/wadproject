@@ -13,6 +13,7 @@ function StudentChatPage({student}) {
   const [socket, setSocket] = useState(null);
   const [instructors, setInstructors] = useState([]);
   const [selectedInstructorId, setSelectedInstructorId] = useState("");
+  const [selectedInstructor, setSelectedInstructor] = useState(null);
   const [messageCounter, setMessageCounter] = useState(0);
 
 
@@ -76,6 +77,7 @@ function StudentChatPage({student}) {
     fetchInstructors();
 
 
+    
 
     const connectToSocketServer = () => {
       const newSocket = io("http://localhost:3001", {
@@ -111,6 +113,8 @@ function StudentChatPage({student}) {
   const handleInstructorChange = async (e) => {
     setSelectedInstructorId(e);
     setMessages([]);
+    const instructor = instructors.find(inst => inst.id === e);
+    setSelectedInstructor(instructor);
     try {
       const response = await axios.get(
         `http://localhost:3001/v1/api/chat/${e}`,  // Assuming this endpoint gets the chat history
@@ -178,6 +182,15 @@ function StudentChatPage({student}) {
         </Col>
         <Col lg={10} md={10} sm={10} id="main-content">
           <div className="chat-page">
+            {selectedInstructor && (
+                <div className="recipient-header">
+                    <img 
+                        src={selectedInstructor.dp} 
+                        alt={`Image of ${selectedInstructor.name}`} 
+                    />
+                    <h3>{selectedInstructor.name}</h3>
+                </div>
+            )}
             <div className="chat-window">
               {messages.map((message, index) => (
                 <div

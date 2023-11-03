@@ -151,3 +151,32 @@ body {
   .custom-dropdown-option-individual:hover {
     background-color: lightgray;
   }
+
+  .recipient-header {
+    display: flex;
+    align-items: center;
+    background: #f7f9fc;  /* subtle background color */
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* subtle shadow for depth */
+    transition: background 0.3s ease;
+}
+
+.recipient-header:hover {
+    background: #eef2f7;
+}
+
+.recipient-header img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2px solid #e5e5e5; /* adding a subtle border around the image */
+}
+
+.recipient-header h3 {
+    margin: 0;
+    color: #333;
+    font-weight: 500;
+}
