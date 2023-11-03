@@ -15,6 +15,7 @@ function InstructorChatPage({instructor}) {
   const [socket, setSocket] = useState(null);
   const [students, setStudents] = useState([]);
   const [selectedStudentId, setSelectedStudentId] = useState("");
+  const [selectedStudent, setSelectedStudent] = useState(null);
   const [messageCounter, setMessageCounter] = useState(0);
 
   const token = Cookies.get("access_token");
@@ -119,6 +120,8 @@ function InstructorChatPage({instructor}) {
   const handleStudentChange = async (e) => {
     setSelectedStudentId(e);
     setMessages([]);
+    const student = students.find(inst => inst.id === e);
+    setSelectedStudent(student);
     try {
       const response = await axios.get(
         `http://localhost:3001/v1/api/chat/${e}`,
@@ -186,6 +189,16 @@ function InstructorChatPage({instructor}) {
         </Col>
         <Col lg={10} md={10} sm={10} id="main-content">
           <div className="chat-page">
+
+          {selectedStudent && (
+                <div className="recipient-header">
+                    <img 
+                        src={selectedStudent.selfie} 
+                        alt={`Image of ${selectedStudent.name}`} 
+                    />
+                    <h3>{selectedStudent.name}</h3>
+                </div>
+            )}
             <div className="chat-window">
               {messages.map((message, index) => (
                 <div
