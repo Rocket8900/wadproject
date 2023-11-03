@@ -84,6 +84,7 @@
     color: white;
     font-size: 0.9vw;
     word-wrap: break-word;  
+    padding: 0;
   }
 
   .mostinnerouter {
@@ -91,7 +92,7 @@
     margin-left: auto;
     margin-right: auto;
     border-radius: 8px;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
   }
 
   .mostinnerouterSignOut {
