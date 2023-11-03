@@ -9,7 +9,7 @@ import Unread from '../unread/Unread'
 import Graph from '../graph/InstruGraph'
 import AlternateGraph from "../graph/InstruAlternateGraph"; 
 import { useNavigate} from "react-router-dom";
-
+import axios from "axios";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -232,6 +232,26 @@ const InstructorMainContent = ({ instructor, bookings }) => {
     };
   }, []);
 
+  const saveLayoutToDatabase = async (updatedLayout) => {
+    try {
+      const token = getCookie("access_token");
+      const response = await axios.get(`http://localhost:3001/v1/api/instructor/profile/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ layout: updatedLayout }),
+      });
+  
+      if (response.ok) {
+        console.log('Layout saved successfully.');
+      } else {
+        console.error('Failed to save layout.');
+      }
+    } catch (error) {
+      console.error('Error saving layout:', error);
+    }
+  };
+
   
 
   return (
@@ -263,3 +283,9 @@ const InstructorMainContent = ({ instructor, bookings }) => {
 }
 
 export default InstructorMainContent;
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
