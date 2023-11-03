@@ -193,6 +193,10 @@ function InstructorLessonList() {
   };
 
   useEffect(() => {
+    updateUpcomingLessons();
+  }, [upcomingLessons]);
+
+  useEffect(() => {
     getStudentNamesForBookings();
   }, [bookings]);
 
@@ -235,6 +239,8 @@ function InstructorLessonList() {
     }
   }
 
+
+
   const updateUpcomingLessons = async () => {
     try {  
       // Fetch weather data for each upcoming lesson
@@ -263,9 +269,7 @@ function InstructorLessonList() {
   };
 
   
-  useEffect(() => {
-    updateUpcomingLessons();
-  }, [upcomingLessons]);
+
   
 
   const handleClosePopup = () => {

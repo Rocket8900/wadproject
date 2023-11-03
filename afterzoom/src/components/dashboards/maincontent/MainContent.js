@@ -9,6 +9,7 @@ import Unread from '../unread/Unread'
 import Graph from '../graph/Graph'
 import AlternateGraph from "../graph/AlternateGraph"; 
 import NotesViewDashboard from '../../notes/NotesViewDashboard'
+import WeatherForecast from "../weather/weather";
 
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
@@ -150,9 +151,18 @@ const MainContent = ({ student, bookings, quiz}) => {
       
       </div>
     },
-    { i: "g", 
+    {
+      i: "i", 
       id: "grid-item-lastrow1", 
       x: 4, y: 6, w: 2, h: 2,
+      content: 
+      <div>
+        <WeatherForecast bookings={bookings}/>
+      </div>
+    },
+    { i: "g", 
+      id: "grid-item-lastrow1", 
+      x: 6, y: 7, w: 2, h: 1,
       content: 
       <div>
         <h2>Press Me to Save Layout</h2>
@@ -160,7 +170,7 @@ const MainContent = ({ student, bookings, quiz}) => {
     },
     { i: "h", 
       id: "grid-item-lastrow1", 
-      x: 6, y: 6, w: 2, h: 2,
+      x: 6, y: 6, w: 2, h: 1,
       content:
       <div className="changeGraph" onClick={toggleGraph} >
         <h2>Press Me to Change Graph</h2>
