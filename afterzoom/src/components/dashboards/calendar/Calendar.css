@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&family=Montserrat:wght@300;400&family=Poppins:wght@300;700&display=swap');
 
   
   .icon {
-    font-family: 'Nunito', sans-serif;
-    font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    /* font-style: normal; */
     display: inline-block;
     vertical-align: middle;
     line-height: 1;
@@ -15,7 +18,7 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: "liga";
+    /* font-feature-settings: "liga"; */
   }
   
   
@@ -32,15 +35,15 @@
     box-sizing: border-box;
   }
   
-  body {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1vw;
+  /* body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1vw;
     font-weight: 800;
     line-height: 1.5;
     color: white;
     background: var(--bg-color);
     position: relative;
-  }
+  } */
   
 
   
@@ -96,6 +99,9 @@
     position: relative;
     width: 100%;
     background: #282828;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2vw;
+    font-weight: 800;
   }
   
   .calendar .header {
@@ -217,5 +223,6 @@
   .event-details {
     color:white;
     text-align:center;
+    padding: 20px;
   }
   
