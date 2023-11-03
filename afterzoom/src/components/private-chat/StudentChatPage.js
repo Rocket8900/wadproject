@@ -51,13 +51,12 @@ function StudentChatPage({student}) {
           if (profileDetails.data.dp == null) {
             profileDetails.data.dp = "/Screenshot 2023-11-03 at 4.14.19 AM.png"
           } else {
-            profileDetails.data.dp = await axios.get(`http://localhost:3001/v1/api/s3/instructor/${profileDetails.id}`, {
+            profileDetails.data.dp = (await axios.get(`http://localhost:3001/v1/api/s3/instructor/single/${profileDetails.data.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                   }
-            })
+            })).data.data
           }
-
           instructorProfile.push(profileDetails);
         }
         let finalProfiles = [];

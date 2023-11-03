@@ -36,7 +36,6 @@ function InstructorChatPage({instructor}) {
         );
 
         let allChat = response.data.data
-        console.log(allChat);
         for (let index = 0; index < instructor.students.length; index++) {
           const studentId = instructor.students[index].id;
           if (!allChat.includes(studentId)){
@@ -56,11 +55,11 @@ function InstructorChatPage({instructor}) {
           if (profileDetails.data.selfie == null) {
             profileDetails.data.selfie = "/Screenshot 2023-11-03 at 4.14.19 AM.png"
           } else {
-            profileDetails.data.selfie = await axios.get(`http://localhost:3001/v1/api/s3/student/${profileDetails.id}`, {
+            profileDetails.data.selfie = (await axios.get(`http://localhost:3001/v1/api/s3/student/single/${profileDetails.data.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                   }
-            })
+            })).data.data
           }
           studentProfile.push(profileDetails)
         }
@@ -68,7 +67,7 @@ function InstructorChatPage({instructor}) {
         for (let i = 0; i < studentProfile.length; i ++ ){
           finalProfiles.push(studentProfile[i].data)
         }
-        console.log(finalProfiles, 1)
+        console.log(finalProfiles);
         setStudents(finalProfiles);
       } catch (error) {
         console.error("Error fetching students with chat history:", error);
@@ -87,7 +86,6 @@ function InstructorChatPage({instructor}) {
       });
 
       newSocket.on("private_message", (message) => {
-        console.log(message);
         setMessages((prevMessages) => [...prevMessages, message]);
       });
 
@@ -119,7 +117,6 @@ function InstructorChatPage({instructor}) {
   };
 
   const handleStudentChange = async (e) => {
-    console.log(e);
     setSelectedStudentId(e);
     setMessages([]);
     try {
@@ -131,9 +128,7 @@ function InstructorChatPage({instructor}) {
           },
         }
       );
-      console.log(response.data.data);
       if (response.data.data) {
-        console.log(response.data.data.message)
         setMessages(response.data.data.message); // Assuming the chat history is in the data property of the response=
       }
     } catch (error) {
@@ -157,7 +152,7 @@ function InstructorChatPage({instructor}) {
               <div className="custom-dropdown-options">
               {students.map((student) => (
                         <button 
-                            key={instructor.id}
+                            key={student.id}
                             onClick={() => {
                                 handleStudentChange(student.id);
                             }}
