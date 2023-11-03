@@ -215,9 +215,66 @@ function InstructorLessonList() {
     }
   }
 
+  // weather forecast API (max 1000 calls per day)
+  const fetchWeatherForecast = async (latitude, longitude, date) => {
+    try {
+      // Call the OpenWeatherMap API to get weather data
+      const apiKey = "5edb4e64fd6cb6634cd6edb3a99e653d";
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&dt=${date}&appid=${apiKey}`
+      );
+  
+      // Extract the relevant weather data from the API response
+      console.log(response.data)
+      const weatherData = response.data;
+  
+      return weatherData;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
+
+  const updateUpcomingLessons = async () => {
+    try {  
+      // Fetch weather data for each upcoming lesson
+      const updatedUpcomingLessons = await Promise.all(
+        upcomingLessons.map(async ({ booking, lesson }) => {
+          const weatherData = await fetchWeatherForecast(
+            "1.3521", // Replace with actual latitude from your lesson data
+            "103.8198", // Replace with actual longitude from your lesson data
+            lesson.date // Date of the lesson
+          );
+
+          return {
+            booking,
+            lesson: {
+              ...lesson,
+              forecastedWeather: weatherData, // Add the weather forecast to the lesson
+            },
+          };
+        })
+      )
+      upcomingLessons = updatedUpcomingLessons;
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
+
+  
+  useEffect(() => {
+    updateUpcomingLessons();
+  }, [upcomingLessons]);
+  
+
   const handleClosePopup = () => {
     setOpen(false); // Close the pop-up
   };
+
+  if (instructor === null || bookings === null) {
+    return <div>Loading...</div>;
+  }
 
 
   return (
@@ -238,8 +295,7 @@ function InstructorLessonList() {
                   <th>LESSON TITLE</th>
                   <th>DATE</th>
                   <th>DESCRIPTION</th>
-                  <th>FEEDBACK</th>
-                  {/* <th>Modify Feedback</th> */}
+                  <th>WEATHER FORECAST</th>
                 </tr>
               </thead>
               <tbody>
@@ -249,8 +305,7 @@ function InstructorLessonList() {
                     <td data-th="Lesson Title">{lesson.title || 'Untitled'}</td>
                     <td data-th="Date">{formatDateToReadableString(lesson.date) || '-'}</td>
                     <td data-th="Description">{lesson.description || '-'}</td>
-                    <td data-th="Feedback">{lesson.feedback || '-'}</td>
-                    {/* <td></td> */}
+                    <td data-th="Forecasted weather">{lesson.forecastedWeather || '-'}</td>
                   </tr>
                 ))}
               </tbody>
@@ -284,7 +339,7 @@ function InstructorLessonList() {
                       ) : (
                         <div>
                           <Button
-                            variant="primary"
+                            variant="outline-success"
                             onClick={() => setIsOpen(true)}
                           >
                             Edit

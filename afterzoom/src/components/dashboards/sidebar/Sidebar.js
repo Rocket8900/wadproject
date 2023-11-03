@@ -204,7 +204,7 @@ const Sidebar = ({ student }) => {
 
   const findInstructorLabel = instructorId ? "View Lessons" : "Find Instructor";
   const findInstructorLink = instructorId ? "/bookingStudent" : "/instructors";
-
+  
   const navigate = useNavigate();
 
   const navigateToHome = () => {
@@ -339,9 +339,7 @@ const Sidebar = ({ student }) => {
 
         <SidebarFooter>
           <Menu iconShape="square">
-            <Link to="/">
-            <MenuItem icon={<FaCog />} className="mostinnerouterSignOut">Sign Out</MenuItem>
-            </Link>
+            <MenuItem icon={<FaCog />} onClick={navigateToHome} className="mostinnerouterSignOut">Sign Out</MenuItem>
           </Menu>
         </SidebarFooter>
       </ProSidebar>
