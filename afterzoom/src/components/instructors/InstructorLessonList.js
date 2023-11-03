@@ -200,9 +200,6 @@ function InstructorLessonList() {
     getStudentNamesForBookings();
   }, [bookings]);
 
-  if (instructor === null || bookings === null) {
-    return <ThreeDotsWave/>;
-  }
 
   const currentDate = new Date();
   const upcomingLessons = [];
@@ -277,7 +274,7 @@ function InstructorLessonList() {
   };
 
   if (instructor === null || bookings === null) {
-    return <div>Loading...</div>;
+    return <ThreeDotsWave/>;
   }
 
 
