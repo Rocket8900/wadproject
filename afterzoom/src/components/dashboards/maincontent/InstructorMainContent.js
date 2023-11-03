@@ -111,7 +111,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
       w: 6,
       h: 2,
       content: 
-<div className={styles.greet} style={{ textAlign: 'left' }}>
+<div className="greet" style={{ textAlign: 'left' }}>
   <h2>Welcome back, {instructorName} <PiHandWavingDuotone /></h2>
   <p>Your profile is {updatedCompleteness}% complete</p> 
   {/* <br/> */}
