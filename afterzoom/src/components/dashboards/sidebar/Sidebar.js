@@ -18,7 +18,7 @@ import {
 } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./stuSidebar.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 
@@ -47,6 +47,12 @@ const Sidebar = ({ student }) => {
 
   const findInstructorLabel = instructorId ? "View Lessons" : "Find Instructor";
   const findInstructorLink = instructorId ? "/bookingStudent" : "/instructors";
+
+  const navigate = useNavigate();
+
+  const navigateToHome = () => {
+    navigate('/');
+  };
 
   if (student.instructorId === null){
     var instructorr="not found";
@@ -158,9 +164,7 @@ const Sidebar = ({ student }) => {
 
         <SidebarFooter>
           <Menu iconShape="square">
-            <Link to="/">
-            <MenuItem icon={<FaCog />} className="mostinnerouterSignOut">Sign Out</MenuItem>
-            </Link>
+            <MenuItem icon={<FaCog />} onClick={navigateToHome} className="mostinnerouterSignOut">Sign Out</MenuItem>
           </Menu>
         </SidebarFooter>
       </ProSidebar>
