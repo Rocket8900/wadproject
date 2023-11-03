@@ -42,25 +42,6 @@ export function ChooseQuiz() {
             }
         };
 
-        // const fetchStudentBookings = async () => {
-        //     try {
-        //         const token = getCookie("access_token");
-        //         const decodedToken = jwtDecode(token).user;
-        //         const studentId = decodedToken.id;
-        //         const response = await axios.get(
-        //             `http://localhost:3001/v1/api/booking/student/${studentId}`,
-        //             {
-        //                 headers: {
-        //                     Authorization: `Bearer ${token}`,
-        //                 },
-        //             }
-        //         );
-        //         setBookings(response.data);
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // };
-
         fetchStudentProfile();
         // fetchStudentBookings();
     }, []);
@@ -93,9 +74,9 @@ export function ChooseQuiz() {
                         <div className={`col-md-5 col-sm-10 ${styles.cardstyle}`}>
                         <div className={`${styles.card} ${styles["card-1"]}`}>
                             <h3>Basic Theory Test</h3>
-                            <p>A curated set of practice quizzes for the BTT.</p>
+                            <p>Master road safety with our curated BTT practice quizzes.</p>
                             <Link to="/btt-quiz">
-                                <button id="btt" className={`btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}>Start</button>
+                                <button id="btt" className={`btn btn-outline-primary mb-2 text-center col-5 me-sm-4`}>Start</button>
                             </Link>
                             
                         </div>
@@ -103,9 +84,9 @@ export function ChooseQuiz() {
                         <div className={`col-md-5 col-sm-10 ${styles.cardstyle}`}>
                         <div className={`${styles.card} ${styles["card-2"]}`}>
                             <h3>Final Theory Test</h3>
-                            <p>A curated set of practice quizzes for the FTT.</p>
+                            <p>Master advanced theory with flexible FTT practice quizzes.</p>
                             <Link to="/ftt-quiz">
-                                <button id="ftt" className={`btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}>Start</button>
+                                <button id="ftt" className={`btn btn-outline-primary mb-2 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}>Start</button>
                             </Link>
                         </div>
                         </div>
@@ -132,7 +113,7 @@ export function ChooseQuiz() {
                             {/* <Link to={`/topical-quiz?category=${selectedCategory}`}> */}
                                 <button 
                                     id="topic" 
-                                    className={`btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}
+                                    className={`btn btn-outline-primary mt-3 mb-2 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}
                                     onClick={startTopicalQuiz}
                                     >
                                     Start
@@ -144,9 +125,9 @@ export function ChooseQuiz() {
                         <div className={`col-md-5 col-sm-10 ${styles.cardstyle}`}>
                         <div className={`${styles.card} ${styles.cardrow2} ${styles["card-4"]}`}>
                             <h3>Review Mistakes</h3>
-                            <p>Review all your mistakes from previous practice quizzes.</p>
+                            <p>Revisit and reinforce your learning by identifying and correcting your quiz mistakes. Sharpen your knowledge for better results.</p>
                             <Link to="/review-quiz">
-                                <button id="review" className={`btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5 ${styles.button}`}>Review</button>
+                                <button id="review" className={`btn btn-outline-primary mt-4 mb-2 text-center col-6 me-sm-4 ${styles.button}`}>Review</button>
                             </Link>
                         </div>
                         </div>
