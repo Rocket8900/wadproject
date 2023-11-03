@@ -114,7 +114,12 @@ const ProfileModal = ({modal, setModal, instructor }) => {
     <Modal show={modal} onHide={() => setModal(false)} dialogClassName="modal-lg modal-dialog-centered rounded">
       <div className="loginModal" style={{ backdropFilter: "blur(5px)", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "35px", minHeight: "50vh"}}>
         <m.main initial={{ y: '-100%' }} animate={{ y: '0%' }} className='loginForm-box '>
-          <Formik>
+          <Formik
+              initialValues={{
+              name: '',
+              carModel: '',
+            }}
+          >
             <Form>
               <h1 className="loginTitle">Edit Profile</h1>
               <div className="input-container" style={{marginBottom:"20px"}}>
