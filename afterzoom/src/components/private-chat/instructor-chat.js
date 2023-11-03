@@ -38,7 +38,6 @@ function ChatWithStudentPage() {
                   }
               );
               setInstructor(instructorResponse.data.data);
-              console.log(instructorResponse.data.data)
   
 
           } catch (error) {
