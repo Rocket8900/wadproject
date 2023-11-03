@@ -24,7 +24,7 @@ import { motion as m } from 'framer-motion'
 import { Formik, Field, Form, ErrorMessage } from 'formik'; 
 import Cookies from 'js-cookie';
 import Modal from 'react-bootstrap/Modal';
-import profile from './sampleprofile.jpg';
+// import profile from './sampleprofile.jpg';
 import jwtDecode from "jwt-decode";
 import axios from 'axios'; 
 import Container from 'react-bootstrap/Container';
@@ -164,7 +164,7 @@ const Sidebar = ({ student }) => {
   console.log(student)
   const location = useLocation();
   const [modal, setModal] = useState(false);
-  const [profileImage, setProfileImage] = useState(profile); 
+  const [profileImage, setProfileImage] = useState(null); 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   useEffect(() => {
     const handleResize = () => {
@@ -227,12 +227,12 @@ const Sidebar = ({ student }) => {
     navigate('/');
   };
 
-  if (student.instructorId === null){
-    var instructorr="not found";
-  }
-  else{
-    var instructorr=student.instructorId;
-  }
+  // if (student.instructorId === null){
+  //   var instructorr="not found";
+  // }
+  // else{
+  //   var instructorr=student.instructorId;
+  // }
 
 
   useEffect(() => {
@@ -247,6 +247,8 @@ const Sidebar = ({ student }) => {
       setActiveMenuItem("simulator");
     } else if (currentPath === "/notes") {
       setActiveMenuItem("yourNotes");
+    } else if (currentPath === '/student-chat'){
+      setActiveMenuItem("instructorChat")
     }
   }, [location.pathname]);
 
@@ -283,15 +285,17 @@ const Sidebar = ({ student }) => {
                 <Col lg={5} md={12}>
                   <img className="sidebarprofile" src={profileImage} alt="pic" />
                 </Col>
-                <Col lg={7} md={12}><div className="user-info">Hello, {name}!</div><div className="user-info">Instructor ID: {instructorr}</div></Col>
+                <Col lg={7} md={12}><div className="user-info">Hello, {name}!</div></Col>
+
               </Row>
             </Container>
+            {/* <p style={{marginLeft:"auto", marginRight: "auto"}}>Instructor Name: {instructorr.name}</p>  */}
             <p className="profileEditInfo">Click me to edit your profile</p>
           </div>
 
           <Menu iconShape="square">
             <MenuItem
-              icon={<FaHome />}
+              icon={<FaHome />} 
               active={activeMenuItem === "dashboard"}
               onClick={() => handleMenuItemClick("dashboard")}
               className="mostinnerouter"

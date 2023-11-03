@@ -21,7 +21,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Cookies from 'js-cookie';
-import profile from './sampleprofile.jpg';
+// import profile from './sampleprofile.jpg';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios'; 
 import { useLocation } from 'react-router-dom';
@@ -161,7 +161,7 @@ const Sidebar = ({ instructor }) => {
   const location = useLocation();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [modal, setModal] = useState(false);
-  const [profileImage, setProfileImage] = useState(profile); 
+  const [profileImage, setProfileImage] = useState(null); 
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 9);
