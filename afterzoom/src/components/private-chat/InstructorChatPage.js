@@ -15,8 +15,15 @@ function InstructorChatPage({instructor}) {
   const [socket, setSocket] = useState(null);
   const [students, setStudents] = useState([]);
   const [selectedStudentId, setSelectedStudentId] = useState("");
+  const [messageCounter, setMessageCounter] = useState(0);
+
   const token = Cookies.get("access_token");
   useEffect(() => {
+    if (messageCounter > 0) {
+      setTimeout(() => {
+          handleStudentChange(selectedStudentId);
+      }, 1000); // 1 seconds delay
+  }
     const fetchStudents = async () => {
       try {
         const response = await axios.get(
@@ -28,8 +35,14 @@ function InstructorChatPage({instructor}) {
           }
         );
 
-        const allChat = response.data.data
-
+        let allChat = response.data.data
+        console.log(allChat);
+        for (let index = 0; index < instructor.students.length; index++) {
+          const studentId = instructor.students[index].id;
+          if (!allChat.includes(studentId)){
+            allChat.push(studentId)
+          }
+        }
         let studentProfile = []
         for (let i = 0; i < allChat.length ; i ++) {
 
@@ -38,7 +51,18 @@ function InstructorChatPage({instructor}) {
               Authorization: `Bearer ${token}`,
             },
           })
-          studentProfile.push(profile.data)
+
+          let profileDetails = profile.data;
+          if (profileDetails.data.selfie == null) {
+            profileDetails.data.selfie = "/Screenshot 2023-11-03 at 4.14.19 AM.png"
+          } else {
+            profileDetails.data.selfie = await axios.get(`http://localhost:3001/v1/api/s3/student/${profileDetails.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                  }
+            })
+          }
+          studentProfile.push(profileDetails)
         }
         let finalProfiles = []
         for (let i = 0; i < studentProfile.length; i ++ ){
@@ -78,7 +102,7 @@ function InstructorChatPage({instructor}) {
         socket.disconnect();
       }
     };
-  }, []);
+  }, [messageCounter]);
 
   const sendMessage = () => {
     if (input.trim()) {
@@ -89,6 +113,7 @@ function InstructorChatPage({instructor}) {
         });
       }
       setInput("");
+      setMessageCounter((prev) => prev + 1);
     }
 
   };
@@ -129,22 +154,37 @@ function InstructorChatPage({instructor}) {
           <div className="chat-header">
             <h2>Chats</h2>
             <div className="custom-dropdown">
-              <div className="custom-dropdown-selected">
-                {selectedStudentId
-                  ? students.find((student) => student.id === selectedStudentId)
-                      .name
-                  : "Select a student"}
-              </div>
               <div className="custom-dropdown-options">
-                {students.map((student) => (
-                  <div
-                    key={student.id}
-                    onClick={() => handleStudentChange(student.id)}
-                    className="custom-dropdown-option-individual"
-                  >
-                    {student.name}
-                  </div>
-                ))}
+              {students.map((student) => (
+                        <button 
+                            key={instructor.id}
+                            onClick={() => {
+                                handleStudentChange(student.id);
+                            }}
+                            className="btn btn-light d-flex align-items-center mb-3 w-100"
+                            style={{
+                                borderRadius: '15px',
+                                transition: 'background-color 0.3s'
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#eef2f7'}
+                            onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
+                        >
+                            <img 
+                                src={student.selfie} 
+                                alt={`Image of ${student.name}`} 
+                                style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '50%', marginRight: '10px' }} 
+                            />
+                            <span style={{
+                                fontSize: 'small',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                                maxWidth: 'calc(100% - 50px)'  // considering image width and margin
+                            }}>
+                                {student.name}
+                            </span>
+                        </button>
+                    ))}
               </div>
             </div>
           </div>

@@ -147,6 +147,8 @@ const Sidebar = ({ student }) => {
               icon={<FaRocketchat />}
               active={activeMenuItem === "instructorChat"}
               onClick={() => handleMenuItemClick("instructorChat")}
+              className="mostinnerouter"
+
             >
               <Link to="/student-chat">
                 <div className="mostInner">Open your chat</div>

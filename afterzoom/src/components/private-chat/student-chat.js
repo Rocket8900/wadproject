@@ -60,7 +60,7 @@ function ChatWithInstructorPage() {
               <Col lg={2} md={2} sm={2} id="sidebar">
                 <StudentSidebar student={student}/> {/* Assuming you have a student sidebar component */}
               </Col>
-              <Col lg={10} md={10} sm={10} id="main-content">
+              <Col lg={10} md={10} sm={10} id="main-content"> 
                  <StudentChatPage student={student}/>
               </Col>
           </Row>
