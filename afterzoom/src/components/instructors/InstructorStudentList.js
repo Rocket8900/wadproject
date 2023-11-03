@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 // import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import styles from './studentlist.module.css';
+import ThreeDotsWave from "../loader/loader";
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -138,7 +139,7 @@ function InstructorLessonList() {
   };
 
   if (instructor === null || students === null) {
-    return <div>Loading...</div>;
+    return <ThreeDotsWave/>;
   }
 
   let count = 0

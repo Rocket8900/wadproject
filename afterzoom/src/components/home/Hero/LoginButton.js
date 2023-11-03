@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import LoginModal from '../login/Login'; // Import the modal component
+import styles from './buttonStyle.module.css';
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
@@ -26,7 +27,7 @@ const LoginButton = () => {
   return (
     <>
       <motion.div
-        className="btn btn_secondary text-center"
+        className="btn loginButton"
         variants={btnGroup}
         onClick={() => setIsOpen(true)}
         whileHover={{ scale: 1.05 }}

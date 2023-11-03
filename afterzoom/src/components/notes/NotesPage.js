@@ -8,6 +8,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
+import ThreeDotsWave from "../loader/loader";
+
 
 export default function NotesPage() {
     const [student, setStudent] = useState(null);
@@ -67,7 +69,7 @@ export default function NotesPage() {
     }, []); 
 
     if (bookings === null || student === null) {
-        return <div>Loading...</div>;
+        return <ThreeDotsWave/>;
     }
 
     return (
