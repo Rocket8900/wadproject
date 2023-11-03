@@ -15,6 +15,7 @@
         const response = await axios.get(
             `https://api.openweathermap.org/data/2.5/forecast?q=SINGAPORE&cnt=8&appid=${apiKey}&dt=${selectedDate} ${selectedTime}`
         );
+        console.log(response.data)
         console.log(response.data.list[0].weather[0].main)
         setWeatherData(response.data.list[0]);
         } catch (error) {
