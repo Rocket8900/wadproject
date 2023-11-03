@@ -24,18 +24,19 @@
 }
 
 
-.a {
-    background-color: #246e0f;
+.ab {
+    background-color: #246e0f ;
     color:white;
+
 }
 
-.a h2{
+.ab h2{
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size:2.3vw;
 }
   
-.a p{
+.ab p{
     font-family: 'Poppins', sans-serif;
     font-size:1.2vw;
     margin: 0;

@@ -25,7 +25,7 @@
 
 
 .a {
-    background-color: #2E5FFE;
+    background-color: #2E5FFE !important;
     color:white;
 }
 

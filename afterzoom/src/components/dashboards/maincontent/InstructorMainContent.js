@@ -104,14 +104,14 @@ const InstructorMainContent = ({ instructor, bookings }) => {
 
   const [layout, setLayout] = useState([
     {
-      i: "a",
+      i: "ab",
       id: "grid-item-hello-user",
       x: 0,
       y: 0,
       w: 6,
       h: 2,
       content: 
-<div className="greet" style={{ textAlign: 'left' }}>
+<div className={styles.greet} style={{ textAlign: 'left' }}>
   <h2>Welcome back, {instructorName} <PiHandWavingDuotone /></h2>
   <p>Your profile is {updatedCompleteness}% complete</p> 
   {/* <br/> */}

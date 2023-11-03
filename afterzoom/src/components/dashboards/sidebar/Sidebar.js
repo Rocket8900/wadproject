@@ -74,7 +74,7 @@ const Sidebar = ({ student }) => {
 
   
   return (
-    <div id="sidebar">
+    <div id="stuSidebar">
       <ProSidebar>
         <SidebarHeader>
           <div className="logotext">
