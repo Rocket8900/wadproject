@@ -18,8 +18,11 @@ import {
 } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./stuSidebar.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { motion as m } from 'framer-motion'
+import { Formik, Field, Form, ErrorMessage } from 'formik'; 
+import Cookies from 'js-cookie';
 
 
 const Sidebar = ({ student }) => {
@@ -47,6 +50,12 @@ const Sidebar = ({ student }) => {
 
   const findInstructorLabel = instructorId ? "View Lessons" : "Find Instructor";
   const findInstructorLink = instructorId ? "/bookingStudent" : "/instructors";
+
+  const navigate = useNavigate();
+  const navigateToHome = () => {
+    Cookies.remove('access_token')
+    navigate('/');
+  };
 
   if (student.instructorId === null){
     var instructorr="not found";
@@ -158,7 +167,7 @@ const Sidebar = ({ student }) => {
 
         <SidebarFooter>
           <Menu iconShape="square">
-            <MenuItem icon={<FaCog />} className="mostinnerouterSignOut">Sign Out</MenuItem>
+            <MenuItem icon={<FaCog />} onClick={navigateToHome} className="mostinnerouterSignOut">Sign Out</MenuItem>
           </Menu>
         </SidebarFooter>
       </ProSidebar>

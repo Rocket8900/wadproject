@@ -217,6 +217,7 @@ const Sidebar = ({ instructor }) => {
   const navigate = useNavigate();
 
   const navigateToHome = () => {
+    Cookies.remove('access_token')
     navigate('/');
   };
   if (name === null || instructorId === null) {
