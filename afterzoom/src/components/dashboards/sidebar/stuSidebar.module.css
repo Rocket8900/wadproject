@@ -4,6 +4,10 @@
     position: relative;
     padding:0px;
     font-family: 'Poppins', sans-serif;
+    background-image: url('../../home/Registration/assets/bg-sidebar-desktop.svg');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size:cover;  
 
   }
   #stuSidebar .pro-sidebar {
