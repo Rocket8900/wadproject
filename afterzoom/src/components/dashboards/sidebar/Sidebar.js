@@ -17,7 +17,7 @@ import {
   FaRocketchat
 } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
-import styles from "./stuSidebar.module.css";
+import "./stuSidebar.css";
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
@@ -74,7 +74,7 @@ const Sidebar = ({ student }) => {
 
   
   return (
-    <div id={styles.sidebar}>
+    <div id="stuSidebar">
       <ProSidebar>
         <SidebarHeader>
           <div className="logotext">
@@ -84,8 +84,8 @@ const Sidebar = ({ student }) => {
 
         <SidebarContent>
         {!isSmallScreen && (
-          <div className={styles["user-info-box"]}>
-            <div className={styles["user-info"]}>
+          <div className="user-info-box">
+            <div className="user-info">
               <p>{name}</p>
               <p>Instructor ID: {instructorr}</p>
             </div>
@@ -99,7 +99,7 @@ const Sidebar = ({ student }) => {
               onClick={() => handleMenuItemClick("dashboard")}
               className="mostinnerouter"
             >
-              <Link to="/student-dashboard" ><div className={styles.mostInner}>Dashboard</div></Link>
+              <Link to="/student-dashboard" ><div className="mostInner">Dashboard</div></Link>
             </MenuItem>
             <MenuItem
               icon={<FaList />}
@@ -109,9 +109,9 @@ const Sidebar = ({ student }) => {
             >
               <Link to={findInstructorLink}>
                 {instructorId ? (
-                  <div className={styles.mostInner}>View Lessons</div>
+                  <div className="mostInner">View Lessons</div>
                 ) : (
-                  <div className={styles.mostInner}>Find Instructor</div>
+                  <div className="mostInner">Find Instructor</div>
                 )}
               </Link>
             </MenuItem>
@@ -123,7 +123,7 @@ const Sidebar = ({ student }) => {
               className="mostinnerouter"
             >
             <Link to="/choose-quiz">
-              <div className={styles.mostInner}>BTT / FTT</div></Link>
+              <div className="mostInner">BTT / FTT</div></Link>
               
             </MenuItem>
 
@@ -133,7 +133,7 @@ const Sidebar = ({ student }) => {
               onClick={() => handleMenuItemClick("simulator")}
               className="mostinnerouter"
             >
-              <Link to="/simulator"><div className={styles.mostInner}>Enter the Simulator</div></Link>
+              <Link to="/simulator"><div className="mostInner">Enter the Simulator</div></Link>
             </MenuItem>
             <MenuItem
               icon={<BsFillClipboard2Fill />}
@@ -141,7 +141,7 @@ const Sidebar = ({ student }) => {
               onClick={() => handleMenuItemClick("yourNotes")}
               className="mostinnerouter"
             >
-              <Link to="/notes"><div className={styles.mostInner}>Your Notes</div></Link>
+              <Link to="/notes"><div className="mostInner">Your Notes</div></Link>
             </MenuItem>
             <MenuItem
               icon={<FaRocketchat />}
@@ -150,7 +150,7 @@ const Sidebar = ({ student }) => {
               className="mostinnerouter"
             >
               <Link to="/student-chat">
-                <div className={styles.mostInner}>Open your chat</div>
+                <div className="mostInner">Open your chat</div>
               </Link>
             </MenuItem>
           </Menu>
