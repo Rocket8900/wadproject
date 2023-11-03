@@ -142,43 +142,43 @@ export function Hero() {
 
             <h1 className='Hometitle'>AfterZOOM</h1>
             <motion.span variants={firstName} initial="initial" animate="animate" className='first'>
-                <motion.span variants={letter}>L</motion.span>
-                <motion.span variants={letter}>e</motion.span>
+                <motion.span variants={letter}>Learning</motion.span>
+                {/* <motion.span variants={letter}>e</motion.span>
                 <motion.span variants={letter}>a</motion.span>
                 <motion.span variants={letter}>r</motion.span>
                 <motion.span variants={letter}>n</motion.span>
                 <motion.span variants={letter}>i</motion.span>
                 <motion.span variants={letter}>n</motion.span>
-                <motion.span variants={letter}>g</motion.span>
-                <motion.span variants={letter} className="second">D</motion.span>
-                <motion.span variants={letter}>r</motion.span>
+                <motion.span variants={letter}>g</motion.span> */}
+                <motion.span variants={letter} className="second">Driving</motion.span>
+                {/* <motion.span variants={letter}>r</motion.span>
                 <motion.span variants={letter}>i</motion.span>
                 <motion.span variants={letter}>v</motion.span>
                 <motion.span variants={letter}>i</motion.span>
                 <motion.span variants={letter}>n</motion.span>
-                <motion.span variants={letter}>g</motion.span>
+                <motion.span variants={letter}>g</motion.span> */}
             </motion.span>
             <motion.span variants={lastName} initial="initial" animate="animate" className='last'>
             <motion.span variants={letter} className="second"></motion.span>
                 <motion.span variants={letter}>H</motion.span>
                 <motion.span variants={letter}>a</motion.span>
                 <motion.span variants={letter}>s</motion.span>
-                <motion.span variants={letter} className="second">N</motion.span>
-                <motion.span variants={letter}>e</motion.span>
+                <motion.span variants={letter} className="second">Never</motion.span>
+                {/* <motion.span variants={letter}>e</motion.span>
                 <motion.span variants={letter}>v</motion.span>
                 <motion.span variants={letter}>e</motion.span>
-                <motion.span variants={letter}>r</motion.span>
-                <motion.span variants={letter} className="second">B</motion.span>
+                <motion.span variants={letter}>r</motion.span> */}
+                <motion.span variants={letter} className="second">Been</motion.span>
+                {/* <motion.span variants={letter}>e</motion.span>
                 <motion.span variants={letter}>e</motion.span>
-                <motion.span variants={letter}>e</motion.span>
-                <motion.span variants={letter}>n</motion.span>
-                <motion.span variants={letter} className="second">Q</motion.span>
-                <motion.span variants={letter}>u</motion.span>
+                <motion.span variants={letter}>n</motion.span> */}
+                <motion.span variants={letter} className="second">Quicker</motion.span>
+                {/* <motion.span variants={letter}>u</motion.span>
                 <motion.span variants={letter}>i</motion.span>
                 <motion.span variants={letter}>c</motion.span>
                 <motion.span variants={letter}>k</motion.span>
                 <motion.span variants={letter}>e</motion.span>
-                <motion.span variants={letter}>r.</motion.span>
+                <motion.span variants={letter}>r.</motion.span> */}
             </motion.span>
           </motion.h2>
 

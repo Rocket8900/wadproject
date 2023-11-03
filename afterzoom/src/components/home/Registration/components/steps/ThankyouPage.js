@@ -61,9 +61,7 @@ export default function ThankyouPage({goto, values}) {
     }
 
 
-    setTimeout(() => {
-      goto(0)
-    }, 5000);
+
   }, [goto])
   return (
     <m.div 

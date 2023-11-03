@@ -220,3 +220,15 @@
 
   }
 
+  .image-container {
+    position: relative;
+  }
+  
+  .image-container img {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  
+  .image-container img.loaded {
+    opacity: 1;
+  }

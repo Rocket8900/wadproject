@@ -21,7 +21,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Cookies from 'js-cookie';
-import profile from './sampleprofile.jpg';
+// import profile from './sampleprofile.jpg';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios'; 
 import { useLocation } from 'react-router-dom';
@@ -114,7 +114,12 @@ const ProfileModal = ({modal, setModal, instructor }) => {
     <Modal show={modal} onHide={() => setModal(false)} dialogClassName="modal-lg modal-dialog-centered rounded">
       <div className="loginModal" style={{ backdropFilter: "blur(5px)", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "35px", minHeight: "50vh"}}>
         <m.main initial={{ y: '-100%' }} animate={{ y: '0%' }} className='loginForm-box '>
-          <Formik>
+          <Formik
+              initialValues={{
+              name: '',
+              carModel: '',
+            }}
+          >
             <Form>
               <h1 className="loginTitle">Edit Profile</h1>
               <div className="input-container" style={{marginBottom:"20px"}}>
@@ -156,7 +161,7 @@ const Sidebar = ({ instructor }) => {
   const location = useLocation();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [modal, setModal] = useState(false);
-  const [profileImage, setProfileImage] = useState(profile); 
+  const [profileImage, setProfileImage] = useState(null); 
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 9);
@@ -217,6 +222,7 @@ const Sidebar = ({ instructor }) => {
   const navigate = useNavigate();
 
   const navigateToHome = () => {
+    Cookies.remove('access_token')
     navigate('/');
   };
   if (name === null || instructorId === null) {

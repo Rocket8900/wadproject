@@ -1,0 +1,29 @@
+.container {
+    width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 8rem);
+    grid-auto-rows: 8rem;
+    justify-items: center;
+    align-items: center;
+  }
+  
+  .loading-box {
+    width: calc(100% - 1rem);
+    height: calc(100% - 1rem);
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.01);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .ig {
+    transform: scale(2);
+    transform-origin: 0 0;
+    background-color: transparent;
+  }

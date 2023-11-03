@@ -12,6 +12,7 @@ import InstructorSidebar from '../dashboards/sidebar/instructorSidebar'
 import InstructorChatPage from './InstructorChatPage'
 import { useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import ThreeDotsWave from "../loader/loader";
 
 
 function ChatWithStudentPage() {
@@ -57,7 +58,7 @@ function ChatWithStudentPage() {
 
 
   if (instructor === null) {
-    return <div>Loading...</div>;
+    return <ThreeDotsWave/>;
 }
 
   return (

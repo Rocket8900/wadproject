@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
 import "./Dashboard.css"
+import ThreeDotsWave from "../loader/loader";
 
 export function StudentDashboard() {
     const [student, setStudent] = useState(null);
@@ -81,7 +82,7 @@ export function StudentDashboard() {
     }, []); 
 
     if (bookings === null || student === null) {
-        return <div>Loading...</div>;
+        return <ThreeDotsWave/>;
     }
 
     return (

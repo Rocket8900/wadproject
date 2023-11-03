@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
 import InstructorMainContent from './maincontent/InstructorMainContent'
 import "./Dashboard.css"
+import ThreeDotsWave from "../loader/loader";
 
 
 export function InstructorDashboard() {
@@ -61,7 +62,7 @@ export function InstructorDashboard() {
     }, []); 
 
     if (instructor === null) {
-        return <div>Loading...</div>;
+        return <ThreeDotsWave/>;
     }
 
     return (

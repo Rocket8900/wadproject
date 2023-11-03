@@ -14,6 +14,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Carousel from 'react-bootstrap/Carousel';
 import MapView from './MapView';
+import ThreeDotsWave from "../loader/loader";
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -245,7 +246,7 @@ getInstructorsData();
 },[]);
 
 if (bookings === null || student === null) {
-  return <div>Loading...</div>;
+  return <ThreeDotsWave/>;
 }
 
   const handleCheckboxChange = (e) => {
