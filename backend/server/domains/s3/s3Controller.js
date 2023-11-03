@@ -24,15 +24,17 @@ export default class S3Controller {
 
     static singleRetrieveSignedUrlsBasedOnStudentId = async (req, res) => {
         try {
-            const studentId = req.user.id
-            const urlId = (await StudentService.getStudentById(studentId)).selfie
-            if (urlId !== null) {
-                const signedUrl = await S3Service.getSignedUrl(urlId)
+            const studentId = req.params.id
+            const student = await StudentService.getStudentById(studentId)
+            if (student && student.selfie !== null) {
+                const signedUrl = await S3Service.getSignedUrl(student.selfie)
                 if (signedUrl) {
+                    Logging.info(`get ${studentId} signed url`)
                     return res.status(200).json({data: signedUrl})
                 }
             }
-            return res.status(400).json({data: "unable to retrieve image"})
+            Logging.info(`${studentId} doesnt exist or has no dp`)
+            return res.status(200).json({data: "unable to retrieve image"})
         } catch (error) {
             Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });
@@ -41,15 +43,17 @@ export default class S3Controller {
 
     static singleRetrieveSignedUrlsBasedOnInstructorId = async (req, res) => {
         try {
-            const instructorId = req.user.id
-            const urlId = (await InstructorService.getInstructorById(instructorId)).dp
-            if (urlId !== null) {
-                const signedUrl = await S3Service.getSignedUrl(urlId)
+            const instructorId = req.params.id
+            const instructor = await InstructorService.getInstructorById(instructorId)
+            if (instructor && instructor.dp !== null) {
+                const signedUrl = await S3Service.getSignedUrl(instructor.dp)
                 if (signedUrl) {
+                    Logging.info(`get ${instructorId} signed url`)
                     return res.status(200).json({data: signedUrl})
                 }
             }
-            return res.status(400).json({data: "unable to retrieve image"})
+            Logging.info(`${instructorId} doesnt exist or has no dp`)
+            return res.status(200).json({data: "unable to retrieve image"})
         } catch (error) {
             Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });
@@ -66,7 +70,7 @@ export default class S3Controller {
                     return res.status(200).json({data: signedUrl})
                 }
             }
-            return res.status(400).json({data: "unable to retrieve scene"})
+            return res.status(200).json({data: "unable to retrieve scene"})
         } catch (error) {
             Logging.error(error)
             return res.status(500).json({ error: "an unexpected error occurred" });

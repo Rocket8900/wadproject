@@ -38,7 +38,6 @@ function ChatWithStudentPage() {
                   }
               );
               setInstructor(instructorResponse.data.data);
-              console.log(instructorResponse.data.data)
   
 
           } catch (error) {
@@ -69,7 +68,7 @@ function ChatWithStudentPage() {
                 <InstructorSidebar instructor={instructor}/>
               </Col>
               <Col lg={10} md={10} sm={10} id="main-content">
-                 <InstructorChatPage instructor={instructor}/>
+                <InstructorChatPage instructor={instructor}/>
               </Col>
           </Row>
       </Container>

@@ -182,7 +182,7 @@ const Sidebar = ({ instructor }) => {
         const instructorId = decodedToken.id;
 
         const picResponse = await axios.get(
-          `http://localhost:3001/v1/api/s3/instructor/single/`,
+          `http://localhost:3001/v1/api/s3/instructor/single/${instructorId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

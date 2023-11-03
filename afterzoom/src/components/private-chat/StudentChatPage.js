@@ -13,6 +13,7 @@ function StudentChatPage({student}) {
   const [socket, setSocket] = useState(null);
   const [instructors, setInstructors] = useState([]);
   const [selectedInstructorId, setSelectedInstructorId] = useState("");
+  const [selectedInstructor, setSelectedInstructor] = useState(null);
   const [messageCounter, setMessageCounter] = useState(0);
 
 
@@ -51,13 +52,12 @@ function StudentChatPage({student}) {
           if (profileDetails.data.dp == null) {
             profileDetails.data.dp = "/Screenshot 2023-11-03 at 4.14.19 AM.png"
           } else {
-            profileDetails.data.dp = await axios.get(`http://localhost:3001/v1/api/s3/instructor/${profileDetails.id}`, {
+            profileDetails.data.dp = (await axios.get(`http://localhost:3001/v1/api/s3/instructor/single/${profileDetails.data.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                   }
-            })
+            })).data.data
           }
-
           instructorProfile.push(profileDetails);
         }
         let finalProfiles = [];
@@ -77,6 +77,7 @@ function StudentChatPage({student}) {
     fetchInstructors();
 
 
+    
 
     const connectToSocketServer = () => {
       const newSocket = io("http://localhost:3001", {
@@ -112,6 +113,8 @@ function StudentChatPage({student}) {
   const handleInstructorChange = async (e) => {
     setSelectedInstructorId(e);
     setMessages([]);
+    const instructor = instructors.find(inst => inst.id === e);
+    setSelectedInstructor(instructor);
     try {
       const response = await axios.get(
         `http://localhost:3001/v1/api/chat/${e}`,  // Assuming this endpoint gets the chat history
@@ -137,7 +140,8 @@ function StudentChatPage({student}) {
   return (
     <Container fluid>
       <Row>
-      <Col lg={2} md={2} sm={2} id="sidebar" style={{background: 'linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%)'}}>
+      <Col lg={2} md={2} sm={2} id="sidebar" style={{background: 'linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%)',
+}}>
             <div className="chat-header">
                 <h2>Chats</h2>
                 <div className="custom-dropdown">
@@ -178,6 +182,15 @@ function StudentChatPage({student}) {
         </Col>
         <Col lg={10} md={10} sm={10} id="main-content">
           <div className="chat-page">
+            {selectedInstructor && (
+                <div className="recipient-header">
+                    <img 
+                        src={selectedInstructor.dp} 
+                        alt={`Image of ${selectedInstructor.name}`} 
+                    />
+                    <h3>{selectedInstructor.name}</h3>
+                </div>
+            )}
             <div className="chat-window">
               {messages.map((message, index) => (
                 <div
