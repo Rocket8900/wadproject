@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&family=Montserrat:wght@300;400&family=Poppins:wght@300;700&display=swap');
 
-#sidebar {
+#stuSidebar {
     position: relative;
     padding:0px;
     font-family: 'Poppins', sans-serif;
 
   }
-  #sidebar .pro-sidebar {
+  #stuSidebar .pro-sidebar {
     height: 100vh;
   }
 
-  #sidebar .closemenu {
+  #stuSidebar .closemenu {
     color: #000;
     z-index: 9999;
     line-height: 20px;
@@ -20,42 +20,42 @@
     cursor: pointer;
     text-align: center;
   }
-  #sidebar .pro-sidebar {
+  #stuSidebar .pro-sidebar {
     width: 100%;
     min-width: 100%;
     color:black;
   }
 
-  #sidebar .pro-sidebar.collapsed {
+  #stuSidebar .pro-sidebar.collapsed {
     width: 80px;
     min-width: 80px;
   }
-  #sidebar .pro-sidebar-inner {
+  #stuSidebar .pro-sidebar-inner {
     box-shadow: 0.5px 0.866px 2px 0px rgba(0, 0, 0, 0.15);
     padding-top:15px;
-    background-image: url('../../home/Registration/assets/bg-sidebar-desktop.svg');
+    background-image: url('../../home/Registration/assets/bg-sidebar-desktop.svg') !important;
     background-repeat: no-repeat;
     background-position: left;
     background-size:cover;  
     
 
   }
-  #sidebar .pro-sidebar-inner .pro-sidebar-layout {
+  #stuSidebar .pro-sidebar-inner .pro-sidebar-layout {
     overflow-y: hidden;
   }
 
-  #sidebar .pro-sidebar-inner .pro-sidebar-layout .logotext {
+  #stuSidebar .pro-sidebar-inner .pro-sidebar-layout .logotext {
     text-align: center;
 
   }
 
-  #sidebar .pro-sidebar-inner .pro-sidebar-layout .logotext p {
+  #stuSidebar .pro-sidebar-inner .pro-sidebar-layout .logotext p {
     font-size: 1.5vw;
     padding: 0 20px;
     color: white;
     font-weight: bold;
   }
-  #sidebar.pro-sidebar-inner .pro-sidebar-layout ul {
+  #stuSidebar.pro-sidebar-inner .pro-sidebar-layout ul {
     padding: 0 5px;
   }
   #sidebar.pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
@@ -63,16 +63,16 @@
     margin: 10px 0px;
     font-weight: bold;
   }
-  #sidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper {
+  #stuSidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper {
     background-color: transparent;
     color: white;
     border-radius: 3px;
   }
-  #sidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper .pro-item-content {
+  #stuSidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper .pro-item-content {
     color: white;
   }
-  #sidebar .pro-sidebar-inner .pro-sidebar-layout .active {
-    background-color: rgba(7, 30, 107, 0.6); 
+  #stuSidebar .pro-sidebar-inner .pro-sidebar-layout .active {
+    background-color: rgba(7, 30, 107, 0.6) !important; 
     color:black !important;
   }
 
@@ -96,11 +96,11 @@
     margin-right: auto;
     border-radius: 8px;
     margin-bottom: 1rem;
-    background-color: rgb(224, 130, 130);
+    background-color: rgb(224, 130, 130) !important;
   }
 
   .mostinnerouterSignOut:hover {
-    background-color: rgb(224, 130, 130);
+    background-color: rgb(224, 130, 130) !important;
   }
   
   .mostinnerouterSignOut {
@@ -126,13 +126,13 @@
     } */
   }
 
-  #sidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
+  #stuSidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
     font-size: 1vw; /* Adjust the font size to your preference */
   }
 
 
   .user-info-box {
-    background-color: rgba(7, 30, 107, 0.6); 
+    background-color: rgba(7, 30, 107, 0.6) !important; 
     padding: 15px;
     border-radius: 8px; 
     width: 90%; 
@@ -168,8 +168,8 @@
     cursor: pointer;
   }
 
-  #sidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item:hover {
-    background-color: rgba(118, 129, 249, 0.655); 
+  #stuSidebar .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item:hover {
+    background-color: rgba(118, 129, 249, 0.655) !important; 
     width: 100%;
     border-radius: 8px;
     margin-left: auto;

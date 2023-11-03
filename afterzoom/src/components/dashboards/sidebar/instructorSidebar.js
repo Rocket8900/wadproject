@@ -28,6 +28,7 @@ import { useLocation } from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 import { motion as m } from 'framer-motion'
 import { Formik, Field, Form, ErrorMessage } from 'formik'; 
+import styles from "./insSidebarOverlap.module.css";
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -242,7 +243,7 @@ const Sidebar = ({ instructor }) => {
         </SidebarHeader>
 
         <SidebarContent>
-          <div className="user-info-box" onClick={() => toggleModal()}>
+          <div className={styles.userInfoBox} onClick={() => toggleModal()}>
             <Container>
               <Row>
                 <Col lg={5} md={12}>
