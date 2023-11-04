@@ -63,10 +63,12 @@ const handleChatClick = async (instructorId) => {
 const handleBookingClick = async (instructorId) => {
   try {
     const token = getCookie("access_token");
-    console.log(token, "!@123");
+    const data = {
+      instructorId: instructorId,
+    };
     const response = await axios.post(
-      `http://localhost:3001/v1/api/booking/${instructorId}`,
-      null,
+      `http://localhost:3001/v1/api/booking/`,
+      data,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -74,9 +76,9 @@ const handleBookingClick = async (instructorId) => {
       }
     );
     if (response) {
-      console.log(response.data.data);
       toast.success("Booking successful!"); // Success toaster
     } else {
+      console.log("nope")
       toast.error("Booking failed. Please try again."); // Error toaster for unsuccessful response
     }
   } catch (error) {
