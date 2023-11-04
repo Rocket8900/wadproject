@@ -35,7 +35,7 @@ function SimulatorSceneThree() {
         const fetchData = async () => {
             try {
                 const token = getCookie("access_token");
-                console.log(token)
+
                 const decodedToken = jwtDecode(token).user;
                 const studentId = decodedToken.id;
 

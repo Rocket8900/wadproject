@@ -54,7 +54,7 @@ li{
     --fwB: 700;
   }
 
- .Hometitle {
+ .Hometitle h1 {
     font-size: 5.3rem;
     font-weight: bold;
   } 

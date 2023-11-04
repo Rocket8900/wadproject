@@ -38,6 +38,8 @@ function InstructorLessonList() {
   const [bookings, setBookings] = useState([]);
   const [studentNames, setStudentNames] = useState({});
   const { id } = useParams();
+  const [upcomingLessons, setUpcomingLessons] = useState([]);
+  const [pastLessons, setpastLessons] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,8 +76,22 @@ function InstructorLessonList() {
             },
           }
         );
+        const currentDate = new Date();
+        let upLessons = []
+        let backLessons = []
+        for (const booking of bookingResponse.data.data) {
+          for (const lesson of booking.lessons) {
+            const lessonDate = new Date(lesson.date);
+            if (lessonDate > currentDate) {
+              upLessons.push({ booking, lesson });
+            } else {
+              backLessons.push({ booking, lesson });
+            }
+          }
+        }
+        setUpcomingLessons(upLessons);
+        setpastLessons(backLessons);
         setBookings(bookingResponse.data.data);
-        console.log(bookingResponse.data.data);
       } catch (error) {
         console.error(error);
       }
@@ -89,6 +105,7 @@ function InstructorLessonList() {
     const [feedback, setFeedback] = useState(selectedLessonFeedback);
     const handleFeedbackChange = (e) => {
       setFeedback(e.target.value);  
+
     };
 
     const handleSaveChanges = async () => {
@@ -104,8 +121,8 @@ function InstructorLessonList() {
             },
           }
         );
-        console.log(booking)
-        console.log(booking.id)
+
+
         // Check if the request was successful
         if (response.status === 201) {
           window.location.reload();
@@ -113,7 +130,7 @@ function InstructorLessonList() {
     
           // You can optionally update the UI or show a success message here
         } else {
-          console.log(response)
+
           // Handle the case where the request was not successful
           console.error("Failed to update feedback");
         }
@@ -192,79 +209,69 @@ function InstructorLessonList() {
     setStudentNames(names);
   };
 
-  useEffect(() => {
-    updateUpcomingLessons();
-  }, [upcomingLessons]);
+  // useEffect(() => {
+  //   updateUpcomingLessons();
+  // }, []);
 
   useEffect(() => {
     getStudentNamesForBookings();
   }, [bookings]);
 
 
-  const currentDate = new Date();
-  const upcomingLessons = [];
-  const pastLessons = [];
 
-  for (const booking of bookings) {
-    for (const lesson of booking.lessons) {
-      const lessonDate = new Date(lesson.date);
-      if (lessonDate > currentDate) {
-        upcomingLessons.push({ booking, lesson });
-      } else {
-        pastLessons.push({ booking, lesson });
-      }
-    }
-  }
 
   // weather forecast API (max 1000 calls per day)
-  const fetchWeatherForecast = async (latitude, longitude, date) => {
-    try {
-      // Call the OpenWeatherMap API to get weather data
-      const apiKey = "5edb4e64fd6cb6634cd6edb3a99e653d";
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&dt=${date}&appid=${apiKey}`
-      );
+  // const fetchWeatherForecast = async (latitude, longitude, date) => {
+  //   try {
+  //     // Call the OpenWeatherMap API to get weather data
+  //     const apiKey = "5edb4e64fd6cb6634cd6edb3a99e653d";
+  //     const response = await axios.get(
+  //       `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&dt=${date}&appid=${apiKey}`
+  //     );
   
-      // Extract the relevant weather data from the API response
-      console.log(response.data)
-      const weatherData = response.data;
+  //     // Extract the relevant weather data from the API response
+
+  //     const weatherData = response.data;
   
-      return weatherData;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  }
+  //     return weatherData;
+  //   } catch (error) {
+  //     console.error(error);
+  //     return null;
+  //   }
+  // }
 
 
 
-  const updateUpcomingLessons = async () => {
-    try {  
-      // Fetch weather data for each upcoming lesson
-      const updatedUpcomingLessons = await Promise.all(
-        upcomingLessons.map(async ({ booking, lesson }) => {
-          const weatherData = await fetchWeatherForecast(
-            "1.3521", // Replace with actual latitude from your lesson data
-            "103.8198", // Replace with actual longitude from your lesson data
-            lesson.date // Date of the lesson
-          );
+  // const updateUpcomingLessons = async () => {
+  //   try {  
+  //     const updatedUpcomingLessons = [];
 
-          return {
-            booking,
-            lesson: {
-              ...lesson,
-              forecastedWeather: weatherData, // Add the weather forecast to the lesson
-            },
-          };
-        })
-      )
-      upcomingLessons = updatedUpcomingLessons;
-    }
-    catch (error) {
-      console.error(error);
-    }
-  };
-
+  //     for (const booking of bookings) {
+  //       for (const lesson of booking.lessons) {
+  //         if (new Date(lesson.date) > new Date()) {
+  //           const weatherData = await fetchWeatherForecast(
+  //             "1.3521", // Replace with actual latitude from your lesson data
+  //             "103.8198", // Replace with actual longitude from your lesson data
+  //             lesson.date // Date of the lesson
+  //           );
+  
+  //           updatedUpcomingLessons.push({
+  //             booking,
+  //             lesson: {
+  //               ...lesson,
+  //               forecastedWeather: weatherData, // Add the weather forecast to the lesson
+  //             },
+  //           });
+  //         }
+  //       }
+  //     }
+  
+  //     // Set the upcomingLessons with the updated lessons
+  //     setUpcomingLessons(updatedUpcomingLessons);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
   
 
   

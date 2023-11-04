@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+
 function StudentChatPage({student}) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -64,7 +65,7 @@ function StudentChatPage({student}) {
         for (let i = 0; i < instructorProfile.length; i++) {
           finalProfiles.push(instructorProfile[i].data);
         }
-        console.log(finalProfiles);
+
         setInstructors(finalProfiles);
       } catch (error) {
         console.error("Error fetching instructors with chat history:", error);

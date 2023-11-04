@@ -78,7 +78,8 @@ function InstructorLessonList() {
               Authorization: `Bearer ${token}`
             }
           });
-          console.log(response.data)
+
+
           return response.data.data;
         } catch (error) {
           console.error(error);
@@ -111,7 +112,7 @@ function InstructorLessonList() {
 
       // Handle the response or update your UI as needed
       window.location.reload();
-      console.log("Booking accepted");
+
     } catch (error) {
       console.error("Error accepting booking:", error);
     }
@@ -132,7 +133,7 @@ function InstructorLessonList() {
       setPendingBookings(pendingBookings.filter(booking => booking.id !== bookingId));
 
       // Handle the response or update your UI as needed
-      console.log("Booking accepted");
+
     } catch (error) {
       console.error("Error accepting booking:", error);
     }

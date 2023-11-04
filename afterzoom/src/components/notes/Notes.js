@@ -53,7 +53,6 @@ const Notes = ({ notes }) => {
         },
       })
       .then(response => {
-        console.log('Note added successfully:', response.data);
         window.location.reload();
       })
       .catch(error => {
@@ -74,7 +73,6 @@ const Notes = ({ notes }) => {
       },
     })
     .then(response => {
-      console.log('Note updated successfully:', response.data);   
       window.location.reload();   
     })
     .catch(error => {
@@ -93,7 +91,6 @@ const Notes = ({ notes }) => {
       },
     })
     .then(response => {
-      console.log('Note deleted successfully:', response.data);
       window.location.reload();
     })
     .catch(error => {
@@ -223,7 +220,7 @@ const Notes = ({ notes }) => {
             <h3 className={styles.miniheader}>No Notes</h3>
           ) : (
             notes.map((note) => (
-              <Col lg={4} className={styles.parentContainer}>
+              <Col lg={4} className={styles.parentContainer} key={note.id}>
               <div key={note.id} className={`${styles.notedContainer} ${styles[note.color]}`}>
                 <div className={styles.noteButtons}>
                   {!note.addToDashboard ? (
@@ -231,7 +228,7 @@ const Notes = ({ notes }) => {
                       Add to Dashboard
                     </button>
                   ) : (
-                    <button className="unadd-to-dashboard" onClick={() => handleAddToDashboard(note.id, note.addToDashboard)}>
+                    <button className={styles.addtodashboard} onClick={() => handleAddToDashboard(note.id, note.addToDashboard)}>
                       Unadd to Dashboard
                     </button>
                   )}
