@@ -56,7 +56,7 @@ const ProfileModal = ({modal, setModal, instructor }) => {
 
 
   const handleProfileUpdate = (e) => {
-    console.log('called');
+
     const data = {
       name: name,
       carModel: carModel,
@@ -68,7 +68,7 @@ const ProfileModal = ({modal, setModal, instructor }) => {
     }
     axios.patch('http://localhost:3001/v1/api/instructor/profile/', data)
       .then((response) => {
-        console.log('Name and car model updated successfully');
+
       })
       .catch((error) => {
         console.error('Error updating name and car model:', error);
@@ -84,7 +84,7 @@ const ProfileModal = ({modal, setModal, instructor }) => {
         },
       })
         .then((response) => {
-          console.log('Image updated successfully');
+
         })
         .catch((error) => {
           console.error('Error updating image:', error);
@@ -189,7 +189,7 @@ const Sidebar = ({ instructor }) => {
             },
           }
         );
-        console.log(picResponse.data.data)
+
         setProfileImage(picResponse.data.data);
       } catch (error) {
         console.error(error);

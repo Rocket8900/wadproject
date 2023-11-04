@@ -49,7 +49,7 @@ export function InstructorDashboard() {
                     }
                 );
                 setBookings(bookingResponse.data.data);
-                console.log(instructorResponse.data.data)
+
     
 
             } catch (error) {

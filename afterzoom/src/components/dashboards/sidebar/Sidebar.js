@@ -66,7 +66,7 @@ const ProfileModal = ({ modal, setModal, student }) => {
       },
     })
       .then((response) => {
-        console.log('Name updated successfully');
+
         window.location.reload()
       })
       .catch((error) => {
@@ -82,7 +82,7 @@ const ProfileModal = ({ modal, setModal, student }) => {
         },
       })
         .then((response) => {
-          console.log('Image updated successfully');
+
           
         })
         .catch((error) => {
