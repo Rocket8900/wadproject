@@ -340,7 +340,6 @@ function InstructorsComponent() {
             },
           }
         );
-        console.log(studentResponse.data.data);
         setStudent(studentResponse.data.data);
 
         const bookingsResponse = await axios.get(
@@ -351,7 +350,6 @@ function InstructorsComponent() {
             },
           }
         );
-        console.log(bookingsResponse.data.data);
         setBookings(bookingsResponse.data.data[0]);
       } catch (error) {
         console.error(error);

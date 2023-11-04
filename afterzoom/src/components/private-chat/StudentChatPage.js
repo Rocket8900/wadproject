@@ -65,7 +65,7 @@ function StudentChatPage({student}) {
         for (let i = 0; i < instructorProfile.length; i++) {
           finalProfiles.push(instructorProfile[i].data);
         }
-        console.log(finalProfiles);
+
         setInstructors(finalProfiles);
       } catch (error) {
         console.error("Error fetching instructors with chat history:", error);

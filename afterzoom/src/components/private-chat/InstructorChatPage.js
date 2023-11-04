@@ -68,7 +68,7 @@ function InstructorChatPage({instructor}) {
         for (let i = 0; i < studentProfile.length; i ++ ){
           finalProfiles.push(studentProfile[i].data)
         }
-        console.log(finalProfiles);
+
         setStudents(finalProfiles);
       } catch (error) {
         console.error("Error fetching students with chat history:", error);
@@ -83,7 +83,7 @@ function InstructorChatPage({instructor}) {
       });
 
       newSocket.emit("connection", () => {
-        console.log("Connected to server");
+
       });
 
       newSocket.on("private_message", (message) => {
