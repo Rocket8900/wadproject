@@ -38,7 +38,8 @@ class Graph extends Component {
                     name: "Lessons",
                     showInLegend: true,
                     dataPoints: monthlyDataPoints
-                }]
+                }],
+                height: 300
             };
 
             return (
