@@ -157,7 +157,7 @@ const MainContent = ({ student, bookings, quiz}) => {
       x: 4, y: 6, w: 2, h: 2,
       content: 
       <div>
-        You have no lessons booked!
+        <WeatherForecast bookings={bookings}/>
       </div>
     },
     { i: "g", 

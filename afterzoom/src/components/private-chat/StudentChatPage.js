@@ -94,7 +94,10 @@ function StudentChatPage({student}) {
     connectToSocketServer();
 
     return () => {
-      if (socket) socket.disconnect();
+      if (socket) {
+        socket.emit('bye-bye');
+        socket.disconnect();
+      }
     };
   }, [messageCounter]);
 

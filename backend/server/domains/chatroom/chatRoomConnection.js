@@ -55,7 +55,7 @@ export const startServerSocket = (io) => {
       })
 
       // onunload from FE to emit a response back to remove socket key pair
-      socket.on("disconnect", async () => {
+      socket.on("bye-bye", async () => {
         Logging.info(socket.userData.userId + " disconncted");
         await redis_cache.del(socket.userData.userId) // del user-socket pair
         socket.disconnect();

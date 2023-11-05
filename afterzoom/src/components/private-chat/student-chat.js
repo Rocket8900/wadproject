@@ -17,8 +17,22 @@ function ChatWithInstructorPage() {
    
   const [student, setStudent] = useState(null);
   const { id } = useParams();
+  const token = Cookies.get("access_token");
 
   useEffect(() => {
+
+        const sendPatchRequest = async () => {
+          try {
+            await axios.patch("http://localhost:3001/v1/api/notification/latest", null, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+          } catch (error) {
+            console.error("Error sending PATCH request:", error);
+          }
+        };
+        sendPatchRequest();
       
       const fetchData = async () => {
           try {
