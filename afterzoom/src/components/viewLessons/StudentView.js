@@ -104,7 +104,7 @@ useEffect(() => {
 
   // Filter out unique instructor details
   const uniqueInstructors = bookings.reduce((unique, booking) => {
-    if (!uniqueInstructorIds.has(booking.instructorId)) {
+    if (!uniqueInstructorIds.has(booking.instructorId) && booking.status === 'ACCEPTED' && instructors[booking.instructorId]) {
       uniqueInstructorIds.add(booking.instructorId);
       unique.push(instructors[booking.instructorId]);
     }
@@ -171,13 +171,13 @@ if (bookings === null || student === null) {
 
                             <tbody>
                             {uniqueInstructors.map((instructor) => (
-                                <tr key={instructor.id}>
-                                    <td data-th="Instructor Name">{instructor.name || '-'}</td>
-                                    <td data-th="Age">{instructor.age || '-'}</td>
-                                    <td data-th="Gender">{instructor.gender || '-'}</td>
-                                    <td data-th="Affiliation">{instructor.affiliation || '-'}</td>
-                                    <td data-th="Email">{instructor.email || '-'}</td>
-                                    <td data-th="Car Model">{instructor.carModel || '-'}</td>
+                                <tr key={instructor ? instructor.id || '-':'-'}>
+                                    <td data-th="Instructor Name">{instructor ? instructor.name || '-':'-'}</td>
+                                    <td data-th="Age">{instructor ? instructor.age || '-':'-'}</td>
+                                    <td data-th="Gender">{instructor ? instructor.gender || '-':'-'}</td>
+                                    <td data-th="Affiliation">{instructor ? instructor.affiliation || '-':'-'}</td>
+                                    <td data-th="Email">{instructor ? instructor.email || '-':'-'}</td>
+                                    <td data-th="Car Model">{instructor ? instructor.carModel || '-':'-'}</td>
                                 </tr>
                                 ))}
                             </tbody>
