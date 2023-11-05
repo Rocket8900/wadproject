@@ -11,6 +11,8 @@ import marker from './download.png';
 import jwtDecode from "jwt-decode";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 
@@ -20,10 +22,12 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
-function SimulatorSceneOne() {
+function SimulatorSceneTwoA() {
     const [student, setStudent] = useState(null);
     const { id } = useParams();
     const [room, setRoom] = useState("starter"); // Declare state unconditionally
+    const [showModal, setShowModal] = useState(true);
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -55,6 +59,7 @@ function SimulatorSceneOne() {
     }
 
     const photoSphereRef = React.createRef();
+    const toggleModal = () => setShowModal(!showModal);
 
     const handleReady = (instance) => {
         const markersPlugs = instance.getPlugin(MarkersPlugin);
@@ -70,33 +75,33 @@ function SimulatorSceneOne() {
     const plugins = [
         [MarkersPlugin, {
             markers: [
-                {
-                    id: 'signal',
-                    position: { yaw: 0, pitch: -0.2 },
-                    image: 'download.png',
-                    size: { width: 32, height: 32 },
-                    anchor: 'bottom center',
-                    zoomLvl: 100,
-                    tooltip: 'Signal Right',
-                },
-                {
-                    id: 'check',
-                    position: { yaw: 1.1, pitch: 0 },
-                    image: 'download.png',
-                    size: { width: 32, height: 32 },
-                    anchor: 'bottom center',
-                    zoomLvl: 100,
-                    tooltip: 'Check Right Mirror for cars',
-                },
-                {
-                    id: 'accel',
-                    position: { yaw: 0.5, pitch: -0.5 },
-                    image: 'download.png',
-                    size: { width: 32, height: 32 },
-                    anchor: 'bottom center',
-                    zoomLvl: 100,
-                    tooltip: 'Accelerate',
-                }
+                // {
+                //     id: 'signal',
+                //     position: { yaw: 0, pitch: -0.2 },
+                //     image: 'download.png',
+                //     size: { width: 32, height: 32 },
+                //     anchor: 'bottom center',
+                //     zoomLvl: 100,
+                //     tooltip: 'Signal Right',
+                // },
+                // {
+                //     id: 'check',
+                //     position: { yaw: 1.1, pitch: 0 },
+                //     image: 'download.png',
+                //     size: { width: 32, height: 32 },
+                //     anchor: 'bottom center',
+                //     zoomLvl: 100,
+                //     tooltip: 'Check Right Mirror for cars',
+                // },
+                // {
+                //     id: 'accel',
+                //     position: { yaw: 0.5, pitch: -0.5 },
+                //     image: 'download.png',
+                //     size: { width: 32, height: 32 },
+                //     anchor: 'bottom center',
+                //     zoomLvl: 100,
+                //     tooltip: 'Accelerate',
+                // }
             ]
         }],
     ];
@@ -112,32 +117,10 @@ function SimulatorSceneOne() {
                         {room === "starter" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='pre-overtake.jpg'
+                                src='post-overtake.jpg'
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}
-                                onReady={handleReady}
-                                littlePlanet={false}
-                            ></ReactPhotoSphereViewer>
-                        )}
-                        {room === "true" && (
-                            <ReactPhotoSphereViewer
-                                ref={photoSphereRef}
-                                src=''
-                                height={"100vh"}
-                                plugins={plugins}
-                                width={"100%"}
-                                onReady={handleReady}
-                                littlePlanet={false}
-                            ></ReactPhotoSphereViewer>
-                        )}
-                        {room === "false" && (
-                            <ReactPhotoSphereViewer
-                                ref={photoSphereRef}
-                                src=''
-                                height={"100vh"}
-                                width={"100%"}
-                                plugins={plugins}
                                 onReady={handleReady}
                                 littlePlanet={false}
                             ></ReactPhotoSphereViewer>
@@ -145,8 +128,24 @@ function SimulatorSceneOne() {
                     </div>
                 </Col>
             </Row>
+            <Modal show={showModal} onHide={toggleModal} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Congratulations!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Succesful overtake! Congratulations on completing this scenario!</p>
+                        <p>Close this pop-up to view your overtake, or click the link below to choose a new level!</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Link to={`/simulator`}>
+                            <Button variant="secondary" onClick={toggleModal}>
+                                Choose a new level
+                            </Button>
+                        </Link>
+                    </Modal.Footer>
+                </Modal>
         </Container>
     );
 }
 
-export default SimulatorSceneOne;
+export default SimulatorSceneTwoA;

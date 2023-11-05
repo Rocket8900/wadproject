@@ -147,39 +147,6 @@ function SimulatorSceneThree() {
                                 littlePlanet={false}
                             ></ReactPhotoSphereViewer>
                         )}
-                        {room === "turnCorrect1" && (
-                            <ReactPhotoSphereViewer
-                                ref={photoSphereRef}
-                                src='post-park.jpg'
-                                height={"100vh"}
-                                width={"100%"}
-                                plugins={plugins}
-                                onReady={handleReady}
-                                littlePlanet={false}
-                            ></ReactPhotoSphereViewer>
-                        )}
-                        {room === "turnWrong" && (
-                            <ReactPhotoSphereViewer
-                                ref={photoSphereRef}
-                                src='wrong-park.jpg'
-                                height={"100vh"}
-                                width={"100%"}
-                                plugins={plugins}
-                                onReady={handleReady}
-                                littlePlanet={false}
-                            ></ReactPhotoSphereViewer>
-                        )}
-                        {room === "turnBack" && (
-                            <ReactPhotoSphereViewer
-                                ref={photoSphereRef}
-                                src='post-park.jpg'
-                                height={"100vh"}
-                                width={"100%"}
-                                plugins={plugins}
-                                onReady={handleReady}
-                                littlePlanet={false}
-                            ></ReactPhotoSphereViewer>
-                        )}
                     </div>
                 </Col>
             </Row>

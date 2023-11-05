@@ -21,6 +21,7 @@ import Simulator from "./components/simulation/Simulator";
 import SimulatorSceneOne from "./components/simulation/SimulatorSceneOne";
 import NotFound from "./components/Error/ErrorPage"
 import SimulatorSceneTwo from "./components/simulation/SimulatorSceneTwo";
+import SimulatorSceneTwoA from "./components/simulation/SimulatorSceneTwo_a";
 import SimulatorSceneThree from "./components/simulation/SimulatorSceneThree";
 import SimulatorScene3a from "./components/simulation/SimulatorScene3a";
 import Scene3success from "./components/simulation/SceneThreeSuccess";
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="/simulator" element={<Simulator/>} />
         <Route path="/simulatorSceneOne" element={<SimulatorSceneOne/>} />
         <Route path="/simulatorSceneTwo" element={<SimulatorSceneTwo/>} />
+        <Route path="/simulatorSceneTwoA" element={<SimulatorSceneTwoA/>} />
         <Route path="/simulatorSceneThree" element={<SimulatorSceneThree/>} />
         <Route path="/simulatorScene3a" element={<SimulatorScene3a/>} />
         <Route path="/3s" element={<Scene3success/>} />

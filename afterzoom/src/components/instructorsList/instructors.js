@@ -262,14 +262,17 @@ function InstructorCard({ instructor, showModal, onAddMarker }) {
                     onClick={() => handleChatClick(instructor.id)}
                   >
                     Chat with instructor!
-                  </Button>
+                  </Button><p></p>
                 </Link>
-                {instructor.preferedLocation && (
-                  <button onClick={handleAddMarkerClick}>Add Marker</button>
-                )}
+                
                 <Button variant="dark" onClick={initiateBooking}>
                   Book the instructor!
                 </Button>
+                <p></p>
+                {instructor.preferedLocation && (
+                  <Button variant="dark" onClick={handleAddMarkerClick}>Add Marker</Button>
+                )}
+
                 <BookingConfirmationModal
                   show={showBookingConfirmation}
                   onHide={() => setShowBookingConfirmation(false)}

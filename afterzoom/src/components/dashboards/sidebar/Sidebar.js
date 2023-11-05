@@ -147,6 +147,7 @@ const Sidebar = ({ student }) => {
   const [modal, setModal] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [scrollingLocked, setScrollingLocked] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -232,6 +233,30 @@ const Sidebar = ({ student }) => {
   const toggleModal = () => {
     setModal(!modal);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const signOutButton = document.querySelector(".mostinnerouterSignOut");
+      const signOutButtonRect = signOutButton.getBoundingClientRect();
+      const sidebar = document.getElementById("stuSidebar");
+      const sidebarRect = sidebar.getBoundingClientRect();
+  
+      if (
+        signOutButtonRect.top <= window.innerHeight &&
+        sidebarRect.bottom > signOutButtonRect.bottom
+      ) {
+        setScrollingLocked(true);
+      } else {
+        setScrollingLocked(false);
+      }
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+  
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div id="stuSidebar">
