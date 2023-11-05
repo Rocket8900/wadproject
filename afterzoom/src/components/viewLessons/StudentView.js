@@ -54,7 +54,7 @@ export function StudentView () {
                     },
                 }
             );
-            console.log(bookingsResponse.data.data)
+            // console.log(bookingsResponse.data.data)
             setBookings(bookingsResponse.data.data);
 
 
@@ -81,8 +81,8 @@ useEffect(() => {
                   },
               }
           );
-          console.log("instructor details")
-          console.log(instructorResponse.data.data)
+        //   console.log("instructor details")
+        //   console.log(instructorResponse.data.data)
           const instructorName = instructorResponse.data.data.name; // Adjust the property based on the API response structure
           names[booking.instructorId] = instructorName;
         } catch (error) {
@@ -95,7 +95,7 @@ useEffect(() => {
 
     if (bookings.length > 0) {
       fetchInstructorNames();
-      console.log(instructorNames)
+    //   console.log(instructorNames)
     }
   }, [bookings]);
 
