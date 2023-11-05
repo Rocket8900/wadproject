@@ -7,7 +7,6 @@ import { PiHandWavingDuotone} from 'react-icons/pi';
 import Calendar from '../calendar/Calendar'; 
 import Unread from '../unread/Unread'
 import Graph from '../graph/InstruGraph'
-import AlternateGraph from "../graph/InstruAlternateGraph"; 
 import { useNavigate} from "react-router-dom";
 import axios from "axios";
 import WeatherForecast from "../weather/weather";
@@ -43,10 +42,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
 
 
   const [details, setDetails] = useState("");
-  const [showAlternateGraph, setShowAlternateGraph] = useState(false); 
-  const toggleGraph = () => {
-    setShowAlternateGraph((prev) => !prev);
-  };
+
   const showDetailsHandle = (details) => {
     setDetails(details);
   };
@@ -107,7 +103,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
       console.log("Screen Width:", screenWidth);
   
       setIsSmallScreen(screenWidth <= 975);
-      setIsReallySmallScreen(screenWidth <= 700);
+      setIsReallySmallScreen(screenWidth <= 576);
   
       console.log("isSmallScreen:", isSmallScreen);
       console.log("isReallySmallScreen:", isReallySmallScreen);
@@ -185,7 +181,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
       />
       </div>
     },
-    { i: "g", 
+    { i: "e", 
       id: "grid-item-lastrow1", 
       x: 0, y: 6, w: 4, h: 2,
       content: 
@@ -193,14 +189,16 @@ const InstructorMainContent = ({ instructor, bookings }) => {
         <WeatherForecast bookings={bookings}/>
       </div>
     },
-    { i: "h", 
-      id: "grid-item-lastrow1", 
-      x: 4, y: 6, w: 4, h: 2,
-      content:
-      <div className="changeGraph" onClick={toggleGraph} >
-        <h2>Press Me to Change Graph</h2>
-      </div>
-    },
+    { i: "f", 
+    id: "grid-item-lastrow1", 
+    x: 4, y: 6, w: 4, h: 2,
+    content: 
+    <div>
+      A QUOTE JUST FOR YOU
+      <p>If you ever feel tiny, think about the impact a bedtime mosquito can have.</p>
+    </div>
+  },
+
   ]);
 
 
@@ -260,7 +258,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
       />
       </div>
     },
-    { i: "g", 
+    { i: "e", 
       id: "grid-item-lastrow1", 
       x: 0, y: 6, w: 4, h: 2,
       content: 
@@ -268,12 +266,13 @@ const InstructorMainContent = ({ instructor, bookings }) => {
         <WeatherForecast bookings={bookings}/>
       </div>
     },
-    { i: "h", 
+    { i: "f", 
       id: "grid-item-lastrow1", 
       x: 4, y: 6, w: 4, h: 2,
-      content:
-      <div className="changeGraph" onClick={toggleGraph} >
-        <h2>Press Me to Change Graph</h2>
+      content: 
+      <div>
+        A QUOTE JUST FOR You
+        <p>Believe you can and you're halfway there.</p>
       </div>
     },
   ]);
@@ -336,7 +335,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
       />
       </div>
     },
-    { i: "g", 
+    { i: "e", 
       id: "grid-item-lastrow1", 
       x: 0, y: 8, w: 8, h: 1,
       content: 
@@ -344,14 +343,15 @@ const InstructorMainContent = ({ instructor, bookings }) => {
         <WeatherForecast bookings={bookings}/>
       </div>
     },
-    { i: "h", 
-      id: "grid-item-lastrow1", 
-      x: 0, y: 8, w: 8, h: 1,
-      content:
-      <div className="changeGraph" onClick={toggleGraph} >
-        <h2>Press Me to Change Graph</h2>
-      </div>
-    },
+    { i: "f", 
+    id: "grid-item-lastrow1", 
+    x: 0, y: 9, w: 8, h: 1,
+    content: 
+    <div>
+      A QUOTE JUST FOR You
+      <p>Work is the greatest thing in the world, so we should always save some of it for tomorrow.</p>
+    </div>
+  },
   ]);
 
 
@@ -420,15 +420,11 @@ const InstructorMainContent = ({ instructor, bookings }) => {
         isDroppable={true}
         droppingItem={{ i: "xx", h: 50, w: 250 }}
       >
-        {layoutToUse.map((itm) => (
-          <div key={itm.i} data-grid={itm} className={`block ${itm.i}`}>
-          {itm.i === "d" && showAlternateGraph ? (
-            <AlternateGraph />
-          ) : (
-            itm.content 
-          )}
-          </div>
-        ))}
+  {layoutToUse.map((item) => (
+    <div key={item.i} data-grid={item} className={`block ${item.i}`}>
+      {item.content} {/* Render the content for each grid item */}
+    </div>
+  ))}
       </ResponsiveReactGridLayout>
     </div>
   );

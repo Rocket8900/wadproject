@@ -26,24 +26,21 @@ class Graph extends Component {
             chatHistory: instructorChats
           } = instructor;
 		const { id: bookingId, lessons:lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings || {}; 
-		if ((!bookings || !bookings.lesson) && instructorStudents===null) {
-            return <div>No lesson data available. Got to Find a Student First !</div>;
-        }
-		if (!bookings || !bookings.lesson) {
-            return <div>No lesson data available.</div>;
-        }
+
 
         const monthlyDataPoints = Array.from({ length: 12 }, () => ({
             y: 0,
             label: ''
         }));
 
-        lesson.forEach(lesson => {
-            const lessonDate = new Date(lesson.date);
-            const monthIndex = lessonDate.getMonth();
-            monthlyDataPoints[monthIndex].y++;
-            monthlyDataPoints[monthIndex].label = lessonDate.toLocaleString('default', { month: 'short' });
-        });
+        if (lesson && lesson.length > 0) {
+            lesson.forEach(lesson => {
+                const lessonDate = new Date(lesson.date);
+                const monthIndex = lessonDate.getMonth();
+                monthlyDataPoints[monthIndex].y++;
+                monthlyDataPoints[monthIndex].label = lessonDate.toLocaleString('default', { month: 'short' });
+            });
+        }
 
         const options = {
             animationEnabled: true,

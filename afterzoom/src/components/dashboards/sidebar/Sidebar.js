@@ -260,11 +260,11 @@ const Sidebar = ({ student }) => {
 
   return (
     <div id="stuSidebar">
-      <ProfileModal
-        modal={modal}
-        setModal={setModal}
-        student={student}
-      />
+        <ProfileModal
+          modal={modal}
+          setModal={setModal}
+          student={student}
+        />
       <ProSidebar>
         <SidebarHeader>
           <div className="logotext">
@@ -273,6 +273,7 @@ const Sidebar = ({ student }) => {
         </SidebarHeader>
 
         <SidebarContent>
+        {isSmallScreen ? null : (
           <div className="user-info-box" onClick={() => toggleModal()}>
             <Container>
               <Row>
@@ -293,6 +294,7 @@ const Sidebar = ({ student }) => {
             </Container>
             <p className="profileEditInfo">Click me to edit your profile</p>
           </div>
+                )}
 
           <Menu iconShape="square">
             <MenuItem
