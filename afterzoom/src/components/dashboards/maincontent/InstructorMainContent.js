@@ -10,10 +10,14 @@ import Graph from '../graph/InstruGraph'
 import AlternateGraph from "../graph/InstruAlternateGraph"; 
 import { useNavigate} from "react-router-dom";
 import axios from "axios";
+import WeatherForecast from "../weather/weather";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const InstructorMainContent = ({ instructor, bookings }) => {
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isReallySmallScreen, setIsReallySmallScreen] = useState(false);
 
   const {
     id: instructorId,
@@ -97,6 +101,29 @@ const InstructorMainContent = ({ instructor, bookings }) => {
     setSections(updatedSections);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      console.log("Screen Width:", screenWidth);
+  
+      setIsSmallScreen(screenWidth <= 975);
+      setIsReallySmallScreen(screenWidth <= 700);
+  
+      console.log("isSmallScreen:", isSmallScreen);
+      console.log("isReallySmallScreen:", isReallySmallScreen);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Call the resize handler once to set initial state
+    handleResize();
+
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); 
 
 
 
@@ -158,31 +185,175 @@ const InstructorMainContent = ({ instructor, bookings }) => {
       />
       </div>
     },
-    { i: "e", 
-      id: "grid-item-lastrow1", 
-      x: 0, y: 6, w: 4, h: 2,
-      content:
-      <div >
-        <h2>NOTES</h2>
-      </div>
-    },
     { i: "g", 
       id: "grid-item-lastrow1", 
-      x: 4, y: 6, w: 2, h: 2,
+      x: 0, y: 6, w: 4, h: 2,
       content: 
       <div>
-        <h2>Press Me to Save Layout</h2>
+        <WeatherForecast bookings={bookings}/>
       </div>
     },
     { i: "h", 
       id: "grid-item-lastrow1", 
-      x: 6, y: 6, w: 2, h: 2,
+      x: 4, y: 6, w: 4, h: 2,
       content:
       <div className="changeGraph" onClick={toggleGraph} >
         <h2>Press Me to Change Graph</h2>
       </div>
     },
   ]);
+
+
+
+  const [layout2, setLayout2] = useState([
+    {
+      i: "ab",
+      id: "grid-item-hello-user",
+      x: 0,
+      y: 0,
+      w: 4,
+      h: 2,
+      content: 
+<div className="greet" style={{ textAlign: 'left' }}>
+  <h2>Welcome back, {instructorName} <PiHandWavingDuotone /></h2>
+  <p>Your profile is {updatedCompleteness}% complete</p> 
+  {/* <br/> */}
+  <p>Task List:</p>
+  {updatedCompleteness < 100 ? (
+    <ul>
+      {missingPoints.map((point, index) => (
+        <li key={index}>{point}</li>
+      ))}
+    </ul>
+  ) : (
+    "  -"
+  )}
+</div>
+      
+    },    
+    { i: "b", 
+      id: "grid-item-unread", 
+      x: 6, y: 0, w: 4, h: 2,
+      content: 
+      <div className="unread"><Unread/></div>
+    },
+    { i: "c", 
+      id: "grid-item-calendar", 
+      x: 0, y: 2, w: 4, h: 4,
+      content:
+      <div>
+      <Calendar
+        showDetailsHandle={showDetailsHandle}
+        bookings={bookings}
+      />
+      </div>
+    },
+    { 
+      i: "d", 
+      id: "grid-item-graph",
+      x: 4, y: 2, w: 4, h: 4,
+      content:
+      <div>
+      <Graph 
+      bookings={bookings}
+      instructor={instructor}
+      />
+      </div>
+    },
+    { i: "g", 
+      id: "grid-item-lastrow1", 
+      x: 0, y: 6, w: 4, h: 2,
+      content: 
+      <div>
+        <WeatherForecast bookings={bookings}/>
+      </div>
+    },
+    { i: "h", 
+      id: "grid-item-lastrow1", 
+      x: 4, y: 6, w: 4, h: 2,
+      content:
+      <div className="changeGraph" onClick={toggleGraph} >
+        <h2>Press Me to Change Graph</h2>
+      </div>
+    },
+  ]);
+
+
+
+
+  const [layout3, setLayout3] = useState([
+    {
+      i: "ab",
+      id: "grid-item-hello-user",
+      x: 0,
+      y: 0,
+      w: 8,
+      h: 1,
+      content: 
+<div className="greet" style={{ textAlign: 'left' }}>
+  <h2>Welcome back, {instructorName} <PiHandWavingDuotone /></h2>
+  <p>Your profile is {updatedCompleteness}% complete</p> 
+  {/* <br/> */}
+  <p>Task List:</p>
+  {updatedCompleteness < 100 ? (
+    <ul>
+      {missingPoints.map((point, index) => (
+        <li key={index}>{point}</li>
+      ))}
+    </ul>
+  ) : (
+    "  -"
+  )}
+</div>
+      
+    },    
+    { i: "b", 
+      id: "grid-item-unread", 
+      x: 0, y: 1, w: 8, h: 1,
+      content: 
+      <div className="unread"><Unread/></div>
+    },
+    { i: "c", 
+      id: "grid-item-calendar", 
+      x: 0, y: 2, w: 8, h: 2,
+      content:
+      <div>
+      <Calendar
+        showDetailsHandle={showDetailsHandle}
+        bookings={bookings}
+      />
+      </div>
+    },
+    { 
+      i: "d", 
+      id: "grid-item-graph",
+      x: 0, y: 5, w: 8, h: 2,
+      content:
+      <div>
+      <Graph 
+      bookings={bookings}
+      instructor={instructor}
+      />
+      </div>
+    },
+    { i: "g", 
+      id: "grid-item-lastrow1", 
+      x: 0, y: 8, w: 8, h: 1,
+      content: 
+      <div>
+        <WeatherForecast bookings={bookings}/>
+      </div>
+    },
+    { i: "h", 
+      id: "grid-item-lastrow1", 
+      x: 0, y: 8, w: 8, h: 1,
+      content:
+      <div className="changeGraph" onClick={toggleGraph} >
+        <h2>Press Me to Change Graph</h2>
+      </div>
+    },
+  ]);
+
 
   useEffect(() => {
     setMounted(true);
@@ -232,26 +403,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
     };
   }, []);
 
-  const saveLayoutToDatabase = async (updatedLayout) => {
-    try {
-      const token = getCookie("access_token");
-      const response = await axios.get(`http://localhost:3001/v1/api/instructor/profile/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ layout: updatedLayout }),
-      });
-  
-      if (response.ok) {
-        console.log('Layout saved successfully.');
-      } else {
-        console.error('Failed to save layout.');
-      }
-    } catch (error) {
-      console.error('Error saving layout:', error);
-    }
-  };
-
+  const layoutToUse = isReallySmallScreen ? layout3 : isSmallScreen ? layout2 : layout;
   
 
   return (
@@ -259,7 +411,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
       <ResponsiveReactGridLayout
         rowHeight={dynamicRowHeight}
         cols={{ lg: 8, md: 8, sm: 8, xs: 8, xxs: 8 }}
-        layout={layout}
+        layout={layoutToUse}
         onDrop={onDrop}
         measureBeforeMount={false}
         useCSSTransforms={mounted}
@@ -268,7 +420,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
         isDroppable={true}
         droppingItem={{ i: "xx", h: 50, w: 250 }}
       >
-        {layout.map((itm) => (
+        {layoutToUse.map((itm) => (
           <div key={itm.i} data-grid={itm} className={`block ${itm.i}`}>
           {itm.i === "d" && showAlternateGraph ? (
             <AlternateGraph />
