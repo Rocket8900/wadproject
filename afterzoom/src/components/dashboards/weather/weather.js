@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 
 import { io } from 'socket.io-client';
@@ -17,17 +15,30 @@ function WeatherForecast( bookings ) {
   const [weater, setWeather] = useState(null);
   const [update, setUpdate] = useState(null);
   const [icon, setIcon] = useState(null)
-  const upcoming = bookings.bookings.lessons
-  const now = new Date();
-  let mostUpcomingDate = new Date(upcoming[0].date);
 
-for (const event of upcoming) {
-  const eventDate = new Date(event.date);
-  if (eventDate > now && eventDate < mostUpcomingDate) {
-    mostUpcomingDate = eventDate;
+  const now = new Date();
+
+  let mostUpcomingUnixTimestamp; // Declare the variable outside of the if clause
+  let mostUpcomingDate; // Declare the variable outside of the if clause
+  
+  if (bookings.bookings && bookings.bookings.lessons && bookings.bookings.lessons.length > 0) {
+    const upcoming = bookings.bookings.lessons;
+    mostUpcomingDate = new Date(upcoming[0].date); // Assign a value within the if clause
+  
+    for (const event of upcoming) {
+      const eventDate = new Date(event.date);
+      if (eventDate > now && eventDate < mostUpcomingDate) {
+        mostUpcomingDate = eventDate;
+      }
+    }
+  
+    mostUpcomingUnixTimestamp = Math.floor(mostUpcomingDate.getTime() / 1000);
+  
+    // Rest of your code for the if clause
+  } else {
+    // Handle the case where there is no data in bookings.bookings.lessons
+    // You can provide a default value or perform other actions as needed.
   }
-}
-let mostUpcomingUnixTimestamp = Math.floor(mostUpcomingDate.getTime() / 1000);
   useEffect(() => {
       
       const fetchData = async () => {
@@ -51,6 +62,7 @@ let mostUpcomingUnixTimestamp = Math.floor(mostUpcomingDate.getTime() / 1000);
                 }
               );
               setWeather(response.data.data.data[0].weather[0].main);
+              
               setUpdate(mostUpcomingDate);
               setIcon(response.data.data.data[0].weather[0].icon)
   
