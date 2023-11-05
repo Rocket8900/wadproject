@@ -249,6 +249,7 @@ const Sidebar = ({ instructor }) => {
         </SidebarHeader>
 
         <SidebarContent>
+        {isSmallScreen ? null : (
           <div className={styles.userInfoBox} onClick={() => toggleModal()}>
             <Container>
               <Row>
@@ -260,6 +261,7 @@ const Sidebar = ({ instructor }) => {
             </Container>
             <p className="profileEditInfo">Click me to edit your profile</p>
           </div>
+               )}
 
           <Menu iconShape="square">
             <MenuItem

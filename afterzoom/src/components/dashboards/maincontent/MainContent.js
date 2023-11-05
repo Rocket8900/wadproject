@@ -57,7 +57,7 @@ const MainContent = ({ student, bookings, quiz}) => {
       console.log("Screen Width:", screenWidth);
   
       setIsSmallScreen(screenWidth <= 975);
-      setIsReallySmallScreen(screenWidth <= 700);
+      setIsReallySmallScreen(screenWidth <= 576);
   
       console.log("isSmallScreen:", isSmallScreen);
       console.log("isReallySmallScreen:", isReallySmallScreen);
@@ -169,21 +169,21 @@ const MainContent = ({ student, bookings, quiz}) => {
       />
       </div>
     },
-    { i: "e", 
-      id: "grid-item-lastrow1", 
-      x: 0, y: 6, w: 4, h: 2,
-      content:
-      <div >
-        <NotesViewDashboard/>
-      </div>
-    },
     {
       i: "i", 
       id: "grid-item-lastrow1", 
-      x: 4, y: 6, w: 4, h: 1,
+      x: 0, y: 6, w: 4, h: 2,
       content: 
       <div>
         <WeatherForecast bookings={bookings}/>
+      </div>
+    },
+    { i: "e", 
+      id: "grid-item-lastrow1", 
+      x: 4, y: 6, w: 4, h: 1,
+      content:
+      <div >
+        <NotesViewDashboard/>
       </div>
     },
     { i: "h", 
