@@ -26,13 +26,19 @@ const MapView = ({ isScriptLoaded, isScriptLoadSucceed, markerCoordinates }) => 
     // Add markers to the map
     if (map && markerCoordinates && markerCoordinates.length > 0) {
       const newMarkers = markerCoordinates.map(marker => {
-        const location = JSON.parse(marker.location);
+        let location;
+        if (typeof marker.location === 'string') {
+          location = JSON.parse(marker.location);
+        } else {
+          location = marker.location;
+        }
         return new window.google.maps.Marker({
           position: { lat: location.latitude, lng: location.longitude },
           map,
           title: marker.name,
         });
       });
+      
       setMarkers(prevMarkers => [...prevMarkers, ...newMarkers]);
     }
   }, [map, markerCoordinates]);
