@@ -13,7 +13,6 @@
 html,
 body {
   height: 100%;
-  overflow-y:hidden;
 }
 
 body {
@@ -51,7 +50,7 @@ fieldset h4{
   display: block;
   position: relative;
   cursor: pointer;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
 
 
@@ -298,7 +297,6 @@ form{
 
 .header{
   padding-top:10px;
-  padding-bottom:0px;
   display: flex;
   align-items: center;
   justify-content: center;
