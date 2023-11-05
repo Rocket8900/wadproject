@@ -58,7 +58,7 @@ export function StudentView () {
 
 
         } catch (error) {
-            console.error(error);
+            // console.error(error);
         }
     };
 
@@ -85,7 +85,7 @@ useEffect(() => {
         //   const instructorName = instructorResponse.data.data.name; // Adjust the property based on the API response structure
           instructorDetails[booking.instructorId] = instructorResponse.data.data;
         } catch (error) {
-          console.error(error);
+        //   console.error(error);
           instructorDetails[booking.instructorId] = "Instructor Name Not Found";
         }
       }
@@ -97,6 +97,18 @@ useEffect(() => {
     //   console.log(instructorNames)
     }
   }, [bookings]);
+
+  // Create a Set to store unique instructor IDs
+  const uniqueInstructorIds = new Set();
+
+  // Filter out unique instructor details
+  const uniqueInstructors = bookings.reduce((unique, booking) => {
+    if (!uniqueInstructorIds.has(booking.instructorId) && booking.status === 'ACCEPTED' && instructors[booking.instructorId]) {
+      uniqueInstructorIds.add(booking.instructorId);
+      unique.push(instructors[booking.instructorId]);
+    }
+    return unique;
+  }, []);
 
 if (bookings === null || student === null) {
     return <div>Loading...</div>;
@@ -168,7 +180,34 @@ if (bookings === null || student === null) {
                         </table>
                     </div>
 
+                    <div className={styles.container}>
+                        <h3>Your Instructors</h3>
+                        <table className={styles["rwd-table"]}>
+                            <thead>
+                            <tr>
+                                <th>NAME</th>
+                                <th>AGE</th>
+                                <th>GENDER</th>
+                                <th>AFFILIATION</th>
+                                <th>EMAIL</th>
+                                <th>CARMODEL</th>
+                            </tr>
+                            </thead>
 
+                            <tbody>
+                            {uniqueInstructors.map((instructor) => (
+                                <tr key={instructor ? instructor.id || '-':'-'}>
+                                    <td data-th="Instructor Name">{instructor ? instructor.name || '-':'-'}</td>
+                                    <td data-th="Age">{instructor ? instructor.age || '-':'-'}</td>
+                                    <td data-th="Gender">{instructor ? instructor.gender || '-':'-'}</td>
+                                    <td data-th="Affiliation">{instructor ? instructor.affiliation || '-':'-'}</td>
+                                    <td data-th="Email">{instructor ? instructor.email || '-':'-'}</td>
+                                    <td data-th="Car Model">{instructor ? instructor.carModel || '-':'-'}</td>
+                                </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </Col>
             </div>
         </div>

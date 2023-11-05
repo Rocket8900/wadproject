@@ -23,7 +23,7 @@ body {
 fieldset{
   display: inline-block;
   vertical-align: top;
-  padding:15px !important;
+  padding:8px !important;
   background: #2e5ffe72;
   border-radius: 6px;
   width:20em;
@@ -296,7 +296,7 @@ form{
 }
 
 .header{
-  padding-top:20px;
+  padding-top:10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -305,7 +305,7 @@ form{
 .header h1{
   text-align: center;
   font-family: 'Poppins', sans-serif;
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: bold;
   color:#2E5FFE;
 }
@@ -340,3 +340,9 @@ form{
   text-align: center;
 }
 /* # sourceMappingURL=card.css.map */
+
+
+.scrollableContainer{
+  height:100vh;
+  overflow-y: auto;
+}

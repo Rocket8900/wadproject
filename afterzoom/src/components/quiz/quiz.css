@@ -21,12 +21,7 @@ img {
   text-align: left;
   margin-left: auto;
   margin-right: auto;
-  /* display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: 0; */
   max-width: 800px;
-  /* min-width: 250px; */
   background: #ffffff;
   border-radius: 4px;
   margin-top: 30px;
@@ -75,7 +70,7 @@ img {
 
 button {
   background: #191716;
-  border-radius: 9px;
+  border-radius: 8px;
   font-size: 18px;
   color: #ffffff;
   padding: 10px 42px;
