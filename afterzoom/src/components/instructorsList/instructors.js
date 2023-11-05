@@ -262,7 +262,7 @@ function InstructorCard({ instructor, showModal, onAddMarker }) {
                     onClick={() => handleChatClick(instructor.id)}
                   >
                     Chat with instructor!
-                  </Button>
+                  </Button><p></p>
                 </Link>
                 {instructor.preferedLocation && (
                   <button onClick={handleAddMarkerClick}>Add Marker</button>
