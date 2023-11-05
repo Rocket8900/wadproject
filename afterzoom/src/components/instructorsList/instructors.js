@@ -413,7 +413,7 @@ if (bookings === null || student === null) {
               <form className="controls" id="Filters">
                 <div className={styles.FilterBox}>
                   <fieldset>
-                    <MapView markerCoordinates={markerCoordinates} />
+                    <MapView markerCoordinates={markerCoordinates} className={styles.MapView}/>
                   </fieldset>
 
                   <br />
@@ -516,7 +516,9 @@ if (bookings === null || student === null) {
 
               {/* Render InstructorCard component for each filtered instructor */}
               <Container fluid>
+              <div className={styles.scrollableContainer}>
                 <Row>
+                  
                   {filteredInstructors.map((instructor) => (
                     <Col key={instructor.id} lg={4} md={6} sm={12}>
                       <InstructorCard
@@ -525,7 +527,9 @@ if (bookings === null || student === null) {
                       />
                     </Col>
                   ))}
+                 
                 </Row>
+                </div>
               </Container>
             </div>
           </Col>
