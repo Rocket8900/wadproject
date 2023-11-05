@@ -54,7 +54,7 @@ export function StudentView () {
                     },
                 }
             );
-            console.log(bookingsResponse.data.data)
+            // console.log(bookingsResponse.data.data)
             setBookings(bookingsResponse.data.data);
 
 
@@ -81,8 +81,8 @@ useEffect(() => {
                   },
               }
           );
-          console.log("instructor details")
-          console.log(instructorResponse.data.data)
+        //   console.log("instructor details")
+        //   console.log(instructorResponse.data.data)
           const instructorName = instructorResponse.data.data.name; // Adjust the property based on the API response structure
           names[booking.instructorId] = instructorName;
         } catch (error) {
@@ -95,7 +95,7 @@ useEffect(() => {
 
     if (bookings.length > 0) {
       fetchInstructorNames();
-      console.log(instructorNames)
+    //   console.log(instructorNames)
     }
   }, [bookings]);
 
@@ -113,6 +113,7 @@ if (bookings === null || student === null) {
                 <Col lg={10} md={10} sm={10} id={styles["main-content"]}>
                     <h1>Your lessons at a glance</h1>
                     <div className={styles.container}>
+                        <h3>Your Upcoming Lessons</h3>
                         <table className={styles["rwd-table"]}>
                             <thead>
                             <tr>
@@ -135,6 +136,37 @@ if (bookings === null || student === null) {
                                             <td data-th="Date">{formatDateTime(lesson.date) || '-'}</td>
                                             <td data-th="Status">{booking.status || '-'}</td>
                                             <td data-th="Feedback">{lesson.feedback || '-'}</td>
+                                        </tr>
+                                    ))
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className={styles.container}>
+                        <h3>Your Instructors</h3>
+                        <table className={styles["rwd-table"]}>
+                            <thead>
+                            <tr>
+                                <th>NAME</th>
+                                <th>AGE</th>
+                                <th>GENDER</th>
+                                <th>AFFILIATION</th>
+                                <th>EMAIL</th>
+                                <th>CARMODEL</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                {bookings.map((booking) => (
+                                    booking.lessons.map((lesson) => (
+                                        <tr key={lesson.id}>
+                                            <td data-th="Instructor Name">{lesson.title || 'Untitled'}</td>
+                                            <td data-th="Age">{instructorNames[booking.instructorId] || '-'}</td>
+                                            <td data-th="Gender">{lesson.description || '-'}</td>
+                                            <td data-th="Affiliation">{formatDateTime(lesson.date) || '-'}</td>
+                                            <td data-th="Email">{booking.status || '-'}</td>
+                                            <td data-th="Car Model">{lesson.feedback || '-'}</td>
                                         </tr>
                                     ))
                                 ))}

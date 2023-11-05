@@ -7,6 +7,7 @@ import './quiz.css';
 import Sidebar from '../dashboards/sidebar/Sidebar';
 import jwtDecode from "jwt-decode";
 import Col from "react-bootstrap/Col";
+import styled from '@emotion/styled';
 
 // Function to combine questions of a specific category from both BTT and FTT
 function combineQuestionsByCategory(btt_questions, ftt_questions, category) {
@@ -45,6 +46,24 @@ const Quiz = ({ type }) => {
   const questionsRef = useRef([]);
   let questions = questionsRef.current;
 
+  // Use a state variable to control the quiz mode
+  const [quizMode, setQuizMode] = useState(type);
+
+  // If pressed review mistakes at result page
+  const resetQuiz = () => {
+    setQuizMode("review")
+    setActiveQuestion(0);
+    setShowResult(false);
+    setSelectedAnswerIndex(null);
+    setResult({
+      score: 0,
+      correctAnswers: 0,
+      wrongAnswers: 0,
+    });
+    setMistakes([]);
+    setIsQuizEnded(false);
+  };
+
 
   // for sidebar
   useEffect(() => {
@@ -75,10 +94,10 @@ const Quiz = ({ type }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (type === 'review') {
+        if (quizMode === 'review') {
           const response = await axios.get('http://localhost:3001/v1/api/quiz/review');
-          console.log(response.data);
-          console.log(response.data.data);
+          // console.log(response.data);
+          // console.log(response.data.data);
 
           // If the user has a mistakes array, set this as the question bank for "review"
           if (response.data.data !== null) {
@@ -86,11 +105,11 @@ const Quiz = ({ type }) => {
           } else {
             setError("You don't have any mistakes to review. Start a new quiz!");
           }
-        } else if (type === 'btt') {
+        } else if (quizMode === 'btt') {
           questionsRef.current = btt_questions; // Update the ref
-        } else if (type === 'ftt') {
+        } else if (quizMode === 'ftt') {
           questionsRef.current = ftt_questions; // Update the ref
-        } else if (type === 'topic') {
+        } else if (quizMode === 'topic') {
           const searchParams = new URLSearchParams(location.search);
           const selectedCategory = searchParams.get('category');
           questionsRef.current = combineQuestionsByCategory(btt_questions, ftt_questions, selectedCategory); // Update the ref
@@ -106,7 +125,7 @@ const Quiz = ({ type }) => {
     };
 
     fetchData();
-  }, [type, location]);
+  }, [quizMode, location]);
 
 
 
@@ -133,7 +152,7 @@ const Quiz = ({ type }) => {
         const isCorrect = questions[activeQuestion].answers[index].correct;
   
         if (!isCorrect) { // selected wrong answer
-          console.log(mistakes)
+          // console.log(mistakes)
 
           if (mistakes !== null) {
 
@@ -179,14 +198,21 @@ const Quiz = ({ type }) => {
 
   const storeResultsToDatabase = () => {
     // Create a request object
+    const percent = 100 * result.correctAnswers / (activeQuestion + 1)
+
+    const token = getCookie("access_token");
     const requestData = {
-      type: type,
-      score: toString(result.correctAnswers),
+      type: quizMode,
+      score: percent.toString(),
       mistakes: mistakes,
     };
 
     // Send the quiz results to the backend
-    axios.post('http://localhost:3001/v1/api/quiz', requestData)
+    axios.post('http://localhost:3001/v1/api/quiz', requestData, {
+      headers: {
+          Authorization: `Bearer ${token}`,
+      },
+  })
       .then((response) => {
         // Handle the response if needed
         console.log('Mistakes saved successfully:' + response.data);
@@ -222,17 +248,20 @@ const Quiz = ({ type }) => {
     // If there are no questions or mistakes, display a message and 
 
     return (
-      <div className="pagebody">
+      <div className="emptybody">
         <div className="row">
           <Col lg={2} md={2} sm={2} id="sidebar">
             <Sidebar student={student} />
           </Col>
 
           <Col lg={10} md={10} sm={10} id="main-content">
-            <h2>You have no mistakes.</h2>
-            <Link to="/choose-quiz">
-              <button className="btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5">Return to quizzes</button>
-            </Link>
+            <div className="quiz-container">
+              <h2>You have no mistakes.</h2>
+              <Link to="/choose-quiz">
+                <button>Return to quizzes</button>
+              </Link>
+            </div>
+            
           </Col>
         </div>
       </div>
@@ -308,7 +337,7 @@ const Quiz = ({ type }) => {
                   </Link>
 
                   <Link to="/review-quiz">
-                    <button id="review" class="btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5">Review Mistakes</button>
+                    <button onClick={resetQuiz} id="review" class="btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5">Review Mistakes</button>
                   </Link>
                 </div>
               )}
