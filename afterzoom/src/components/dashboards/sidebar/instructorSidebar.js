@@ -66,7 +66,7 @@ const ProfileModal = ({modal, setModal, instructor }) => {
       const parts = value.split(`; ${name}=`);
       if (parts.length === 2) return parts.pop().split(";").shift();
     }
-    axios.patch('http://localhost:3001/v1/api/instructor/profile/', data)
+    axios.patch('http://47.128.71.161:3001/v1/api/instructor/profile/', data)
       .then((response) => {
 
       })
@@ -78,7 +78,7 @@ const ProfileModal = ({modal, setModal, instructor }) => {
       const formData = new FormData();
       formData.append('photo', imageFile);
       const token = getCookie("access_token");
-      axios.patch('http://localhost:3001/v1/api/instructor/profile/photo', formData, {
+      axios.patch('http://47.128.71.161:3001/v1/api/instructor/profile/photo', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -182,7 +182,7 @@ const Sidebar = ({ instructor }) => {
         const instructorId = decodedToken.id;
 
         const picResponse = await axios.get(
-          `http://localhost:3001/v1/api/s3/instructor/single/${instructorId}`,
+          `http://47.128.71.161:3001/v1/api/s3/instructor/single/${instructorId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -27,7 +27,7 @@ export function StudentDashboard() {
 
                 const studentResponse = await axios.get(
 
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `http://47.128.71.161:3001/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -38,7 +38,7 @@ export function StudentDashboard() {
 
 
                 const bookingsResponse = await axios.get(
-                    `http://localhost:3001/v1/api/booking/student/`,
+                    `http://47.128.71.161:3001/v1/api/booking/student/`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ export function StudentDashboard() {
                 setBookings(bookingsResponse.data.data[0]);
 
                 const quizResponse = await axios.get(
-                    `http://localhost:3001/v1/api/quiz/`,
+                    `http://47.128.71.161:3001/v1/api/quiz/`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ export function StudentDashboard() {
 
 
                 const notesResponse = await axios.get(
-                    `http://localhost:3001/v1/api/note/list`,
+                    `http://47.128.71.161:3001/v1/api/note/list`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

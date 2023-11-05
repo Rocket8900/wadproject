@@ -73,7 +73,7 @@ const Quiz = ({ type }) => {
             const decodedToken = jwtDecode(token).user;
             const studentId = decodedToken.id;
             const response = await axios.get(
-                `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                `http://47.128.71.161:3001/v1/api/student/profile/${studentId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -95,7 +95,7 @@ const Quiz = ({ type }) => {
     const fetchData = async () => {
       try {
         if (quizMode === 'review') {
-          const response = await axios.get('http://localhost:3001/v1/api/quiz/review');
+          const response = await axios.get('http://47.128.71.161:3001/v1/api/quiz/review');
           // console.log(response.data);
           // console.log(response.data.data);
 
@@ -208,7 +208,7 @@ const Quiz = ({ type }) => {
     };
 
     // Send the quiz results to the backend
-    axios.post('http://localhost:3001/v1/api/quiz', requestData, {
+    axios.post('http://47.128.71.161:3001/v1/api/quiz', requestData, {
       headers: {
           Authorization: `Bearer ${token}`,
       },

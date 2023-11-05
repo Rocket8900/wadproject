@@ -51,7 +51,7 @@ function InstructorLessonList() {
         const instructorId = decodedToken.id;
 
         const instructorResponse = await axios.get(
-          `http://localhost:3001/v1/api/instructor/profile/${instructorId}`,
+          `http://47.128.71.161:3001/v1/api/instructor/profile/${instructorId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ function InstructorLessonList() {
         const instructorId = decodedToken.id;
 
         const bookingResponse = await axios.get(
-          `http://localhost:3001/v1/api/booking/instructor`,
+          `http://47.128.71.161:3001/v1/api/booking/instructor`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -115,7 +115,7 @@ function InstructorLessonList() {
         const token = getCookie("access_token");
     
         const response = await axios.patch(
-          `http://localhost:3001/v1/api/lesson/${booking.id}`, 
+          `http://47.128.71.161:3001/v1/api/lesson/${booking.id}`, 
           { feedback },
           {
             headers: {
@@ -189,7 +189,7 @@ function InstructorLessonList() {
     try {
       const token = getCookie("access_token");
       const response = await axios.get(
-        `http://localhost:3001/v1/api/student/profile/${studentId}`,
+        `http://47.128.71.161:3001/v1/api/student/profile/${studentId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
