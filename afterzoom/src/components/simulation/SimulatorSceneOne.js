@@ -79,7 +79,6 @@ function SimulatorSceneOne() {
               (clickedMarkerId === "accel" && prevCounter === 2)
             ) {
               if (prevCounter === 2) {
-                setRoom("true");
                 return toggleModal();
               }
               toggleModal3();

@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 
 function getCookie(name) {
@@ -28,6 +28,7 @@ function SimulatorSceneTwo() {
     const [showModal1, setShowModal1] = useState(true);
     const [showModal2, setShowModal2] = useState(false);
     const [showModal3, setShowModal3] = useState(false);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -66,8 +67,6 @@ function SimulatorSceneTwo() {
         markersPlugs.addEventListener("select-marker", (e) => {
           const clickedMarkerId = e.marker.config.id;
       
-
-      
           // Use the functional form of setClickCounter
           setClickCounter(prevCounter => {
             // Check if the clicked marker is the next one in the sequence
@@ -78,6 +77,7 @@ function SimulatorSceneTwo() {
             ) {
               if (prevCounter === 2) {
                 setRoom("true");
+                navigate("/simulatorSceneTwoA")
                 return toggleModal();
               }
               toggleModal3();
@@ -157,17 +157,6 @@ function SimulatorSceneTwo() {
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}
-                                onReady={handleReady}
-                                littlePlanet={false}
-                            ></ReactPhotoSphereViewer>
-                        )}
-                        {room === "false" && (
-                            <ReactPhotoSphereViewer
-                                ref={photoSphereRef}
-                                src=''
-                                height={"100vh"}
-                                width={"100%"}
-                                plugins={plugins}
                                 onReady={handleReady}
                                 littlePlanet={false}
                             ></ReactPhotoSphereViewer>
