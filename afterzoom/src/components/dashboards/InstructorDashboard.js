@@ -28,7 +28,7 @@ export function InstructorDashboard() {
 
                 const instructorResponse = await axios.get(
 
-                    `http://localhost:3001/v1/api/instructor/profile/${instructorId}`,
+                    `http://13.212.56.111:3001/v1/api/instructor/profile/${instructorId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ export function InstructorDashboard() {
 
                 const bookingResponse = await axios.get(
 
-                    `http://localhost:3001/v1/api/booking/instructor`,
+                    `http://13.212.56.111:3001/v1/api/booking/instructor`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

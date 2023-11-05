@@ -25,7 +25,7 @@ function ChatWithStudentPage() {
   useEffect(() => {
     const sendPatchRequest = async () => {
       try {
-        await axios.patch("http://localhost:3001/v1/api/notification/latest", null, {
+        await axios.patch("http://13.212.56.111:3001/v1/api/notification/latest", null, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -43,7 +43,7 @@ function ChatWithStudentPage() {
 
               const instructorResponse = await axios.get(
 
-                  `http://localhost:3001/v1/api/instructor/profile/${instructorId}`,
+                  `http://13.212.56.111:3001/v1/api/instructor/profile/${instructorId}`,
                   {
                       headers: {
                           Authorization: `Bearer ${token}`,

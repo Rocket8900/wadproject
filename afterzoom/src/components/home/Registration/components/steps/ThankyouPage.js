@@ -17,7 +17,7 @@ export default function ThankyouPage({ goto, values }) {
   useEffect(() => {
     if (values.type === 'student') {
       const formData = values;
-      axios.post('http://localhost:3001/v1/api/student/register', formData, {
+      axios.post('http://13.212.56.111:3001/v1/api/student/register', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -34,7 +34,7 @@ export default function ThankyouPage({ goto, values }) {
         });
     } else {
       const formData = values;
-      axios.post('http://localhost:3001/v1/api/instructor/register', formData, {
+      axios.post('http://13.212.56.111:3001/v1/api/instructor/register', formData, {
         headers: {
           'Content-Type': 'application/json',
         },

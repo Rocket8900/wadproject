@@ -31,7 +31,7 @@ function StudentChatPage({student}) {
     const fetchInstructors = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/v1/api/chat/student/list",  // Assuming the endpoint
+          "http://13.212.56.111:3001/v1/api/chat/student/list",  // Assuming the endpoint
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ function StudentChatPage({student}) {
 
         let instructorProfile = [];
         for (let i = 0; i < allChat.length; i++) {
-          const profile = await axios.get(`http://localhost:3001/v1/api/instructor/profile/${allChat[i]}`, {
+          const profile = await axios.get(`http://13.212.56.111:3001/v1/api/instructor/profile/${allChat[i]}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -53,7 +53,7 @@ function StudentChatPage({student}) {
           if (profileDetails.data.dp == null) {
             profileDetails.data.dp = "/Screenshot 2023-11-03 at 4.14.19 AM.png"
           } else {
-            profileDetails.data.dp = (await axios.get(`http://localhost:3001/v1/api/s3/instructor/single/${profileDetails.data.id}`, {
+            profileDetails.data.dp = (await axios.get(`http://13.212.56.111:3001/v1/api/s3/instructor/single/${profileDetails.data.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                   }
@@ -121,7 +121,7 @@ function StudentChatPage({student}) {
     setSelectedInstructor(instructor);
     try {
       const response = await axios.get(
-        `http://localhost:3001/v1/api/chat/${e}`,  // Assuming this endpoint gets the chat history
+        `http://13.212.56.111:3001/v1/api/chat/${e}`,  // Assuming this endpoint gets the chat history
         {
           headers: {
             Authorization: `Bearer ${token}`,

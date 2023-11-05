@@ -45,7 +45,7 @@ const Notes = ({ notes }) => {
         addToDashboard: false, 
       };
 
-      axios.post(`http://localhost:3001/v1/api/note`, newNote
+      axios.post(`http://13.212.56.111:3001/v1/api/note`, newNote
       , {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -65,7 +65,7 @@ const Notes = ({ notes }) => {
   
   
   const handleAddToDashboard = (id, addToDashboard) => {
-    axios.patch(`http://localhost:3001/v1/api/note/${id}`, {
+    axios.patch(`http://13.212.56.111:3001/v1/api/note/${id}`, {
       addToDashboard: !addToDashboard,
     }, {
       headers: {
@@ -83,7 +83,7 @@ const Notes = ({ notes }) => {
   
 
   const handleDeleteNote = (id) => {
-    axios.delete(`http://localhost:3001/v1/api/note/${id}`,
+    axios.delete(`http://13.212.56.111:3001/v1/api/note/${id}`,
      {
       headers: {
         Authorization: `Bearer ${token}`,

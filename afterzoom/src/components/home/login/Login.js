@@ -55,7 +55,7 @@ const LoginModal = ({ isOpen, setIsOpen }) => {
 
   const handleStudentLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/v1/api/student/login', {
+      const response = await axios.post('http://13.212.56.111:3001/v1/api/student/login', {
         email,
         password,
       }, {withCredentials: true});
@@ -79,7 +79,7 @@ const LoginModal = ({ isOpen, setIsOpen }) => {
 
   const handleInstructorLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/v1/api/instructor/login', {
+      const response = await axios.post('http://13.212.56.111:3001/v1/api/instructor/login', {
         email,
         password,
       }, {withCredentials: true})

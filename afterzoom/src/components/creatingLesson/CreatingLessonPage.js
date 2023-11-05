@@ -23,7 +23,7 @@ export function CreatingLesson() {
 
                 const instructorResponse = await axios.get(
 
-                    `http://localhost:3001/v1/api/instructor/profile/${instructorId}`,
+                    `http://13.212.56.111:3001/v1/api/instructor/profile/${instructorId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

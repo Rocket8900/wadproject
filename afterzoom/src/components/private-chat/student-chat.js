@@ -23,7 +23,7 @@ function ChatWithInstructorPage() {
 
         const sendPatchRequest = async () => {
           try {
-            await axios.patch("http://localhost:3001/v1/api/notification/latest", null, {
+            await axios.patch("http://13.212.56.111:3001/v1/api/notification/latest", null, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -41,7 +41,7 @@ function ChatWithInstructorPage() {
               const studentId = decodedToken.id;
 
               const studentResponse = await axios.get(
-                  `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                  `http://13.212.56.111:3001/v1/api/student/profile/${studentId}`,
                   {
                       headers: {
                           Authorization: `Bearer ${token}`,

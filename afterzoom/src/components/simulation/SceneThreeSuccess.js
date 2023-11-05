@@ -36,7 +36,7 @@ function Scene3success() {
                 const studentId = decodedToken.id;
 
                 const studentResponse = await axios.get(
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `http://13.212.56.111:3001/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
