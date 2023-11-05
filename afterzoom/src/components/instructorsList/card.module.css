@@ -340,3 +340,9 @@ form{
   text-align: center;
 }
 /* # sourceMappingURL=card.css.map */
+
+
+.scrollableContainer{
+  height:100vh;
+  overflow-y: auto;
+}

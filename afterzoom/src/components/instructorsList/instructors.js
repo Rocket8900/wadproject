@@ -13,7 +13,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Carousel from 'react-bootstrap/Carousel';
-import MapView from './MapView';
+import AsyncScriptLoader from './MapView';
 import {toast} from "react-toastify";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -413,7 +413,7 @@ if (bookings === null || student === null) {
               <form className="controls" id="Filters">
                 <div className={styles.FilterBox}>
                   <fieldset>
-                    <MapView markerCoordinates={markerCoordinates} />
+                    <AsyncScriptLoader markerCoordinates={markerCoordinates} className={styles.MapView}/>
                   </fieldset>
 
                   <br />
@@ -516,6 +516,7 @@ if (bookings === null || student === null) {
 
               {/* Render InstructorCard component for each filtered instructor */}
               <Container fluid>
+                <div className={styles.scrollableContainer}>
                 <Row>
                   {filteredInstructors.map((instructor) => (
                     <Col key={instructor.id} lg={4} md={6} sm={12}>
@@ -525,7 +526,9 @@ if (bookings === null || student === null) {
                       />
                     </Col>
                   ))}
+        
                 </Row>
+                </div>
               </Container>
             </div>
           </Col>
