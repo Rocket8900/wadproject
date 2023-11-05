@@ -11,7 +11,8 @@
 
   }
   #stuSidebar .pro-sidebar {
-    height: 100vh;
+    height: 100% !important;
+    overflow-y: auto;
   }
 
   #stuSidebar .closemenu {
@@ -45,7 +46,7 @@
 
   }
   #stuSidebar .pro-sidebar-inner .pro-sidebar-layout {
-    overflow-y: hidden;
+    overflow-y: auto !important;
   }
 
   #stuSidebar .pro-sidebar-inner .pro-sidebar-layout .logotext {
