@@ -25,19 +25,7 @@ function InstructorChatPage({instructor}) {
           handleStudentChange(selectedStudentId);
       }, 1000); // 1 seconds delay
   }
-  const sendPatchRequest = async () => {
-    try {
-      await axios.patch("http://localhost:3001/v1/api/notification/latest", null, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    } catch (error) {
-      console.error("Error sending PATCH request:", error);
-    }
-  };
 
-  sendPatchRequest();
     const fetchStudents = async () => {
       try {
         const response = await axios.get(
