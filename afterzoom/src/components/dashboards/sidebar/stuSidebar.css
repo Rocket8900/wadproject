@@ -8,7 +8,7 @@
     background-repeat: no-repeat;
     background-position: left;
     background-size:cover;  
-
+    height:100vh;
   }
   #stuSidebar .pro-sidebar {
     height: 100% !important;

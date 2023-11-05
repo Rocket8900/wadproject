@@ -17,6 +17,8 @@ import styles from './lessonlist.module.css';
 import ThreeDotsWave from "../loader/loader";
 
 
+
+
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);

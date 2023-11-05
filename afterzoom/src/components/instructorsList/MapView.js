@@ -25,7 +25,7 @@ const MapView = ({ isScriptLoaded, isScriptLoadSucceed, markerCoordinates }) => 
 
   const loadGoogleMapsScript = () => {
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyC2Qnl98e6FirAZSVRYEyzYfs_0jPaTsSk&libraries=places&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`;
     script.async = true;
     script.defer = true;
     window.initMap = initMap; // Make sure initMap is available globally
@@ -144,7 +144,7 @@ const MapView = ({ isScriptLoaded, isScriptLoadSucceed, markerCoordinates }) => 
   )
 };
 
-  const MapViewWithAsyncScriptLoader = asyncScriptLoader(['https://maps.googleapis.com/maps/api/js?key=AIzaSyC2Qnl98e6FirAZSVRYEyzYfs_0jPaTsSk&libraries=places'])(MapView);
+  const AsyncScriptLoader = asyncScriptLoader(["https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places"])(MapView);
 
-  export default MapViewWithAsyncScriptLoader;
+  export default AsyncScriptLoader;
 
