@@ -193,7 +193,7 @@ fieldset h4{
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center !important;
   width: 100%;
   padding: 1rem;
   transition: transform var(--d) var(--e);
