@@ -15,7 +15,8 @@ import Col from "react-bootstrap/Col";
 import Carousel from 'react-bootstrap/Carousel';
 import MapView from './MapView';
 import {toast} from "react-toastify";
-import { ToastContainer } from "react-bootstrap";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function getCookie(name) {

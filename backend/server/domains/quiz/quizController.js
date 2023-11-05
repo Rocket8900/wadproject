@@ -1,5 +1,4 @@
 import Logging from "../../utils/loggings.js";
-import { redis_cache } from "../../utils/redisConnection.js";
 import QuizSevice from "./quizService.js";
 
 export default class QuizController {
