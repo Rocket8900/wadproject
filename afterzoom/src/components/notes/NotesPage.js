@@ -75,10 +75,10 @@ export default function NotesPage() {
     return (
         <Container fluid>
             <Row>
-                <Col lg={2} md={2} sm={2} id="sidebar">
+                <Col lg={2} md={2} sm={2} xs={2} id="sidebar">
                     <Sidebar student={student} bookings={bookings} />i
                 </Col>
-                <Col lg={10} md={10} sm={10} id="notes">
+                <Col lg={10} md={10} sm={10} xs={10} id="notes">
                     <Notes notes={notes} />
                 </Col>
             </Row>

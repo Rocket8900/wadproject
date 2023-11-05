@@ -88,12 +88,12 @@ export function StudentDashboard() {
     return (
         <Container fluid>
             <Row>
-                <Col lg={2} md={2} sm={2} id="sidebar" className="sidebar-sticky">
+                <Col lg={2} md={2} sm={2} xs={2} id="sidebar" className="sidebar-sticky">
             
                     <Sidebar student={student} />
 
                 </Col>
-                <Col lg={10} md={10} sm={10} id="main-content">
+                <Col lg={10} md={10} sm={10} xs={10} id="main-content">
                     <MainContent student={student} bookings={bookings} quiz={quiz} notes={notes}/>
                 </Col>
             </Row>

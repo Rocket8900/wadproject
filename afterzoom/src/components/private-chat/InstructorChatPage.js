@@ -149,7 +149,7 @@ function InstructorChatPage({instructor}) {
   return (
     <Container fluid>
       <Row>
-        <Col lg={2} md={2} sm={2} id="sidebar">
+        <Col lg={2} md={2} sm={2} xs={2} id="sidebar">
           <div className="chat-header">
             <h2>Chats</h2>
             <div className="custom-dropdown">
@@ -188,7 +188,7 @@ function InstructorChatPage({instructor}) {
             </div>
           </div>
         </Col>
-        <Col lg={10} md={10} sm={10} id="main-content">
+        <Col lg={10} md={10} sm={10} xs={10} id="main-content">
           <div className="chat-page">
 
           {selectedStudent && (

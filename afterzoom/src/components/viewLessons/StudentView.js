@@ -117,11 +117,11 @@ if (bookings === null || student === null) {
     return (
         <div className={styles.body}>
             <div className="row">
-                <Col lg={2} md={2} sm={2} id="sidebar">
+                <Col lg={2} md={2} sm={2} xs={2} id="sidebar">
                     <Sidebar student={student} />
                 </Col>
 
-                <Col lg={10} md={10} sm={10} id={styles["main-content"]}>
+                <Col lg={10} md={10} sm={10} xs={10} id={styles["main-content"]}>
                 <div className={styles.container}>
                         <h3>Your Instructor details</h3>
                         <table className={styles["rwd-table"]}>

@@ -50,10 +50,10 @@ export function CreatingLesson() {
     return (
         <Container fluid>
             <Row>
-                <Col lg={2} md={2} sm={2} id="sidebar">
+                <Col lg={2} md={2} sm={2} xs={2} id="sidebar">
                     <Sidebar instructor={instructor} />i
                 </Col>
-                <Col lg={10} md={10} sm={10} id="creatingLessonContent">
+                <Col lg={10} md={10} sm={10} xs={10} id="creatingLessonContent">
                     
                     <CreatingLessonContent instructor={instructor} />
                 </Col>

@@ -57,10 +57,10 @@ function Simulator() {
   return (
       <Container fluid>
           <div className={`row ${styles.row}`}>
-              <Col lg={2} md={2} sm={2} id="sidebar">
+              <Col lg={2} md={2} sm={2} xs={2} id="sidebar">
                 <Sidebar student={student}/>
               </Col>
-              <Col lg={10} md={10} sm={10} id={styles["main-content"]}>
+              <Col lg={10} md={10} sm={10} xs={10} id={styles["main-content"]}>
                 <h1>This is where we enter the matrix</h1>
 
                 <div className={`${styles.container} row d-flex`}>
