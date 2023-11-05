@@ -24,7 +24,7 @@ export function StudentView () {
     
   const [student, setStudent] = useState(null);
   const [bookings, setBookings] = useState([]);
-  const [instructorNames, setInstructorNames] = useState({});
+  const [instructors, setInstructors] = useState({});
 
   useEffect(() => {
         
@@ -69,7 +69,7 @@ export function StudentView () {
 
 useEffect(() => {
     const fetchInstructorNames = async () => {
-      const names = {};
+      const instructorDetails  = {};
       for (const booking of bookings) {
         try {
           const token = getCookie("access_token");
@@ -83,14 +83,14 @@ useEffect(() => {
           );
         //   console.log("instructor details")
         //   console.log(instructorResponse.data.data)
-          const instructorName = instructorResponse.data.data.name; // Adjust the property based on the API response structure
-          names[booking.instructorId] = instructorName;
+        //   const instructorName = instructorResponse.data.data.name; // Adjust the property based on the API response structure
+          instructorDetails [booking.instructorId] = instructorResponse.data.data;
         } catch (error) {
           console.error(error);
-          names[booking.instructorId] = "Instructor Name Not Found";
+          instructorDetails[booking.instructorId] = "Instructor Name Not Found";
         }
       }
-      setInstructorNames(names);
+      setInstructors(instructorDetails);
     };
 
     if (bookings.length > 0) {
@@ -131,7 +131,7 @@ if (bookings === null || student === null) {
                                     booking.lessons.map((lesson) => (
                                         <tr key={lesson.id}>
                                             <td data-th="Lesson">{lesson.title || 'Untitled'}</td>
-                                            <td data-th="Instructor">{instructorNames[booking.instructorId] || '-'}</td>
+                                            <td data-th="Instructor">{instructors[booking.instructorId] ? instructors[booking.instructorId].name || '-' : '-'}</td>
                                             <td data-th="Description">{lesson.description || '-'}</td>
                                             <td data-th="Date">{formatDateTime(lesson.date) || '-'}</td>
                                             <td data-th="Status">{booking.status || '-'}</td>
@@ -161,12 +161,12 @@ if (bookings === null || student === null) {
                                 {bookings.map((booking) => (
                                     booking.lessons.map((lesson) => (
                                         <tr key={lesson.id}>
-                                            <td data-th="Instructor Name">{lesson.title || 'Untitled'}</td>
-                                            <td data-th="Age">{instructorNames[booking.instructorId] || '-'}</td>
-                                            <td data-th="Gender">{lesson.description || '-'}</td>
-                                            <td data-th="Affiliation">{formatDateTime(lesson.date) || '-'}</td>
-                                            <td data-th="Email">{booking.status || '-'}</td>
-                                            <td data-th="Car Model">{lesson.feedback || '-'}</td>
+                                            <td data-th="Instructor Name">{instructors[booking.instructorId] ? instructors[booking.instructorId].name || '-' : '-'}</td>
+                                            <td data-th="Age">{instructors[booking.instructorId] ? instructors[booking.instructorId].age || '-' : '-'}</td>
+                                            <td data-th="Gender">{instructors[booking.instructorId] ? instructors[booking.instructorId].gender || '-' : '-'}</td>
+                                            <td data-th="Affiliation">{instructors[booking.instructorId] ? instructors[booking.instructorId].affiliation || '-' : '-'}</td>
+                                            <td data-th="Email">{instructors[booking.instructorId] ? instructors[booking.instructorId].email || '-' : '-'}</td>
+                                            <td data-th="Car Model">{instructors[booking.instructorId] ? instructors[booking.instructorId].carModel || '-' : '-'}</td>
                                         </tr>
                                     ))
                                 ))}
