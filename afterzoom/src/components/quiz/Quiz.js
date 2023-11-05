@@ -82,7 +82,7 @@ const Quiz = ({ type }) => {
             );
             setStudent(response.data.data);
         } catch (error) {
-            console.error(error);
+            // console.error(error);
         }
     };
 
@@ -118,7 +118,7 @@ const Quiz = ({ type }) => {
         setIsLoading(false);
       } catch (error) {
         // Handle errors
-        console.error('Error fetching questions:', error);
+        // console.error('Error fetching questions:', error);
         setError('Error fetching questions: ' + error.message);
         setIsLoading(false);
       }
@@ -140,10 +140,6 @@ const Quiz = ({ type }) => {
       }
 
   }
-
-  // useEffect(() => {
-  //   console.log('Mistakes:', mistakes);
-  // }, [mistakes]);
 
   const onAnswerSelected = (index) => {
     
@@ -215,11 +211,11 @@ const Quiz = ({ type }) => {
   })
       .then((response) => {
         // Handle the response if needed
-        console.log('Mistakes saved successfully:' + response.data);
+        // console.log('Mistakes saved successfully:' + response.data);
       })
       .catch((error) => {
         // Handle errors
-        console.error('Error saving mistakes:', error);
+        // console.error('Error saving mistakes:', error);
       });
   };
 
@@ -235,14 +231,6 @@ const Quiz = ({ type }) => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-  // if (!questions || activeQuestion === null || activeQuestion < 0 || activeQuestion >= questions.length) {
-  //   console.log("activeQuestion: " + activeQuestion)
-  //   console.log(questions)
-  //   return (
-  //     <div>Error message goes here...</div>
-  //   );
-  // }
 
   if (!questions || questions.length === 0) {
     // If there are no questions or mistakes, display a message and 
@@ -333,11 +321,11 @@ const Quiz = ({ type }) => {
                   </p>
 
                   <Link to="/choose-quiz">
-                    <button id="btt" class="btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5">Return to quizzes</button>
+                    <button id="btt" className="btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5">Return to quizzes</button>
                   </Link>
 
                   <Link to="/review-quiz">
-                    <button onClick={resetQuiz} id="review" class="btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5">Review Mistakes</button>
+                    <button onClick={resetQuiz} id="review" className="btn btn-outline-primary mb-4 text-center col-12 me-sm-4 col-sm-5">Review Mistakes</button>
                   </Link>
                 </div>
               )}
