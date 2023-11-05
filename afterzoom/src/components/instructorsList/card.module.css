@@ -13,6 +13,7 @@
 html,
 body {
   height: 100%;
+  overflow-y:hidden;
 }
 
 body {
@@ -23,7 +24,7 @@ body {
 fieldset{
   display: inline-block;
   vertical-align: top;
-  padding:15px !important;
+  padding:8px !important;
   background: #2e5ffe72;
   border-radius: 6px;
   width:20em;
@@ -50,7 +51,7 @@ fieldset h4{
   display: block;
   position: relative;
   cursor: pointer;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 
 
@@ -296,7 +297,8 @@ form{
 }
 
 .header{
-  padding-top:20px;
+  padding-top:10px;
+  padding-bottom:0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -305,7 +307,7 @@ form{
 .header h1{
   text-align: center;
   font-family: 'Poppins', sans-serif;
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: bold;
   color:#2E5FFE;
 }
