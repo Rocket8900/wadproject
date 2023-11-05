@@ -235,7 +235,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
   const saveLayoutToDatabase = async (updatedLayout) => {
     try {
       const token = getCookie("access_token");
-      const response = await axios.get(`http://localhost:3001/v1/api/instructor/profile/`, {
+      const response = await axios.get(`http://47.128.71.161:3001/v1/api/instructor/profile/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

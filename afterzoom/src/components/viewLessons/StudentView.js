@@ -36,7 +36,7 @@ export function StudentView () {
 
             const studentResponse = await axios.get(
 
-                `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                `http://47.128.71.161:3001/v1/api/student/profile/${studentId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ export function StudentView () {
 
 
             const bookingsResponse = await axios.get(
-                `http://localhost:3001/v1/api/booking/student/`,
+                `http://47.128.71.161:3001/v1/api/booking/student/`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ useEffect(() => {
         try {
           const token = getCookie("access_token");
           const instructorResponse = await axios.get(
-              `http://localhost:3001/v1/api/instructor/profile/${booking.instructorId}`,
+              `http://47.128.71.161:3001/v1/api/instructor/profile/${booking.instructorId}`,
               {
                   headers: {
                       Authorization: `Bearer ${token}`,
