@@ -14,7 +14,7 @@ weatherRoute.post("/", async (req, res) => {
         console.log(result.data);
         res.status(200).json({data: result.data})
     } catch (error) {
-        Logging.error(error.message)
+        Logging.error(error)
         res.status(500).json({data:"internal server error"});
     }
 })
