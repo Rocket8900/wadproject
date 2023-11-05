@@ -148,10 +148,10 @@ function InstructorLessonList() {
   return (
     <Container fluid>
       <Row>
-        <Col lg={2} md={2} sm={2} id="sidebar">
+        <Col lg={2} md={2} sm={2} xs={2} id="sidebar">
           <InstructorSidebar instructor={instructor} />
         </Col>
-        <Col lg={10} md={10} sm={10} id={styles["main-content"]}>
+        <Col lg={10} md={10} sm={10} xs={10} id={styles["main-content"]}>
           <h1>Your Students</h1>
 
           <div className={styles.container1}>

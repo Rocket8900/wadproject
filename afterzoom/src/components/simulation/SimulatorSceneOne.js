@@ -136,10 +136,10 @@ function SimulatorSceneOne() {
         
         <Container fluid>
             <Row>
-                <Col lg={2} md={2} sm={2} id="sidebar">
+                <Col lg={2} md={2} sm={2} xs={2} id="sidebar">
                     <Sidebar student={student}/>
                 </Col>
-                <Col lg={10} md={10} sm={10} id="main-content">
+                <Col lg={10} md={10} sm={10} xs={10} id="main-content">
                     <div className="App">
                         {room === "starter" && (
                             <ReactPhotoSphereViewer

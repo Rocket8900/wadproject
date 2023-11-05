@@ -238,11 +238,11 @@ const Quiz = ({ type }) => {
     return (
       <div className="emptybody">
         <div className="row">
-          <Col lg={2} md={2} sm={2} id="sidebar">
+          <Col lg={2} md={2} sm={2} xs={2} id="sidebar">
             <Sidebar student={student} />
           </Col>
 
-          <Col lg={10} md={10} sm={10} id="main-content">
+          <Col lg={10} md={10} sm={10} xs={10} id="main-content">
             <div className="quiz-container">
               <h2>You have no mistakes.</h2>
               <Link to="/choose-quiz">
@@ -262,11 +262,11 @@ const Quiz = ({ type }) => {
   return (
     <div className="pagebody">
         <div className="row">
-          <Col lg={2} md={2} sm={2} id="sidebar">
+          <Col lg={2} md={2} sm={2} xs={2} id="sidebar">
             <Sidebar student={student} />
           </Col>
 
-          <Col lg={10} md={10} sm={10} id="main-content">
+          <Col lg={10} md={10} sm={10} xs={10} id="main-content">
             <div className="quiz-container">
               {!showResult ? (
                 <div>

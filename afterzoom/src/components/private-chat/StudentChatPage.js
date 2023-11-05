@@ -144,7 +144,7 @@ function StudentChatPage({student}) {
   return (
     <Container fluid>
       <Row>
-      <Col lg={2} md={2} sm={2} id="sidebar" style={{background: 'linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%)',
+      <Col lg={2} md={2} sm={2} xs={2} id="sidebar" style={{background: 'linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%)',
 }}>
             <div className="chat-header">
                 <h2>Chats</h2>
@@ -184,7 +184,7 @@ function StudentChatPage({student}) {
                 </div>
             </div>
         </Col>
-        <Col lg={10} md={10} sm={10} id="main-content">
+        <Col lg={10} md={10} sm={10} xs={10} id="main-content">
           <div className="chat-page">
             {selectedInstructor && (
                 <div className="recipient-header">

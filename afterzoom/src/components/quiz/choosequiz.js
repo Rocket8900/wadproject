@@ -65,10 +65,10 @@ export function ChooseQuiz() {
     return (
         <Container fluid className={styles.container}>
             <Row>
-                <Col lg={2} md={2} sm={2} id="sidebar">
+                <Col lg={2} md={2} sm={2} xs={2} id="sidebar">
                     <Sidebar student={student} />
                 </Col>
-                <Col lg={10} md={10} sm={10} id={styles["main-content"]}>
+                <Col lg={10} md={10} sm={10} xs={10} id={styles["main-content"]}>
                     <h1>Choose Question Type</h1>
 
                     <div className="row" id={styles.cards}>
