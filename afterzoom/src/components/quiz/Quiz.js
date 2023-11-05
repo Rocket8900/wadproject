@@ -198,10 +198,12 @@ const Quiz = ({ type }) => {
 
   const storeResultsToDatabase = () => {
     // Create a request object
+    const percent = 100 * result.correctAnswers / (activeQuestion + 1)
+
     const token = getCookie("access_token");
     const requestData = {
       type: quizMode,
-      score: toString(result.correctAnswers),
+      score: percent.toString(),
       mistakes: mistakes,
     };
 
