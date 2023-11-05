@@ -33,7 +33,7 @@ function InstructorLessonList() {
         const decodedToken = jwtDecode(token).user;
         const id = decodedToken.id;
 
-        const response = await axios.get(`http://47.128.71.161:3001/v1/api/instructor/profile/${id}`, {
+        const response = await axios.get(`http://localhost:3001/v1/api/instructor/profile/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -52,7 +52,7 @@ function InstructorLessonList() {
         const decodedToken = jwtDecode(token).user;
         const id = decodedToken.id;
 
-        const response = await axios.get(`http://47.128.71.161:3001/v1/api/booking/instructor`, {
+        const response = await axios.get(`http://localhost:3001/v1/api/booking/instructor`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -73,7 +73,7 @@ function InstructorLessonList() {
       const token = Cookie.get('access_token');
       const profilePromises = pendingBookings.map(async (booking) => {
         try {
-          const response = await axios.get(`http://47.128.71.161:3001/v1/api/student/profile/${booking.studentId}`, {
+          const response = await axios.get(`http://localhost:3001/v1/api/student/profile/${booking.studentId}`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -97,7 +97,7 @@ function InstructorLessonList() {
   const acceptBooking = async (bookingId) => {
     try {
       const token = Cookie.get('access_token');
-      await axios.patch(`http://47.128.71.161:3001/v1/api/booking/${bookingId}`, {
+      await axios.patch(`http://localhost:3001/v1/api/booking/${bookingId}`, {
         status: "ACCEPTED",
       }, {
         headers: {
@@ -121,7 +121,7 @@ function InstructorLessonList() {
   const rejectBooking = async (bookingId) => {
     try {
       const token = Cookie.get('access_token');
-      await axios.patch(`http://47.128.71.161:3001/v1/api/booking/${bookingId}`, {
+      await axios.patch(`http://localhost:3001/v1/api/booking/${bookingId}`, {
         status: "REJECTED",
       }, {
         headers: {

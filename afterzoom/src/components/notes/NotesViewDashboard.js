@@ -14,7 +14,7 @@ const NotesViewDashboard = () => {
                 const studentId = decodedToken.id;
 
                 const notesResponse = await axios.get(
-                    `http://47.128.71.161:3001/v1/api/note/list`,
+                    `http://localhost:3001/v1/api/note/list`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

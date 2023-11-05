@@ -68,7 +68,7 @@ export default function CreatingLessonContent(props) {
         let selectedId = null;
 
         const instrubookingResponse = await axios.get(
-          `http://47.128.71.161:3001/v1/api/booking/instructor`,
+          `http://localhost:3001/v1/api/booking/instructor`,
           {
               headers: {
                   Authorization: `Bearer ${token}`,
@@ -85,7 +85,7 @@ export default function CreatingLessonContent(props) {
         console.log(selectedId)
 
         const lessonInput = await axios.post(
-          `http://47.128.71.161:3001/v1/api/lesson`,
+          `http://localhost:3001/v1/api/lesson`,
           {
             title: formData.title,
             date: formData.selectedDate,

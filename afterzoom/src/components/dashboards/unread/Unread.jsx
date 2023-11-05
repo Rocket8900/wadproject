@@ -74,7 +74,7 @@ function ChatWithStudentPage() {
               const token = getCookie("access_token");
               const response = await axios.get(
 
-                  `http://47.128.71.161:3001/v1/api/notification/latest`,
+                  `http://localhost:3001/v1/api/notification/latest`,
                   {
                       headers: {
                           Authorization: `Bearer ${token}`,

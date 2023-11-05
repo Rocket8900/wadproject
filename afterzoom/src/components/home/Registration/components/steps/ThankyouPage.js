@@ -24,7 +24,7 @@ export default function ThankyouPage({goto, values}) {
       const formData = values; // Assuming your values match the structure you need to send
 
     // Send the form values to the server using Axios
-    axios.post('http://47.128.71.161:3001/v1/api/student/register', formData, {
+    axios.post('http://localhost:3001/v1/api/student/register', formData, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -43,7 +43,7 @@ export default function ThankyouPage({goto, values}) {
     }
     else {
       const formData = values;
-      axios.post('http://47.128.71.161:3001/v1/api/instructor/register', formData, {
+      axios.post('http://localhost:3001/v1/api/instructor/register', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
