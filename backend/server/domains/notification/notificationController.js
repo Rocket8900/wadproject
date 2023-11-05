@@ -44,7 +44,7 @@ export default class NotificationController {
             const latestNotification = await NotificationService.getLatestNotificationForUser(userId)
             if (!latestNotification) {
                 Logging.warn(`error getting latest notifications for user`)
-                return res.status(400).json({ error: "cannot get latest notification"})
+                return res.status(200).json({ error: "cannot get latest notification"})
             }
             Logging.info("updated notification status for user")
             return res.status(201).json({data: latestNotification})
