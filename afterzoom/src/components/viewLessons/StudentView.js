@@ -25,7 +25,6 @@ export function StudentView () {
   const [student, setStudent] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [instructors, setInstructors] = useState({});
-
   useEffect(() => {
         
     const fetchData = async () => {
@@ -84,7 +83,7 @@ useEffect(() => {
         //   console.log("instructor details")
         //   console.log(instructorResponse.data.data)
         //   const instructorName = instructorResponse.data.data.name; // Adjust the property based on the API response structure
-          instructorDetails [booking.instructorId] = instructorResponse.data.data;
+          instructorDetails[booking.instructorId] = instructorResponse.data.data;
         } catch (error) {
         //   console.error(error);
           instructorDetails[booking.instructorId] = "Instructor Name Not Found";
@@ -123,6 +122,32 @@ if (bookings === null || student === null) {
                 </Col>
 
                 <Col lg={10} md={10} sm={10} id={styles["main-content"]}>
+                <div className={styles.container}>
+                        <h3>Your Instructor details</h3>
+                        <table className={styles["rwd-table"]}>
+                            <thead>
+                            <tr>
+                                <th>NAME</th>
+                                <th>AGE</th>
+                                <th>GENDER</th>
+                                <th>AFFILIATION</th>
+                                <th>EMAIL</th>
+                                <th>CARMODEL</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                        {/* <tr key={lesson.id}>
+                                            <td data-th="Instructor Name">{instructors[booking.instructorId] ? instructors[booking.instructorId].name || '-' : '-'}</td>
+                                            <td data-th="Age">{instructors[booking.instructorId] ? instructors[booking.instructorId].age || '-' : '-'}</td>
+                                            <td data-th="Gender">{instructors[booking.instructorId] ? instructors[booking.instructorId].gender || '-' : '-'}</td>
+                                            <td data-th="Affiliation">{instructors[booking.instructorId] ? instructors[booking.instructorId].affiliation || '-' : '-'}</td>
+                                            <td data-th="Email">{instructors[booking.instructorId] ? instructors[booking.instructorId].email || '-' : '-'}</td>
+                                            <td data-th="Car Model">{instructors[booking.instructorId] ? instructors[booking.instructorId].carModel || '-' : '-'}</td>
+                                        </tr> */}
+                            </tbody>
+                        </table>
+                    </div>
                     <h1>Your lessons at a glance</h1>
                     <div className={styles.container}>
                         <h3>Your Upcoming Lessons</h3>

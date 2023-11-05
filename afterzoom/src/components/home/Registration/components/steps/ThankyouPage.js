@@ -1,47 +1,38 @@
-import '../../../Home.css'
-
-import Tick from '../../assets/icon-thank-you.svg'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import axios from 'axios';
+import { motion as m } from 'framer-motion';
+import '../../../Home.css';
+import Tick from '../../assets/icon-thank-you.svg';
 
-// framer motion
-import { motion as m } from 'framer-motion'
-
-export default function ThankyouPage({goto, values}) {
-  const container ={
+export default function ThankyouPage({ goto, values }) {
+  const container = {
     hidden: {
-        opacity:0,
+      opacity: 0,
     },
     show: {
-        opacity:1,
+      opacity: 1,
     },
-}
+  };
 
   useEffect(() => {
-
-
-    if(values.type === 'student'){
-      const formData = values; // Assuming your values match the structure you need to send
-
-    // Send the form values to the server using Axios
-    axios.post('http://localhost:3001/v1/api/student/register', formData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (response.status === 200) {
-
-        } else {
-
-        }
+    if (values.type === 'student') {
+      const formData = values;
+      axios.post('http://localhost:3001/v1/api/student/register', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-
-    }
-    else {
+        .then(response => {
+          if (response.status === 200) {
+            // Handle success if needed
+          } else {
+            // Handle other cases
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    } else {
       const formData = values;
       axios.post('http://localhost:3001/v1/api/instructor/register', formData, {
         headers: {
@@ -50,7 +41,7 @@ export default function ThankyouPage({goto, values}) {
       })
         .then(response => {
           if (response.status === 200) {
-
+            // Handle success if needed
           } else {
             console.error('Error submitting form data');
           }
@@ -59,20 +50,19 @@ export default function ThankyouPage({goto, values}) {
           console.error('Error:', error);
         });
     }
+  }, []); // Empty dependency array to run the effect only once
 
-
-
-  }, [goto])
   return (
-    <m.div 
-      className='thankyou-form'
-      variants={container}
-      initial='hidden'
-      animate='show'
-    >
+    <div className='thankyou-form'>
+      <m.div
+        variants={container}
+        initial='hidden'
+        animate='show'
+      >
         <img src={Tick} alt="tick mark" />
         <h1>Thank you!</h1>
         <p>Thanks for signing up! You may now login using your new account</p>
-    </m.div>
-  )
+      </m.div>
+    </div>
+  );
 }
