@@ -32,7 +32,7 @@ function Simulator() {
 
                 const studentResponse = await axios.get(
 
-                    `http://47.128.71.161:3001/v1/api/student/profile/${studentId}`,
+                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

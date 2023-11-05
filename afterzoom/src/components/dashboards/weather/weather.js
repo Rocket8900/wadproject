@@ -48,7 +48,7 @@ function WeatherForecast( bookings ) {
               const instructorId = decodedToken.id;
 
               const response = await axios.post(
-                `http://47.128.71.161:3001/v1/api/weather`,
+                `http://localhost:3001/v1/api/weather`,
                 {
                   "dt": mostUpcomingUnixTimestamp,
                   "lat": "1.3521",

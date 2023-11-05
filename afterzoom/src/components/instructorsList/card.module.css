@@ -20,7 +20,6 @@ body {
   place-items: center;
 }
 
-
 fieldset{
   display: inline-block;
   vertical-align: top;
@@ -37,21 +36,21 @@ fieldset{
 fieldset label{
   font: 'nunito';
   color:white;
-  font-size:0.9em;
+  font-size:1em;
 }
 
 fieldset h4{
   font: 'nunito';
   color:white;
   font-weight:bold;
-  font-size:1.4em;
+  font-size:1.6em;
 }
 
 .checkbox{
   display: block;
   position: relative;
   cursor: pointer;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
 
 
@@ -341,10 +340,3 @@ form{
   text-align: center;
 }
 /* # sourceMappingURL=card.css.map */
-
-.scrollableContainer {
-  max-height: 100vh; /* Set a maximum height for the container */
-  overflow-y: auto; /* Add vertical scrollbar when content overflows */
-  width:100%;
-}
-

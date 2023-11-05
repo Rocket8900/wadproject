@@ -41,7 +41,7 @@ const handleChatClick = async (instructorId) => {
     const token = getCookie("access_token"); // Assuming you use Cookies for storing the token
     console.log(token);
     const response = await axios.post(
-      `http://47.128.71.161:3001/v1/api/chat/${instructorId}`,
+      `http://localhost:3001/v1/api/chat/${instructorId}`,
       null,
       {
         headers: {
@@ -68,7 +68,7 @@ const handleBookingClick = async (instructorId) => {
       instructorId: instructorId,
     };
     const response = await axios.post(
-      `http://47.128.71.161:3001/v1/api/booking/`,
+      `http://localhost:3001/v1/api/booking/`,
       data,
       {
         headers: {
@@ -125,7 +125,7 @@ function InstructorCard({ instructor, showModal, onAddMarker }) {
   const fetchInstructorDP = async () => {
     try {
       const token = Cookie.get("access_token");
-      const response = await axios.get(`http://47.128.71.161:3001/v1/api/S3/instructor/single/${instructor.id}`, {
+      const response = await axios.get(`http://localhost:3001/v1/api/S3/instructor/single/${instructor.id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -175,7 +175,7 @@ function InstructorCard({ instructor, showModal, onAddMarker }) {
     try {
       const token = Cookie.get("access_token");
       const response = await axios.get(
-        `http://47.128.71.161:3001/v1/api/s3/instructor/bulk/${instructor.id}`, 
+        `http://localhost:3001/v1/api/s3/instructor/bulk/${instructor.id}`, 
           {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -316,7 +316,7 @@ function InstructorsComponent() {
         const token = Cookie.get("access_token");
 
         const response = await axios.get(
-          "http://47.128.71.161:3001/v1/api/instructor/list",
+          "http://localhost:3001/v1/api/instructor/list",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -337,7 +337,7 @@ function InstructorsComponent() {
         const studentId = decodedToken.id;
 
         const studentResponse = await axios.get(
-          `http://47.128.71.161:3001/v1/api/student/profile/${studentId}`,
+          `http://localhost:3001/v1/api/student/profile/${studentId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -347,7 +347,7 @@ function InstructorsComponent() {
         setStudent(studentResponse.data.data);
 
         const bookingsResponse = await axios.get(
-          `http://47.128.71.161:3001/v1/api/booking/student/`,
+          `http://localhost:3001/v1/api/booking/student/`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -413,7 +413,7 @@ if (bookings === null || student === null) {
               <form className="controls" id="Filters">
                 <div className={styles.FilterBox}>
                   <fieldset>
-                    <MapView markerCoordinates={markerCoordinates} className={styles.MapView}/>
+                    <MapView markerCoordinates={markerCoordinates} />
                   </fieldset>
 
                   <br />
@@ -516,9 +516,7 @@ if (bookings === null || student === null) {
 
               {/* Render InstructorCard component for each filtered instructor */}
               <Container fluid>
-              <div className={styles.scrollableContainer}>
                 <Row>
-                  
                   {filteredInstructors.map((instructor) => (
                     <Col key={instructor.id} lg={4} md={6} sm={12}>
                       <InstructorCard
@@ -527,9 +525,7 @@ if (bookings === null || student === null) {
                       />
                     </Col>
                   ))}
-                 
                 </Row>
-                </div>
               </Container>
             </div>
           </Col>
