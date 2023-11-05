@@ -229,7 +229,7 @@ const Notes = ({ notes }) => {
                     </button>
                   ) : (
                     <button className={styles.addtodashboard} onClick={() => handleAddToDashboard(note.id, note.addToDashboard)}>
-                      Unadd to Dashboard
+                      Remove from Dashboard
                     </button>
                   )}
                   <button
