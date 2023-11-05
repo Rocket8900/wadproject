@@ -49,6 +49,7 @@ export const startServerSocket = (io) => {
           } else {
             // add a notification for the receiver (using receiverId)
             await NotificationController.createNewNotification(receiverId)
+            Logging.info("created new notifs")
           }
         }
       })

@@ -11,7 +11,8 @@ weatherRoute.post("/", async (req, res) => {
         const {lat, lon, dt, apiKey} = req.body
         const result = await axios.get(`https://api.openweathermap.org/data/3.0/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${dt}&appid=${apiKey}`)
         Logging.info('get weather details')
-        res.status(200).json({data: result.data})
+        console.log(result.data);
+        res.status(200).json({data: result.data[0].weather})
     } catch (error) {
         Logging.error(error.message)
         res.status(500).json({data:"internal server error"});
