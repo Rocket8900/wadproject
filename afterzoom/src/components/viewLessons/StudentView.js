@@ -59,7 +59,7 @@ export function StudentView () {
 
 
         } catch (error) {
-            console.error(error);
+            // console.error(error);
         }
     };
 
@@ -86,7 +86,7 @@ useEffect(() => {
         //   const instructorName = instructorResponse.data.data.name; // Adjust the property based on the API response structure
           instructorDetails [booking.instructorId] = instructorResponse.data.data;
         } catch (error) {
-          console.error(error);
+        //   console.error(error);
           instructorDetails[booking.instructorId] = "Instructor Name Not Found";
         }
       }
@@ -98,6 +98,18 @@ useEffect(() => {
     //   console.log(instructorNames)
     }
   }, [bookings]);
+
+  // Create a Set to store unique instructor IDs
+  const uniqueInstructorIds = new Set();
+
+  // Filter out unique instructor details
+  const uniqueInstructors = bookings.reduce((unique, booking) => {
+    if (!uniqueInstructorIds.has(booking.instructorId)) {
+      uniqueInstructorIds.add(booking.instructorId);
+      unique.push(instructors[booking.instructorId]);
+    }
+    return unique;
+  }, []);
 
 if (bookings === null || student === null) {
     return <div>Loading...</div>;
@@ -158,17 +170,15 @@ if (bookings === null || student === null) {
                             </thead>
 
                             <tbody>
-                                {bookings.map((booking) => (
-                                    booking.lessons.map((lesson) => (
-                                        <tr key={lesson.id}>
-                                            <td data-th="Instructor Name">{instructors[booking.instructorId] ? instructors[booking.instructorId].name || '-' : '-'}</td>
-                                            <td data-th="Age">{instructors[booking.instructorId] ? instructors[booking.instructorId].age || '-' : '-'}</td>
-                                            <td data-th="Gender">{instructors[booking.instructorId] ? instructors[booking.instructorId].gender || '-' : '-'}</td>
-                                            <td data-th="Affiliation">{instructors[booking.instructorId] ? instructors[booking.instructorId].affiliation || '-' : '-'}</td>
-                                            <td data-th="Email">{instructors[booking.instructorId] ? instructors[booking.instructorId].email || '-' : '-'}</td>
-                                            <td data-th="Car Model">{instructors[booking.instructorId] ? instructors[booking.instructorId].carModel || '-' : '-'}</td>
-                                        </tr>
-                                    ))
+                            {uniqueInstructors.map((instructor) => (
+                                <tr key={instructor.id}>
+                                    <td data-th="Instructor Name">{instructor.name || '-'}</td>
+                                    <td data-th="Age">{instructor.age || '-'}</td>
+                                    <td data-th="Gender">{instructor.gender || '-'}</td>
+                                    <td data-th="Affiliation">{instructor.affiliation || '-'}</td>
+                                    <td data-th="Email">{instructor.email || '-'}</td>
+                                    <td data-th="Car Model">{instructor.carModel || '-'}</td>
+                                </tr>
                                 ))}
                             </tbody>
                         </table>

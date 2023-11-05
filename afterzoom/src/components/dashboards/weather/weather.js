@@ -34,10 +34,8 @@ function WeatherForecast( bookings ) {
   
     mostUpcomingUnixTimestamp = Math.floor(mostUpcomingDate.getTime() / 1000);
   
-    // Rest of your code for the if clause
   } else {
     // Handle the case where there is no data in bookings.bookings.lessons
-    // You can provide a default value or perform other actions as needed.
   }
   useEffect(() => {
       
@@ -89,9 +87,9 @@ function WeatherForecast( bookings ) {
     <div
     style={
         weater === 'Rain'
-        ? {color:"white", backgroundColor:"grey", width:"200%", textAlign:"center", display:"flex", alignContent:"center",alignItems:"center", height:"200%", borderRadius:"8px"}
+        ? {color:"white", backgroundColor:"grey", width:"200%", textAlign:"center", display:"flex", justifyContent: 'center',alignItems:"center", height:"200%", borderRadius:"8px"}
         : weater === null
-        ? { backgroundColor: 'red', color: 'white', width:"200%", textAlign:"center", display:"flex", alignContent:"center",alignItems:"center", height:"100%", borderRadius:"8px" }
+        ? { backgroundColor: 'red', color: 'white', textAlign:"center", display:"flex", alignContent:"center",alignItems:"center", height:"100%", borderRadius:"8px" }
         : {} 
     }
   >
