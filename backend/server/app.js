@@ -28,13 +28,13 @@ export const app = express()
 const httpServer = http.createServer(app);  
 const io = new Server(httpServer, {
     cors: {
-        origin: "http://localhost:3000",  // Allow this origin
+        origin: "http://13.212.56.111:3000/",  // Allow this origin
         methods: ["GET", "POST", "DELETE", "PATCH"]  // Allow these HTTP methods
     }
 });
 
 app.use(cors({
-    origin: 'http://localhost:3000', // replace with your frontend's origin
+    origin: 'http://13.212.56.111:3000/', // replace with your frontend's origin
     credentials: true
   }));
   
