@@ -128,7 +128,7 @@ export function ChooseQuiz() {
                             <h3>Review Mistakes</h3>
                             <p>Revisit and reinforce your learning by identifying and correcting your quiz mistakes. Sharpen your knowledge for better results.</p>
                             <Link to="/review-quiz">
-                                <button id="review" className={`btn btn-outline-primary mt-4 mb-2 text-center col-6 me-sm-4 ${styles.button}`}>Review</button>
+                                <button id="review" className={`btn btn-outline-primary mt-4 mb-2 text-center col-7 me-sm-4 ${styles.button}`}>Review</button>
                             </Link>
                         </div>
                         </div>

@@ -303,7 +303,7 @@ function InstructorLessonList() {
                   <th>LESSON TITLE</th>
                   <th>DATE</th>
                   <th>DESCRIPTION</th>
-                  <th>WEATHER FORECAST</th>
+                  <th>FEEDBACK</th>
                 </tr>
               </thead>
               <tbody>
@@ -313,7 +313,7 @@ function InstructorLessonList() {
                     <td data-th="Lesson Title">{lesson.title || 'Untitled'}</td>
                     <td data-th="Date">{formatDateToReadableString(lesson.date) || '-'}</td>
                     <td data-th="Description">{lesson.description || '-'}</td>
-                    <td data-th="Forecasted weather">{lesson.forecastedWeather || '-'}</td>
+                    <td data-th="Feedback">{lesson.feedback || '-'}</td>
                   </tr>
                 ))}
               </tbody>
