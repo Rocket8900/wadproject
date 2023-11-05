@@ -198,6 +198,7 @@ const Quiz = ({ type }) => {
 
   const storeResultsToDatabase = () => {
     // Create a request object
+    const token = getCookie("access_token");
     const requestData = {
       type: quizMode,
       score: toString(result.correctAnswers),
@@ -205,7 +206,11 @@ const Quiz = ({ type }) => {
     };
 
     // Send the quiz results to the backend
-    axios.post('http://localhost:3001/v1/api/quiz', requestData)
+    axios.post('http://localhost:3001/v1/api/quiz', requestData, {
+      headers: {
+          Authorization: `Bearer ${token}`,
+      },
+  })
       .then((response) => {
         // Handle the response if needed
         console.log('Mistakes saved successfully:' + response.data);
