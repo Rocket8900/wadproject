@@ -18,8 +18,8 @@ export default function ThankyouPage({goto, values}) {
 }
 
   useEffect(() => {
-    console.log(values)
-    console.log('Form submitted!')
+
+
     if(values.type === 'student'){
       const formData = values; // Assuming your values match the structure you need to send
 
@@ -31,9 +31,9 @@ export default function ThankyouPage({goto, values}) {
     })
       .then(response => {
         if (response.status === 200) {
-          console.log('Form data submitted successfully!');
+
         } else {
-          console.error('Error submitting form data');
+
         }
       })
       .catch(error => {
@@ -50,7 +50,7 @@ export default function ThankyouPage({goto, values}) {
       })
         .then(response => {
           if (response.status === 200) {
-            console.log('Form data submitted successfully!');
+
           } else {
             console.error('Error submitting form data');
           }

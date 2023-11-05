@@ -26,7 +26,7 @@ function Simulator() {
         const fetchData = async () => {
             try {
                 const token = getCookie("access_token");
-                console.log(token)
+
                 const decodedToken = jwtDecode(token).user;
                 const studentId = decodedToken.id;
 
@@ -66,7 +66,7 @@ function Simulator() {
                 <div className={`${styles.container} row d-flex`}>
                     <div className={`col-md-3 col-sm-10 ${styles.card}`}>
                             <div className="image-container">
-                                <img src="https://cdn.dribbble.com/users/674925/screenshots/4749353/media/e2f370153a90139d89c57e9ac459b991.gif" class={styles["card-img-top"]}></img>
+                                <img src="https://cdn.dribbble.com/users/674925/screenshots/4749353/media/e2f370153a90139d89c57e9ac459b991.gif" className={styles["card-img-top"]}></img>
                             </div>
                                 <div className={styles["card-body"]}>
                                 <h3>Level 1</h3>
@@ -79,7 +79,7 @@ function Simulator() {
 
                     <div className={`col-md-3 col-sm-10 ${styles.card}`}>
                             <div className="image-container">
-                                <img src="https://cdn.dribbble.com/users/3406038/screenshots/6328629/car_on_road.gif" class={styles["card-img-top"]}></img>
+                                <img src="https://cdn.dribbble.com/users/3406038/screenshots/6328629/car_on_road.gif" className={styles["card-img-top"]}></img>
                             </div>
                                 <div className={styles["card-body"]}>
                                 <h3>Level 2</h3>
@@ -92,7 +92,7 @@ function Simulator() {
 
                     <div className={`col-md-3 col-sm-10 ${styles.card}`}>
                             <div className="image-container">
-                                <img src="https://cdn.dribbble.com/users/330915/screenshots/6720147/4_share_dribbble.gif" class={styles["card-img-top"]}></img>
+                                <img src="https://cdn.dribbble.com/users/330915/screenshots/6720147/4_share_dribbble.gif" className={styles["card-img-top"]}></img>
                             </div>
                                 <div className={styles["card-body"]}>
                                 <h3>Level 3</h3>

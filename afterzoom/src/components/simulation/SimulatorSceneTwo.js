@@ -34,7 +34,7 @@ function SimulatorSceneTwo() {
         const fetchData = async () => {
             try {
                 const token = getCookie("access_token");
-                console.log(token)
+
                 const decodedToken = jwtDecode(token).user;
                 const studentId = decodedToken.id;
 
@@ -66,7 +66,7 @@ function SimulatorSceneTwo() {
         markersPlugs.addEventListener("select-marker", (e) => {
           const clickedMarkerId = e.marker.config.id;
       
-          console.log(clickCounter)
+
       
           // Use the functional form of setClickCounter
           setClickCounter(prevCounter => {

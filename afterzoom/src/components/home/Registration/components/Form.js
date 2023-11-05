@@ -50,8 +50,7 @@ export default function MyForm({step, next, prev, goto}) {
         }}
         
         onSubmit={ (values, {resetForm}) => {
-          console.log(resetForm)
-          console.log(values)
+
 
           if(step === 0){
             setValidPlan(true)

@@ -39,7 +39,8 @@ class Graph extends Component {
 					{ y: 2, label: "Nov" },
 					{ y: 2, label: "Dec" }
 				]
-			}]
+			}],
+			height: 300
 		};
 		
 		return (

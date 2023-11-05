@@ -140,7 +140,7 @@ export function Hero() {
 
           <motion.h2>
 
-            <h1 className='Hometitle'>AfterZOOM</h1>
+            <div className='Hometitle'><h1>AfterZOOM</h1></div>
             <motion.span variants={firstName} initial="initial" animate="animate" className='first'>
                 <motion.span variants={letter}>Learning</motion.span>
                 {/* <motion.span variants={letter}>e</motion.span>

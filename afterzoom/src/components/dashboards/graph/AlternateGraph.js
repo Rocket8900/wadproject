@@ -78,7 +78,8 @@ class Graph extends Component {
                     showInLegend: true,
                     dataPoints: fttDataPoints
                 }
-            ]
+            ],
+            height: 300
         };
 
         return (
