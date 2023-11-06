@@ -164,7 +164,7 @@ const Sidebar = ({ instructor }) => {
   const [profileImage, setProfileImage] = useState(null); 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 9);
+      setIsSmallScreen(window.innerWidth <= 900);
     };
     window.addEventListener("resize", handleResize);
 

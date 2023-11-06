@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import sceneOne from './t-junc.JPG'
 
 
 
@@ -144,7 +145,7 @@ function SimulatorSceneOne() {
                         {room === "starter" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='t-junc.jpg'
+                                src={sceneOne}
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}

@@ -11,6 +11,8 @@ import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import sceneOne from './t-junc.JPG'
+
 
 
 function getCookie(name) {
@@ -142,7 +144,7 @@ function SimulatorSceneTwo() {
                         {room === "starter" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='pre-overtake.jpg'
+                                src={sceneOne}
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}

@@ -6,12 +6,11 @@ function WeatherForecast({ bookings }) {
   const [weather, setWeather] = useState(null);
   const [update, setUpdate] = useState(null);
   const [icon, setIcon] = useState(null);
-  console.log(bookings)
   const now = new Date();
   let mostUpcomingUnixTimestamp;
-  let mostUpcomingDate; // Declare the variable here
-  
-  if (bookings) {
+  let mostUpcomingDate; 
+  if (bookings ) {
+    if(bookings.lessons.length > 0){
     const upcoming = bookings.lessons;
     mostUpcomingDate = new Date(upcoming[0].date);
   
@@ -23,7 +22,7 @@ function WeatherForecast({ bookings }) {
     }
   
     mostUpcomingUnixTimestamp = Math.floor(mostUpcomingDate.getTime() / 1000);
-    console.log(mostUpcomingUnixTimestamp)
+  }
   }
   
   useEffect(() => {
@@ -40,7 +39,6 @@ function WeatherForecast({ bookings }) {
               "dt": mostUpcomingUnixTimestamp,
               "lat": "1.3521",
               "lon": "103.8198",
-              // "apiKey": "e57dece87ef87648d306135d6f2f527c"
             },
             {
               headers: {

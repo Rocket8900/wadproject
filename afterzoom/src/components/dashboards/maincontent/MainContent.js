@@ -54,13 +54,10 @@ const MainContent = ({ student, bookings, quiz}) => {
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
-      console.log("Screen Width:", screenWidth);
   
       setIsSmallScreen(screenWidth <= 975);
       setIsReallySmallScreen(screenWidth <= 576);
   
-      console.log("isSmallScreen:", isSmallScreen);
-      console.log("isReallySmallScreen:", isReallySmallScreen);
     };
 
     // Add event listener for window resize
