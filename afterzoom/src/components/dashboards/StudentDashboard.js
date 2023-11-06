@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
 import "./Dashboard.css"
 import ThreeDotsWave from "../loader/loader";
+import BASE_URL from "../apiConfig";
 
 export function StudentDashboard() {
     const [student, setStudent] = useState(null);
@@ -27,7 +28,7 @@ export function StudentDashboard() {
 
                 const studentResponse = await axios.get(
 
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `${BASE_URL}/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -38,7 +39,7 @@ export function StudentDashboard() {
 
 
                 const bookingsResponse = await axios.get(
-                    `http://localhost:3001/v1/api/booking/student/`,
+                    `${BASE_URL}/v1/api/booking/student/`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -48,7 +49,7 @@ export function StudentDashboard() {
                 setBookings(bookingsResponse.data.data[0]);
 
                 const quizResponse = await axios.get(
-                    `http://localhost:3001/v1/api/quiz/`,
+                    `${BASE_URL}/v1/api/quiz/`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -59,7 +60,7 @@ export function StudentDashboard() {
 
 
                 const notesResponse = await axios.get(
-                    `http://localhost:3001/v1/api/note/list`,
+                    `${BASE_URL}/v1/api/note/list`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

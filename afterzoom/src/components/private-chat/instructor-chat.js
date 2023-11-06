@@ -13,6 +13,7 @@ import InstructorChatPage from './InstructorChatPage'
 import { useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import ThreeDotsWave from "../loader/loader";
+import BASE_URL from "../apiConfig";
 
 
 function ChatWithStudentPage() {
@@ -25,7 +26,7 @@ function ChatWithStudentPage() {
   useEffect(() => {
     const sendPatchRequest = async () => {
       try {
-        await axios.patch("http://localhost:3001/v1/api/notification/latest", null, {
+        await axios.patch(`${BASE_URL}/v1/api/notification/latest`, null, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -43,7 +44,7 @@ function ChatWithStudentPage() {
 
               const instructorResponse = await axios.get(
 
-                  `http://localhost:3001/v1/api/instructor/profile/${instructorId}`,
+                  `${BASE_URL}/v1/api/instructor/profile/${instructorId}`,
                   {
                       headers: {
                           Authorization: `Bearer ${token}`,

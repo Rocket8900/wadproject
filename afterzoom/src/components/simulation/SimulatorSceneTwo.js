@@ -11,7 +11,9 @@ import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import sceneOne from './t-junc.JPG'
+import sceneTwoPre from './pre-overtake.JPG';
+import sceneTwoPost from './post-overtake.JPG';
+import BASE_URL from "../apiConfig";
 
 
 
@@ -42,7 +44,7 @@ function SimulatorSceneTwo() {
                 const studentId = decodedToken.id;
 
                 const studentResponse = await axios.get(
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `${BASE_URL}/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -144,7 +146,7 @@ function SimulatorSceneTwo() {
                         {room === "starter" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src={sceneOne}
+                                src={sceneTwoPre}
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}
@@ -155,7 +157,7 @@ function SimulatorSceneTwo() {
                         {room === "true" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='post-overtake.jpg'
+                                src={sceneTwoPost}
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}

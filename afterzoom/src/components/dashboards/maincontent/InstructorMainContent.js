@@ -11,6 +11,7 @@ import { useNavigate} from "react-router-dom";
 import axios from "axios";
 import WeatherForecast from "../weather/weather";
 
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const InstructorMainContent = ({ instructor, bookings }) => {
@@ -164,6 +165,7 @@ const InstructorMainContent = ({ instructor, bookings }) => {
       <Calendar
         showDetailsHandle={showDetailsHandle}
         bookings={bookings}
+        
       />
       </div>
     },
@@ -198,7 +200,6 @@ const InstructorMainContent = ({ instructor, bookings }) => {
   },
 
   ]);
-
 
 
   const [layout2, setLayout2] = useState([

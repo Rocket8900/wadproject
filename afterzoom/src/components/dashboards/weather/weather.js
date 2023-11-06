@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import jwtDecode from "jwt-decode";
+import BASE_URL from "../../apiConfig";
 
 function WeatherForecast({ bookings }) {
   const [weather, setWeather] = useState(null);
@@ -34,7 +35,7 @@ function WeatherForecast({ bookings }) {
           const instructorId = decodedToken.id;
   
           const response = await axios.post(
-            `http://localhost:3001/v1/api/weather`,
+            `${BASE_URL}/v1/api/weather`,
             {
               "dt": mostUpcomingUnixTimestamp,
               "lat": "1.3521",

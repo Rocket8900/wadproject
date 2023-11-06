@@ -29,6 +29,7 @@ import jwtDecode from "jwt-decode";
 import { motion as m } from 'framer-motion'
 import { Formik, Field, Form, ErrorMessage } from 'formik'; 
 import styles from "./insSidebarOverlap.module.css";
+import BASE_URL from "../../apiConfig";
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -66,7 +67,7 @@ const ProfileModal = ({modal, setModal, instructor }) => {
       const parts = value.split(`; ${name}=`);
       if (parts.length === 2) return parts.pop().split(";").shift();
     }
-    axios.patch('http://localhost:3001/v1/api/instructor/profile/', data)
+    axios.patch(`${BASE_URL}/v1/api/instructor/profile/`, data)
       .then((response) => {
 
       })
@@ -78,7 +79,7 @@ const ProfileModal = ({modal, setModal, instructor }) => {
       const formData = new FormData();
       formData.append('photo', imageFile);
       const token = getCookie("access_token");
-      axios.patch('http://localhost:3001/v1/api/instructor/profile/photo', formData, {
+      axios.patch(`${BASE_URL}/v1/api/instructor/profile/photo`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -182,7 +183,7 @@ const Sidebar = ({ instructor }) => {
         const instructorId = decodedToken.id;
 
         const picResponse = await axios.get(
-          `http://localhost:3001/v1/api/s3/instructor/single/${instructorId}`,
+          `${BASE_URL}/v1/api/s3/instructor/single/${instructorId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

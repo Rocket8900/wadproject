@@ -11,8 +11,8 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
-
-
+import sceneThreeSuccess from  './post-park.JPG';
+import BASE_URL from "../apiConfig";
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -36,7 +36,7 @@ function Scene3success() {
                 const studentId = decodedToken.id;
 
                 const studentResponse = await axios.get(
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `${BASE_URL}/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ function Scene3success() {
                         {room === "starter" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='post-park.jpg'
+                                src={sceneThreeSuccess}
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}

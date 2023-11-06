@@ -11,6 +11,7 @@ import StudentChatPage from './StudentChatPage'; // This will be the student cha
 import { useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import ThreeDotsWave from "../loader/loader";
+import BASE_URL from "../apiConfig";
 
 
 function ChatWithInstructorPage() {
@@ -23,7 +24,7 @@ function ChatWithInstructorPage() {
 
         const sendPatchRequest = async () => {
           try {
-            await axios.patch("http://localhost:3001/v1/api/notification/latest", null, {
+            await axios.patch(`${BASE_URL}/v1/api/notification/latest`, null, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -41,7 +42,7 @@ function ChatWithInstructorPage() {
               const studentId = decodedToken.id;
 
               const studentResponse = await axios.get(
-                  `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                `${BASE_URL}/v1/api/student/profile/${studentId}`,
                   {
                       headers: {
                           Authorization: `Bearer ${token}`,

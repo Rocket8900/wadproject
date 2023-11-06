@@ -15,6 +15,7 @@ import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import CreatingLessonContent from './CreatingLessonContent';
 import styles from './lessonlist.module.css';
 import ThreeDotsWave from "../loader/loader";
+import BASE_URL from "../apiConfig";
 
 
 
@@ -51,7 +52,7 @@ function InstructorLessonList() {
         const instructorId = decodedToken.id;
 
         const instructorResponse = await axios.get(
-          `http://localhost:3001/v1/api/instructor/profile/${instructorId}`,
+          `${BASE_URL}/v1/api/instructor/profile/${instructorId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -71,7 +72,7 @@ function InstructorLessonList() {
         const instructorId = decodedToken.id;
 
         const bookingResponse = await axios.get(
-          `http://localhost:3001/v1/api/booking/instructor`,
+          `${BASE_URL}/v1/api/booking/instructor`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -115,7 +116,7 @@ function InstructorLessonList() {
         const token = getCookie("access_token");
     
         const response = await axios.patch(
-          `http://localhost:3001/v1/api/lesson/${booking.id}`, 
+          `${BASE_URL}/v1/api/lesson/${booking.id}`, 
           { feedback },
           {
             headers: {
@@ -189,7 +190,7 @@ function InstructorLessonList() {
     try {
       const token = getCookie("access_token");
       const response = await axios.get(
-        `http://localhost:3001/v1/api/student/profile/${studentId}`,
+        `${BASE_URL}/v1/api/student/profile/${studentId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -226,7 +227,6 @@ function InstructorLessonList() {
   // const fetchWeatherForecast = async (latitude, longitude, date) => {
   //   try {
   //     // Call the OpenWeatherMap API to get weather data
-  //     const apiKey = "5edb4e64fd6cb6634cd6edb3a99e653d";
   //     const response = await axios.get(
   //       `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&dt=${date}&appid=${apiKey}`
   //     );
