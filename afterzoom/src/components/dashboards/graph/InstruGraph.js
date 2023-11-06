@@ -3,6 +3,7 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { useParams } from "react-router-dom";
 import CanvasJSReact from '@canvasjs/react-charts';
+import BASE_URL from "../../apiConfig";
 
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -18,7 +19,7 @@ function Graph() {
         const decodedToken = jwtDecode(token).user;
 
         const bookingResponse = await axios.get(
-          `http://localhost:3001/v1/api/booking/instructor`,
+          `${BASE_URL}/v1/api/booking/instructor`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
