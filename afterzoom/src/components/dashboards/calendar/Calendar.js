@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+
 import {
   format,
   subMonths,
@@ -13,8 +13,58 @@ import {
 } from "date-fns";
 import "./Calendar.css";
 
-const Calendar = ({ showDetailsHandle, bookings })=> {
-  const { id: bookingId, lessons:lesson, studentId: bookingStudentId, instructorId:bookInstructorId, status } = bookings || {}; 
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+import { useParams } from "react-router-dom";
+
+const Calendar = ({ showDetailsHandle})=> {
+  const [bookings, setBookings] = useState(null);
+  const { id } = useParams();
+
+  useEffect(() => {
+      
+      const fetchData = async () => {
+          try {
+              const token = getCookie("access_token");
+              const decodedToken = jwtDecode(token).user;
+
+
+              const bookingResponse = await axios.get(
+
+                  `http://localhost:3001/v1/api/booking/instructor`,
+                  {
+                      headers: {
+                          Authorization: `Bearer ${token}`,
+                      },
+                  }
+              );
+              setBookings(bookingResponse.data.data);
+
+  
+
+          } catch (error) {
+              console.error(error);
+          }
+      };
+  
+      fetchData(); 
+      
+  }, []); 
+
+   
+  const lesson = [];
+
+  console.log(bookings)
+
+  if (bookings) {
+    bookings.forEach((booking) => {
+      if (booking.lessons) {
+        lesson.push(...booking.lessons);
+      }
+    });
+  }
+  
   const [eventDetails, setEventDetails] = useState('');
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
@@ -180,3 +230,8 @@ const Calendar = ({ showDetailsHandle, bookings })=> {
 };
 
 export default Calendar;
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}

@@ -39,6 +39,9 @@ class Graph extends Component {
     
         return height;
     }
+
+
+    
     
 
     render() {
