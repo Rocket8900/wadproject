@@ -127,6 +127,7 @@ const MainContent = ({ student, bookings, quiz}) => {
       content: 
 <div style={{ textAlign: 'left' }}>
   <h2>Hello, {name} <PiHandWavingDuotone /></h2>
+  <div className="random">
   Your profile is {updatedCompleteness}% complete <br/>
   Task List:
   <ul>
@@ -134,6 +135,7 @@ const MainContent = ({ student, bookings, quiz}) => {
       <li key={index}>{point}</li>
     ))}
   </ul>
+  </div>
 </div>
       
     },    
@@ -205,6 +207,7 @@ const MainContent = ({ student, bookings, quiz}) => {
       content: 
 <div style={{ textAlign: 'left' }}>
   <h2>Hello, {name} <PiHandWavingDuotone /></h2>
+  <div className="random">
   Your profile is {updatedCompleteness}% complete <br/>
   Task List:
   <ul>
@@ -212,6 +215,7 @@ const MainContent = ({ student, bookings, quiz}) => {
       <li key={index}>{point}</li>
     ))}
   </ul>
+  </div>
 </div>
       
     },    
@@ -288,6 +292,7 @@ const MainContent = ({ student, bookings, quiz}) => {
       content: 
 <div style={{ textAlign: 'left' }}>
   <h2>Hello, {name} <PiHandWavingDuotone /></h2>
+  <div className="random">
   Your profile is {updatedCompleteness}% complete <br/>
   Task List:
   <ul>
@@ -295,6 +300,7 @@ const MainContent = ({ student, bookings, quiz}) => {
       <li key={index}>{point}</li>
     ))}
   </ul>
+  </div>
 </div>
       
     },    
@@ -393,13 +399,13 @@ const MainContent = ({ student, bookings, quiz}) => {
 
 
   useEffect(() => {
-    const containerHeight = window.innerHeight;
+    const containerHeight = window.innerHeight-100;
     const numberOfRows = 9; 
     const calculatedRowHeight = containerHeight / numberOfRows;
     setDynamicRowHeight(calculatedRowHeight);
 
     const handleResize = () => {
-      const updatedContainerHeight = window.innerHeight;
+      const updatedContainerHeight = window.innerHeight-100;
       const updatedRowHeight = updatedContainerHeight / numberOfRows;
       setDynamicRowHeight(updatedRowHeight);
     };
