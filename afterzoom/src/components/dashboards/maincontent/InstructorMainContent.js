@@ -383,14 +383,14 @@ const InstructorMainContent = ({ instructor, bookings }) => {
   const [dynamicRowHeight, setDynamicRowHeight] = useState(0);
 
   useEffect(() => {
-    const containerHeight = window.innerHeight;
+    const containerHeight = window.innerHeight-100;
     const numberOfRows = 9; 
     const calculatedRowHeight = containerHeight / numberOfRows;
     setDynamicRowHeight(calculatedRowHeight);
 
     const handleResize = () => {
-      const updatedContainerHeight = window.innerHeight;
-      const updatedRowHeight = updatedContainerHeight / numberOfRows;
+      const updatedContainerHeight = window.innerHeight-100;
+      const updatedRowHeight = updatedContainerHeight / 9;
       setDynamicRowHeight(updatedRowHeight);
     };
 
