@@ -32,12 +32,12 @@
 .a h2{
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size:2.3vw;
+    font-size:0.85em;
 }
   
-.a p{
+.a .random{
     font-family: 'Poppins', sans-serif;
-    font-size:1.2vw;
+    font-size:0.65em;
 }
 
   
@@ -47,10 +47,11 @@
 
 .c, .d, .e, .g, .h {
     font-family: 'Poppins', sans-serif;
+    font-size: 0.95em;
 }
 
 .g h2, .h h2 {
-    font-size: 20px;
+    font-size: 1em;
 }
 
 .unread{
