@@ -10,6 +10,7 @@ const MapView = ({ isScriptLoaded, isScriptLoadSucceed, markerCoordinates }) => 
   const inputRef = useRef(null); 
   const [travelTime, setTravelTime] = useState(null);
   const [directionsService, setDirectionsService] = useState(null);
+  const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
   const initMap = () =>{
     const singapore = { lat: 1.3521, lng: 103.8198 };
@@ -25,7 +26,7 @@ const MapView = ({ isScriptLoaded, isScriptLoadSucceed, markerCoordinates }) => 
 
   const loadGoogleMapsScript = () => {
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places&callback=initMap`;
     script.async = true;
     script.defer = true;
     window.initMap = initMap; // Make sure initMap is available globally
@@ -144,7 +145,7 @@ const MapView = ({ isScriptLoaded, isScriptLoadSucceed, markerCoordinates }) => 
   )
 };
 
-  const AsyncScriptLoader = asyncScriptLoader(["https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places"])(MapView);
+  const AsyncScriptLoader = asyncScriptLoader(["https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places"])(MapView);
 
   export default AsyncScriptLoader;
 
