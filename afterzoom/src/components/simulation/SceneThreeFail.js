@@ -11,6 +11,8 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
+import sceneThreeFail from  './wrong-park.JPG';
+import BASE_URL from "../apiConfig";
 
 
 
@@ -36,7 +38,7 @@ function Scene3fail() {
                 const studentId = decodedToken.id;
 
                 const studentResponse = await axios.get(
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `${BASE_URL}/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -98,7 +100,7 @@ function Scene3fail() {
                         {room === "starter" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='wrong-park.jpg'
+                                src={sceneThreeFail}
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}

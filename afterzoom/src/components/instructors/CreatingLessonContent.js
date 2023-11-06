@@ -5,6 +5,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
 import './styles/styles.css';
+import BASE_URL from "../apiConfig";
 
 const styles = {
   container: {
@@ -68,7 +69,7 @@ export default function CreatingLessonContent(props) {
         let selectedId = null;
 
         const instrubookingResponse = await axios.get(
-          `http://localhost:3001/v1/api/booking/instructor`,
+          `${BASE_URL}/v1/api/booking/instructor`,
           {
               headers: {
                   Authorization: `Bearer ${token}`,
@@ -85,7 +86,7 @@ export default function CreatingLessonContent(props) {
         console.log(selectedId)
 
         const lessonInput = await axios.post(
-          `http://localhost:3001/v1/api/lesson`,
+          `${BASE_URL}/v1/api/lesson`,
           {
             title: formData.title,
             date: formData.selectedDate,

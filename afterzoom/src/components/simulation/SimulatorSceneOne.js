@@ -11,6 +11,7 @@ import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import sceneOne from './t-junc.JPG'
+import BASE_URL from "../apiConfig";
 
 
 
@@ -42,7 +43,7 @@ function SimulatorSceneOne() {
                 const studentId = decodedToken.id;
 
                 const studentResponse = await axios.get(
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `${BASE_URL}/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

@@ -17,6 +17,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { useParams } from "react-router-dom";
+import BASE_URL from "../../apiConfig";
 
 const Calendar = ({ showDetailsHandle})=> {
   const [bookings, setBookings] = useState(null);
@@ -32,7 +33,7 @@ const Calendar = ({ showDetailsHandle})=> {
 
               const bookingResponse = await axios.get(
 
-                  `http://localhost:3001/v1/api/booking/instructor`,
+                  `${BASE_URL}/v1/api/booking/instructor`,
                   {
                       headers: {
                           Authorization: `Bearer ${token}`,

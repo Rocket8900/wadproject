@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { motion as m } from 'framer-motion'
 import { Formik, Field, Form } from 'formik'; 
+import BASE_URL from "../../apiConfig";
 
 const LoginModal = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ const LoginModal = ({ isOpen, setIsOpen }) => {
 
   const handleStudentLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/v1/api/student/login', {
+      const response = await axios.post(`${BASE_URL}/v1/api/student/login`, {
         email,
         password,
       }, {withCredentials: true});
@@ -79,7 +80,7 @@ const LoginModal = ({ isOpen, setIsOpen }) => {
 
   const handleInstructorLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/v1/api/instructor/login', {
+      const response = await axios.post(`${BASE_URL}/v1/api/instructor/login`, {
         email,
         password,
       }, {withCredentials: true})

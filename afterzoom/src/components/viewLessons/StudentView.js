@@ -3,7 +3,8 @@ import axios from 'axios';
 import Sidebar from '../dashboards/sidebar/Sidebar';
 import jwtDecode from "jwt-decode";
 import Col from "react-bootstrap/Col";
-import styles from './student.module.css'
+import styles from './student.module.css';
+import BASE_URL from "../apiConfig";
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -35,7 +36,7 @@ export function StudentView () {
 
             const studentResponse = await axios.get(
 
-                `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                `${BASE_URL}/v1/api/student/profile/${studentId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -46,7 +47,7 @@ export function StudentView () {
 
 
             const bookingsResponse = await axios.get(
-                `http://localhost:3001/v1/api/booking/student/`,
+                `${BASE_URL}/v1/api/booking/student/`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -73,7 +74,7 @@ useEffect(() => {
         try {
           const token = getCookie("access_token");
           const instructorResponse = await axios.get(
-              `http://localhost:3001/v1/api/instructor/profile/${booking.instructorId}`,
+            `${BASE_URL}/v1/api/instructor/profile/${booking.instructorId}`,
               {
                   headers: {
                       Authorization: `Bearer ${token}`,

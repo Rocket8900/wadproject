@@ -8,6 +8,7 @@ import Sidebar from '../dashboards/sidebar/Sidebar';
 import jwtDecode from "jwt-decode";
 import styles from './choose.module.css';
 import ThreeDotsWave from "../loader/loader";
+import BASE_URL from "../apiConfig";
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -30,7 +31,7 @@ export function ChooseQuiz() {
                 const decodedToken = jwtDecode(token).user;
                 const studentId = decodedToken.id;
                 const response = await axios.get(
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `${BASE_URL}/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

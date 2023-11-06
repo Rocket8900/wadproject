@@ -8,6 +8,7 @@ import Sidebar from '../dashboards/sidebar/Sidebar';
 import jwtDecode from "jwt-decode";
 import Col from "react-bootstrap/Col";
 import styled from '@emotion/styled';
+import BASE_URL from "../apiConfig";
 
 // Function to combine questions of a specific category from both BTT and FTT
 function combineQuestionsByCategory(btt_questions, ftt_questions, category) {
@@ -73,7 +74,7 @@ const Quiz = ({ type }) => {
             const decodedToken = jwtDecode(token).user;
             const studentId = decodedToken.id;
             const response = await axios.get(
-                `http://localhost:3001/v1/api/student/profile/${studentId}`,
+              `${BASE_URL}/v1/api/student/profile/${studentId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -95,7 +96,7 @@ const Quiz = ({ type }) => {
     const fetchData = async () => {
       try {
         if (quizMode === 'review') {
-          const response = await axios.get('http://localhost:3001/v1/api/quiz/review');
+          const response = await axios.get(`${BASE_URL}/v1/api/quiz/review`);
           // console.log(response.data);
           // console.log(response.data.data);
 
@@ -204,7 +205,7 @@ const Quiz = ({ type }) => {
     };
 
     // Send the quiz results to the backend
-    axios.post('http://localhost:3001/v1/api/quiz', requestData, {
+    axios.post(`${BASE_URL}/v1/api/quiz`, requestData, {
       headers: {
           Authorization: `Bearer ${token}`,
       },

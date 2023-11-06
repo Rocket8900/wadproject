@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
 import CreatingLessonContent from "../instructors/CreatingLessonContent";
+import BASE_URL from "../apiConfig";
 
 
 export function CreatingLesson() {
@@ -23,7 +24,7 @@ export function CreatingLesson() {
 
                 const instructorResponse = await axios.get(
 
-                    `http://localhost:3001/v1/api/instructor/profile/${instructorId}`,
+                    `${BASE_URL}/v1/api/instructor/profile/${instructorId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

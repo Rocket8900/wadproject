@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import BASE_URL from "../apiConfig";
 
 const NotesViewDashboard = () => {
     const [notes, setNotes] = useState([]);
@@ -14,7 +15,7 @@ const NotesViewDashboard = () => {
                 const studentId = decodedToken.id;
 
                 const notesResponse = await axios.get(
-                    `http://localhost:3001/v1/api/note/list`,
+                  `${BASE_URL}/v1/api/note/list`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

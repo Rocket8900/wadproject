@@ -8,6 +8,8 @@ import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import BASE_URL from "../apiConfig";
+
 
 function InstructorChatPage({instructor}) {
   const [messages, setMessages] = useState([]);
@@ -29,7 +31,7 @@ function InstructorChatPage({instructor}) {
     const fetchStudents = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/v1/api/chat/instructor/list",
+          `${BASE_URL}/v1/api/chat/instructor/list`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -47,7 +49,7 @@ function InstructorChatPage({instructor}) {
         let studentProfile = []
         for (let i = 0; i < allChat.length ; i ++) {
 
-          const profile = await axios.get(`http://localhost:3001/v1/api/student/profile/${allChat[i]}`, {
+          const profile = await axios.get(`${BASE_URL}/v1/api/student/profile/${allChat[i]}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -57,7 +59,7 @@ function InstructorChatPage({instructor}) {
           if (profileDetails.data.selfie == null) {
             profileDetails.data.selfie = "/Screenshot 2023-11-03 at 4.14.19 AM.png"
           } else {
-            profileDetails.data.selfie = (await axios.get(`http://localhost:3001/v1/api/s3/student/single/${profileDetails.data.id}`, {
+            profileDetails.data.selfie = (await axios.get(`${BASE_URL}/v1/api/s3/student/single/${profileDetails.data.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                   }
@@ -79,7 +81,7 @@ function InstructorChatPage({instructor}) {
     fetchStudents();
 
     const connectToSocketServer = () => {
-      const newSocket = io("http://localhost:3001", {
+      const newSocket = io(`${BASE_URL}`, {
         query: `token=${token}`,
       });
 
@@ -125,7 +127,7 @@ function InstructorChatPage({instructor}) {
     setSelectedStudent(student);
     try {
       const response = await axios.get(
-        `http://localhost:3001/v1/api/chat/${e}`,
+        `${BASE_URL}/v1/api/chat/${e}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

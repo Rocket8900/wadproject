@@ -11,7 +11,9 @@ import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-
+import sceneThreePre from './pre-park.JPG';
+import sceneThreeMid from './mid-park.JPG';
+import BASE_URL from "../apiConfig";
 
 
 function getCookie(name) {
@@ -40,7 +42,7 @@ function SimulatorSceneThree() {
                 const studentId = decodedToken.id;
 
                 const studentResponse = await axios.get(
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `${BASE_URL}/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -128,7 +130,7 @@ function SimulatorSceneThree() {
                         {room === "starter" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='pre-park.jpg'
+                                src={sceneThreePre}
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}
@@ -139,7 +141,7 @@ function SimulatorSceneThree() {
                         {room === "turnCorrect" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='mid-park.JPG'
+                                src={sceneThreeMid}
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}

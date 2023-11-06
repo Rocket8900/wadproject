@@ -8,6 +8,7 @@ import { motion as m } from 'framer-motion'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import BASE_URL from "../apiConfig";
 
 
 const card ={
@@ -45,7 +46,7 @@ const Notes = ({ notes }) => {
         addToDashboard: false, 
       };
 
-      axios.post(`http://localhost:3001/v1/api/note`, newNote
+      axios.post(`${BASE_URL}/v1/api/note`, newNote
       , {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -65,7 +66,7 @@ const Notes = ({ notes }) => {
   
   
   const handleAddToDashboard = (id, addToDashboard) => {
-    axios.patch(`http://localhost:3001/v1/api/note/${id}`, {
+    axios.patch(`${BASE_URL}/v1/api/note/${id}`, {
       addToDashboard: !addToDashboard,
     }, {
       headers: {
@@ -83,7 +84,7 @@ const Notes = ({ notes }) => {
   
 
   const handleDeleteNote = (id) => {
-    axios.delete(`http://localhost:3001/v1/api/note/${id}`,
+    axios.delete(`${BASE_URL}/v1/api/note/${id}`,
      {
       headers: {
         Authorization: `Bearer ${token}`,

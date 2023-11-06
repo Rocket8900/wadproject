@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import jwtDecode from "jwt-decode";
 import ThreeDotsWave from "../loader/loader";
+import BASE_URL from "../apiConfig";
 
 
 export default function NotesPage() {
@@ -27,7 +28,7 @@ export default function NotesPage() {
 
                 const studentResponse = await axios.get(
 
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `${BASE_URL}/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -38,7 +39,7 @@ export default function NotesPage() {
 
 
                 const bookingsResponse = await axios.get(
-                    `http://localhost:3001/v1/api/booking/student/`,
+                    `${BASE_URL}/v1/api/booking/student/`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -49,7 +50,7 @@ export default function NotesPage() {
 
 
                 const notesResponse = await axios.get(
-                    `http://localhost:3001/v1/api/note/list`,
+                    `${BASE_URL}/v1/api/note/list`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

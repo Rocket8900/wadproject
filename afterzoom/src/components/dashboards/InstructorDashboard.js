@@ -10,6 +10,7 @@ import jwtDecode from "jwt-decode";
 import InstructorMainContent from './maincontent/InstructorMainContent'
 import "./Dashboard.css"
 import ThreeDotsWave from "../loader/loader";
+import BASE_URL from "../apiConfig";
 
 
 export function InstructorDashboard() {
@@ -28,7 +29,7 @@ export function InstructorDashboard() {
 
                 const instructorResponse = await axios.get(
 
-                    `http://localhost:3001/v1/api/instructor/profile/${instructorId}`,
+                    `${BASE_URL}/v1/api/instructor/profile/${instructorId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -41,7 +42,7 @@ export function InstructorDashboard() {
 
                 const bookingResponse = await axios.get(
 
-                    `http://localhost:3001/v1/api/booking/instructor`,
+                    `${BASE_URL}/v1/api/booking/instructor`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -64,7 +65,6 @@ export function InstructorDashboard() {
     if (instructor === null) {
         return <ThreeDotsWave/>;
     }
-
     return (
         <Container fluid>
             <Row>

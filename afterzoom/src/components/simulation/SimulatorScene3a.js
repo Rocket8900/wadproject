@@ -11,6 +11,8 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
+import sceneThreeMid from  './mid-park.JPG';
+import BASE_URL from "../apiConfig";
 
 
 
@@ -37,7 +39,7 @@ function SimulatorScene3a() {
                 const studentId = decodedToken.id;
 
                 const studentResponse = await axios.get(
-                    `http://localhost:3001/v1/api/student/profile/${studentId}`,
+                    `${BASE_URL}/v1/api/student/profile/${studentId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -111,7 +113,7 @@ function SimulatorScene3a() {
                         {room === "starter" && (
                             <ReactPhotoSphereViewer
                                 ref={photoSphereRef}
-                                src='mid-park.jpg'
+                                src={sceneThreeMid}
                                 height={"100vh"}
                                 plugins={plugins}
                                 width={"100%"}

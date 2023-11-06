@@ -29,6 +29,8 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import BASE_URL from "../../apiConfig";
+
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -60,7 +62,7 @@ const ProfileModal = ({ modal, setModal, student }) => {
     const data = {
       name: name,
     };
-    axios.patch('http://localhost:3001/v1/api/student/profile/', data, {
+    axios.patch(`${BASE_URL}/v1/api/student/profile/`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -76,7 +78,7 @@ const ProfileModal = ({ modal, setModal, student }) => {
     if (imageFile) {
       const formData = new FormData();
       formData.append('photo', imageFile);
-      axios.patch('http://localhost:3001/v1/api/student/profile/photo', formData, {
+      axios.patch(`${BASE_URL}/v1/api/student/profile/photo`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -173,7 +175,7 @@ const Sidebar = ({ student }) => {
         const studentId = decodedToken.id;
 
         const picResponse = await axios.get(
-          `http://localhost:3001/v1/api/s3/student/single/${studentId}`,
+          `${BASE_URL}/v1/api/s3/student/single/${studentId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

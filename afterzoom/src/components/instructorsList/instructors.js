@@ -17,6 +17,7 @@ import AsyncScriptLoader from './MapView';
 import {toast} from "react-toastify";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import BASE_URL from "../apiConfig";
 
 
 function getCookie(name) {
@@ -41,7 +42,7 @@ const handleChatClick = async (instructorId) => {
     const token = getCookie("access_token"); // Assuming you use Cookies for storing the token
     console.log(token);
     const response = await axios.post(
-      `http://localhost:3001/v1/api/chat/${instructorId}`,
+      `${BASE_URL}/v1/api/chat/${instructorId}`,
       null,
       {
         headers: {
@@ -68,7 +69,7 @@ const handleBookingClick = async (instructorId) => {
       instructorId: instructorId,
     };
     const response = await axios.post(
-      `http://localhost:3001/v1/api/booking/`,
+      `${BASE_URL}/v1/api/booking/`,
       data,
       {
         headers: {
@@ -125,7 +126,7 @@ function InstructorCard({ instructor, showModal, onAddMarker }) {
   const fetchInstructorDP = async () => {
     try {
       const token = Cookie.get("access_token");
-      const response = await axios.get(`http://localhost:3001/v1/api/S3/instructor/single/${instructor.id}`, {
+      const response = await axios.get(`${BASE_URL}/v1/api/S3/instructor/single/${instructor.id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -175,7 +176,7 @@ function InstructorCard({ instructor, showModal, onAddMarker }) {
     try {
       const token = Cookie.get("access_token");
       const response = await axios.get(
-        `http://localhost:3001/v1/api/s3/instructor/bulk/${instructor.id}`, 
+        `${BASE_URL}/v1/api/s3/instructor/bulk/${instructor.id}`, 
           {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -316,7 +317,7 @@ function InstructorsComponent() {
         const token = Cookie.get("access_token");
 
         const response = await axios.get(
-          "http://localhost:3001/v1/api/instructor/list",
+          `${BASE_URL}/v1/api/instructor/list`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -337,7 +338,7 @@ function InstructorsComponent() {
         const studentId = decodedToken.id;
 
         const studentResponse = await axios.get(
-          `http://localhost:3001/v1/api/student/profile/${studentId}`,
+          `${BASE_URL}/v1/api/student/profile/${studentId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -347,7 +348,7 @@ function InstructorsComponent() {
         setStudent(studentResponse.data.data);
 
         const bookingsResponse = await axios.get(
-          `http://localhost:3001/v1/api/booking/student/`,
+          `${BASE_URL}/v1/api/booking/student/`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

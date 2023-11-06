@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import "./Unread.css";
 import { useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import BASE_URL from "../../apiConfig";
 
 function ChatWithStudentPage() {
   const [read, setRead] = useState(null);
@@ -16,7 +17,7 @@ function ChatWithStudentPage() {
       try {
         const token = getCookie("access_token");
         const response = await axios.get(
-          `http://localhost:3001/v1/api/notification/latest`,
+          `${BASE_URL}/v1/api/notification/latest`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
